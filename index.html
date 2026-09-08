@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório de Números Irracionais</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- KaTeX para renderização matemática -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+
+  <style>
+    .tab-btn.active {
+      border-bottom: 3px solid #2563eb;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+    .math-step {
+      border-left: 3px solid #3b82f6;
+      padding-left: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+  <!-- Cabeçalho -->
+  <header class="bg-slate-900 text-white py-6 border-b border-slate-700 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight">Laboratório de Números Irracionais</h1>
+        <p class="text-slate-400 text-sm mt-1">Investigação Algébrica e Aritmética: TFA, TRR e Fundamentos Epistemológicos</p>
+      </div>
+      <div class="text-xs bg-slate-800 border border-slate-700 px-3 py-2 rounded text-slate-300">
+        Iniciação Científica &bull; Sequência Didática para Ensino Médio
+      </div>
+    </div>
+  </header>
+
+  <!-- Navegação em Abas -->
+  <div class="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+    <nav class="max-w-6xl mx-auto px-4 flex space-x-6 overflow-x-auto text-sm font-medium">
+      <button onclick="switchTab('tfa')" id="tab-tfa" class="tab-btn active py-4 px-1 text-slate-600 hover:text-blue-600 whitespace-nowrap">
+        1. Verificador TFA (Aritmética)
+      </button>
+      <button onclick="switchTab('trr')" id="tab-trr" class="tab-btn py-4 px-1 text-slate-600 hover:text-blue-600 whitespace-nowrap">
+        2. Filtro TRR (Álgebra)
+      </button>
+      <button onclick="switchTab('tabela')" id="tab-tabela" class="tab-btn py-4 px-1 text-slate-600 hover:text-blue-600 whitespace-nowrap">
+        3. Tabela de Notáveis
+      </button>
+      <button onclick="switchTab('historia')" id="tab-historia" class="tab-btn py-4 px-1 text-slate-600 hover:text-blue-600 whitespace-nowrap">
+        4. Contexto Histórico
+      </button>
+    </nav>
+  </div>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+
+    <!-- ======================================================== -->
+    <!-- ABA 1: TEOREMA FUNDAMENTAL DA ARITMÉTICA (TFA)          -->
+    <!-- ======================================================== -->
+    <section id="pane-tfa" class="space-y-6">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Demonstração via Teorema Fundamental da Aritmética</h2>
+        <p class="text-sm text-slate-600 mb-6">
+          Investigue a irracionalidade de raízes quadradas examinando a <strong>paridade dos expoentes</strong> na decomposição em fatores primos. Pelo TFA, uma decomposição é única.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end max-w-xl">
+          <div class="col-span-2">
+            <label for="tfa-input" class="block text-xs font-semibold uppercase text-slate-500 mb-1">Radicando (K inteiro positivo):</label>
+            <div class="flex items-center space-x-2">
+              <span class="text-2xl font-serif text-slate-700">&radic;</span>
+              <input type="number" id="tfa-input" min="2" max="1000000" value="72" 
+                     class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+          <div>
+            <button onclick="executarTFA()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
+              Demonstrar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saída TFA -->
+      <div id="tfa-output" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden">
+        <!-- Injetado dinamicamente -->
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ABA 2: TEOREMA DAS RAÍZES RACIONAIS (TRR)               -->
+    <!-- ======================================================== -->
+    <section id="pane-trr" class="space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Filtro Algébrico: Teorema das Raízes Racionais</h2>
+        <p class="text-sm text-slate-600 mb-6">
+          Investigue radicais de ordem arbitrária \(\sqrt[n]{K}\) associando-os à equação polinomial mônica \(x^n - K = 0\). 
+          Pela Dicotomia dos Polinômios Mônicos, toda raiz racional é necessariamente inteira.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
+          <div>
+            <label for="trr-index" class="block text-xs font-semibold uppercase text-slate-500 mb-1">Índice (n &ge; 2):</label>
+            <input type="number" id="trr-index" min="2" max="10" value="3" 
+                   class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label for="trr-radicand" class="block text-xs font-semibold uppercase text-slate-500 mb-1">Radicando (K &ge; 1):</label>
+            <input type="number" id="trr-radicand" min="1" max="100000" value="5" 
+                   class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <button onclick="executarTRR()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
+              Filtrar Raízes
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saída TRR -->
+      <div id="trr-output" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden">
+        <!-- Injetado dinamicamente -->
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ABA 3: TABELA DE NÚMEROS IRRACIONAIS NOTÁVEIS          -->
+    <!-- ======================================================== -->
+    <section id="pane-tabela" class="space-y-6 hidden">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h2 class="text-xl font-bold text-slate-900 mb-2">Tabela de Constantes e Irracionais Notáveis</h2>
+        <p class="text-sm text-slate-600 mb-6">
+          Diferenciação fundamental entre irracionais <strong>algébricos</strong> (satisfazem equações polinomiais com coeficientes inteiros) e <strong>transcendentes</strong> (não pertencem a nenhuma raiz polinomial com coeficientes inteiros).
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 border-b border-slate-200 text-slate-700">
+                <th class="py-3 px-4 font-semibold">Símbolo</th>
+                <th class="py-3 px-4 font-semibold">Nome / Origem</th>
+                <th class="py-3 px-4 font-semibold">Valor Decimal Aproximado</th>
+                <th class="py-3 px-4 font-semibold">Classificação</th>
+                <th class="py-3 px-4 font-semibold">Polinômio Minimal / Prova</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-blue-600 text-base">\(\sqrt{2}\)</td>
+                <td class="py-3 px-4 font-medium">Constante de Pitágoras (Diagonal do quadrado unitário)</td>
+                <td class="py-3 px-4 font-mono text-xs">1,414213562373095...</td>
+                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs font-semibold">Algébrico</span></td>
+                <td class="py-3 px-4 font-mono text-xs">x² - 2 = 0</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-blue-600 text-base">\(\sqrt{3}\)</td>
+                <td class="py-3 px-4 font-medium">Constante de Teodoro (Diagonal do cubo unitário)</td>
+                <td class="py-3 px-4 font-mono text-xs">1,732050807568877...</td>
+                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs font-semibold">Algébrico</span></td>
+                <td class="py-3 px-4 font-mono text-xs">x² - 3 = 0</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-blue-600 text-base">\(\phi\)</td>
+                <td class="py-3 px-4 font-medium">Número de Ouro (Proporção Áurea: \(\frac{1+\sqrt{5}}{2}\))</td>
+                <td class="py-3 px-4 font-mono text-xs">1,618033988749895...</td>
+                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs font-semibold">Algébrico</span></td>
+                <td class="py-3 px-4 font-mono text-xs">x² - x - 1 = 0</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-indigo-600 text-base">\(\pi\)</td>
+                <td class="py-3 px-4 font-medium">Pi (Razão perímetro/diâmetro na circunferência)</td>
+                <td class="py-3 px-4 font-mono text-xs">3,141592653589793...</td>
+                <td class="py-3 px-4"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs font-semibold">Transcendente</span></td>
+                <td class="py-3 px-4 text-xs">Provado por Lindemann (1882)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-indigo-600 text-base">\(e\)</td>
+                <td class="py-3 px-4 font-medium">Número de Euler (Base do logaritmo natural)</td>
+                <td class="py-3 px-4 font-mono text-xs">2,718281828459045...</td>
+                <td class="py-3 px-4"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs font-semibold">Transcendente</span></td>
+                <td class="py-3 px-4 text-xs">Provado por Hermite (1873)</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-indigo-600 text-base">\(\ln(2)\)</td>
+                <td class="py-3 px-4 font-medium">Logaritmo natural de 2</td>
+                <td class="py-3 px-4 font-mono text-xs">0,693147180559945...</td>
+                <td class="py-3 px-4"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs font-semibold">Transcendente</span></td>
+                <td class="py-3 px-4 text-xs">Teorema de Lindemann-Weierstrass</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-indigo-600 text-base">\(\zeta(3)\)</td>
+                <td class="py-3 px-4 font-medium">Constante de Apéry (\(\sum_{n=1}^\infty \frac{1}{n^3}\))</td>
+                <td class="py-3 px-4 font-mono text-xs">1,202056903159594...</td>
+                <td class="py-3 px-4"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-semibold">Irracional</span></td>
+                <td class="py-3 px-4 text-xs">Provado por Apéry (1979) [Transcendência em aberto]</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 px-4 font-bold text-blue-600 text-base">\(\sqrt[3]{2}\)</td>
+                <td class="py-3 px-4 font-medium">Constante de Delos (Problema da duplicação do cubo)</td>
+                <td class="py-3 px-4 font-mono text-xs">1,259921049894873...</td>
+                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs font-semibold">Algébrico</span></td>
+                <td class="py-3 px-4 font-mono text-xs">x³ - 2 = 0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- ABA 4: CONTEXTO HISTÓRICO E EPISTEMOLÓGICO             -->
+    <!-- ======================================================== -->
+    <section id="pane-historia" class="space-y-6 hidden">
+      <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-6 text-slate-700 leading-relaxed">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900 mb-2">A Evolução Histórica e Epistemológica dos Irracionais</h2>
+          <p class="text-sm text-slate-500">Do colapso da incomensurabilidade pitagórica à axiomatização de Dedekind e Cantor.</p>
+        </div>
+
+        <div class="border-t border-slate-200 pt-4 space-y-4">
+          <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            1. O Colapso Pitagórico e a Incomensurabilidade (séc. V a.C.)
+          </h3>
+          <p class="text-sm">
+            Para a escola pitagórica, a ordem cósmica repousava sobre a afirmação mística de que <em>"tudo é número inteiro"</em>. 
+            Medir qualquer segmento significava encontrar uma unidade submúltipla comum capaz de caber um número inteiro de vezes em ambos os comprimentos. 
+            Ao aplicar o Teorema de Pitágoras a um quadrado de lado unitário (\(1 \times 1\)), depararam-se com a diagonal de comprimento \(d\), tal que \(d^2 = 1^2 + 1^2 = 2\).
+          </p>
+          <p class="text-sm">
+            A descoberta atribuída a Hipaso de Metaponto revelou que a diagonal e o lado do quadrado são <strong>incomensuráveis</strong>: 
+            não existe nenhuma fração de inteiros capaz de mensurar ambos perfeitamente. A demonstração geométrica por redução ao absurdo causou a primeira grande crise nos fundamentos da matemática grega.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-200 pt-4 space-y-4">
+          <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            2. O Refúgio Geométrico: Eudoxo e os Elementos de Euclides
+          </h3>
+          <p class="text-sm">
+            Incapazes de tratar os números irracionais numericamente por falta de um sistema formal, os matemáticos gregos isolaram a aritmética da geometria. 
+            No Livro V dos <em>Elementos</em>, Eudoxo de Cnido desenvolveu a teoria das proporções puramente geométricas para contornar a incomensurabilidade sem recorrer a frações infinitas. 
+            Mais tarde, no Livro X, Euclides classificou detalhadamente magnitudes irracionais com radicais aninhados.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-200 pt-4 space-y-4">
+          <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            3. A Álgebra dos Polinômios e o Teste das Raízes (séc. XVII - XVIII)
+          </h3>
+          <p class="text-sm">
+            Com a introdução da álgebra simbólica por Descartes, Newton e Gauss, a irracionalidade deixou de ser uma relação entre segmentos geométricos e passou a ser tratada como a <strong>ausência de raízes racionais em polinômios</strong>. 
+            O Teorema das Raízes Racionais estabeleceu um algoritmo finito e determinístico: se um polinômio com coeficientes inteiros não possui raízes dentre seus candidatos racionais fracionários, qualquer raiz real encontrada é garantidamente irracional.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-200 pt-4 space-y-4">
+          <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            4. A Fronteira da Transcendência: Liouville, Hermite e Lindemann (séc. XIX)
+          </h3>
+          <p class="text-sm">
+            Em 1844, Joseph Liouville construiu o primeiro número comprovadamente transcendente (\(L = \sum_{k=1}^\infty 10^{-k!}\)), demonstrando que existem números reais que não são raízes de nenhuma equação polinomial de coeficientes inteiros.
+            Em 1873, Charles Hermite demonstrou a transcendência da base neperiana \(e\), e em 1882 Ferdinand von Lindemann provou que \(\pi\) é transcendente. 
+            Esse último resultado sepultou definitivamente a milenar questão grega da <em>quadratura do círculo</em> com régua e compasso.
+          </p>
+        </div>
+
+        <div class="border-t border-slate-200 pt-4 space-y-4">
+          <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            5. A Completude da Reta: Cortes de Dedekind e Teoria de Cantor
+          </h3>
+          <p class="text-sm">
+            Apenas no final do século XIX o conjunto dos números reais (\(\mathbb{R}\)) recebeu rigor formal. 
+            Richard Dedekind definiu cada número irracional como um <em>corte</em> que divide o conjunto dos racionais \(\mathbb{Q}\) em duas classes, preenchendo as lacunas da reta contínua. 
+            Paralelamente, Georg Cantor provou que, enquanto o conjunto dos racionais é enumerável (\(\aleph_0\)), o conjunto dos números irracionais é não enumerável (\(\mathfrak{c} = 2^{\aleph_0}\)), demonstrando que quase todos os pontos da reta real pertencem ao conjunto dos irracionais.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+    Laboratório de Números Irracionais &bull; Sequência Didática para Ensino Médio &bull; Referências: Niven (1990), Figueiredo (2002), Marques (2013)
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- SCRIPTS DO MOTOR ALGÉBRICO                               -->
+  <!-- ======================================================== -->
+  <script>
+    // Gerenciador de Abas
+    function switchTab(tabId) {
+      const tabs = ['tfa', 'trr', 'tabela', 'historia'];
+      tabs.forEach(t => {
+        document.getElementById('pane-' + t).classList.add('hidden');
+        document.getElementById('tab-' + t).classList.remove('active');
+      });
+      document.getElementById('pane-' + tabId).classList.remove('hidden');
+      document.getElementById('tab-' + tabId).classList.add('active');
+      
+      // Re-render KaTeX se necessário
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('pane-' + tabId));
+      }
+    }
+
+    // Fatoração em Primos
+    function primeFactorization(n) {
+      const factors = {};
+      let d = 2;
+      while (d * d <= n) {
+        while (n % d === 0) {
+          factors[d] = (factors[d] || 0) + 1;
+          n = Math.floor(n / d);
+        }
+        d++;
+      }
+      if (n > 1) {
+        factors[n] = (factors[n] || 0) + 1;
+      }
+      return factors;
+    }
+
+    // ========================================================
+    // MOTOR 1: EXECUÇÃO DO TEOREMA FUNDAMENTAL DA ARITMÉTICA
+    // ========================================================
+    function executarTFA() {
+      const inputVal = parseInt(document.getElementById('tfa-input').value);
+      const outDiv = document.getElementById('tfa-output');
+      outDiv.classList.remove('hidden');
+
+      if (isNaN(inputVal) || inputVal < 2) {
+        outDiv.innerHTML = `<div class="text-red-600 font-medium text-sm">Por favor, insira um número inteiro maior ou igual a 2.</div>`;
+        return;
+      }
+
+      const factors = primeFactorization(inputVal);
+      let factorStrArray = [];
+      let temExpoenteImpar = false;
+      let primoImpar = null;
+      let expImpar = 0;
+
+      for (const [p, exp] of Object.entries(factors)) {
+        factorStrArray.push(`${p}^{${exp}}`);
+        if (exp % 2 !== 0 && !temExpoenteImpar) {
+          temExpoenteImpar = true;
+          primoImpar = p;
+          expImpar = exp;
+        }
+      }
+
+      const fatoracaoFormatada = factorStrArray.join(' \\cdot ');
+
+      let html = '';
+
+      if (!temExpoenteImpar) {
+        // É um quadrado perfeito -> Racional
+        const raizExata = Math.round(Math.sqrt(inputVal));
+        html = `
+          <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-lg">Resultado: Racional (Inteiro)</h3>
+            <span class="bg-emerald-100 text-emerald-800 font-semibold px-3 py-1 rounded text-xs">\\(\\sqrt{${inputVal}} \\in \\mathbb{Q}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700">
+            <p><strong>1. Fatoração Prima Única (TFA):</strong></p>
+            <div class="math-step">\\(${inputVal} = ${fatoracaoFormatada}\\)</div>
+            <p><strong>2. Análise dos Expoentes:</strong></p>
+            <p>Todos os fatores primos possuem expoentes <strong>pares</strong>. Portanto, \\(${inputVal}\\) é um quadrado perfeito exato:</p>
+            <div class="math-step">\\(\\sqrt{${inputVal}} = ${raizExata}\\)</div>
+            <p class="text-slate-600">Como \\(${raizExata} = \\frac{${raizExata}}{1}\\), o número é racional.</p>
+          </div>
+        `;
+      } else {
+        // Não é quadrado perfeito -> Irracional demonstrado
+        html = `
+          <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-lg">Resultado: Irracional Comprovado</h3>
+            <span class="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded text-xs">\\(\\sqrt{${inputVal}} \\notin \\mathbb{Q}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700">
+            <p><strong>1. Decomposição Canônica em Primos (TFA):</strong></p>
+            <div class="math-step">\\(${inputVal} = ${fatoracaoFormatada}\\)</div>
+            <p>Note que o fator primo <strong>${primoImpar}</strong> possui expoente <strong>${expImpar} (ímpar)</strong>.</p>
+
+            <p><strong>2. Estrutura da Prova por Redução ao Absurdo:</strong></p>
+            <p>Suponha, por absurdo, que \\(\\sqrt{${inputVal}}\\) seja racional. Então existem inteiros coprimos \\(p, q\\) tais que:</p>
+            <div class="math-step">\\(\\frac{p}{q} = \\sqrt{${inputVal}} \\implies p^2 = ${inputVal} \\cdot q^2 \\implies p^2 = (${fatoracaoFormatada}) \\cdot q^2\\)</div>
+
+            <p><strong>3. Confronto de Paridade de Expoentes:</strong></p>
+            <ul class="list-disc list-inside space-y-1 pl-2">
+              <li>No membro esquerdo (\\(p^2\\)), como qualquer número ao quadrado dobra os expoentes de seus fatores primos, o fator primo <strong>${primoImpar}</strong> comparece obrigatoriamente com <strong>expoente par</strong> (seja \\(2k\\)).</li>
+              <li>No membro direito (\\(${inputVal} \\cdot q^2\\)), o fator primo <strong>${primoImpar}</strong> comparece em \\(q^2\\) com expoente par (\\(2m\\)), que ao ser multiplicado por \\(${primoImpar}^{${expImpar}}\\), totaliza um <strong>expoente ímpar</strong> (\\(${expImpar} + 2m\\)).</li>
+            </ul>
+
+            <p><strong>4. Contradição com o Teorema Fundamental da Aritmética:</strong></p>
+            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded text-red-900 text-xs">
+              <strong>Absurdo:</strong> Um mesmo número inteiro positivo não pode possuir duas fatorações distintas com contagens par e ímpar para o fator primo ${primoImpar}. Pela unicidade do TFA, a igualdade \\(p^2 = ${inputVal}q^2\\) é impossível.
+            </div>
+            <p class="font-semibold text-slate-900 pt-2">Conclusão: \\(\\sqrt{${inputVal}}\\) não pode ser escrito como fração de inteiros. Logo, \\(\\sqrt{${inputVal}} \\in \\mathbb{R} \\setminus \\mathbb{Q}\\).</p>
+          </div>
+        `;
+      }
+
+      outDiv.innerHTML = html;
+      if (window.renderMathInElement) {
+        renderMathInElement(outDiv);
+      }
+    }
+
+    // ========================================================
+    // MOTOR 2: EXECUÇÃO DO TESTE DAS RAÍZES RACIONAIS (TRR)
+    // ========================================================
+    function getDivisors(n) {
+      n = Math.abs(n);
+      const divs = [];
+      for (let i = 1; i <= Math.floor(Math.sqrt(n)); i++) {
+        if (n % i === 0) {
+          divs.push(i);
+          if (i * i !== n) divs.push(n / i);
+        }
+      }
+      return divs.sort((a, b) => a - b);
+    }
+
+    function executarTRR() {
+      const n = parseInt(document.getElementById('trr-index').value);
+      const k = parseInt(document.getElementById('trr-radicand').value);
+      const outDiv = document.getElementById('trr-output');
+      outDiv.classList.remove('hidden');
+
+      if (isNaN(n) || n < 2 || isNaN(k) || k < 1) {
+        outDiv.innerHTML = `<div class="text-red-600 font-medium text-sm">Insira um índice n &ge; 2 e um radicando K &ge; 1.</div>`;
+        return;
+      }
+
+      const divisores = getDivisors(k);
+      const candidatos = [];
+      divisores.forEach(d => {
+        candidatos.push(d);
+        candidatos.push(-d);
+      });
+      candidatos.sort((a, b) => a - b);
+
+      let raizEncontrada = null;
+      const avaliacoes = [];
+
+      for (const c of candidatos) {
+        const val = Math.pow(c, n) - k;
+        avaliacoes.push({ c, val });
+        if (val === 0 && raizEncontrada === null) {
+          raizEncontrada = c;
+        }
+      }
+
+      let html = '';
+
+      if (raizEncontrada !== null) {
+        html = `
+          <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-lg">Resultado: Raiz Racional Encontrada</h3>
+            <span class="bg-emerald-100 text-emerald-800 font-semibold px-3 py-1 rounded text-xs">\\(\\sqrt[${n}]{${k}} = ${raizEncontrada} \\in \\mathbb{Z}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700">
+            <p><strong>1. Modelo Polinomial Mônico:</strong> Definimos \\(P(x) = x^{${n}} - ${k} = 0\\).</p>
+            <p><strong>2. Aplicação do TRR:</strong> Como o coeficiente líder é \\(a_{${n}} = 1\\), qualquer raiz racional \\(p/q\\) exige que \\(q \\mid 1\\). Logo, toda raiz racional deve ser inteira e pertencer aos divisores de \\(${k}\\):</p>
+            <div class="math-step">\\(\\text{Candidatos } \\in \\{${candidatos.join(', ')}\\}\\)</div>
+            <p><strong>3. Teste dos Candidatos:</strong></p>
+            <p>Para o candidato \\(x = ${raizEncontrada}\\):</p>
+            <div class="math-step">\\(P(${raizEncontrada}) = (${raizEncontrada})^{${n}} - ${k} = ${Math.pow(raizEncontrada, n) - k} = 0\\)</div>
+            <p class="font-semibold text-slate-900">Conclusão: \\(\\sqrt[${n}]{${k}}\\) é exatamente o número inteiro \\(${raizEncontrada}\\), portanto é racional.</p>
+          </div>
+        `;
+      } else {
+        const tabelaTestes = avaliacoes.map(item => 
+          `<span class="inline-block bg-slate-100 px-2 py-1 rounded mr-2 mb-2 text-xs font-mono">P(${item.c}) = ${item.val} &ne; 0</span>`
+        ).join('');
+
+        html = `
+          <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-lg">Resultado: Irracional Algébrico Comprovado</h3>
+            <span class="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded text-xs">\\(\\sqrt[${n}]{${k}} \\notin \\mathbb{Q}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700">
+            <p><strong>1. Polinômio Mônico Associado:</strong></p>
+            <p>Seja \\(x = \\sqrt[${n}]{${k}}\\). Elevando ambos os lados à ordem \\(${n}\\), obtemos a equação polinomial com coeficientes inteiros:</p>
+            <div class="math-step">\\(P(x) = x^{${n}} - ${k} = 0\\)</div>
+
+            <p><strong>2. Teorema das Raízes Racionais e a Dicotomia (Figueiredo, 2002):</strong></p>
+            <p>
+              O TRR estabelece que se uma fração irredutível \\(p/q\\) é raiz de um polinômio com coeficientes inteiros, 
+              então \\(p \\mid a_0\\) (neste caso, \\(p \\mid ${k}\\)) e \\(q \\mid a_n\\) (neste caso, \\(q \\mid 1\\)).
+              Como \\(q \\in \\{\\pm 1\\}\\), <strong>qualquer raiz racional deste polinômio deve ser obrigatoriamente um número inteiro divisor de ${k}</strong>.
+            </p>
+
+            <p><strong>3. Teste Exaustivo do Conjunto Finito de Candidatos:</strong></p>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              ${tabelaTestes}
+            </div>
+
+            <p><strong>4. Dedução Lógica:</strong></p>
+            <p>
+              Nenhum dos divisores inteiros zera o polinômio. Como a lista finita de candidatos esgotou todas as possíveis raízes racionais e \\(\\sqrt[${n}]{${k}}\\) é comprovadamente uma raiz real da equação, concluímos:
+            </p>
+            <div class="p-3 bg-blue-50 border-l-4 border-blue-600 rounded text-blue-950 text-xs">
+              <strong>Teorema da Dicotomia:</strong> Ou uma raiz de um polinômio mônico inteiro é inteira, ou ela é irracional. Como não é inteira, <strong>\\(\\sqrt[${n}]{${k}}\\) é um número irracional algébrico</strong>.
+            </div>
+          </div>
+        `;
+      }
+
+      outDiv.innerHTML = html;
+      if (window.renderMathInElement) {
+        renderMathInElement(outDiv);
+      }
+    }
+
+    // Executa uma demonstração inicial ao carregar
+    window.addEventListener('DOMContentLoaded', () => {
+      executarTFA();
+    });
+  </script>
+</body>
+</html>
