@@ -39,6 +39,13 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+##[1.0.5]
+* **Novo:** Adição de suporte as raízes complexas na aba "Solucionador de polinômios"
+* **Novo:** Adição do recurso de somar raízes na aba "Solucionador de polinômios"
+* **Novo:** Adição do recurso de multiplicar raízes na aba "Solucionador de polinômios"
+* **Melhoria:** Aprimoramento do recurso de geração de gráficos na aba "Solucionador de polinômios"
+* **Correção:** Resolução de erro na resolução de monômios x^n = 0 
+
 ### [1.0.4]
 * **Novo:** Adição de recurso experimental de geração de gráficos na aba "Solucionador de polinômios".
 
