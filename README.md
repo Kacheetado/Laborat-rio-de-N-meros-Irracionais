@@ -1,4 +1,4 @@
-#Laboratório de Números Irracionais
+
 O Laboratório de Números Irracionais é produto do projeto de pesquisa do IFPB/CG chamado "Realmente conhecemos os números irracionais? Uma abordagem para identificá-los usando ferramentas do ensino básico", seus membros são Kauã Fabson, Maria Alice Éllysson Emanuel e Jonathas Jerônimo.
 O objetivo do projeto é estudar números irracionais utilizando as ferramentas do ensino básico, mesmo que não se limite apenas a isso, e utilizar dessas ferramentas para obter infinitos números irracionais.
 Na versão inicial da ferramenta, existem as seguintes funcionalidades:
