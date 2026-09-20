@@ -1202,6 +1202,190 @@
       return result;
     }
 
+function gerarSvgGraficoPolinomio(coeffs) {
+      const width = 600, height = 300;
+      
+      // 1. Descobrir limites do Eixo X via Cota de Fujiwara
+      // Isso nos dá o limite máximo onde qualquer raiz pode existir
+      let fujiwaraMax = 0;
+      let grau = coeffs.length - 1;
+      let an = Math.abs(coeffs[0]);
+      for (let i = 1; i <= grau; i++) {
+        let termo = Math.pow(Math.abs(coeffs[i]) / an, 1 / i);
+        if (termo > fujiwaraMax) fujiwaraMax = termo;
+      }
+      
+      // O raio das raízes é 2 * fujiwaraMax. Damos um "chorinho" visual.
+      let limiteX = Math.ceil(2 * fujiwaraMax) + 1;
+      
+      // Travamos o eixo X entre 4 e 50 para gráficos sempre visíveis e rápidos
+      let boundX = Math.max(4, Math.min(limiteX, 50));
+      const xMin = -boundX;
+      const xMax = boundX;
+      const xRange = xMax - xMin;
+      
+      const steps = 200; // Um pouco mais de passos para curvas X longas ficarem suaves
+      const dx = xRange / steps;
+
+      // 2. Descobrir limites reais do Eixo Y no intervalo X visível
+      let calcYMin = Infinity;
+      let calcYMax = -Infinity;
+      for (let i = 0; i <= steps; i++) {
+        let y = evalPoly(coeffs, xMin + i * dx);
+        if (y < calcYMin) calcYMin = y;
+        if (y > calcYMax) calcYMax = y;
+      }
+
+      let yRange = calcYMax - calcYMin;
+      if (yRange === 0) yRange = 10; 
+
+      let yMin = calcYMin - yRange * 0.15;
+      let yMax = calcYMax + yRange * 0.15;
+      
+      if (yMin > 0) yMin = -yRange * 0.15;
+      if (yMax < 0) yMax = yRange * 0.15;
+      yRange = yMax - yMin;
+
+      // 3. Calcular passos (ticks) dinâmicos para o Eixo Y
+      let rawStepY = yRange / 6;
+      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
+      let normY = rawStepY / magY;
+      let yStep = normY > 7.5 ? 10 * magY : normY > 3.5 ? 5 * magY : normY > 1.5 ? 2 * magY : magY;
+
+      // 4. Calcular passos (ticks) dinâmicos para o Eixo X
+      let rawStepX = xRange / 8;
+      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+      let normX = rawStepX / magX;
+      let xStep = normX > 7.5 ? 10 * magX : normX > 3.5 ? 5 * magX : normX > 1.5 ? 2 * magX : magX;
+
+      const toScreenX = (x) => ((x - xMin) / xRange) * width;
+      const toScreenY = (y) => height - ((y - yMin) / yRange) * height;
+
+      let pathD = "";
+      for (let i = 0; i <= steps; i++) {
+        let x = xMin + i * dx;
+        let y = evalPoly(coeffs, x);
+        let sx = toScreenX(x);
+        let sy = toScreenY(y);
+        
+        // Trava para o renderizador do navegador não bugar com coords absurdas
+        sy = Math.max(-5000, Math.min(height + 5000, sy));
+        pathD += (i === 0 ? `M ${sx} ${sy}` : ` L ${sx} ${sy}`);
+      }
+
+      const xAxisY = toScreenY(0);
+      const yAxisX = toScreenX(0);
+
+      let ticksEixos = "";
+
+      // Renderiza números e barras do Eixo X dinâmico
+      let startX = Math.ceil(xMin / xStep) * xStep;
+      for (let i = startX; i <= xMax; i += xStep) {
+        if (Math.abs(i) < 1e-7) continue;
+        let tx = toScreenX(i);
+        let labelX = Number.isInteger(i) ? i : parseFloat(i.toFixed(2));
+        ticksEixos += `
+          <line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" />
+          <text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>
+        `;
+      }
+
+      // Renderiza números e barras do Eixo Y dinâmico
+      let startY = Math.ceil(yMin / yStep) * yStep;
+      for (let j = startY; j <= yMax; j += yStep) {
+        if (Math.abs(j) < 1e-7) continue; 
+        let ty = toScreenY(j);
+        let labelY = Number.isInteger(j) ? j : parseFloat(j.toFixed(2));
+        ticksEixos += `
+          <line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" />
+          <text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>
+        `;
+      }
+      
+      // Zero na origem
+      ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
+
+      return `
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center">
+          <p class="text-xs text-slate-400 mb-2 font-medium">Visualização Cartesiana do Polinômio P(x) e Raízes</p>
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
+            <!-- Eixos Principais -->
+            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
+            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
+            
+            <!-- Ticks e Números -->
+            ${ticksEixos}
+            
+            <!-- Curva P(x) -->
+            <path d="${pathD}" fill="none" stroke="#3b82f6" stroke-width="3" />
+            
+            <!-- Marcações de x e y -->
+            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
+            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
+          </svg>
+        </div>
+      `;
+    }
+
+// --- CLASSES E MÉTODOS NUMÉRICOS (DURAND-KERNER) ---
+    class Complexo {
+      constructor(re, im = 0) {
+        this.re = re;
+        this.im = im;
+      }
+      add(c) { return new Complexo(this.re + c.re, this.im + c.im); }
+      sub(c) { return new Complexo(this.re - c.re, this.im - c.im); }
+      mul(c) { return new Complexo(this.re * c.re - this.im * c.im, this.re * c.im + this.im * c.re); }
+      div(c) { 
+        const den = c.re * c.re + c.im * c.im; 
+        return new Complexo((this.re * c.re + this.im * c.im) / den, (this.im * c.re - this.re * c.im) / den);
+      }
+      toTeX() {
+        if (Math.abs(this.im) < 1e-7) return `${this.re.toFixed(5)}`;
+        const absIm = Math.abs(this.im).toFixed(5);
+        let reStr = Math.abs(this.re) < 1e-7 ? "0" : this.re.toFixed(5);
+        if (Math.abs(this.re) < 1e-7) return `${this.im < 0 ? '-' : ''}${absIm}i`;
+        return `${reStr} ${this.im > 0 ? '+' : '-'} ${absIm}i`;
+      }
+    }
+
+    function evalPolyComplex(coeffs, z) {
+      let res = new Complexo(coeffs[0], 0);
+      for (let i = 1; i < coeffs.length; i++) {
+        res = res.mul(z).add(new Complexo(coeffs[i], 0));
+      }
+      return res;
+    }
+
+    function durandKerner(coeffs) {
+      const degree = coeffs.length - 1;
+      let roots = [];
+      // Raio inicial com ângulos assimétricos para quebrar simetria
+      for (let i = 0; i < degree; i++) {
+        roots.push(new Complexo(Math.cos(i * 2.5) * 1.5, Math.sin(i * 2.5) * 1.5));
+      }
+      
+      for (let iter = 0; iter < 100; iter++) {
+        let maxDiff = 0;
+        let newRoots = [];
+        for (let i = 0; i < degree; i++) {
+          let p = evalPolyComplex(coeffs, roots[i]);
+          let den = new Complexo(1, 0);
+          for (let j = 0; j < degree; j++) {
+            if (i !== j) den = den.mul(roots[i].sub(roots[j]));
+          }
+          let change = p.div(den);
+          let nextRoot = roots[i].sub(change);
+          newRoots.push(nextRoot);
+          maxDiff = Math.max(maxDiff, Math.abs(change.re) + Math.abs(change.im));
+        }
+        roots = newRoots;
+        if (maxDiff < 1e-10) break;
+      }
+      return roots;
+    }
+    // ---------------------------------------------------
+
     function resolverPolinomio() {
       const inputStr = document.getElementById('poly-input').value;
       const outDiv = document.getElementById('solver-output');
@@ -1215,50 +1399,70 @@
 
       const originalCoeffs = parsed.coeffs;
       const degree = parsed.degree;
-      const an = originalCoeffs[0];
-      const a0 = originalCoeffs[originalCoeffs.length - 1];
+      
+      const svgGrafico = gerarSvgGraficoPolinomio(originalCoeffs);
 
       let steps = [];
       steps.push(`<strong>${t('solver_poly_lbl')}</strong> \\(P(x) = ${formatPolynomial(originalCoeffs)} = 0\\) (${t('solver_deg_lbl')} ${degree})`);
 
-      if (a0 === 0) steps.push(t('solver_zero_root'));
+      let currentCoeffs = [...originalCoeffs];
+      let raizesRacionais = [];
+      let multiplicidadeZero = 0;
 
-      const pDivs = getDivisors(Math.round(a0));
-      const qDivs = getDivisors(Math.round(an));
-      const candidatosMap = new Map();
+      while (currentCoeffs.length > 1 && currentCoeffs[currentCoeffs.length - 1] === 0) {
+        multiplicidadeZero++;
+        currentCoeffs.pop();
+      }
 
-      for (let p of pDivs) {
-        for (let q of qDivs) {
-          const g = gcd(p, q);
-          const sp = p / g, sq = q / g;
-          candidatosMap.set(`${sp}/${sq}`, { val: sp / sq, p: sp, q: sq });
-          candidatosMap.set(`-${sp}/${sq}`, { val: -sp / sq, p: -sp, q: sq });
+      if (multiplicidadeZero > 0) {
+        raizesRacionais.push({ val: 0, tex: '0' });
+        if (currentCoeffs.length === 1) {
+          steps.push(`O polinômio é um monômio. Logo, a única raiz é \\(x = 0\\) (com multiplicidade ${multiplicidadeZero}).`);
+        } else {
+          steps.push(`O termo independente original é 0. Logo, \\(x = 0\\) é raiz racional evidente (multiplicidade ${multiplicidadeZero}).`);
+          steps.push(`Polinômio reduzido para análise do TRR: <div class="math-step notranslate">\\(Q(x) = ${formatPolynomial(currentCoeffs)} = 0\\)</div>`);
         }
       }
 
-      const candList = Array.from(candidatosMap.values()).sort((a, b) => a.val - b.val);
-      const candTeX = candList.map(c => c.q === 1 ? `${c.p}` : `\\frac{${c.p}}{${c.q}}`).join(', ');
+      if (currentCoeffs.length > 1) {
+        const an = currentCoeffs[0];
+        const a0 = currentCoeffs[currentCoeffs.length - 1];
 
-      steps.push(`${t('solver_cand_intro', { a0, an })}<br>
-                  <div class="math-step notranslate">\\(\\mathcal{C} = \\left\\{ ${candTeX} \\right\\}\\) (${candList.length} ${t('solver_cand_tested')})</div>`);
+        const pDivs = getDivisors(Math.round(a0));
+        const qDivs = getDivisors(Math.round(an));
+        const candidatosMap = new Map();
 
-      let currentCoeffs = [...originalCoeffs];
-      let raizesRacionais = [];
+        for (let p of pDivs) {
+          for (let q of qDivs) {
+            const g = gcd(p, q);
+            const sp = p / g, sq = q / g;
+            candidatosMap.set(`${sp}/${sq}`, { val: sp / sq, p: sp, q: sq });
+            candidatosMap.set(`-${sp}/${sq}`, { val: -sp / sq, p: -sp, q: sq });
+          }
+        }
 
-      for (let cand of candList) {
-        while (currentCoeffs.length > 1) {
-          const val = evalPoly(currentCoeffs, cand.val);
-          if (Math.abs(val) < 1e-7) {
-            const fracStr = cand.q === 1 ? `${cand.p}` : `\\frac{${cand.p}}{${cand.q}}`;
-            raizesRacionais.push({ val: cand.val, tex: fracStr });
-            currentCoeffs = ruffini(currentCoeffs, cand.val);
-          } else break;
+        const candList = Array.from(candidatosMap.values()).sort((a, b) => a.val - b.val);
+        const candTeX = candList.map(c => c.q === 1 ? `${c.p}` : `\\frac{${c.p}}{${c.q}}`).join(', ');
+
+        steps.push(`${t('solver_cand_intro', { a0, an })}<br>
+                    <div class="math-step notranslate">\\(\\mathcal{C} = \\left\\{ ${candTeX} \\right\\}\\) (${candList.length} ${t('solver_cand_tested')})</div>`);
+
+        for (let cand of candList) {
+          while (currentCoeffs.length > 1) {
+            const val = evalPoly(currentCoeffs, cand.val);
+            if (Math.abs(val) < 1e-7) {
+              const fracStr = cand.q === 1 ? `${cand.p}` : `\\frac{${cand.p}}{${cand.q}}`;
+              raizesRacionais.push({ val: cand.val, tex: fracStr });
+              currentCoeffs = ruffini(currentCoeffs, cand.val);
+            } else break;
+          }
         }
       }
 
       let raizesIrracionais = [];
       let polySobrouStr = formatPolynomial(currentCoeffs);
 
+      // RESOLUÇÃO DE QUADRÁTICA (Exata)
       if (currentCoeffs.length - 1 === 2) {
         const A = currentCoeffs[0], B = currentCoeffs[1], C = currentCoeffs[2];
         const delta = B * B - 4 * A * C;
@@ -1272,31 +1476,104 @@
           if (!Number.isInteger(sqrtDelta)) {
             const r1Tex = B === 0 ? `\\frac{\\sqrt{${delta}}}{${2*A}}` : `\\frac{${-B} + \\sqrt{${delta}}}{${2*A}}`;
             const r2Tex = B === 0 ? `-\\frac{\\sqrt{${delta}}}{${2*A}}` : `\\frac{${-B} - \\sqrt{${delta}}}{${2*A}}`;
-            raizesIrracionais.push({ tex: r1Tex, val: (-B + sqrtDelta) / (2*A) });
-            raizesIrracionais.push({ tex: r2Tex, val: (-B - sqrtDelta) / (2*A) });
+            raizesIrracionais.push({ tex: r1Tex, val: (-B + sqrtDelta) / (2*A), isComplex: false });
+            raizesIrracionais.push({ tex: r2Tex, val: (-B - sqrtDelta) / (2*A), isComplex: false });
             steps.push(t('solver_irrat_delta', { delta }));
           }
         } else if (delta < 0) {
           steps.push(t('solver_complex_roots'));
+          const absDelta = Math.abs(delta);
+          
+          const r1Tex = B === 0 ? `\\frac{i\\sqrt{${absDelta}}}{${2*A}}` : `\\frac{${-B} + i\\sqrt{${absDelta}}}{${2*A}}`;
+          const r2Tex = B === 0 ? `-\\frac{i\\sqrt{${absDelta}}}{${2*A}}` : `\\frac{${-B} - i\\sqrt{${absDelta}}}{${2*A}}`;
+          
+          const re = -B / (2*A);
+          const im = Math.sqrt(absDelta) / (2*A);
+          const reStr = Math.abs(re) < 1e-7 ? "" : re.toFixed(4);
+          const sign1 = reStr === "" ? "" : " + ";
+          const sign2 = reStr === "" ? "-" : " - ";
+          
+          raizesIrracionais.push({ tex: r1Tex, valStr: `${reStr}${sign1}${Math.abs(im).toFixed(4)}i`, isComplex: true });
+          raizesIrracionais.push({ tex: r2Tex, valStr: `${reStr}${sign2}${Math.abs(im).toFixed(4)}i`, isComplex: true });
         }
-      } else if (currentCoeffs.length - 1 > 0 && raizesRacionais.length === 0) {
-        steps.push(t('solver_no_rat_roots'));
-        steps.push(t('solver_all_real_irrat'));
+      } 
+      // RESOLUÇÃO NUMÉRICA (Durand-Kerner) PARA GRAUS MAIORES
+      else if (currentCoeffs.length - 1 > 2) {
+        steps.push(`O polinômio reduzido tem grau ${currentCoeffs.length - 1}. Extraindo raízes irracionais/complexas restantes via método numérico (Durand-Kerner)...`);
+        
+        const numRoots = durandKerner(currentCoeffs);
+        numRoots.forEach(z => {
+          if (Math.abs(z.im) < 1e-6) {
+            raizesIrracionais.push({ tex: `\\approx ${z.re.toFixed(5)}`, val: z.re, isComplex: false });
+          } else {
+            raizesIrracionais.push({ tex: `\\approx ${z.toTeX()}`, valStr: z.toTeX(), isComplex: true });
+          }
+        });
       }
 
-      let badgeHtml = (raizesIrracionais.length > 0 || (raizesRacionais.length === 0 && degree >= 1))
-        ? `<span class="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded text-xs">${t('solver_badge_has_irrat')}</span>`
-        : `<span class="bg-emerald-100 text-emerald-800 font-semibold px-3 py-1 rounded text-xs">${t('solver_badge_only_rat')}</span>`;
+      const hasComplex = raizesIrracionais.some(r => r.isComplex);
+      const hasIrrat = raizesIrracionais.length > 0 && !hasComplex;
+      
+      let badgeHtml = `<span class="bg-emerald-100 text-emerald-800 font-semibold px-3 py-1 rounded text-xs">${t('solver_badge_only_rat')}</span>`;
+      if (hasComplex) {
+        badgeHtml = `<span class="bg-purple-100 text-purple-800 font-semibold px-3 py-1 rounded text-xs">Contém Raízes Complexas</span>`;
+      } else if (hasIrrat) {
+        badgeHtml = `<span class="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded text-xs">${t('solver_badge_has_irrat')}</span>`;
+      }
 
       let resumoRaizes = '';
       if (raizesRacionais.length > 0) {
         resumoRaizes += `<p><strong>${t('solver_rat_roots_found')}</strong> ` + 
           raizesRacionais.map(r => `\\(x = ${r.tex}\\)`).join(', ') + `</p>`;
       }
+      
       if (raizesIrracionais.length > 0) {
-        resumoRaizes += `<p class="mt-2 text-blue-900 font-medium"><strong>${t('solver_irrat_roots_found')}</strong> ` + 
-          raizesIrracionais.map(r => `\\(x = ${r.tex} \\approx ${r.val.toFixed(5)}\\)`).join(', ') + `</p>`;
+        const label = hasComplex ? "Raízes Restantes (Irracionais e Complexas):" : `<strong>${t('solver_irrat_roots_found')}</strong>`;
+        resumoRaizes += `<p class="mt-2 text-blue-900 font-medium">${hasComplex ? '<strong>' + label + '</strong>' : label} <br> ` + 
+          raizesIrracionais.map(r => {
+            if(r.valStr) return `\\(x = ${r.tex} \\approx ${r.valStr}\\)`;
+            if(r.tex.includes('\\approx')) return `\\(x ${r.tex}\\)`;
+            return `\\(x = ${r.tex} \\approx ${r.val.toFixed(5)}\\)`;
+          }).join('<br><span class="opacity-50 inline-block px-2">&bull;</span>') + `</p>`;
       }
+
+      // =====================================
+      // BÔNUS: VÉRTICE DA PARÁBOLA E GIRARD
+      // =====================================
+      let verticeHtml = '';
+      if (degree === 2) {
+        const a = originalCoeffs[0], b = originalCoeffs[1], c = originalCoeffs[2];
+        const delta = b*b - 4*a*c;
+        const xv = -b / (2*a);
+        const yv = -delta / (4*a);
+        const tipo = a > 0 ? "Ponto de Mínimo" : "Ponto de Máximo";
+        
+        verticeHtml = `
+          <div class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded">
+            <h4 class="font-bold text-amber-900 mb-1">Geometria da Parábola (Grau 2)</h4>
+            <ul class="list-disc list-inside text-amber-800 text-sm space-y-1">
+              <li><strong>Concavidade:</strong> Voltada para ${a > 0 ? 'cima' : 'baixo'}</li>
+              <li><strong>Vértice (${tipo}):</strong> \\(V = (${xv.toFixed(4)}, ${yv.toFixed(4)})\\)</li>
+            </ul>
+          </div>
+        `;
+      }
+
+      const coefN = originalCoeffs[0];
+      const coefN_1 = originalCoeffs.length > 1 ? originalCoeffs[1] : 0;
+      const coef0 = originalCoeffs[originalCoeffs.length - 1];
+      const soma = -coefN_1 / coefN;
+      const produto = (degree % 2 === 0 ? 1 : -1) * coef0 / coefN;
+
+      const vietaHtml = `
+        <div class="mt-4 p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded">
+          <h4 class="font-bold text-indigo-900 mb-1">Relações de Girard</h4>
+          <ul class="list-disc list-inside text-indigo-800 text-sm space-y-1">
+            <li><strong>Soma das raízes (\\(S\\)):</strong> \\(${soma.toFixed(4)}\\)</li>
+            <li><strong>Produto das raízes (\\(P\\)):</strong> \\(${produto.toFixed(4)}\\)</li>
+          </ul>
+        </div>
+      `;
 
       let html = `
         <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
@@ -1304,10 +1581,13 @@
           ${badgeHtml}
         </div>
         <div class="space-y-4 text-sm text-slate-700">
+          ${svgGrafico}
           ${steps.map(s => `<div class="step-box">${s}</div>`).join('')}
           <div class="p-4 bg-slate-100 border-l-4 border-blue-600 rounded">
             ${resumoRaizes || `<p>${t('solver_no_real_roots')}</p>`}
           </div>
+          ${verticeHtml}
+          ${vietaHtml}
         </div>
       `;
 
