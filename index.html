@@ -1025,7 +1025,9 @@
     }
 
     function gcd(a, b) {
-      a = Math.abs(a); b = Math.abs(b);
+      // O Math.round protege contra decimais microscópicos que causam loops infinitos
+      a = Math.round(Math.abs(a)); 
+      b = Math.round(Math.abs(b));
       while (b) { let t = b; b = a % b; a = t; }
       return a;
     }
@@ -1386,6 +1388,61 @@ function gerarSvgGraficoPolinomio(coeffs) {
     }
     // ---------------------------------------------------
 
+// ===================================================
+    // SIMPLIFICADOR ALGÉBRICO PARA RAÍZES EXATAS
+    // ===================================================
+    function simplificarRaiz(n) {
+      let out = 1, inside = Math.abs(n);
+      for (let i = 2; i * i <= inside; i++) {
+        while (inside % (i * i) === 0) {
+          out *= i;
+          inside /= (i * i);
+        }
+      }
+      return { out, inside };
+    }
+
+    function formatarRaizQuadratica(A, B, delta, isMinus) {
+      A = Math.round(A);
+      B = Math.round(B);
+      delta = Math.round(delta);
+      
+      const isComplex = delta < 0;
+      const absDelta = Math.abs(delta);
+      const { out, inside } = simplificarRaiz(absDelta);
+      
+      let den = 2 * A;
+      let re = -B;
+      let im = out;
+      
+      let g = gcd(gcd(Math.abs(re), im), Math.abs(den));
+      re /= g; im /= g; den /= g;
+      
+      if (den < 0) { re = -re; den = -den; }
+      
+      let imStr = "";
+      if (inside === 1) {
+        imStr = (im === 1 ? "" : im) + (isComplex ? "i" : "");
+      } else {
+        imStr = (im === 1 ? "" : im) + "\\sqrt{" + inside + "}" + (isComplex ? "i" : "");
+      }
+      if (imStr === "") imStr = "1"; 
+      if (imStr === "i") imStr = "i"; 
+      
+      let sign = isMinus ? "-" : "+";
+      
+      if (den === 1) {
+        if (re === 0) return isMinus ? `-${imStr}` : imStr;
+        return `${re} ${sign} ${imStr}`;
+      } else {
+        if (re === 0) return `${isMinus ? '-' : ''}\\frac{${imStr}}{${den}}`;
+        return `\\frac{${re} ${sign} ${imStr}}{${den}}`;
+      }
+    }
+
+    // ===================================================
+    // SOLUCIONADOR PRINCIPAL
+    // ===================================================
     function resolverPolinomio() {
       const inputStr = document.getElementById('poly-input').value;
       const outDiv = document.getElementById('solver-output');
@@ -1393,7 +1450,7 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
       const parsed = parsePolynomial(inputStr);
       if (!parsed || parsed.degree < 1) {
-        outDiv.innerHTML = `<div class="text-red-600 font-medium text-sm">Polinômio inválido.</div>`;
+        outDiv.innerHTML = `<div class="text-red-600 font-medium text-sm">Polinómio inválido.</div>`;
         return;
       }
 
@@ -1417,10 +1474,10 @@ function gerarSvgGraficoPolinomio(coeffs) {
       if (multiplicidadeZero > 0) {
         raizesRacionais.push({ val: 0, tex: '0' });
         if (currentCoeffs.length === 1) {
-          steps.push(`O polinômio é um monômio. Logo, a única raiz é \\(x = 0\\) (com multiplicidade ${multiplicidadeZero}).`);
+          steps.push(`O polinómio é um monómio. Logo, a única raiz é \\(x = 0\\) (com multiplicidade ${multiplicidadeZero}).`);
         } else {
           steps.push(`O termo independente original é 0. Logo, \\(x = 0\\) é raiz racional evidente (multiplicidade ${multiplicidadeZero}).`);
-          steps.push(`Polinômio reduzido para análise do TRR: <div class="math-step notranslate">\\(Q(x) = ${formatPolynomial(currentCoeffs)} = 0\\)</div>`);
+          steps.push(`Polinómio reduzido para análise do TRR: <div class="math-step notranslate">\\(Q(x) = ${formatPolynomial(currentCoeffs)} = 0\\)</div>`);
         }
       }
 
@@ -1445,7 +1502,7 @@ function gerarSvgGraficoPolinomio(coeffs) {
         const candTeX = candList.map(c => c.q === 1 ? `${c.p}` : `\\frac{${c.p}}{${c.q}}`).join(', ');
 
         steps.push(`${t('solver_cand_intro', { a0, an })}<br>
-                    <div class="math-step notranslate">\\(\\mathcal{C} = \\left\\{ ${candTeX} \\right\\}\\) (${candList.length} ${t('solver_cand_tested')})</div>`);
+                    <div class="math-step notranslate overflow-x-auto pb-2">\\(\\mathcal{C} = \\left\\{ ${candTeX} \\right\\}\\) <span class="text-xs text-slate-500 whitespace-nowrap ml-2">(${candList.length} ${t('solver_cand_tested')})</span></div>`);
 
         for (let cand of candList) {
           while (currentCoeffs.length > 1) {
@@ -1453,7 +1510,11 @@ function gerarSvgGraficoPolinomio(coeffs) {
             if (Math.abs(val) < 1e-7) {
               const fracStr = cand.q === 1 ? `${cand.p}` : `\\frac{${cand.p}}{${cand.q}}`;
               raizesRacionais.push({ val: cand.val, tex: fracStr });
+              
               currentCoeffs = ruffini(currentCoeffs, cand.val);
+              
+              // BLINDAGEM DE PRECISÃO: Elimina resíduos decimais após Briot-Ruffini
+              currentCoeffs = currentCoeffs.map(c => Math.abs(c - Math.round(c)) < 1e-5 ? Math.round(c) : c);
             } else break;
           }
         }
@@ -1462,10 +1523,22 @@ function gerarSvgGraficoPolinomio(coeffs) {
       let raizesIrracionais = [];
       let polySobrouStr = formatPolynomial(currentCoeffs);
 
-      // RESOLUÇÃO DE QUADRÁTICA (Exata)
-      if (currentCoeffs.length - 1 === 2) {
+      let isBinomial = false;
+      const degRem = currentCoeffs.length - 1;
+      if (degRem >= 3) {
+        isBinomial = true;
+        for (let i = 1; i < degRem; i++) {
+          if (Math.abs(currentCoeffs[i]) > 1e-7) { isBinomial = false; break; }
+        }
+      }
+
+      // RESOLUÇÃO DE QUADRÁTICA COM SIMPLIFICADOR ALGÉBRICO SEGURO
+      if (degRem === 2) {
         const A = currentCoeffs[0], B = currentCoeffs[1], C = currentCoeffs[2];
         const delta = B * B - 4 * A * C;
+        
+        // Verifica se os coeficientes mantiveram integridade de números inteiros
+        const isIntPoly = Number.isInteger(A) && Number.isInteger(B) && Number.isInteger(C);
 
         steps.push(`${t('solver_quadratic_rem')}<br>
                     <div class="math-step notranslate">\\(Q(x) = ${polySobrouStr} = 0\\)</div>
@@ -1473,9 +1546,16 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
         if (delta > 0) {
           const sqrtDelta = Math.sqrt(delta);
-          if (!Number.isInteger(sqrtDelta)) {
-            const r1Tex = B === 0 ? `\\frac{\\sqrt{${delta}}}{${2*A}}` : `\\frac{${-B} + \\sqrt{${delta}}}{${2*A}}`;
-            const r2Tex = B === 0 ? `-\\frac{\\sqrt{${delta}}}{${2*A}}` : `\\frac{${-B} - \\sqrt{${delta}}}{${2*A}}`;
+          
+          if (!isIntPoly || Number.isInteger(sqrtDelta)) {
+            const r1 = (-B + sqrtDelta) / (2 * A);
+            const r2 = (-B - sqrtDelta) / (2 * A);
+            raizesIrracionais.push({ tex: `${parseFloat(r1.toFixed(5))}`, val: r1, isComplex: false, isApproxOnly: true });
+            raizesIrracionais.push({ tex: `${parseFloat(r2.toFixed(5))}`, val: r2, isComplex: false, isApproxOnly: true });
+            if (!Number.isInteger(sqrtDelta)) steps.push(t('solver_irrat_delta', { delta }));
+          } else {
+            const r1Tex = formatarRaizQuadratica(A, B, delta, false);
+            const r2Tex = formatarRaizQuadratica(A, B, delta, true);
             raizesIrracionais.push({ tex: r1Tex, val: (-B + sqrtDelta) / (2*A), isComplex: false });
             raizesIrracionais.push({ tex: r2Tex, val: (-B - sqrtDelta) / (2*A), isComplex: false });
             steps.push(t('solver_irrat_delta', { delta }));
@@ -1483,30 +1563,90 @@ function gerarSvgGraficoPolinomio(coeffs) {
         } else if (delta < 0) {
           steps.push(t('solver_complex_roots'));
           const absDelta = Math.abs(delta);
-          
-          const r1Tex = B === 0 ? `\\frac{i\\sqrt{${absDelta}}}{${2*A}}` : `\\frac{${-B} + i\\sqrt{${absDelta}}}{${2*A}}`;
-          const r2Tex = B === 0 ? `-\\frac{i\\sqrt{${absDelta}}}{${2*A}}` : `\\frac{${-B} - i\\sqrt{${absDelta}}}{${2*A}}`;
-          
           const re = -B / (2*A);
           const im = Math.sqrt(absDelta) / (2*A);
           const reStr = Math.abs(re) < 1e-7 ? "" : re.toFixed(4);
           const sign1 = reStr === "" ? "" : " + ";
           const sign2 = reStr === "" ? "-" : " - ";
-          
-          raizesIrracionais.push({ tex: r1Tex, valStr: `${reStr}${sign1}${Math.abs(im).toFixed(4)}i`, isComplex: true });
-          raizesIrracionais.push({ tex: r2Tex, valStr: `${reStr}${sign2}${Math.abs(im).toFixed(4)}i`, isComplex: true });
+          const valStr1 = `${reStr}${sign1}${Math.abs(im).toFixed(4)}i`;
+          const valStr2 = `${reStr}${sign2}${Math.abs(im).toFixed(4)}i`;
+
+          if (!isIntPoly) {
+             raizesIrracionais.push({ tex: '', valStr: valStr1, isComplex: true, isApproxOnly: true });
+             raizesIrracionais.push({ tex: '', valStr: valStr2, isComplex: true, isApproxOnly: true });
+          } else {
+            const r1Tex = formatarRaizQuadratica(A, B, delta, false);
+            const r2Tex = formatarRaizQuadratica(A, B, delta, true);
+            raizesIrracionais.push({ tex: r1Tex, valStr: valStr1, isComplex: true });
+            raizesIrracionais.push({ tex: r2Tex, valStr: valStr2, isComplex: true });
+          }
+        } else if (delta === 0) {
+            const r = -B / (2 * A);
+            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true });
+            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true });
         }
       } 
-      // RESOLUÇÃO NUMÉRICA (Durand-Kerner) PARA GRAUS MAIORES
-      else if (currentCoeffs.length - 1 > 2) {
-        steps.push(`O polinômio reduzido tem grau ${currentCoeffs.length - 1}. Extraindo raízes irracionais/complexas restantes via método numérico (Durand-Kerner)...`);
+      // RESOLUÇÃO ALGÉBRICA PARA BINÓMIOS PUROS DE GRAU >= 3
+      else if (isBinomial) {
+        const A = currentCoeffs[0];
+        const C = currentCoeffs[degRem];
+        const valK = -C / A;
+        const absK = Math.abs(valK);
+        
+        let sinalA = A === 1 ? '' : (A === -1 ? '-' : A);
+        let sinalC = C > 0 ? '+' : '';
+        steps.push(`O polinómio reduzido é um binómio puro da forma \\(${sinalA}x^{${degRem}} ${sinalC} ${C} = 0\\). Extraindo raízes algébricas exatas (Radiciação e Notação de Euler)...`);
+        
+        const rDec = Math.pow(absK, 1 / degRem);
+        const isNegative = valK < 0;
+        
+        let fracTex = Math.abs(A) === 1 ? `${Math.abs(C)}` : `\\frac{${Math.abs(C)}}{${Math.abs(A)}}`;
+        let radBaseTex = `\\sqrt[${degRem}]{${fracTex}}`;
+        
+        for (let k = 0; k < degRem; k++) {
+          let theta = isNegative ? Math.PI : 0;
+          let angle = (theta + 2 * Math.PI * k) / degRem;
+          
+          let re = rDec * Math.cos(angle);
+          let im = rDec * Math.sin(angle);
+          
+          if (Math.abs(im) < 1e-6) {
+            let signReal = re < 0 ? "-" : "";
+            raizesIrracionais.push({ tex: `${signReal}${radBaseTex}`, val: re, isComplex: false });
+          } else {
+            let angleFactor = isNegative ? (1 + 2 * k) : (2 * k);
+            
+            let g = gcd(angleFactor, degRem);
+            let num = angleFactor / g;
+            let den = degRem / g;
+            
+            let angleTex = "";
+            if (num === 1 && den === 1) angleTex = "\\pi";
+            else if (den === 1) angleTex = `${num}\\pi`;
+            else if (num === 1) angleTex = `\\frac{\\pi}{${den}}`;
+            else angleTex = `\\frac{${num}\\pi}{${den}}`;
+            
+            let eulerTex = `e^{i ${angleTex}}`;
+            
+            let reStr = Math.abs(re) < 1e-7 ? "" : re.toFixed(4);
+            let imAbs = Math.abs(im).toFixed(4);
+            let sign1 = reStr === "" ? "" : (im > 0 ? " + " : " - ");
+            let sign2 = reStr === "" ? (im > 0 ? "" : "-") : "";
+            
+            raizesIrracionais.push({ tex: `${radBaseTex} \\cdot ${eulerTex}`, valStr: `${reStr}${sign1}${sign2}${imAbs}i`, isComplex: true });
+          }
+        }
+      }
+      // RESOLUÇÃO NUMÉRICA (Durand-Kerner) PARA GRAUS > 2 MISTOS
+      else if (degRem > 2) {
+        steps.push(`O polinómio reduzido tem grau ${degRem}. Extraindo raízes irracionais/complexas restantes via método numérico (Durand-Kerner)...`);
         
         const numRoots = durandKerner(currentCoeffs);
         numRoots.forEach(z => {
           if (Math.abs(z.im) < 1e-6) {
-            raizesIrracionais.push({ tex: `\\approx ${z.re.toFixed(5)}`, val: z.re, isComplex: false });
+            raizesIrracionais.push({ tex: '', val: z.re, isComplex: false, isApproxOnly: true });
           } else {
-            raizesIrracionais.push({ tex: `\\approx ${z.toTeX()}`, valStr: z.toTeX(), isComplex: true });
+            raizesIrracionais.push({ tex: '', valStr: z.toTeX(), isComplex: true, isApproxOnly: true });
           }
         });
       }
@@ -1523,23 +1663,31 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
       let resumoRaizes = '';
       if (raizesRacionais.length > 0) {
-        resumoRaizes += `<p><strong>${t('solver_rat_roots_found')}</strong> ` + 
-          raizesRacionais.map(r => `\\(x = ${r.tex}\\)`).join(', ') + `</p>`;
+        resumoRaizes += `<p><strong>${t('solver_rat_roots_found')}</strong></p>
+          <ul class="list-disc list-inside text-slate-800 space-y-1 mt-1 pl-1">` + 
+          raizesRacionais.map(r => {
+            if (r.tex.includes('\\frac')) {
+              return `<li>\\(x = ${r.tex} \\approx ${r.val.toFixed(5)}\\)</li>`;
+            }
+            return `<li>\\(x = ${r.tex}\\)</li>`;
+          }).join('') + `</ul>`;
       }
       
       if (raizesIrracionais.length > 0) {
         const label = hasComplex ? "Raízes Restantes (Irracionais e Complexas):" : `<strong>${t('solver_irrat_roots_found')}</strong>`;
-        resumoRaizes += `<p class="mt-2 text-blue-900 font-medium">${hasComplex ? '<strong>' + label + '</strong>' : label} <br> ` + 
+        
+        resumoRaizes += `<div class="mt-4 text-blue-900 font-medium">${hasComplex ? '<strong>' + label + '</strong>' : label}</div>
+          <ul class="list-disc list-inside text-blue-900 font-medium space-y-1 mt-1 pl-1"> ` + 
           raizesIrracionais.map(r => {
-            if(r.valStr) return `\\(x = ${r.tex} \\approx ${r.valStr}\\)`;
-            if(r.tex.includes('\\approx')) return `\\(x ${r.tex}\\)`;
-            return `\\(x = ${r.tex} \\approx ${r.val.toFixed(5)}\\)`;
-          }).join('<br><span class="opacity-50 inline-block px-2">&bull;</span>') + `</p>`;
+            if (r.isApproxOnly) {
+              return `<li>\\(x \\approx ${r.valStr ? r.valStr : r.val.toFixed(5)}\\)</li>`;
+            } else {
+              return `<li>\\(x = ${r.tex} \\approx ${r.valStr ? r.valStr : r.val.toFixed(5)}\\)</li>`;
+            }
+          }).join('') + `</ul>`;
       }
 
-      // =====================================
-      // BÔNUS: VÉRTICE DA PARÁBOLA E GIRARD
-      // =====================================
+      // VÉRTICE DA PARÁBOLA E GIRARD
       let verticeHtml = '';
       if (degree === 2) {
         const a = originalCoeffs[0], b = originalCoeffs[1], c = originalCoeffs[2];
@@ -1562,15 +1710,34 @@ function gerarSvgGraficoPolinomio(coeffs) {
       const coefN = originalCoeffs[0];
       const coefN_1 = originalCoeffs.length > 1 ? originalCoeffs[1] : 0;
       const coef0 = originalCoeffs[originalCoeffs.length - 1];
-      const soma = -coefN_1 / coefN;
-      const produto = (degree % 2 === 0 ? 1 : -1) * coef0 / coefN;
+      
+      const somaNum = -coefN_1;
+      const somaDen = coefN;
+      const somaGcd = gcd(somaNum, somaDen);
+      const sNum = somaNum / somaGcd;
+      const sDen = somaDen / somaGcd;
+      const sSign = (sNum * sDen < 0) ? '-' : '';
+      const sTex = Math.abs(sDen) === 1 ? `${sSign}${Math.abs(sNum)}` : `${sSign}\\frac{${Math.abs(sNum)}}{${Math.abs(sDen)}}`;
+      const sDec = somaNum / somaDen;
+      const sDisp = Math.abs(sDen) === 1 ? `\\(${sTex}\\)` : `\\(${sTex} \\approx ${sDec.toFixed(4)}\\)`;
+
+      const pSignBase = (degree % 2 === 0 ? 1 : -1);
+      const prodNum = pSignBase * coef0;
+      const prodDen = coefN;
+      const prodGcd = gcd(prodNum, prodDen);
+      const pNum = prodNum / prodGcd;
+      const pDen = prodDen / prodGcd;
+      const pSign = (pNum * pDen < 0) ? '-' : '';
+      const pTex = Math.abs(pDen) === 1 ? `${pSign}${Math.abs(pNum)}` : `${pSign}\\frac{${Math.abs(pNum)}}{${Math.abs(pDen)}}`;
+      const pDec = prodNum / prodDen;
+      const pDisp = Math.abs(pDen) === 1 ? `\\(${pTex}\\)` : `\\(${pTex} \\approx ${pDec.toFixed(4)}\\)`;
 
       const vietaHtml = `
         <div class="mt-4 p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded">
           <h4 class="font-bold text-indigo-900 mb-1">Relações de Girard</h4>
           <ul class="list-disc list-inside text-indigo-800 text-sm space-y-1">
-            <li><strong>Soma das raízes (\\(S\\)):</strong> \\(${soma.toFixed(4)}\\)</li>
-            <li><strong>Produto das raízes (\\(P\\)):</strong> \\(${produto.toFixed(4)}\\)</li>
+            <li><strong>Soma das raízes (\\(S\\)):</strong> ${sDisp}</li>
+            <li><strong>Produto das raízes (\\(P\\)):</strong> ${pDisp}</li>
           </ul>
         </div>
       `;
