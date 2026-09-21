@@ -39,10 +39,17 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.0.6]
+* **Novo:** Valores algébricos adicionados as raízes na aba "Solucionador de polinômios"
+* **Novo:** Valores da soma de raízes vêm em decimal e na forma algébrica na aba "Solucionador de polinômios"
+* **Novo:** Valores do produto de raízes vêm em decimal e na forma algébrica na aba "Solucionador de polinômios"
+* **Melhoria:** Exibição de candidatos ao TRR quando há muitos elementos na aba "Solucionador de polinômios"
+
 ## [1.0.5]
 * **Novo:** Adição de suporte as raízes complexas na aba "Solucionador de polinômios"
 * **Novo:** Adição do recurso de somar raízes na aba "Solucionador de polinômios"
 * **Novo:** Adição do recurso de multiplicar raízes na aba "Solucionador de polinômios"
+* **Novo:** Análise geométrica de parábolas na aba "Solucionador de polinômios"
 * **Melhoria:** Aprimoramento do recurso de geração de gráficos na aba "Solucionador de polinômios"
 * **Correção:** Resolução de erro na resolução de monômios x^n = 0 
 
