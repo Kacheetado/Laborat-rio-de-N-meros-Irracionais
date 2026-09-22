@@ -39,6 +39,10 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.0.7]
+* **Melhoria:** Aprimoramento do recurso de tradução
+* **Correção:** Pequenos bugs
+
 ## [1.0.6]
 * **Novo:** Valores algébricos adicionados as raízes na aba "Solucionador de polinômios"
 * **Novo:** Valores da soma de raízes vêm em decimal e na forma algébrica na aba "Solucionador de polinômios"
