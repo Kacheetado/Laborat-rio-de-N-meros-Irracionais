@@ -2,7 +2,7 @@
 
 O **Laboratório de Números Irracionais** é uma aplicação interativa desenvolvida como produto do projeto de pesquisa *"Realmente conhecemos os números irracionais? Uma abordagem para identificá-los usando ferramentas do ensino básico"*, conduzido no Instituto Federal da Paraíba (IFPB) - Campus Campina Grande.
 
-A ferramenta está disponível online via GitHub Pages: **[Insira o link aqui]**
+A ferramenta está disponível online via GitHub Pages: **https://kacheetado.github.io/Laborat-rio-de-N-meros-Irracionais/**
 
 ## 🎯 Objetivo
 
@@ -14,6 +14,10 @@ O projeto visa explorar e estudar os números irracionais a partir de ferramenta
 - Maria Alice
 - Éllysson Emanuel
 - Jonathas Jerônimo
+
+## 💻 Desenvolvimento e Autoria
+
+- **Concepção, Arquitetura e Programação:** Kauã Fabson (Responsável pelo desenvolvimento integral do código e implementação técnica da ferramenta)
 
 ## ✨ Recursos e Funcionalidades
 
@@ -41,7 +45,7 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## [1.0.7]
 * **Melhoria:** Aprimoramento do recurso de tradução
-* **Correção:** Pequenos bugs
+* **Correção:** Resolução de pequenos bugs
 
 ## [1.0.6]
 * **Novo:** Valores algébricos adicionados as raízes na aba "Solucionador de polinômios"
