@@ -13,6 +13,11 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
+  <!-- Nerdamer CAS (Computer Algebra System) -->
+  <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/nerdamer.core.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Algebra.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Calculus.js"></script>
+
   <style>
     .tab-btn.active {
       border-bottom: 3px solid #2563eb;
@@ -66,7 +71,7 @@
         1. Verificador TFA
       </button>
       <button onclick="switchTab('solver')" id="tab-solver" class="tab-btn py-4 px-1 text-slate-600 hover:text-blue-600 whitespace-nowrap" data-i18n="tab_solver">
-        2. Solucionador de Polinômios (TRR)
+        2. Solucionador de Polinômios
       </button>
       <button onclick="switchTab('trig')" id="tab-trig" class="tab-btn py-4 px-1 text-slate-600 hover:text-blue-600 whitespace-nowrap" data-i18n="tab_trig">
         3. Funções Trigonométricas
@@ -105,7 +110,7 @@
           </div>
           <div class="sm:col-span-2">
             <label for="tfa-input" class="block text-xs font-semibold uppercase text-slate-500 mb-1" data-i18n="tfa_lbl_rad">Radicando (K inteiro positivo):</label>
-            <input type="number" id="tfa-input" min="2" max="1000000" value="" placeholder="ex: 72" 
+            <input type="number" id="tfa-input" min="2" max="1000000" value="" placeholder="ex: 72 "
                    class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
@@ -119,26 +124,28 @@
       <div id="tfa-output" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"></div>
     </section>
 
-    <!-- ABA 2: RESOLVER POLINÔMIOS -->
+    <!-- ABA 2: SOLVER POLINÔMIOS -->
     <section id="pane-solver" class="space-y-6 hidden">
       <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-        <h2 data-i18n="solver_title" class="text-xl font-bold text-slate-900 mb-2">2. Solucionador de Polinômios & Teste das Raízes Racionais Geral</h2>
+        <h2 data-i18n="solver_title" class="text-xl font-bold text-slate-900 mb-2">2. Solucionador de Polinômios</h2>
         <p class="text-sm text-slate-600 mb-4" data-i18n="solver_desc">
           Insira qualquer polinômio com coeficientes inteiros \(P(x) = a_n x^n + \dots + a_1 x + a_0\). O algoritmo encontra todos os candidatos racionais \(\pm \frac{p}{q}\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as raízes irracionais remanescentes.
         </p>
 
         <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
           <span class="text-slate-500 font-semibold" data-i18n="quick_ex">Exemplos rápidos:</span>
-          <button onclick="carregarExemplo('2x^3 - 3x^2 - 11x + 6')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">2x³ - 3x² - 11x + 6</button>
-          <button onclick="carregarExemplo('x^3 - 2')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">x³ - 2 (Delos)</button>
+          <button onclick="carregarExemplo('(2x-1)(x-2)(x+3) = 0')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">(2x-1)(x-2)(x+3) = 0</button>
+          <button onclick="carregarExemplo('x^3 - 2')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">x³ - 2</button>
           <button onclick="carregarExemplo('8x^3 - 6x - 1')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">8x³ - 6x - 1 (cos 20°)</button>
           <button onclick="carregarExemplo('x^4 - 5x^2 + 6')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">x⁴ - 5x² + 6</button>
+          <button onclick="carregarExemplo('2x^2 + 5 = x + 3')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">2x² + 5 = x + 3</button>
+          <button onclick="carregarExemplo('x^3 - x^2 + x - 1')" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">x³ - x² + x - 1 (Complexas)</button>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
           <div class="flex-grow w-full">
             <label for="poly-input" class="block text-xs font-semibold uppercase text-slate-500 mb-1" data-i18n="solver_lbl_poly">Polinômio P(x):</label>
-            <input type="text" id="poly-input" value="" placeholder="Ex: 2x^3 - 3x^2 - 11x + 6 ou x^4 - 2"
+            <input type="text" id="poly-input" value="" placeholder="Ex: x^2 +3x - 2"
                    class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
           <button onclick="resolverPolinomio()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap" data-i18n="solver_btn">
@@ -155,13 +162,13 @@
       <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
         <h2 data-i18n="trig_title" class="text-xl font-bold text-slate-900 mb-2">3. Funções Trigonométricas</h2>
         <p class="text-sm text-slate-600 mb-4" data-i18n="trig_desc">
-          Investigue a irracionalidade dos valores trigonométricos. De acordo com o célebre Teorema de Niven, para ângulos racionais \(\theta \in [0^\circ, 90^\circ]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(\theta \in \{0^\circ, 30^\circ, 90^\circ\}\). Todos os outros geram valores irracionais.
+          Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos racionais \(\theta \in [0^\circ, 90^\circ]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(\theta \in \{0^\circ, 30^\circ, 90^\circ\}\). Todos os outros geram valores irracionais.
         </p>
 
         <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
           <span class="text-slate-500 font-semibold" data-i18n="trig_shortcuts">Atalhos didáticos:</span>
-          <button onclick="setTrig('cos', 20)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">cos(20°) &bull; Chebyshev e TRR</button>
-          <button onclick="setTrig('sin', 45)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">sin(45°) &bull; Diagonal / Pitágoras</button>
+          <button onclick="setTrig('cos', 20)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">cos(20°)</button>
+          <button onclick="setTrig('sin', 45)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">sin(45°) &bull; Diagonal de Pitágoras</button>
           <button onclick="setTrig('cos', 36)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">cos(36°) &bull; Proporção Áurea (\(\phi\))</button>
           <button onclick="setTrig('sin', 15)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">sin(15°) &bull; Radical Aninhado</button>
           <button onclick="setTrig('sin', 30)" class="bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded text-slate-700 border">sin(30°) = 1/2 &bull; Racional</button>
@@ -203,7 +210,7 @@
         <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
           <div class="flex-grow w-full">
             <label for="eisen-input" class="block text-xs font-semibold uppercase text-slate-500 mb-1" data-i18n="solver_lbl_poly">Polinômio P(x):</label>
-            <input type="text" id="eisen-input" value="x^4 - 10x^2 + 5" placeholder="Ex: x^4 - 10x^2 + 5 ou x^5 - 6x + 12"
+            <input type="text" id="eisen-input" value="" placeholder="Ex: x^5 - 6x + 12"
                    class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
           <button onclick="executarEisenstein()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap" data-i18n="eisen_btn">
@@ -217,8 +224,9 @@
 
     <!-- ABA 5: FRAÇÕES CONTÍNUAS -->
     <section id="pane-fraccont" class="space-y-6 hidden">
+      <!-- Raízes Quadradas -->
       <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-        <h2 data-i18n="cf_title" class="text-xl font-bold text-slate-900 mb-2">5. Reconhecimento Construtivo via Frações Contínuas Simples</h2>
+        <h2 class="text-xl font-bold text-slate-900 mb-2"> <span data-i18n="cf_title">Reconhecimento Construtivo via Frações Contínuas Simples</span></h2>
         <p class="text-sm text-slate-600 mb-4" data-i18n="cf_desc">
           Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \([a_0; \overline{a_1, a_2, \dots, a_k}]\).
         </p>
@@ -226,7 +234,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
           <div class="sm:col-span-2">
             <label for="cf-radicand" class="block text-xs font-semibold uppercase text-slate-500 mb-1" data-i18n="cf_lbl_rad">Raiz Quadrada \(\sqrt{N}\) (N não quadrado):</label>
-            <input type="number" id="cf-radicand" min="2" max="1000" value="19" 
+            <input type="number" id="cf-radicand" min="2" max="1000" value="" placeholder="Ex: 19" 
                    class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
           </div>
           <div>
@@ -236,8 +244,21 @@
           </div>
         </div>
       </div>
-
       <div id="cf-output" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"></div>
+
+      <!-- Expressões Gerais -->
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mt-6">
+        <h2 data-i18n="cf_expr_title" class="text-xl font-bold text-slate-900 mb-2">Aproximações Fracionárias de Constantes</h2>
+        <p class="text-sm text-slate-600 mb-4" data-i18n="cf_expr_desc">Gere convergentes racionais para constantes transcendentais ou trigonométricas.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold uppercase text-slate-500 mb-1" data-i18n="cf_expr_lbl">Expressão (ex: pi, e, sin(1), sqrt(2)/2):</label>
+            <input type="text" id="cf-expr-input" value="" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-base focus:ring-2 focus:ring-blue-500 font-mono">
+          </div>
+          <button onclick="executarFracaoExpressao()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">Gerar Convergentes</button>
+        </div>
+      </div>
+      <div id="cf-expr-output" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"></div>
     </section>
 
     <!-- ABA 6: TABELA -->
@@ -356,7 +377,7 @@
             <span data-i18n="hist_h3">3. O Teorema de Niven na Trigonometria (1956)</span>
           </h3>
           <p class="text-sm" data-i18n="hist_p3">
-            Ivan Niven estabeleceu a ponte definitiva entre trigonometria e teoria dos números. Seu teorema prova que, se um ângulo em graus \(\theta\) é racional no intervalo fechado \([0, 90]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(0^\circ, 30^\circ\) e \(90^\circ\). Para todos os outros ângulos com medidas racionais, a trigonometria mergulha no conjunto dos irracionais.
+            Ivan Niven estabeleceu a ponte definitiva entre trigonometria e teoria dos números. Seu teorema prova que, se um ângulo em graus \(\theta\) é racional no intervalo fechado \([0, 90^\circ]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(0^\circ, 30^\circ\) e \(90^\circ\). Para todos os outros ângulos com medidas racionais, a trigonometria mergulha no conjunto dos irracionais.
           </p>
         </div>
 
@@ -388,17 +409,15 @@
     <span data-i18n="footer_text">Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo (2002), Marques (2013)</span>
   </footer>
 
-  <!-- ======================================================== -->
-  <!-- DICIONÁRIO (ESTÁTICO & DINÂMICO)           -->
-  <!-- ======================================================== -->
+  <!-- DICIONÁRIO I18N COMPLETO (ESTÁTICO & DINÂMICO)-->
   <script>
     const i18n = {
       pt: {
-        app_title: "Laboratório de Números Irracionais & Álgebra",
-        app_subtitle: "Investigação e Dedução: TFA, TRR Completo, Polinômios Gerais, Trigonometria (Teorema de Niven), Eisenstein e Frações Contínuas",
+        app_title: "Laboratório de Números Irracionais",
+        app_subtitle: "Investigação e Dedução: TFA, TRR Completo, Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas",
         project_badge: "Iniciação Científica • Sequência Didática",
         tab_tfa: "1. Verificador TFA",
-        tab_solver: "2. Solucionador de Polinômios (TRR)",
+        tab_solver: "2. Solucionador de Polinômios",
         tab_trig: "3. Funções Trigonométricas",
         tab_eisenstein: "4. Critério de Eisenstein",
         tab_fraccont: "5. Frações Contínuas",
@@ -411,14 +430,29 @@
         tfa_lbl_rad: "Radicando (K inteiro positivo):",
         tfa_btn: "Demonstrar",
 
-        solver_title: "2. Solucionador de Polinômios & Teste das Raízes Racionais Geral",
-        solver_desc: "Insira qualquer polinômio com coeficientes inteiros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). O algoritmo encontra todos os candidatos racionais \\(\\pm \\frac{p}{q}\\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as <strong>raízes irracionais remanescentes</strong>.",
+        solver_title: "2. Solucionador de Polinômios",
+        solver_desc: "Insira qualquer polinômio com coeficientes inteiros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). O algoritmo encontra todos os candidatos racionais \\(\\pm \\frac{p}{q}\\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as raízes irracionais remanescentes.",
         quick_ex: "Exemplos rápidos:",
         solver_lbl_poly: "Polinômio P(x):",
         solver_btn: "Solucionar Passo a Passo",
+        solver_calc_title: "Cálculo Simbólico (Polinômio P(x))",
+        solver_rem_complex_roots: "Raízes Restantes (Irracionais e Complexas):",
+        solver_girard_title: "Relações de Girard",
+        solver_girard_sum: "Soma das raízes (\\(S\\)): ",
+        solver_girard_prod: "Produto das raízes (\\(P\\)): ",
+        solver_geom_title: "Geometria da Parábola (Grau 2)",
+        solver_geom_concav: "Concavidade:",
+        solver_geom_up: "Voltada para cima",
+        solver_geom_down: "Voltada para baixo",
+        solver_geom_vertex: "Vértice",
+        solver_geom_min: "Ponto de Mínimo",
+        solver_geom_max: "Ponto de Máximo",
+        solver_err_invalid: "Polinômio inválido. Verifique a sintaxe.",
+        solver_cartesian_title: "Visualização Cartesiana do Polinômio P(x) e Raízes",
+        solver_complex_title: "Plano Complexo (Argand-Gauss) - Distribuição das Raízes",
 
         trig_title: "3. Funções Trigonométricas",
-        trig_desc: "Investigue a irracionalidade dos valores trigonométricos. De acordo com o célebre <strong>Teorema de Niven (1956)</strong>, para ângulos racionais \\(\\theta \\in [0^\\circ, 90^\\circ]\\), os únicos casos em que \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) são racionais ocorrem em \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos os outros geram <strong>valores irracionais</strong>.",
+        trig_desc: "Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos racionais \\(\\theta \\in [0^\\circ, 90^\\circ]\\), os únicos casos em que \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) são racionais ocorrem em \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos os outros geram valores irracionais.",
         trig_shortcuts: "Atalhos didáticos:",
         trig_lbl_func: "Função:",
         trig_lbl_angle: "Ângulo em Graus (°):",
@@ -431,10 +465,17 @@
         eisen_desc: "Ferramenta avançada de Álgebra Abstrata: Se existir um primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) e \\(p^2 \\nmid a_0\\), o polinômio é irredutível sobre \\(\\mathbb{Q}\\). Consequentemente, para graus \\(n \\ge 2\\), nenhuma de suas raízes pode ser racional!",
         eisen_btn: "Testar Primos",
 
-        cf_title: "5. Reconhecimento Construtivo via Frações Contínuas Simples",
+        cf_title: "Reconhecimento Construtivo via Frações Contínuas Simples",
         cf_desc: "Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Raiz Quadrada \\(\\sqrt{N}\\) (N não quadrado):",
         cf_btn: "Expandir Fração",
+        
+        cf_expr_title: "Aproximações Fracionárias de Constantes",
+        cf_expr_desc: "Gere convergentes racionais para constantes transcendentais ou trigonométricas.",
+        cf_expr_lbl: "Expressão (ex: pi, e, sin(1), sqrt(2)/2):",
+        cf_expr_btn: "Gerar Convergentes",
+        err_invalid_expr: "Expressão inválida. Utilize formatações matemáticas em inglês (ex: pi, e, sin(1), sqrt(2)).",
+        err_syntax: "Erro de sintaxe algébrica. Certifique-se de usar notações matemáticas explícitas.",
 
         tabela_title: "Tabela de Constantes e Irracionais Notáveis",
         tabela_desc: "Diferenciação fundamental entre irracionais algébricos (raízes de equações com coeficientes inteiros) e transcendentes (demonstrados fora da álgebra polinomial clássica).",
@@ -473,7 +514,6 @@
 
         footer_text: "Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo (2002), Marques (2013)",
 
-        // Chaves dinâmicas dos resultados
         res_rational_int: "Resultado: Racional (Inteiro)",
         res_irrational_proven: "Resultado: Irracional Demonstrado",
         tfa_step1: "1. Decomposição Canônica em Primos (TFA):",
@@ -539,7 +579,7 @@
         app_subtitle: "Investigation and Deduction: FTA, Full RRT, General Polynomials, Trigonometry, Eisenstein, and Continued Fractions",
         project_badge: "Scientific Research • Didactic Sequence",
         tab_tfa: "1. FTA Verifier",
-        tab_solver: "2. Polynomial Solver (RRT)",
+        tab_solver: "2. Polynomial Solver",
         tab_trig: "3. Trigonometric Functions",
         tab_eisenstein: "4. Eisenstein's Criterion",
         tab_fraccont: "5. Continued Fractions",
@@ -552,11 +592,26 @@
         tfa_lbl_rad: "Radicand (Positive integer K):",
         tfa_btn: "Prove",
 
-        solver_title: "2. Polynomial Solver & General Rational Root Theorem",
+        solver_title: "2. Polynomial Solver",
         solver_desc: "Enter any polynomial with integer coefficients \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). The algorithm tests all rational candidates \\(\\pm \\frac{p}{q}\\) via RRT, factors using Ruffini's rule, extracts rational roots, and isolates the remaining irrational roots.",
         quick_ex: "Quick examples:",
         solver_lbl_poly: "Polynomial P(x):",
         solver_btn: "Solve Step-by-Step",
+        solver_calc_title: "Symbolic Calculus (Polynomial P(x))",
+        solver_rem_complex_roots: "Remaining Roots (Irrational and Complex):",
+        solver_girard_title: "Vieta's Formulas",
+        solver_girard_sum: "Sum of roots (\\(S\\)): ",
+        solver_girard_prod: "Product of roots (\\(P\\)): ",
+        solver_geom_title: "Parabola Geometry (Degree 2)",
+        solver_geom_concav: "Concavity:",
+        solver_geom_up: "Upwards",
+        solver_geom_down: "Downwards",
+        solver_geom_vertex: "Vertex",
+        solver_geom_min: "Minimum Point",
+        solver_geom_max: "Maximum Point",
+        solver_err_invalid: "Invalid polynomial. Check syntax.",
+        solver_cartesian_title: "Cartesian Visualization of Polynomial P(x) and Roots",
+        solver_complex_title: "Complex Plane (Argand-Gauss) - Root Distribution",
 
         trig_title: "3. Trigonometric Functions",
         trig_desc: "Investigate the irrationality of trigonometric values. According to Niven's Theorem, for rational angles \\(\\theta \\in [0^\\circ, 90^\\circ]\\), the only cases where \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) are rational occur at \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). All other angles produce irrational values.",
@@ -572,10 +627,17 @@
         eisen_desc: "Advanced Abstract Algebra tool: If there is a prime \\(p\\) such that \\(p \\mid a_i\\) for all \\(i < n\\), \\(p \\nmid a_n\\), and \\(p^2 \\nmid a_0\\), the polynomial is irreducible over \\(\\mathbb{Q}\\). Consequently, for degree \\(n \\ge 2\\), none of its roots can be rational!",
         eisen_btn: "Test Primes",
 
-        cf_title: "5. Constructive Recognition via Simple Continued Fractions",
+        cf_title: "Constructive Recognition via Simple Continued Fractions",
         cf_desc: "Unlike finite decimal expansions, the continued fraction expansion of any rational number always terminates, whereas for an irrational number it is strictly infinite. Quadratic irrationals produce periodic expansions: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Square Root \\(\\sqrt{N}\\) (non-square N):",
         cf_btn: "Expand Fraction",
+        
+        cf_expr_title: "Fractional Approximations of Constants",
+        cf_expr_desc: "Generate rational convergents for transcendental or trigonometric constants.",
+        cf_expr_lbl: "Expression (e.g., pi, e, sin(1), sqrt(2)/2):",
+        cf_expr_btn: "Generate Convergents",
+        err_invalid_expr: "Invalid expression. Use English mathematical formatting (e.g., pi, e, sin(1), sqrt(2)).",
+        err_syntax: "Algebraic syntax error. Ensure explicit notations.",
 
         tabela_title: "Table of Constants & Notable Irrationals",
         tabela_desc: "Fundamental distinction between algebraic irrationals (roots of integer polynomials) and transcendental numbers (proven outside classical polynomial algebra).",
@@ -602,7 +664,7 @@
         hist_title: "Historical and Epistemological Evolution of Irrationals",
         hist_subtitle: "From the Pythagorean crisis of incommensurability to the analytical formalization of Dedekind and Cantor.",
         hist_h1: "1. The Pythagorean Collapse and Incommensurability (5th century BC)",
-        hist_p1: "For the Pythagoreans, universal harmony rested on the principle that <em>'all is integer number'</em>. Every segment was believed to be measurable through common integer units. By analyzing the diagonal of a unit square (\\(d^2 = 1^2 + 1^2 = 2\\)), Hippasus discovered that the side and diagonal are incommensurable, creating the first major crisis in the foundations of mathematics.",
+        hist_p1: "For the Pythagoreans, universal harmony rested on the principle that <em>'all is integer number'</em>. Every segment was believed to be measurable through common integer units. By analyzing the diagonal of a unit square (\\(d^2 = 1^2 + 1^2 = 2\\)), Hippasus discovered that the side and diagonal are incommensurables, creating the first major crisis in the foundations of mathematics.",
         hist_h2: "2. The Polynomial Barrier and the Rational Root Theorem",
         hist_p2: "With modern algebra, investigation shifted from geometry to polynomial equations. The Rational Root Theorem (RRT) established a finite, definitive method: if the rational candidates derived from integer coefficients do not vanish the equation, any existing real root is strictly algebraic irrational.",
         hist_h3: "3. Niven's Theorem in Trigonometry (1956)",
@@ -679,7 +741,7 @@
         app_subtitle: "Investigación y Deducción: TFA, TRR Completo, Polinomios Generales, Trigonometría, Eisenstein y Fracciones Continuas",
         project_badge: "Iniciación Científica • Secuencia Didáctica",
         tab_tfa: "1. Verificador TFA",
-        tab_solver: "2. Solucionador de Polinomios (TRR)",
+        tab_solver: "2. Solucionador de Polinomios",
         tab_trig: "3. Funciones Trigonométricas",
         tab_eisenstein: "4. Criterio de Eisenstein",
         tab_fraccont: "5. Fracciones Continuas",
@@ -692,14 +754,29 @@
         tfa_lbl_rad: "Radicando (K entero positivo):",
         tfa_btn: "Demostrar",
 
-        solver_title: "2. Solucionador de Polinomios y Teorema de las Raíces Racionales General",
+        solver_title: "2. Solucionador de Polinomios",
         solver_desc: "Ingrese cualquier polinomio con coeficientes enteros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). El algoritmo prueba los candidatos racionales \\(\\pm \\frac{p}{q}\\) por el TRR, factoriza mediante la regla de Ruffini, extrae las raíces racionales y aísla las raíces irracionales restantes.",
         quick_ex: "Ejemplos rápidos:",
         solver_lbl_poly: "Polinomio P(x):",
         solver_btn: "Resolver Paso a Paso",
+        solver_calc_title: "Cálculo Simbólico (Polinomio P(x))",
+        solver_rem_complex_roots: "Raíces Restantes (Irracionales y Complejas):",
+        solver_girard_title: "Fórmulas de Vieta (Relaciones de Girard)",
+        solver_girard_sum: "Suma de las raíces (\\(S\\)): ",
+        solver_girard_prod: "Producto de las raíces (\\(P\\)): ",
+        solver_geom_title: "Geometría de la Parábola (Grado 2)",
+        solver_geom_concav: "Concavidad:",
+        solver_geom_up: "Hacia arriba",
+        solver_geom_down: "Hacia abajo",
+        solver_geom_vertex: "Vértice",
+        solver_geom_min: "Punto Mínimo",
+        solver_geom_max: "Punto Máximo",
+        solver_err_invalid: "Polinomio inválido. Verifique la sintaxis.",
+        solver_cartesian_title: "Visualización Cartesiana del Polinomio P(x) y Raíces",
+        solver_complex_title: "Plano Complejo (Argand-Gauss) - Distribución de las Raíces",
 
         trig_title: "3. Funciones Trigonométricas",
-        trig_desc: "Investigue la irracionalidad de los valores trigonométricos. Según el célebre Teorema de Niven, para ángulos racionales \\(\\theta \\in [0^\\circ, 90^\\circ]\\), los únicos casos donde \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son racionales ocurren en \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos los demás generan valores irracionales.",
+        trig_desc: "Investigue la irracionalidad de los valores trigonométricos. Según el Teorema de Niven, para ángulos racionales \\(\\theta \\in [0^\\circ, 90^\\circ]\\), los únicos casos donde \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son racionales ocurren en \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos los demás generan valores irracionales.",
         trig_shortcuts: "Atajos didácticos:",
         trig_lbl_func: "Función:",
         trig_lbl_angle: "Ángulo en Grados (°):",
@@ -712,10 +789,17 @@
         eisen_desc: "Herramienta avanzada de Álgebra Abstracta: Si existe un primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) y \\(p^2 \\nmid a_0\\), el polinomio es irreducible sobre \\(\\mathbb{Q}\\). ¡Ninguna de sus raíces reales puede ser racional!",
         eisen_btn: "Probar Primos",
 
-        cf_title: "5. Reconocimiento Constructivo mediante Fracciones Continuas",
+        cf_title: "Reconocimiento Constructivo mediante Fracciones Continuas",
         cf_desc: "A diferencia del desarrollo decimal finito, la fracción continua de cualquier número racional siempre termina, mientras que la de un irracional es estrictamente infinita. Los irracionales cuadráticos generan desarrollos periódicos: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Raíz Cuadrada \\(\\sqrt{N}\\) (N no cuadrado):",
         cf_btn: "Expandir Fracción",
+        
+        cf_expr_title: "Aproximaciones Fraccionarias de Constantes",
+        cf_expr_desc: "Genere convergentes racionales para constantes trascendentales o trigonométricas.",
+        cf_expr_lbl: "Expresión (ej: pi, e, sin(1), sqrt(2)/2):",
+        cf_expr_btn: "Generar Convergentes",
+        err_invalid_expr: "Expresión inválida. Utilice formato matemático explícito.",
+        err_syntax: "Error de sintaxis algebraica.",
 
         tabela_title: "Tabla de Constantes e Irracionales Notables",
         tabela_desc: "Diferenciación fundamental entre irracionales algebraicos (raíces de polinomios con coeficientes enteros) y trascendentes.",
@@ -816,10 +900,10 @@
 
       fr: {
         app_title: "Laboratoire des Nombres Irrationnels",
-        app_subtitle: "Investigation et Déduction : TFA, TRR Complet, Polynômes Généraux, Trigonométrie (Théorème de Niven), Eisenstein et Fractions Continues",
+        app_subtitle: "Investigation et Déduction : TFA, TRR Complet, Polynômes Généraux, Trigonométrie, Eisenstein et Fractions Continues",
         project_badge: "Recherche Scientifique • Séquence Didactique",
         tab_tfa: "1. Vérificateur TFA",
-        tab_solver: "2. Résolveur de Polynômes (TRR)",
+        tab_solver: "2. Résolveur de Polynômes",
         tab_trig: "3. Fonctions Trigonométriques",
         tab_eisenstein: "4. Critère d'Eisenstein",
         tab_fraccont: "5. Fractions Continues",
@@ -832,11 +916,26 @@
         tfa_lbl_rad: "Radicande (K entier positif) :",
         tfa_btn: "Démontrer",
 
-        solver_title: "2. Résolveur de Polynômes & Théorème des Racines Rationnelles Général",
+        solver_title: "2. Résolveur de Polynômes",
         solver_desc: "Entrez un polynôme à coefficients entiers \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). L'algorithme teste les candidats rationnels \\(\\pm \\frac{p}{q}\\), factorise par la méthode de Ruffini et isole les racines irrationnelles restantes.",
         quick_ex: "Exemples rapides :",
         solver_lbl_poly: "Polynôme P(x) :",
         solver_btn: "Résoudre Étape par Étape",
+        solver_calc_title: "Calcul Symbolique (Polynôme P(x))",
+        solver_rem_complex_roots: "Racines Restantes (Irrationnelles et Complexes) :",
+        solver_girard_title: "Relations de Viète",
+        solver_girard_sum: "Somme des racines (\\(S\\)) : ",
+        solver_girard_prod: "Produit des racines (\\(P\\)) : ",
+        solver_geom_title: "Géométrie de la Parabole (Degré 2)",
+        solver_geom_concav: "Concavité :",
+        solver_geom_up: "Vers le haut",
+        solver_geom_down: "Vers le bas",
+        solver_geom_vertex: "Sommet",
+        solver_geom_min: "Point Minimum",
+        solver_geom_max: "Point Maximum",
+        solver_err_invalid: "Polynôme invalide. Vérifiez la syntaxe.",
+        solver_cartesian_title: "Visualisation Cartésienne du Polynôme P(x) et Racines",
+        solver_complex_title: "Plan Complexe (Argand-Gauss) - Distribution des Racines",
 
         trig_title: "3. Fonctions Trigonométriques",
         trig_desc: "Examinez l'irrationalité des valeurs trigonométriques. D'après le Théorème de Niven, pour des angles rationnels \\(\\theta \\in [0^\\circ, 90^\\circ]\\), les seuls cas où \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont rationnels sont \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Tous les autres produisent des nombres irrationnels.",
@@ -852,10 +951,17 @@
         eisen_desc: "Outil d'algèbre abstraite : S'il existe un nombre premier \\(p\\) tel que \\(p \\mid a_i\\) pour tout \\(i < n\\), \\(p \\nmid a_n\\) et \\(p^2 \\nmid a_0\\), le polynôme est irréductible sur \\(\\mathbb{Q}\\\\). Aucune de ses racines réelles ne peut être rationnelle !",
         eisen_btn: "Tester les Nombres Premiers",
 
-        cf_title: "5. Reconnaissance Constructive via Fractions Continues Simples",
+        cf_title: "Reconnaissance Constructive via Fractions Continues Simples",
         cf_desc: "Contrairement à l'écriture décimale finie, la fraction continue d'un nombre rationnel se termine toujours, tandis que celle d'un irrationnel est strictement infinie. Les irrationnels quadratiques produisent des développements périodiques : \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Racine Carrée \\(\\sqrt{N}\\) (N non carré) :",
         cf_btn: "Développer la Fraction",
+        
+        cf_expr_title: "Approximations Fractionnaires de Constantes",
+        cf_expr_desc: "Générez des convergents rationnels pour des constantes transcendantes ou trigonométriques.",
+        cf_expr_lbl: "Expression (ex: pi, e, sin(1), sqrt(2)/2):",
+        cf_expr_btn: "Générer les Convergents",
+        err_invalid_expr: "Expression invalide.",
+        err_syntax: "Erreur de syntaxe algébrique.",
 
         tabela_title: "Tableau des Constantes et Irrationnels Notables",
         tabela_desc: "Distinction fondamentale entre irrationnels algébriques (racines de polynômes à coefficients entiers) et nombres transcendants.",
@@ -971,7 +1077,6 @@
       idiomaAtual = lang;
       const dict = i18n[lang];
 
-      // Atualiza visual dos botões de idioma
       document.querySelectorAll('.lang-btn').forEach(btn => {
         if (btn.getAttribute('data-lang') === lang) {
           btn.className = 'lang-btn px-2.5 py-1 rounded-md text-white transition-colors bg-blue-600 font-semibold';
@@ -980,7 +1085,6 @@
         }
       });
 
-      // Atualiza todos os elementos estáticos marcados com data-i18n
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) {
@@ -988,10 +1092,8 @@
         }
       });
 
-      // Re-executa os cálculos para traduzir as explicações passo a passo instantaneamente
       reexecutarAtivos();
 
-      // Renderiza KaTeX
       if (window.renderMathInElement) {
         renderMathInElement(document.body);
       }
@@ -1003,12 +1105,12 @@
       if (!document.getElementById('trig-output').classList.contains('hidden')) analisarTrig();
       if (!document.getElementById('eisen-output').classList.contains('hidden')) executarEisenstein();
       if (!document.getElementById('cf-output').classList.contains('hidden')) executarFracaoContinua();
+      if (!document.getElementById('cf-expr-output').classList.contains('hidden')) executarFracaoExpressao();
     }
   </script>
 
-  <!-- ======================================================== -->
-  <!-- MOTORES MATEMÁTICOS TOTALMENTE INTERNACIONALIZADOS       -->
-  <!-- ======================================================== -->
+
+  <!-- MOTORES MATEMÁTICOS-->
   <script>
     function switchTab(tabId) {
       const tabs = ['tfa', 'solver', 'trig', 'eisenstein', 'fraccont', 'tabela', 'historia'];
@@ -1025,7 +1127,6 @@
     }
 
     function gcd(a, b) {
-      // O Math.round protege contra decimais microscópicos que causam loops infinitos
       a = Math.round(Math.abs(a)); 
       b = Math.round(Math.abs(b));
       while (b) { let t = b; b = a % b; a = t; }
@@ -1136,18 +1237,18 @@
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
 
-    // MOTOR 2: SOLVER POLINÔMIOS
+    // MOTOR 2: RESOLVER POLINÔMIOS
     function carregarExemplo(polyStr) {
       document.getElementById('poly-input').value = polyStr;
       resolverPolinomio();
     }
 
-    function parsePolynomial(str) {
+    function parseExpression(str) {
+      if (!str || str.trim() === '') return {};
       str = str.replace(/\s+/g, '').replace(/-/g, '+-');
       const terms = str.split('+').filter(t => t.length > 0);
       const polyMap = {};
-      let maxDeg = 0;
-
+      
       for (let term of terms) {
         let coef = 1, deg = 0;
         if (term.includes('x')) {
@@ -1162,16 +1263,48 @@
           coef = parseFloat(term);
           deg = 0;
         }
-        if (isNaN(coef) || isNaN(deg)) return null;
-        polyMap[deg] = (polyMap[deg] || 0) + coef;
-        if (deg > maxDeg) maxDeg = deg;
+        if (!isNaN(coef) && !isNaN(deg)) {
+          polyMap[deg] = (polyMap[deg] || 0) + coef;
+        }
       }
-
-      const coeffs = [];
-      for (let i = maxDeg; i >= 0; i--) coeffs.push(polyMap[i] || 0);
-      return { coeffs, degree: maxDeg };
+      return polyMap;
     }
 
+    function parsePolynomial(str) {
+      try {
+        let expr = str;
+        if (str.includes('=')) {
+          const sides = str.split('=');
+          expr = `(${sides[0]}) - (${sides[1]})`;
+        }
+
+        let expanded = nerdamer(expr).expand().text();
+        let cleanStr = expanded.replace(/\*/g, '');
+        
+        const polyMap = parseExpression(cleanStr);
+        const finalMap = {};
+        let maxDeg = 0;
+
+        for (let degStr in polyMap) {
+          const deg = parseInt(degStr);
+          const val = polyMap[degStr];
+          if (Math.abs(val) > 1e-7) { 
+            finalMap[deg] = val;
+            if (deg > maxDeg) maxDeg = deg;
+          }
+        }
+
+        if (Object.keys(finalMap).length === 0) return { coeffs: [0], degree: 0 };
+
+        const coeffs = [];
+        for (let i = maxDeg; i >= 0; i--) coeffs.push(finalMap[i] || 0);
+        
+        return { coeffs, degree: maxDeg };
+      } catch (e) {
+        return null;
+      }
+    }
+    
     function formatPolynomial(coeffs) {
       const deg = coeffs.length - 1;
       const terms = [];
@@ -1204,11 +1337,8 @@
       return result;
     }
 
-function gerarSvgGraficoPolinomio(coeffs) {
+    function gerarSvgGraficoPolinomio(coeffs, realRoots = []) {
       const width = 600, height = 300;
-      
-      // 1. Descobrir limites do Eixo X via Cota de Fujiwara
-      // Isso nos dá o limite máximo onde qualquer raiz pode existir
       let fujiwaraMax = 0;
       let grau = coeffs.length - 1;
       let an = Math.abs(coeffs[0]);
@@ -1217,19 +1347,15 @@ function gerarSvgGraficoPolinomio(coeffs) {
         if (termo > fujiwaraMax) fujiwaraMax = termo;
       }
       
-      // O raio das raízes é 2 * fujiwaraMax. Damos um "chorinho" visual.
       let limiteX = Math.ceil(2 * fujiwaraMax) + 1;
-      
-      // Travamos o eixo X entre 4 e 50 para gráficos sempre visíveis e rápidos
       let boundX = Math.max(4, Math.min(limiteX, 50));
       const xMin = -boundX;
       const xMax = boundX;
       const xRange = xMax - xMin;
       
-      const steps = 200; // Um pouco mais de passos para curvas X longas ficarem suaves
+      const steps = 200;
       const dx = xRange / steps;
 
-      // 2. Descobrir limites reais do Eixo Y no intervalo X visível
       let calcYMin = Infinity;
       let calcYMax = -Infinity;
       for (let i = 0; i <= steps; i++) {
@@ -1248,13 +1374,11 @@ function gerarSvgGraficoPolinomio(coeffs) {
       if (yMax < 0) yMax = yRange * 0.15;
       yRange = yMax - yMin;
 
-      // 3. Calcular passos (ticks) dinâmicos para o Eixo Y
       let rawStepY = yRange / 6;
       let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
       let normY = rawStepY / magY;
       let yStep = normY > 7.5 ? 10 * magY : normY > 3.5 ? 5 * magY : normY > 1.5 ? 2 * magY : magY;
 
-      // 4. Calcular passos (ticks) dinâmicos para o Eixo X
       let rawStepX = xRange / 8;
       let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
       let normX = rawStepX / magX;
@@ -1270,7 +1394,6 @@ function gerarSvgGraficoPolinomio(coeffs) {
         let sx = toScreenX(x);
         let sy = toScreenY(y);
         
-        // Trava para o renderizador do navegador não bugar com coords absurdas
         sy = Math.max(-5000, Math.min(height + 5000, sy));
         pathD += (i === 0 ? `M ${sx} ${sy}` : ` L ${sx} ${sy}`);
       }
@@ -1280,7 +1403,6 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
       let ticksEixos = "";
 
-      // Renderiza números e barras do Eixo X dinâmico
       let startX = Math.ceil(xMin / xStep) * xStep;
       for (let i = startX; i <= xMax; i += xStep) {
         if (Math.abs(i) < 1e-7) continue;
@@ -1292,7 +1414,6 @@ function gerarSvgGraficoPolinomio(coeffs) {
         `;
       }
 
-      // Renderiza números e barras do Eixo Y dinâmico
       let startY = Math.ceil(yMin / yStep) * yStep;
       for (let j = startY; j <= yMax; j += yStep) {
         if (Math.abs(j) < 1e-7) continue; 
@@ -1304,32 +1425,77 @@ function gerarSvgGraficoPolinomio(coeffs) {
         `;
       }
       
-      // Zero na origem
       ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
 
+      let pointsSvg = "";
+      for (let r of realRoots) {
+        if (r >= xMin && r <= xMax) {
+          let rx = toScreenX(r);
+          let ry = toScreenY(0);
+          pointsSvg += `<circle cx="${rx}" cy="${ry}" r="4.5" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.5" />`;
+        }
+      }
+
       return `
-        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center">
-          <p class="text-xs text-slate-400 mb-2 font-medium">Visualização Cartesiana do Polinômio P(x) e Raízes</p>
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
+          <p class="text-xs text-slate-400 mb-2 font-medium" data-i18n="solver_cartesian_title">${t('solver_cartesian_title')}</p>
           <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
-            <!-- Eixos Principais -->
             <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
             <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
-            
-            <!-- Ticks e Números -->
             ${ticksEixos}
-            
-            <!-- Curva P(x) -->
             <path d="${pathD}" fill="none" stroke="#3b82f6" stroke-width="3" />
-            
-            <!-- Marcações de x e y -->
             <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
             <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
+            ${pointsSvg}
           </svg>
         </div>
       `;
     }
 
-// --- CLASSES E MÉTODOS NUMÉRICOS (DURAND-KERNER) ---
+    function gerarSvgPlanoComplexo(allRoots) {
+      const width = 300, height = 300;
+      let maxAbs = 1;
+      for (let r of allRoots) {
+        maxAbs = Math.max(maxAbs, Math.abs(r.re), Math.abs(r.im));
+      }
+      let limit = Math.ceil(maxAbs * 1.3);
+      if (limit < 2) limit = 2;
+      
+      const toScreenX = (x) => ((x + limit) / (2 * limit)) * width;
+      const toScreenY = (y) => height - ((y + limit) / (2 * limit)) * height;
+      
+      let gridLines = "";
+      for (let i = -limit; i <= limit; i++) {
+        if (i === 0) continue;
+        let sx = toScreenX(i);
+        let sy = toScreenY(i);
+        gridLines += `<line x1="${sx}" y1="0" x2="${sx}" y2="${height}" stroke="#334155" stroke-width="0.5" stroke-dasharray="2,2"/>`;
+        gridLines += `<line x1="0" y1="${sy}" x2="${width}" y2="${sy}" stroke="#334155" stroke-width="0.5" stroke-dasharray="2,2"/>`;
+        
+        gridLines += `<text x="${sx}" y="${toScreenY(0) + 12}" fill="#94a3b8" font-size="10" text-anchor="middle">${i}</text>`;
+        gridLines += `<text x="${toScreenX(0) - 6}" y="${sy + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${i}i</text>`;
+      }
+
+      let pointsSvg = "";
+      for (let r of allRoots) {
+        pointsSvg += `<circle cx="${toScreenX(r.re)}" cy="${toScreenY(r.im)}" r="5" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.5" />`;
+      }
+      
+      return `
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
+          <p class="text-xs text-slate-400 mb-2 font-medium" data-i18n="solver_complex_title">${t('solver_complex_title')}</p>
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
+            ${gridLines}
+            <line x1="0" y1="${toScreenY(0)}" x2="${width}" y2="${toScreenY(0)}" stroke="#94a3b8" stroke-width="1.5" />
+            <line x1="${toScreenX(0)}" y1="0" x2="${toScreenX(0)}" y2="${height}" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="${width - 15}" y="${toScreenY(0) - 10}" fill="#cbd5e1" font-size="12" font-style="italic">Re</text>
+            <text x="${toScreenX(0) + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">Im</text>
+            ${pointsSvg}
+          </svg>
+        </div>
+      `;
+    }
+
     class Complexo {
       constructor(re, im = 0) {
         this.re = re;
@@ -1362,7 +1528,7 @@ function gerarSvgGraficoPolinomio(coeffs) {
     function durandKerner(coeffs) {
       const degree = coeffs.length - 1;
       let roots = [];
-      // Raio inicial com ângulos assimétricos para quebrar simetria
+      
       for (let i = 0; i < degree; i++) {
         roots.push(new Complexo(Math.cos(i * 2.5) * 1.5, Math.sin(i * 2.5) * 1.5));
       }
@@ -1372,7 +1538,9 @@ function gerarSvgGraficoPolinomio(coeffs) {
         let newRoots = [];
         for (let i = 0; i < degree; i++) {
           let p = evalPolyComplex(coeffs, roots[i]);
-          let den = new Complexo(1, 0);
+          
+          let den = new Complexo(coeffs[0], 0);
+          
           for (let j = 0; j < degree; j++) {
             if (i !== j) den = den.mul(roots[i].sub(roots[j]));
           }
@@ -1386,11 +1554,7 @@ function gerarSvgGraficoPolinomio(coeffs) {
       }
       return roots;
     }
-    // ---------------------------------------------------
 
-// ===================================================
-    // SIMPLIFICADOR ALGÉBRICO PARA RAÍZES EXATAS
-    // ===================================================
     function simplificarRaiz(n) {
       let out = 1, inside = Math.abs(n);
       for (let i = 2; i * i <= inside; i++) {
@@ -1440,9 +1604,6 @@ function gerarSvgGraficoPolinomio(coeffs) {
       }
     }
 
-    // ===================================================
-    // SOLUCIONADOR PRINCIPAL
-    // ===================================================
     function resolverPolinomio() {
       const inputStr = document.getElementById('poly-input').value;
       const outDiv = document.getElementById('solver-output');
@@ -1450,14 +1611,12 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
       const parsed = parsePolynomial(inputStr);
       if (!parsed || parsed.degree < 1) {
-        outDiv.innerHTML = `<div class="text-red-600 font-medium text-sm">Polinómio inválido.</div>`;
+        outDiv.innerHTML = `<div data-i18n="solver_err_invalid" class="text-red-600 font-medium text-sm">${t('solver_err_invalid')}</div>`;
         return;
       }
 
       const originalCoeffs = parsed.coeffs;
       const degree = parsed.degree;
-      
-      const svgGrafico = gerarSvgGraficoPolinomio(originalCoeffs);
 
       let steps = [];
       steps.push(`<strong>${t('solver_poly_lbl')}</strong> \\(P(x) = ${formatPolynomial(originalCoeffs)} = 0\\) (${t('solver_deg_lbl')} ${degree})`);
@@ -1512,8 +1671,6 @@ function gerarSvgGraficoPolinomio(coeffs) {
               raizesRacionais.push({ val: cand.val, tex: fracStr });
               
               currentCoeffs = ruffini(currentCoeffs, cand.val);
-              
-              // BLINDAGEM DE PRECISÃO: Elimina resíduos decimais após Briot-Ruffini
               currentCoeffs = currentCoeffs.map(c => Math.abs(c - Math.round(c)) < 1e-5 ? Math.round(c) : c);
             } else break;
           }
@@ -1524,7 +1681,9 @@ function gerarSvgGraficoPolinomio(coeffs) {
       let polySobrouStr = formatPolynomial(currentCoeffs);
 
       let isBinomial = false;
+      let biquadraticExata = false;
       const degRem = currentCoeffs.length - 1;
+      
       if (degRem >= 3) {
         isBinomial = true;
         for (let i = 1; i < degRem; i++) {
@@ -1532,12 +1691,17 @@ function gerarSvgGraficoPolinomio(coeffs) {
         }
       }
 
-      // RESOLUÇÃO DE QUADRÁTICA COM SIMPLIFICADOR ALGÉBRICO SEGURO
+      if (degRem === 4 && Math.abs(currentCoeffs[1]) < 1e-7 && Math.abs(currentCoeffs[3]) < 1e-7) {
+        const A_bq = currentCoeffs[0], B_bq = currentCoeffs[2], C_bq = currentCoeffs[4];
+        const delta_bq = B_bq * B_bq - 4 * A_bq * C_bq;
+        if (delta_bq >= 0 && Number.isInteger(Math.sqrt(delta_bq))) {
+            biquadraticExata = true;
+        }
+      }
+
       if (degRem === 2) {
         const A = currentCoeffs[0], B = currentCoeffs[1], C = currentCoeffs[2];
         const delta = B * B - 4 * A * C;
-        
-        // Verifica se os coeficientes mantiveram integridade de números inteiros
         const isIntPoly = Number.isInteger(A) && Number.isInteger(B) && Number.isInteger(C);
 
         steps.push(`${t('solver_quadratic_rem')}<br>
@@ -1546,18 +1710,17 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
         if (delta > 0) {
           const sqrtDelta = Math.sqrt(delta);
-          
+          const r1 = (-B + sqrtDelta) / (2 * A);
+          const r2 = (-B - sqrtDelta) / (2 * A);
           if (!isIntPoly || Number.isInteger(sqrtDelta)) {
-            const r1 = (-B + sqrtDelta) / (2 * A);
-            const r2 = (-B - sqrtDelta) / (2 * A);
-            raizesIrracionais.push({ tex: `${parseFloat(r1.toFixed(5))}`, val: r1, isComplex: false, isApproxOnly: true });
-            raizesIrracionais.push({ tex: `${parseFloat(r2.toFixed(5))}`, val: r2, isComplex: false, isApproxOnly: true });
+            raizesIrracionais.push({ tex: `${parseFloat(r1.toFixed(5))}`, val: r1, isComplex: false, isApproxOnly: true, reNum: r1, imNum: 0 });
+            raizesIrracionais.push({ tex: `${parseFloat(r2.toFixed(5))}`, val: r2, isComplex: false, isApproxOnly: true, reNum: r2, imNum: 0 });
             if (!Number.isInteger(sqrtDelta)) steps.push(t('solver_irrat_delta', { delta }));
           } else {
             const r1Tex = formatarRaizQuadratica(A, B, delta, false);
             const r2Tex = formatarRaizQuadratica(A, B, delta, true);
-            raizesIrracionais.push({ tex: r1Tex, val: (-B + sqrtDelta) / (2*A), isComplex: false });
-            raizesIrracionais.push({ tex: r2Tex, val: (-B - sqrtDelta) / (2*A), isComplex: false });
+            raizesIrracionais.push({ tex: r1Tex, val: r1, isComplex: false, reNum: r1, imNum: 0 });
+            raizesIrracionais.push({ tex: r2Tex, val: r2, isComplex: false, reNum: r2, imNum: 0 });
             steps.push(t('solver_irrat_delta', { delta }));
           }
         } else if (delta < 0) {
@@ -1572,21 +1735,85 @@ function gerarSvgGraficoPolinomio(coeffs) {
           const valStr2 = `${reStr}${sign2}${Math.abs(im).toFixed(4)}i`;
 
           if (!isIntPoly) {
-             raizesIrracionais.push({ tex: '', valStr: valStr1, isComplex: true, isApproxOnly: true });
-             raizesIrracionais.push({ tex: '', valStr: valStr2, isComplex: true, isApproxOnly: true });
+             raizesIrracionais.push({ tex: '', valStr: valStr1, isComplex: true, isApproxOnly: true, reNum: re, imNum: im });
+             raizesIrracionais.push({ tex: '', valStr: valStr2, isComplex: true, isApproxOnly: true, reNum: re, imNum: -im });
           } else {
             const r1Tex = formatarRaizQuadratica(A, B, delta, false);
             const r2Tex = formatarRaizQuadratica(A, B, delta, true);
-            raizesIrracionais.push({ tex: r1Tex, valStr: valStr1, isComplex: true });
-            raizesIrracionais.push({ tex: r2Tex, valStr: valStr2, isComplex: true });
+            raizesIrracionais.push({ tex: r1Tex, valStr: valStr1, isComplex: true, reNum: re, imNum: im });
+            raizesIrracionais.push({ tex: r2Tex, valStr: valStr2, isComplex: true, reNum: re, imNum: -im });
           }
         } else if (delta === 0) {
             const r = -B / (2 * A);
-            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true });
-            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true });
+            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true, reNum: r, imNum: 0 });
+            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true, reNum: r, imNum: 0 });
         }
       } 
-      // RESOLUÇÃO ALGÉBRICA PARA BINÓMIOS PUROS DE GRAU >= 3
+      else if (biquadraticExata) {
+        const A = currentCoeffs[0], B = currentCoeffs[2], C = currentCoeffs[4];
+        const delta = B * B - 4 * A * C;
+        const sqrtDelta = Math.round(Math.sqrt(delta));
+        
+        steps.push(`O polinómio reduzido é uma equação biquadrada da forma \\(${A}x^4 ${B >= 0 ? '+' : ''} ${B}x^2 ${C >= 0 ? '+' : ''} ${C} = 0\\).<br>Substituindo \\(y = x^2\\), obtemos uma equação do 2º grau cujas raízes racionais nos permitem extrair \\(x = \\pm\\sqrt{y}\\).`);
+
+        const processY = (num, den) => {
+          let g = gcd(num, den);
+          let n = num / g;
+          let d = den / g;
+          if (d < 0) { n = -n; d = -d; }
+
+          let valY = n / d;
+          
+          if (valY === 0) {
+              raizesIrracionais.push({ tex: '0', val: 0, isComplex: false, reNum: 0, imNum: 0 });
+          } else if (valY > 0) {
+              let texStr = "";
+              if (d === 1) {
+                  let { out, inside } = simplificarRaiz(n);
+                  if (inside === 1) texStr = `${out}`;
+                  else texStr = (out === 1 ? "" : out) + `\\sqrt{${inside}}`;
+              } else {
+                  let { out, inside } = simplificarRaiz(n * d);
+                  let finalNum = out;
+                  let finalDen = d;
+                  let g2 = gcd(finalNum, finalDen);
+                  finalNum /= g2; finalDen /= g2;
+                  let numTex = (inside === 1) ? `${finalNum}` : ((finalNum === 1 ? "" : finalNum) + `\\sqrt{${inside}}`);
+                  if (finalDen === 1) texStr = numTex;
+                  else texStr = `\\frac{${numTex}}{${finalDen}}`;
+              }
+              
+              let rv = Math.sqrt(valY);
+              raizesIrracionais.push({ tex: texStr, val: rv, isComplex: false, reNum: rv, imNum: 0 });
+              raizesIrracionais.push({ tex: `-${texStr}`, val: -rv, isComplex: false, reNum: -rv, imNum: 0 });
+          } else {
+              let absN = Math.abs(n);
+              let texStr = "";
+              if (d === 1) {
+                  let { out, inside } = simplificarRaiz(absN);
+                  if (inside === 1) texStr = `${out}i`;
+                  else texStr = (out === 1 ? "" : out) + `\\sqrt{${inside}}i`;
+              } else {
+                  let { out, inside } = simplificarRaiz(absN * d);
+                  let finalNum = out;
+                  let finalDen = d;
+                  let g2 = gcd(finalNum, finalDen);
+                  finalNum /= g2; finalDen /= g2;
+                  let numTex = (inside === 1) ? `${finalNum}i` : ((finalNum === 1 ? "" : finalNum) + `\\sqrt{${inside}}i`);
+                  if (finalDen === 1) texStr = numTex;
+                  else texStr = `\\frac{${numTex}}{${finalDen}}`;
+              }
+              
+              let imVal = Math.sqrt(Math.abs(valY));
+              let valStrApp = imVal.toFixed(5);
+              raizesIrracionais.push({ tex: texStr, valStr: `${valStrApp}i`, isComplex: true, reNum: 0, imNum: imVal });
+              raizesIrracionais.push({ tex: `-${texStr}`, valStr: `-${valStrApp}i`, isComplex: true, reNum: 0, imNum: -imVal });
+          }
+        };
+
+        processY(-B + sqrtDelta, 2 * A);
+        processY(-B - sqrtDelta, 2 * A);
+      }
       else if (isBinomial) {
         const A = currentCoeffs[0];
         const C = currentCoeffs[degRem];
@@ -1612,7 +1839,7 @@ function gerarSvgGraficoPolinomio(coeffs) {
           
           if (Math.abs(im) < 1e-6) {
             let signReal = re < 0 ? "-" : "";
-            raizesIrracionais.push({ tex: `${signReal}${radBaseTex}`, val: re, isComplex: false });
+            raizesIrracionais.push({ tex: `${signReal}${radBaseTex}`, val: re, isComplex: false, reNum: re, imNum: 0 });
           } else {
             let angleFactor = isNegative ? (1 + 2 * k) : (2 * k);
             
@@ -1633,27 +1860,62 @@ function gerarSvgGraficoPolinomio(coeffs) {
             let sign1 = reStr === "" ? "" : (im > 0 ? " + " : " - ");
             let sign2 = reStr === "" ? (im > 0 ? "" : "-") : "";
             
-            raizesIrracionais.push({ tex: `${radBaseTex} \\cdot ${eulerTex}`, valStr: `${reStr}${sign1}${sign2}${imAbs}i`, isComplex: true });
+            raizesIrracionais.push({ tex: `${radBaseTex} \\cdot ${eulerTex}`, valStr: `${reStr}${sign1}${sign2}${imAbs}i`, isComplex: true, reNum: re, imNum: im });
           }
         }
       }
-      // RESOLUÇÃO NUMÉRICA (Durand-Kerner) PARA GRAUS > 2 MISTOS
       else if (degRem > 2) {
-        steps.push(`O polinómio reduzido tem grau ${degRem}. Extraindo raízes irracionais/complexas restantes via método numérico (Durand-Kerner)...`);
+        steps.push(`O polinómio reduzido tem grau ${degRem}. Extraindo raízes irracionais/complexas restantes via método numérico (Durand-Kerner)`);
         
         const numRoots = durandKerner(currentCoeffs);
         numRoots.forEach(z => {
           if (Math.abs(z.im) < 1e-6) {
-            raizesIrracionais.push({ tex: '', val: z.re, isComplex: false, isApproxOnly: true });
+            raizesIrracionais.push({ tex: '', val: z.re, isComplex: false, isApproxOnly: true, reNum: z.re, imNum: 0 });
           } else {
-            raizesIrracionais.push({ tex: '', valStr: z.toTeX(), isComplex: true, isApproxOnly: true });
+            raizesIrracionais.push({ tex: '', valStr: z.toTeX(), isComplex: true, isApproxOnly: true, reNum: z.re, imNum: z.im });
           }
         });
       }
 
+      // Consolidando coordenadas para plotagem
+      let realRoots = [];
+      let allRoots = [];
+
+      raizesRacionais.forEach(r => {
+        realRoots.push(r.val);
+        allRoots.push({ re: r.val, im: 0 });
+      });
+
+      raizesIrracionais.forEach(r => {
+        if (!r.isComplex) {
+          realRoots.push(r.val);
+          allRoots.push({ re: r.val, im: 0 });
+        } else {
+          allRoots.push({ re: r.reNum, im: r.imNum });
+        }
+      });
+
       const hasComplex = raizesIrracionais.some(r => r.isComplex);
       const hasIrrat = raizesIrracionais.length > 0 && !hasComplex;
       
+      const svgGrafico = gerarSvgGraficoPolinomio(originalCoeffs, realRoots);
+      let svgPlanoComplexo = '';
+      if (hasComplex) {
+        svgPlanoComplexo = gerarSvgPlanoComplexo(allRoots);
+      }
+      
+      let visualizacoesHtml = '';
+      if (hasComplex) {
+        visualizacoesHtml = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${svgGrafico}
+            ${svgPlanoComplexo}
+          </div>
+        `;
+      } else {
+        visualizacoesHtml = svgGrafico;
+      }
+
       let badgeHtml = `<span class="bg-emerald-100 text-emerald-800 font-semibold px-3 py-1 rounded text-xs">${t('solver_badge_only_rat')}</span>`;
       if (hasComplex) {
         badgeHtml = `<span class="bg-purple-100 text-purple-800 font-semibold px-3 py-1 rounded text-xs">Contém Raízes Complexas</span>`;
@@ -1674,9 +1936,11 @@ function gerarSvgGraficoPolinomio(coeffs) {
       }
       
       if (raizesIrracionais.length > 0) {
-        const label = hasComplex ? "Raízes Restantes (Irracionais e Complexas):" : `<strong>${t('solver_irrat_roots_found')}</strong>`;
+        const labelText = hasComplex ? t('solver_rem_complex_roots') : t('solver_irrat_roots_found');
+        const labelKey = hasComplex ? 'solver_rem_complex_roots' : 'solver_irrat_roots_found';
+        const label = `<strong><span data-i18n="${labelKey}">${labelText}</span></strong>`;
         
-        resumoRaizes += `<div class="mt-4 text-blue-900 font-medium">${hasComplex ? '<strong>' + label + '</strong>' : label}</div>
+        resumoRaizes += `<div class="mt-4 text-blue-900 font-medium">${label}</div>
           <ul class="list-disc list-inside text-blue-900 font-medium space-y-1 mt-1 pl-1"> ` + 
           raizesIrracionais.map(r => {
             if (r.isApproxOnly) {
@@ -1687,21 +1951,24 @@ function gerarSvgGraficoPolinomio(coeffs) {
           }).join('') + `</ul>`;
       }
 
-      // VÉRTICE DA PARÁBOLA E GIRARD
       let verticeHtml = '';
       if (degree === 2) {
         const a = originalCoeffs[0], b = originalCoeffs[1], c = originalCoeffs[2];
         const delta = b*b - 4*a*c;
         const xv = -b / (2*a);
         const yv = -delta / (4*a);
-        const tipo = a > 0 ? "Ponto de Mínimo" : "Ponto de Máximo";
+        
+        const tipoKey = a > 0 ? 'solver_geom_min' : 'solver_geom_max';
+        const tipoText = a > 0 ? t('solver_geom_min') : t('solver_geom_max');
+        const concavKey = a > 0 ? 'solver_geom_up' : 'solver_geom_down';
+        const concavText = a > 0 ? t('solver_geom_up') : t('solver_geom_down');
         
         verticeHtml = `
           <div class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 rounded">
-            <h4 class="font-bold text-amber-900 mb-1">Geometria da Parábola (Grau 2)</h4>
+            <h4 class="font-bold text-amber-900 mb-1" data-i18n="solver_geom_title">${t('solver_geom_title')}</h4>
             <ul class="list-disc list-inside text-amber-800 text-sm space-y-1">
-              <li><strong>Concavidade:</strong> Voltada para ${a > 0 ? 'cima' : 'baixo'}</li>
-              <li><strong>Vértice (${tipo}):</strong> \\(V = (${xv.toFixed(4)}, ${yv.toFixed(4)})\\)</li>
+              <li><strong><span data-i18n="solver_geom_concav">${t('solver_geom_concav')}</span></strong> <span data-i18n="${concavKey}">${concavText}</span></li>
+              <li><strong><span data-i18n="solver_geom_vertex">${t('solver_geom_vertex')}</span> (<span data-i18n="${tipoKey}">${tipoText}</span>):</strong> \\(V = (${xv.toFixed(4)}, ${yv.toFixed(4)})\\)</li>
             </ul>
           </div>
         `;
@@ -1734,13 +2001,38 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
       const vietaHtml = `
         <div class="mt-4 p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded">
-          <h4 class="font-bold text-indigo-900 mb-1">Relações de Girard</h4>
+          <h4 class="font-bold text-indigo-900 mb-1" data-i18n="solver_girard_title">${t('solver_girard_title')}</h4>
           <ul class="list-disc list-inside text-indigo-800 text-sm space-y-1">
-            <li><strong>Soma das raízes (\\(S\\)):</strong> ${sDisp}</li>
-            <li><strong>Produto das raízes (\\(P\\)):</strong> ${pDisp}</li>
+            <li><strong><span data-i18n="solver_girard_sum">${t('solver_girard_sum')}</span></strong> ${sDisp}</li>
+            <li><strong><span data-i18n="solver_girard_prod">${t('solver_girard_prod')}</span></strong> ${pDisp}</li>
           </ul>
         </div>
       `;
+
+      let calcHtml = '';
+      try {
+        let nerdStr = originalCoeffs.map((c, i) => {
+            let deg = originalCoeffs.length - 1 - i;
+            if (c === 0) return '';
+            return `${c > 0 ? '+' : ''}${c}*x^${deg}`;
+        }).join('');
+        if (!nerdStr) nerdStr = '0';
+        
+        const resultDiff = nerdamer(`diff(${nerdStr}, x)`).toTeX();
+        const resultInt = nerdamer(`integrate(${nerdStr}, x)`).toTeX();
+        
+        calcHtml = `
+          <div class="mt-4 p-4 bg-slate-50 border-l-4 border-slate-500 rounded">
+            <h4 class="font-bold text-slate-800 mb-2" data-i18n="solver_calc_title">${t('solver_calc_title')}</h4>
+            <div class="space-y-2">
+              <div class="math-step notranslate text-sm">\\( \\frac{d}{dx}[P(x)] = ${resultDiff} \\)</div>
+              <div class="math-step notranslate text-sm">\\( \\int P(x) \\, dx = ${resultInt} + C \\)</div>
+            </div>
+          </div>
+        `;
+      } catch(e) {
+        console.error("Erro ao gerar cálculo diferencial e integral.", e);
+      }
 
       let html = `
         <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
@@ -1748,13 +2040,14 @@ function gerarSvgGraficoPolinomio(coeffs) {
           ${badgeHtml}
         </div>
         <div class="space-y-4 text-sm text-slate-700">
-          ${svgGrafico}
+          ${visualizacoesHtml}
           ${steps.map(s => `<div class="step-box">${s}</div>`).join('')}
           <div class="p-4 bg-slate-100 border-l-4 border-blue-600 rounded">
             ${resumoRaizes || `<p>${t('solver_no_real_roots')}</p>`}
           </div>
           ${verticeHtml}
           ${vietaHtml}
+          ${calcHtml}
         </div>
       `;
 
@@ -1902,7 +2195,7 @@ function gerarSvgGraficoPolinomio(coeffs) {
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
 
-    // MOTOR 5: FRAÇÕES CONTÍNUAS
+    // MOTOR: FRAÇÕES CONTÍNUAS (RAÍZES)
     function executarFracaoContinua() {
       const N = parseInt(document.getElementById('cf-radicand').value);
       const outDiv = document.getElementById('cf-output');
@@ -1959,6 +2252,60 @@ function gerarSvgGraficoPolinomio(coeffs) {
 
       outDiv.innerHTML = html;
       if (window.renderMathInElement) renderMathInElement(outDiv);
+    }
+
+    // MOTOR: FRAÇÕES CONTÍNUAS (EXPRESSÕES GERAIS)
+    function executarFracaoExpressao() {
+      const expr = document.getElementById('cf-expr-input').value;
+      const outDiv = document.getElementById('cf-expr-output');
+      outDiv.classList.remove('hidden');
+      
+      try {
+        const val = parseFloat(nerdamer(expr).evaluate().text());
+        if (isNaN(val) || !isFinite(val)) throw new Error();
+
+        let a_n = Math.floor(val);
+        let x_n = val - a_n;
+        const periodo = [a_n];
+        
+        let stepCount = 0;
+        while (x_n > 1e-10 && stepCount < 20) {
+          let inverted = 1 / x_n;
+          a_n = Math.floor(inverted);
+          periodo.push(a_n);
+          x_n = inverted - a_n;
+          stepCount++;
+        }
+
+        let p_ant = 1, p_cur = periodo[0], q_ant = 0, q_cur = 1;
+        const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
+
+        for (let i = 1; i < periodo.length; i++) {
+          const coef = periodo[i];
+          let p_next = coef * p_cur + p_ant;
+          let q_next = coef * q_cur + q_ant;
+          p_ant = p_cur; p_cur = p_next;
+          q_ant = q_cur; q_cur = q_next;
+          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur/q_cur).toFixed(8)}`);
+        }
+
+        const exprTex = nerdamer(expr).toTeX();
+        outDiv.innerHTML = `
+          <div class="border-b border-slate-200 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-lg">Aproximações Racionais para \\(${exprTex}\\)</h3>
+            <span class="bg-blue-100 text-blue-800 font-semibold px-3 py-1 rounded text-xs">Valor: ${val.toFixed(8)}...</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700">
+            <div class="math-step notranslate">\\(${exprTex} \\approx [${periodo.join('; ')}]\\)</div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
+              ${convergentes.map((c, idx) => `<div class="mb-1"><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+            </div>
+          </div>
+        `;
+        renderMathInElement(outDiv);
+      } catch(e) {
+        outDiv.innerHTML = `<div class="text-red-600 font-medium text-sm">${t('err_invalid_expr')}</div>`;
+      }
     }
 
     // Inicialização ao carregar
