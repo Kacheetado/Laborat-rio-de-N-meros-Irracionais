@@ -19,6 +19,11 @@ O projeto visa explorar e estudar os números irracionais a partir de ferramenta
 
 - **Concepção, Arquitetura e Programação:** Kauã Fabson (Responsável pelo desenvolvimento integral do código e implementação técnica da ferramenta)
 
+## ✉️ Contato e Suporte
+
+Tem sugestões, encontrou algum bug ou deseja estabelecer parcerias? Entre em contato conosco através do e-mail oficial do projeto:
+* **E-mail:** `laboratorionumerosirracionais@gmail.com`
+
 ## ✨ Recursos e Funcionalidades
 
 A plataforma é dividida em abas temáticas que oferecem diferentes abordagens matemáticas:
@@ -26,7 +31,7 @@ A plataforma é dividida em abas temáticas que oferecem diferentes abordagens m
 * **Teorema Fundamental da Aritmética:** Permite determinar se a raiz de índice *N* de um número natural (≥ 2) é racional ou irracional.
 * **Solucionador de Polinômios:** Utiliza o Teorema das Raízes Racionais (TRR) para solucionar polinômios e classificar suas raízes (racionais ou irracionais). Conta com um recurso experimental de **geração de gráficos**.
 * **Critério de Eisenstein:** Aplica o critério de irredutibilidade de Eisenstein, utilizando o método de decomposição de polinômios em conjunto com o TRR.
-* **Frações Contínuas Simples (Reconhecimento Construtivo):** Verifica a irracionalidade da raiz de um número natural e gera suas melhores aproximações racionais (em formato de fração e decimal).
+* **Frações Contínuas Simples:** Verifica a irracionalidade da raiz de um número natural e gera suas melhores aproximações racionais (em formato de fração e decimal).
 * **Funções Trigonométricas:** Calcula os valores de seno, cosseno e tangente em formato decimal, além de verificar se o resultado é um número irracional.
 * **Tabela de Notáveis:** Uma compilação de consulta rápida contendo alguns dos números irracionais mais importantes da matemática.
 * **Contexto Histórico:** Uma seção dedicada a contar um pouco da história e da descoberta dos números irracionais.
@@ -43,9 +48,23 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.0.9]
+* **Novo:** Suporte a igualdade de polinômios na aba "Solucionador de polinômios"
+* **Novo:** Suporte a o produto de polinômios na aba "Solucionador de polinômios"
+* **Novo:** Suporte ao Quociente de polinômios na aba "Solucionador de polinômios"
+* **Novo:** Resolução da derivada de polinômios na aba "Solucionador de polinômios"
+* **Novo:** Resolução da integral de polinômios na aba "Solucionador de polinômios"
+* **Novo:** Aproximações Fracionárias de Constantes na aba "Frações contínuas"
+* **Melhoria:** Adição de marcação no gráfico e plano para evidenciar raízes da aba "Solucionador de polinômios"
+
+## [1.0.8]
+* **Novo:** Plano complexo adicionado na aba "Solucionador de polinômios"
+* **Melhoria:** Revisão completa da tradução da aba "Solucionador de polinômios"
+* **Correção:** Resolução de bug crítico na aba "Solucionador de polinômios", onde o motor matemático não conseguia descobrir algumas raízes
+
 ## [1.0.7]
 * **Melhoria:** Aprimoramento do recurso de tradução
-* **Correção:** Resolução de pequenos bugs
+* **Correção:** Resolução de pequenos bugs de interface
 
 ## [1.0.6]
 * **Novo:** Valores algébricos adicionados as raízes na aba "Solucionador de polinômios"
