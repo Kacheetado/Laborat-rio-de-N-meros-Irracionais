@@ -51,6 +51,8 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 ## [1.1.0]
 * **Novo:** Construtor de polinômios na aba "Solucionador de polinômios"
 * **Novo:** Seletor de tema claro e escuro
+* **Novo:** Teclado para facilitar digitação na caixa Aproximações Fracionárias de Constantes na aba "Frações contínuas"
+* **Novo:** Aproximações fracionárias de operações com números irracionais na aba "Frações contínuas"
 * **Melhoria:** Tradução das abas "Solucionador de polinômios" e "Frações contínuas"
 * **Correção:** Bug de interface na aba "Frações contínuas", onde alguns elementos vazavam da tela
 
