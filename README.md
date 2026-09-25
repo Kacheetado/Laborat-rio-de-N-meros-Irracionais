@@ -48,6 +48,12 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.1.0]
+* **Novo:** Construtor de polinômios na aba "Solucionador de polinômios"
+* **Novo:** Seletor de tema claro e escuro
+* **Melhoria:** Tradução das abas "Solucionador de polinômios" e "Frações contínuas"
+* **Correção:** Bug de interface na aba "Frações contínuas", onde alguns elementos vazavam da tela
+
 ## [1.0.9]
 * **Novo:** Suporte a igualdade de polinômios na aba "Solucionador de polinômios"
 * **Novo:** Suporte a o produto de polinômios na aba "Solucionador de polinômios"
