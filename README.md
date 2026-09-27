@@ -48,6 +48,13 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.1.1]
+### [1.1.1]
+* **Novo:** Suporte a funções logarítmicas na aba "Solucionador de polinômios"
+* **Novo:** A aba "Solucionador de polinômios" recebeu suporte a funções trigonométricas
+* **Novo:** As expressões geradas no bloco "Aproximações fracionárias de constantes" podem ser enviadas para a aba "Solucionador de polinômios"
+* **Correção:** Correção de bug de interface no construtor de polinômios na aba "Solucionador de polinômios" em dispositivos móveis
+
 ## [1.1.0]
 * **Novo:** Construtor de polinômios na aba "Solucionador de polinômios"
 * **Novo:** Seletor de tema claro e escuro
