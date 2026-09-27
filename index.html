@@ -171,32 +171,41 @@
       <button onclick="carregarExemplo('x^3 - x^2 + x - 1')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x³ - x² + x - 1 (Complexas)</button>
     </div>
     
-    <!-- Gerador de Polinômios para Expressões Algébricas -->
-    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 mb-6 transition-colors">
-      <h3 class="text-sm font-bold text-blue-900 dark:text-blue-300 mb-2" data-i18n="gen_title">Construtor de Expressões (Gerador de Polinômio Minimal)</h3>
-      <p class="text-xs text-blue-800 dark:text-blue-400 mb-3" data-i18n="gen_desc">
-        Quer provar que uma expressão como \(\frac{\sqrt{7}}{3}\) é irracional? Insira os valores abaixo para gerar o polinômio correspondente e enviá-lo ao solucionador.
-      </p>
-      
-      <div class="flex flex-wrap items-center gap-3 text-sm">
-        <div class="flex items-center gap-1">
-          <span class="font-semibold text-blue-900 dark:text-blue-300">\(x =\)</span>
-          <span class="text-xl text-slate-400 dark:text-slate-500 font-light">(</span>
-          <input type="number" id="gen-a" value="1" placeholder="A" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500">
-          <span class="font-bold text-slate-700 dark:text-slate-300">\(\sqrt{\vphantom{X}}\)</span>
-          <input type="number" id="gen-k" value="7" placeholder="K" class="w-16 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500">
-          <span class="font-bold text-slate-700 dark:text-slate-300">\(+\)</span>
-          <input type="number" id="gen-b" value="0" placeholder="B" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500">
-          <span class="text-xl text-slate-400 dark:text-slate-500 font-light">)</span>
-          <span class="font-bold text-slate-700 dark:text-slate-300">/</span>
-          <input type="number" id="gen-c" value="3" placeholder="C" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500">
+<!-- Gerador de Polinômios para Expressões Algébricas -->
+        <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 mb-6 transition-colors">
+          <h3 class="text-sm font-bold text-blue-900 dark:text-blue-300 mb-2" data-i18n="gen_title">Construtor de Expressões (Gerador de Polinômio Minimal)</h3>
+          <p class="text-xs text-blue-800 dark:text-blue-400 mb-3" data-i18n="gen_desc">
+            Quer provar que uma expressão como \(\frac{\sqrt{7}}{3}\) é irracional? Insira os valores abaixo para gerar o polinômio correspondente e enviá-lo ao solucionador.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-semibold text-blue-900 dark:text-blue-300">\(x =\)</span>
+              <span class="text-xl text-slate-400 dark:text-slate-500 font-light">(</span>
+              
+              <input type="number" id="gen-a" value="" placeholder="A" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Coeficiente A">
+              
+              <div class="flex items-center">
+                <span class="font-bold text-slate-700 dark:text-slate-300 mr-1">\(\sqrt[n]{k}\)</span>
+                <input type="number" id="gen-n" value="" placeholder="N" min="2" class="w-10 px-1 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500 text-xs" title="Índice da Raiz (N)">
+                <span class="font-bold text-slate-700 dark:text-slate-300 mx-1">\(]{\vphantom{X}}\)</span>
+                <input type="number" id="gen-k" value="" placeholder="K" class="w-14 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Radicando K">
+              </div>
+
+              <span class="font-bold text-slate-700 dark:text-slate-300">\(+\)</span>
+              <input type="number" id="gen-b" value="" placeholder="B" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Termo B">
+              
+              <span class="text-xl text-slate-400 dark:text-slate-500 font-light">)</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">/</span>
+              <input type="number" id="gen-c" value="" placeholder="C" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Denominador C">
+            </div>
+            
+            <button onclick="gerarEEnviarPolinomio()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-1.5 rounded-lg transition-colors text-xs shadow-sm whitespace-nowrap mt-2 sm:mt-0" data-i18n="gen_btn">
+              Gerar e Solucionar
+            </button>
+          </div>
+          <div id="gen-steps" class="mt-3 text-xs text-slate-700 dark:text-slate-300 hidden"></div>
         </div>
-        <button onclick="gerarEEnviarPolinomio()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-1.5 rounded-lg transition-colors text-xs shadow-sm" data-i18n="gen_btn">
-          Gerar e Solucionar
-        </button>
-      </div>
-      <div id="gen-steps" class="mt-3 text-xs text-slate-700 dark:text-slate-300 hidden"></div>
-    </div>
     
     <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
       <div class="flex-grow w-full">
@@ -328,12 +337,20 @@
           <button onclick="inserirNoExpr(')')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\()\)</button>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-2xl">
           <div class="sm:col-span-2">
             <label class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="cf_expr_lbl">Expressão:</label>
             <input type="text" id="cf-expr-input" value="" placeholder="Use os botões acima ou digite..." class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:ring-2 focus:ring-blue-500 dark:text-white font-mono">
           </div>
-          <button onclick="executarFracaoExpressao()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap">Gerar Convergentes</button>
+            
+            <!-- Botão da Ponte Mágica -->
+            <button onclick="enviarParaAba2()" class="w-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/60 font-medium px-4 py-1.5 rounded-lg transition-colors shadow-sm whitespace-nowrap text-xs flex items-center justify-center gap-1.5 border border-indigo-200 dark:border-indigo-800">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              Levar para o Construtor (Aba 2)
+            </button>
+            <div class="flex flex-col gap-2 w-full">
+            <button onclick="executarFracaoExpressao()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap">Gerar Convergentes</button>
+          </div>
         </div>
       </div>
       <div id="cf-expr-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm mt-6 hidden transition-colors"></div>
@@ -1409,7 +1426,18 @@
           expr = `(${sides[0]}) - (${sides[1]})`;
         }
 
+        // O Nerdamer expande a expressão primeiro
         let expanded = nerdamer(expr).expand().text();
+
+        // TRAVA DE SEGURANÇA
+        // Se a expressão expandida contiver qualquer caractere que não seja:
+        // 'x', números (0-9), espaços ou operadores básicos
+        // Isso significa que existem frações, decimais, raízes ou constantes (pi, e).
+        // Ao retornar null, o sistema a ativar o modo de calculo
+        if (expanded.match(/[^x0-9\+\-\*\^\s]/i)) {
+          return null; 
+        }
+
         let cleanStr = expanded.replace(/\*/g, '');
         
         const polyMap = parseExpression(cleanStr);
@@ -1468,116 +1496,150 @@
       return result;
     }
 
-    function gerarSvgGraficoPolinomio(coeffs, realRoots = []) {
+    function gerarSvgFuncaoGeral(f_eval) {
+      // 1. INJEÇÃO DE FUNÇÕES MATEMÁTICAS NATIVAS EM FALTA NO JAVASCRIPT
+      // Garante que o motor consegue desenhar secantes, cossecantes e cotangentes
+      if (typeof Math.sec === 'undefined') Math.sec = (x) => 1 / Math.cos(x);
+      if (typeof Math.csc === 'undefined') Math.csc = (x) => 1 / Math.sin(x);
+      if (typeof Math.cot === 'undefined') Math.cot = (x) => 1 / Math.tan(x);
+      if (typeof Math.asec === 'undefined') Math.asec = (x) => Math.acos(1 / x);
+      if (typeof Math.acsc === 'undefined') Math.acsc = (x) => Math.asin(1 / x);
+      if (typeof Math.acot === 'undefined') Math.acot = (x) => Math.PI / 2 - Math.atan(x);
+
       const width = 600, height = 300;
-      let fujiwaraMax = 0;
-      let grau = coeffs.length - 1;
-      let an = Math.abs(coeffs[0]);
-      for (let i = 1; i <= grau; i++) {
-        let termo = Math.pow(Math.abs(coeffs[i]) / an, 1 / i);
-        if (termo > fujiwaraMax) fujiwaraMax = termo;
-      }
-      
-      let limiteX = Math.ceil(2 * fujiwaraMax) + 1;
-      let boundX = Math.max(4, Math.min(limiteX, 50));
-      const xMin = -boundX;
-      const xMax = boundX;
+      const boundX = 6;
+      const xMin = -boundX, xMax = boundX;
       const xRange = xMax - xMin;
       
-      const steps = 200;
+      const steps = 400; 
       const dx = xRange / steps;
 
-      let calcYMin = Infinity;
-      let calcYMax = -Infinity;
+      let points = [];
+      
       for (let i = 0; i <= steps; i++) {
-        let y = evalPoly(coeffs, xMin + i * dx);
-        if (y < calcYMin) calcYMin = y;
-        if (y > calcYMax) calcYMax = y;
+        let x = xMin + i * dx;
+        try {
+            let y = f_eval(x);
+            if (!isNaN(y) && isFinite(y)) {
+                points.push({x, y});
+            }
+        } catch(e) {}
       }
 
+      if (points.length === 0) return '';
+
+      // 2. MOTOR ESTATÍSTICO IQR
+      let validYs = points.map(p => p.y).sort((a, b) => a - b);
+      let q1 = validYs[Math.floor(validYs.length * 0.25)];
+      let q3 = validYs[Math.floor(validYs.length * 0.75)];
+      let iqr = q3 - q1;
+      
+      if (iqr === 0) iqr = 2; // Para retas horizontais ou funções muito planas
+
+      // Limite de visualização que ignora tudo o que dispara para o infinito
+      let lowerBound = q1 - 3 * iqr;
+      let upperBound = q3 + 3 * iqr;
+
+      let p5 = validYs[Math.floor(validYs.length * 0.05)];
+      let p95 = validYs[Math.floor(validYs.length * 0.95)];
+      
+      let calcYMin = Math.max(p5, lowerBound);
+      let calcYMax = Math.min(p95, upperBound);
+      
+      // Impede que a escala fique em linhas quase retas
+      if (calcYMax - calcYMin < 5) {
+          calcYMax = Math.max(calcYMax, 5);
+          calcYMin = Math.min(calcYMin, -5);
+      }
+      
       let yRange = calcYMax - calcYMin;
-      if (yRange === 0) yRange = 10; 
+      if (yRange < 0.1) yRange = 10; 
 
       let yMin = calcYMin - yRange * 0.15;
       let yMax = calcYMax + yRange * 0.15;
       
-      if (yMin > 0) yMin = -yRange * 0.15;
-      if (yMax < 0) yMax = yRange * 0.15;
+      // Ancoragem visual no eixo X
+      if (yMin > 0 && yMin < yRange) yMin = -yRange * 0.15;
+      if (yMax < 0 && Math.abs(yMax) < yRange) yMax = yRange * 0.15;
+      
       yRange = yMax - yMin;
-
-      let rawStepY = yRange / 6;
-      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
-      let normY = rawStepY / magY;
-      let yStep = normY > 7.5 ? 10 * magY : normY > 3.5 ? 5 * magY : normY > 1.5 ? 2 * magY : magY;
-
-      let rawStepX = xRange / 8;
-      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
-      let normX = rawStepX / magX;
-      let xStep = normX > 7.5 ? 10 * magX : normX > 3.5 ? 5 * magX : normX > 1.5 ? 2 * magX : magX;
 
       const toScreenX = (x) => ((x - xMin) / xRange) * width;
       const toScreenY = (y) => height - ((y - yMin) / yRange) * height;
 
       let pathD = "";
-      for (let i = 0; i <= steps; i++) {
-        let x = xMin + i * dx;
-        let y = evalPoly(coeffs, x);
-        let sx = toScreenX(x);
-        let sy = toScreenY(y);
+      let first = true;
+      for (let i = 0; i < points.length; i++) {
+        let p = points[i];
         
-        sy = Math.max(-5000, Math.min(height + 5000, sy));
-        pathD += (i === 0 ? `M ${sx} ${sy}` : ` L ${sx} ${sy}`);
+        // 3. QUEBRA DE ASSÍNTOTAS
+        if (i > 0) {
+            let prevP = points[i-1];
+            let diffY = Math.abs(p.y - prevP.y);
+            
+            // Se o salto de Y num milímetro do eixo X for maior que 80% da tela visível, é uma assíntota
+            if (diffY > yRange * 0.8) {
+                first = true;
+            }
+        }
+
+        let sx = toScreenX(p.x);
+        let sy = toScreenY(p.y);
+        
+        // Se a assíntota disparar o pixel para fora dos limites da caixa do SVG, a caneta levanta
+        if (sy < -height || sy > height * 2) {
+            first = true;
+            continue;
+        }
+
+        if (first) {
+            pathD += `M ${sx} ${sy}`;
+            first = false;
+        } else {
+            pathD += ` L ${sx} ${sy}`;
+        }
       }
 
       const xAxisY = toScreenY(0);
       const yAxisX = toScreenX(0);
-
       let ticksEixos = "";
+
+      let rawStepX = xRange / 8;
+      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+      
+      let rawStepY = yRange / 6;
+      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
+      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
 
       let startX = Math.ceil(xMin / xStep) * xStep;
       for (let i = startX; i <= xMax; i += xStep) {
         if (Math.abs(i) < 1e-7) continue;
         let tx = toScreenX(i);
-        let labelX = Number.isInteger(i) ? i : parseFloat(i.toFixed(2));
-        ticksEixos += `
-          <line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" />
-          <text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>
-        `;
+        let labelX = parseFloat(i.toFixed(2));
+        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
       }
 
       let startY = Math.ceil(yMin / yStep) * yStep;
       for (let j = startY; j <= yMax; j += yStep) {
         if (Math.abs(j) < 1e-7) continue; 
         let ty = toScreenY(j);
-        let labelY = Number.isInteger(j) ? j : parseFloat(j.toFixed(2));
-        ticksEixos += `
-          <line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" />
-          <text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>
-        `;
+        let labelY = parseFloat(j.toFixed(2));
+        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
       }
       
       ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
 
-      let pointsSvg = "";
-      for (let r of realRoots) {
-        if (r >= xMin && r <= xMax) {
-          let rx = toScreenX(r);
-          let ry = toScreenY(0);
-          pointsSvg += `<circle cx="${rx}" cy="${ry}" r="4.5" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.5" />`;
-        }
-      }
-
       return `
         <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
-          <p class="text-xs text-slate-400 mb-2 font-medium" data-i18n="solver_cartesian_title">${t('solver_cartesian_title')}</p>
-          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
+          <p class="text-xs text-slate-400 mb-2 font-medium">Plano Cartesiano: Gráfico da Função f(x)</p>
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800">
             <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
             <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
             ${ticksEixos}
-            <path d="${pathD}" fill="none" stroke="#3b82f6" stroke-width="3" />
+            <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
             <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
             <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
-            ${pointsSvg}
           </svg>
         </div>
       `;
@@ -1736,42 +1798,73 @@
     }
 
     function gerarEEnviarPolinomio() {
-      const A = parseFloat(document.getElementById('gen-a').value) || 1;
-      const K = parseFloat(document.getElementById('gen-k').value);
-      const B = parseFloat(document.getElementById('gen-b').value) || 0;
-      const C = parseFloat(document.getElementById('gen-c').value) || 1;
+      // 1. Coleta de dados
+      let A = parseFloat(document.getElementById('gen-a').value);
+      if (isNaN(A)) A = 1;
+      
+      let N = parseInt(document.getElementById('gen-n').value);
+      if (isNaN(N) || N < 2) N = 2;
+      
+      let K = parseFloat(document.getElementById('gen-k').value);
+      
+      let B = parseFloat(document.getElementById('gen-b').value);
+      if (isNaN(B)) B = 0;
+      
+      let C = parseFloat(document.getElementById('gen-c').value);
       const stepsDiv = document.getElementById('gen-steps');
 
-      if (isNaN(K) || K < 0 || C === 0) {
-        stepsDiv.innerHTML = `<span class="text-red-600 dark:text-red-400 font-medium">${t('gen_error')}</span>`;
+      // 2. Trava de segurança para zero no denominador e radicando inválido
+      if (isNaN(K) || K < 0 || isNaN(C) || C === 0) {
+        stepsDiv.innerHTML = `<span class="text-red-600 dark:text-red-400 font-medium">${t('gen_error') || 'Erro: K deve ser ≥ 0 e C não pode ser 0.'}</span>`;
         stepsDiv.classList.remove('hidden');
         return;
       }
 
-      const c2 = C * C;
-      const c1 = -2 * B * C;
-      const c0 = (B * B) - (A * A * K);
+      // 3. Monta a expressão algébrica para expandir
+      // vai resolver: (C*x - B)^N - (A^N * K) = 0
+      const aPowK = Math.pow(A, N) * K;
+      const exprStr = `expand((${C}*x - (${B}))^${N} - ${aPowK})`;
+      
+      let polyStr = "";
+      try {
+        polyStr = nerdamer(exprStr).text();
+      } catch (e) {
+        stepsDiv.innerHTML = `<span class="text-red-600 dark:text-red-400 font-medium">Erro ao expandir polinômio. Verifique os valores inseridos.</span>`;
+        stepsDiv.classList.remove('hidden');
+        return;
+      }
 
-      let polyStr = `${c2}x^2`;
-      if (c1 !== 0) polyStr += ` ${c1 > 0 ? '+' : '-'} ${Math.abs(c1)}x`;
-      if (c0 !== 0) polyStr += ` ${c0 > 0 ? '+' : '-'} ${Math.abs(c0)}`;
+      // 4. Formatação didática do isolamento em LaTeX
+      const A_str = A !== 1 ? (A === -1 ? '-' : A) : '';
+      const raiz_str = N === 2 ? `\\sqrt{${K}}` : `\\sqrt[${N}]{${K}}`;
+      const B_str = B !== 0 ? (B > 0 ? `+${B}` : `${B}`) : '';
+      
+      const step1 = `x = \\frac{${A_str}${raiz_str} ${B_str}}{${C}}`;
+      
+      const cx_term = `${C}x`;
+      const b_inv_term = B !== 0 ? (B > 0 ? `-${B}` : `+${Math.abs(B)}`) : '';
+      const step2 = `${cx_term} ${b_inv_term} = ${A_str}${raiz_str}`;
+      
+      const step3 = `(${cx_term} ${b_inv_term})^{${N}} = (${A_str}${raiz_str})^{${N}}`;
+      
+      // Limpar os asteriscos de multiplicação do output do Nerdamer
+      const cleanPolyForTex = polyStr.replace(/\*/g, '');
 
-      const step1 = `\\( x = \\frac{${A !== 1 ? A : ''}\\sqrt{${K}} ${B !== 0 ? (B > 0 ? '+' + B : B) : ''}}{${C}} \\)`;
-      const step2 = `\\( ${C}x ${B !== 0 ? (B > 0 ? '-' + B : '+' + Math.abs(B)) : ''} = ${A !== 1 ? A : ''}\\sqrt{${K}} \\)`;
-      const step3 = `\\( (${C}x ${B !== 0 ? (B > 0 ? '-' + B : '+' + Math.abs(B)) : ''})^2 = (${A !== 1 ? A : ''}\\sqrt{${K}})^2 \\)`;
-      const step4 = `\\( ${polyStr} = 0 \\)`;
-
+      // Renderização com \implies nativo do KaTeX dentro de um bloco
       stepsDiv.innerHTML = `
         <div class="p-3 bg-white dark:bg-slate-800 border border-blue-200 dark:border-slate-600 rounded mt-2">
-          <p class="font-semibold text-blue-800 dark:text-blue-300 mb-1">${t('gen_deduction')}</p>
-          <div class="math-step notranslate overflow-x-auto pb-2">${step1} &nbsp;&nbsp;&implies;&nbsp;&nbsp; ${step2} &nbsp;&nbsp;&implies;&nbsp;&nbsp; ${step3} &nbsp;&nbsp;&implies;&nbsp;&nbsp; <strong>${step4}</strong></div>
+          <p class="font-semibold text-blue-800 dark:text-blue-300 mb-1" data-i18n="gen_deduction">${t('gen_deduction') || 'Dedução Algébrica (Isolamento):'}</p>
+          <div class="math-step notranslate overflow-x-auto pb-2 text-sm whitespace-nowrap">
+            \\( ${step1} \\implies ${step2} \\implies ${step3} \\implies \\) <strong>\\( ${cleanPolyForTex} = 0 \\)</strong>
+          </div>
         </div>
       `;
       stepsDiv.classList.remove('hidden');
       
       if (window.renderMathInElement) renderMathInElement(stepsDiv);
 
-      document.getElementById('poly-input').value = polyStr;
+      // Envia o resultado para o input principal e dispara a solução
+      document.getElementById('poly-input').value = cleanPolyForTex;
       resolverPolinomio();
     }
 
@@ -1781,9 +1874,10 @@
       outDiv.classList.remove('hidden');
 
       const parsed = parsePolynomial(inputStr);
+      
+      // Se o TRR falhar por encontrar constantes transcendentes (pi, e) u expressões não-inteiras, ativa o modo de calculo
       if (!parsed || parsed.degree < 1) {
-        outDiv.innerHTML = `<div data-i18n="solver_err_invalid" class="text-red-600 dark:text-red-400 font-medium text-sm">${t('solver_err_invalid')}</div>`;
-        return;
+        return analisarExpressaoSimbolica(inputStr, outDiv);
       }
 
       const originalCoeffs = parsed.coeffs;
@@ -2424,7 +2518,7 @@ function executarFracaoContinua() {
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
 
-    // MOTOR: FRAÇÕES CONTÍNUAS (EXPRESSÕES GERAIS - NOVA LÓGICA NUMÉRICA)
+    // MOTOR: FRAÇÕES CONTÍNUAS 
     function inserirNoExpr(texto) {
       const input = document.getElementById('cf-expr-input');
       const start = input.selectionStart;
@@ -2493,6 +2587,414 @@ function executarFracaoContinua() {
       } catch(e) {
         outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">${t('err_invalid_expr')}</div>`;
       }
+    }
+
+    function enviarParaAba2() {
+      const expr = document.getElementById('cf-expr-input').value.trim();
+      
+      if (!expr) {
+        alert("Digite uma expressão primeiro!");
+        return;
+      }
+
+      try {
+        // Apenas valida se o nerdamer consegue interpretar a sintaxe, sem resolver decimais
+        nerdamer(expr);
+        
+        // Mantém a expressão simbólica
+        // Cria a função f(x) = x^2 - (expr)^2, formando uma parábola simétrica
+        const polyStr = `x^2 - (${expr})^2`;
+
+        document.getElementById('poly-input').value = polyStr;
+        switchTab('solver');
+        
+        setTimeout(() => {
+            const polyInputDiv = document.getElementById('poly-input').closest('.flex-grow');
+            polyInputDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Efeito visual esmeralda para indicar a transição
+            polyInputDiv.classList.add('ring-4', 'ring-emerald-400', 'transition-all', 'rounded');
+            setTimeout(() => polyInputDiv.classList.remove('ring-4', 'ring-emerald-400', 'rounded'), 1000);
+            
+            // Dispara o solucionador híbrido da Aba 2
+            resolverPolinomio();
+        }, 300);
+
+      } catch(e) {
+        alert("Erro algébrico. Certifique-se de que a expressão matemática está escrita corretamente.");
+      }
+    }
+
+    function analisarExpressaoSimbolica(exprStr, outDiv) {
+      try {
+        // 1. APLICA O TRADUTOR DE SINTAXE AQUI
+        let funcStr = sanitizarSintaxeMatematica(exprStr);
+
+        if (funcStr.includes('=')) {
+          const parts = funcStr.split('=');
+          funcStr = `(${parts[0]}) - (${parts[1]})`;
+        }
+
+        // Auto-correção para constantes sem 'x
+        if (!funcStr.includes('x')) {
+            funcStr = `x^2 - (${funcStr})^2`;
+        }
+
+        const f = nerdamer(funcStr);
+        const texExpr = f.toTeX();
+        
+        // Operações de Cálculo Rigoroso
+        const derivadaTex = nerdamer(`diff(${funcStr}, x)`).toTeX();
+        const integralTex = nerdamer(`integrate(${funcStr}, x)`).toTeX();
+
+        // Compila a função para gerar o Gráfico SVG
+        const f_eval = f.buildFunction(['x']);
+        const svgGrafico = gerarSvgFuncaoGeral(f_eval);
+
+        outDiv.innerHTML = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Modo de Análise Analítica (Cálculo e Geometria)</h3>
+            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">Função de R em R</span>
+          </div>
+          
+          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+            <p>O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o <strong>rigor absoluto</strong> da sua expressão sem aproximações decimais, o laboratório ativou o motor de Análise Real.</p>
+            
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Função Analisada:</span>
+              <div class="math-step notranslate mb-4">\\(f(x) = ${texExpr}\\)</div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
+                  <span class="font-semibold text-blue-600 dark:text-blue-400">Derivada \\(\\frac{d}{dx}f(x)\\):</span>
+                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${derivadaTex}\\)</div>
+                </div>
+                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
+                  <span class="font-semibold text-purple-600 dark:text-purple-400">Integral Indefinida \\(\\int f(x) dx\\):</span>
+                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${integralTex} + C\\)</div>
+                </div>
+              </div>
+            </div>
+            
+            ${svgGrafico}
+          </div>
+        `;
+        if (window.renderMathInElement) renderMathInElement(outDiv);
+      } catch(e) {
+        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">Erro ao compilar função para análise. Verifique se a variável dependente é "x" e se a sintaxe matemática é suportada.</div>`;
+      }
+    }
+
+    function gerarSvgFuncaoGeral(f_eval) {
+      const width = 600, height = 300;
+      const boundX = 6;
+      const xMin = -boundX;
+      const xMax = boundX;
+      const xRange = xMax - xMin;
+      
+      const steps = 300;
+      const dx = xRange / steps;
+
+      let calcYMin = Infinity;
+      let calcYMax = -Infinity;
+      let points = [];
+      
+      for (let i = 0; i <= steps; i++) {
+        let x = xMin + i * dx;
+        try {
+            let y = f_eval(x);
+            // Ignora descontinuidades, raízes complexas de números negativos, etc
+            if (!isNaN(y) && isFinite(y)) {
+                points.push({x, y});
+                if (y < calcYMin) calcYMin = y;
+                if (y > calcYMax) calcYMax = y;
+            }
+        } catch(e) {}
+      }
+
+      if (points.length === 0) return '';
+
+      let yRange = calcYMax - calcYMin;
+      if (yRange === 0) yRange = 10; 
+
+      let yMin = calcYMin - yRange * 0.15;
+      let yMax = calcYMax + yRange * 0.15;
+      
+      if (yMin > 0) yMin = -yRange * 0.15;
+      if (yMax < 0) yMax = yRange * 0.15;
+      yRange = yMax - yMin;
+
+      const toScreenX = (x) => ((x - xMin) / xRange) * width;
+      const toScreenY = (y) => height - ((y - yMin) / yRange) * height;
+
+      let pathD = "";
+      let first = true;
+      for (let p of points) {
+        let sx = toScreenX(p.x);
+        let sy = toScreenY(p.y);
+        sy = Math.max(-5000, Math.min(height + 5000, sy)); 
+        if (first) {
+            pathD += `M ${sx} ${sy}`;
+            first = false;
+        } else {
+            pathD += ` L ${sx} ${sy}`;
+        }
+      }
+
+      const xAxisY = toScreenY(0);
+      const yAxisX = toScreenX(0);
+      let ticksEixos = "";
+
+      let rawStepX = xRange / 8;
+      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+      
+      let rawStepY = yRange / 6;
+      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
+      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
+
+      let startX = Math.ceil(xMin / xStep) * xStep;
+      for (let i = startX; i <= xMax; i += xStep) {
+        if (Math.abs(i) < 1e-7) continue;
+        let tx = toScreenX(i);
+        let labelX = parseFloat(i.toFixed(2));
+        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
+      }
+
+      let startY = Math.ceil(yMin / yStep) * yStep;
+      for (let j = startY; j <= yMax; j += yStep) {
+        if (Math.abs(j) < 1e-7) continue; 
+        let ty = toScreenY(j);
+        let labelY = parseFloat(j.toFixed(2));
+        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
+      }
+      
+      ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
+
+      return `
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
+          <p class="text-xs text-slate-400 mb-2 font-medium">Plano Cartesiano: Gráfico da Função f(x)</p>
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800">
+            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
+            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
+            ${ticksEixos}
+            <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="3" />
+            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
+            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
+          </svg>
+        </div>
+      `;
+    }
+
+    // 1. TRADUTOR DE SINTAXE (Português -> Internacional)
+    function sanitizarSintaxeMatematica(expr) {
+      let limpa = expr.toLowerCase();
+      // Inversas
+      limpa = limpa.replace(/\barcsen\b/g, 'asin');
+      limpa = limpa.replace(/\barccos\b/g, 'acos');
+      limpa = limpa.replace(/\barctg\b/g, 'atan');
+      limpa = limpa.replace(/\barctan\b/g, 'atan');
+      // Recíprocas e normais
+      limpa = limpa.replace(/\bcossec\b/g, 'csc');
+      limpa = limpa.replace(/\bcosec\b/g, 'csc');
+      limpa = limpa.replace(/\bcotg\b/g, 'cot');
+      limpa = limpa.replace(/\btg\b/g, 'tan');
+      limpa = limpa.replace(/\bsen\b/g, 'sin');
+      return limpa;
+    }
+
+    // 2. O ANALISADOR HÍBRIDO -->
+    function analisarExpressaoSimbolica(exprStr, outDiv) {
+      try {
+        let funcStr = sanitizarSintaxeMatematica(exprStr);
+
+        if (funcStr.includes('=')) {
+          const parts = funcStr.split('=');
+          funcStr = `(${parts[0]}) - (${parts[1]})`;
+        }
+
+        // Se o utilizador apenas digitou uma constante força a parábola geométrica
+        if (!funcStr.includes('x')) {
+            funcStr = `x^2 - (${funcStr})^2`;
+        }
+
+        const f = nerdamer(funcStr);
+        const texExpr = f.toTeX();
+        
+        const derivadaTex = nerdamer(`diff(${funcStr}, x)`).toTeX();
+        const integralTex = nerdamer(`integrate(${funcStr}, x)`).toTeX();
+
+        const f_eval = f.buildFunction(['x']);
+        const svgGrafico = gerarSvgFuncaoGeral(f_eval);
+
+        outDiv.innerHTML = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Modo de Análise Analítica (Cálculo e Geometria)</h3>
+            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">Função de R em R</span>
+          </div>
+          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+            <p>O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o <strong>rigor absoluto</strong> da sua expressão sem aproximações decimais, o laboratório ativou o motor de Análise Real.</p>
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Função Analisada:</span>
+              <div class="math-step notranslate mb-4">\\(f(x) = ${texExpr}\\)</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
+                  <span class="font-semibold text-blue-600 dark:text-blue-400">Derivada \\(\\frac{d}{dx}f(x)\\):</span>
+                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${derivadaTex}\\)</div>
+                </div>
+                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
+                  <span class="font-semibold text-purple-600 dark:text-purple-400">Integral Indefinida \\(\\int f(x) dx\\):</span>
+                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${integralTex} + C\\)</div>
+                </div>
+              </div>
+            </div>
+            ${svgGrafico}
+          </div>
+        `;
+        if (window.renderMathInElement) renderMathInElement(outDiv);
+      } catch(e) {
+        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">Erro ao compilar função para análise. Verifique se a variável dependente é "x" e se a sintaxe matemática é suportada.</div>`;
+      }
+    }
+
+    // 3. O RENDERIZADOR GRÁFICO 
+    function gerarSvgFuncaoGeral(f_eval) {
+      // Injeta suporte a funções recíprocas no JavaScript nativo
+      if (typeof Math.sec === 'undefined') Math.sec = (x) => 1 / Math.cos(x);
+      if (typeof Math.csc === 'undefined') Math.csc = (x) => 1 / Math.sin(x);
+      if (typeof Math.cot === 'undefined') Math.cot = (x) => 1 / Math.tan(x);
+      if (typeof Math.asec === 'undefined') Math.asec = (x) => Math.acos(1 / x);
+      if (typeof Math.acsc === 'undefined') Math.acsc = (x) => Math.asin(1 / x);
+      if (typeof Math.acot === 'undefined') Math.acot = (x) => Math.PI / 2 - Math.atan(x);
+
+      const width = 600, height = 300;
+      const xMin = -6, xMax = 6;
+      const xRange = xMax - xMin;
+      const steps = 600; 
+      const dx = xRange / steps;
+
+      let validPoints = [];
+      for (let i = 0; i <= steps; i++) {
+        let x = xMin + i * dx;
+        try {
+            let y = f_eval(x);
+            // Salva apenas números reais válidos (Ignora NaNs de inversas fora do domínio)
+            if (typeof y === 'number' && !isNaN(y) && isFinite(y)) {
+                validPoints.push({x, y});
+            }
+        } catch(e) {}
+      }
+
+      if (validPoints.length === 0) return '';
+
+      // Enquadramento
+      let sortedY = validPoints.map(p => p.y).sort((a, b) => a - b);
+      let p10 = sortedY[Math.floor(sortedY.length * 0.10)];
+      let p90 = sortedY[Math.floor(sortedY.length * 0.90)];
+      
+      let calcYMin = p10;
+      let calcYMax = p90;
+
+      // Se a variação de Y for assíntotas
+      if (calcYMax - calcYMin > 25) {
+          let median = sortedY[Math.floor(sortedY.length / 2)];
+          calcYMin = median - 10;
+          calcYMax = median + 10;
+      }
+
+      // Se a variação for microscópica
+      if (calcYMax - calcYMin < 4) {
+          let mid = (calcYMax + calcYMin) / 2;
+          calcYMin = mid - 3;
+          calcYMax = mid + 3;
+      }
+
+      let yRange = calcYMax - calcYMin;
+      calcYMin -= yRange * 0.1;
+      calcYMax += yRange * 0.1;
+      
+      // Ancoragem do Eixo X no centro visual
+      if (calcYMin > 0 && calcYMin < yRange) calcYMin = -yRange * 0.15;
+      if (calcYMax < 0 && Math.abs(calcYMax) < yRange) calcYMax = yRange * 0.15;
+      yRange = calcYMax - calcYMin;
+
+      const toScreenX = (x) => ((x - xMin) / xRange) * width;
+      const toScreenY = (y) => height - ((y - calcYMin) / yRange) * height;
+
+      let pathD = "";
+      let first = true;
+      
+      for (let i = 0; i < validPoints.length; i++) {
+        let p = validPoints[i];
+        
+        // Se houver um salto vertical grande em curto passo horizontal
+        if (i > 0) {
+            let prev = validPoints[i-1];
+            if (Math.abs(p.y - prev.y) > yRange * 0.4) {
+                first = true;
+            }
+        }
+
+        let sx = toScreenX(p.x);
+        let sy = toScreenY(p.y);
+
+        // Clip-path de segurança: Se o ponto estiver muito fora da caixa SVG, ignora o desenho
+        if (p.y > calcYMax + yRange || p.y < calcYMin - yRange) {
+            first = true;
+            continue;
+        }
+
+        if (first) {
+            pathD += `M ${sx} ${sy}`;
+            first = false;
+        } else {
+            pathD += ` L ${sx} ${sy}`;
+        }
+      }
+
+      const xAxisY = toScreenY(0);
+      const yAxisX = toScreenX(0);
+      let ticksEixos = "";
+
+      let rawStepX = xRange / 8;
+      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+      
+      let rawStepY = yRange / 6;
+      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
+      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
+
+      let startX = Math.ceil(xMin / xStep) * xStep;
+      for (let i = startX; i <= xMax; i += xStep) {
+        if (Math.abs(i) < 1e-7) continue;
+        let tx = toScreenX(i);
+        let labelX = parseFloat(i.toFixed(2));
+        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
+      }
+
+      let startY = Math.ceil(calcYMin / yStep) * yStep;
+      for (let j = startY; j <= calcYMax; j += yStep) {
+        if (Math.abs(j) < 1e-7) continue; 
+        let ty = toScreenY(j);
+        let labelY = parseFloat(j.toFixed(2));
+        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
+      }
+      
+      ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
+
+      return `
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
+          <p class="text-xs text-slate-400 mb-2 font-medium">Plano Cartesiano: Gráfico da Função f(x)</p>
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800">
+            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
+            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
+            ${ticksEixos}
+            <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
+            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
+          </svg>
+        </div>
+      `;
     }
 
     // Inicialização ao carregar
