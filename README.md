@@ -48,8 +48,13 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.1.2]
+* **Novo:** Aba dedicada aos logaritimos
+* **Novo:** Suporte a valores em radianos para ângulos na aba "Funções Trigonométricas"
+* **Novo:** Retorno de valores algébricos exatos para determinados ângulos
+* **Correção:** Bug crítico que travava a aba "Solucionador de polinômios"
+
 ## [1.1.1]
-### [1.1.1]
 * **Novo:** Suporte a funções logarítmicas na aba "Solucionador de polinômios"
 * **Novo:** A aba "Solucionador de polinômios" recebeu suporte a funções trigonométricas
 * **Novo:** As expressões geradas no bloco "Aproximações fracionárias de constantes" podem ser enviadas para a aba "Solucionador de polinômios"
