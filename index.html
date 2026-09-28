@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Laboratório de Números Irracionais</title>
-  
+
   <!-- Tailwind CSS CDN com suporte a Dark Mode -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -12,7 +13,7 @@
       darkMode: 'class',
     }
   </script>
-  
+
   <!-- KaTeX para renderização matemática -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
@@ -29,16 +30,19 @@
       color: #1d4ed8;
       font-weight: 600;
     }
+
     .dark .tab-btn.active {
       border-bottom: 3px solid #3b82f6;
       color: #60a5fa;
     }
+
     .math-step {
       border-left: 3px solid #3b82f6;
       padding-left: 0.75rem;
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
     }
+
     .step-box {
       background-color: #f8fafc;
       border: 1px solid #e2e8f0;
@@ -46,13 +50,14 @@
       padding: 1rem;
       margin-top: 0.75rem;
     }
+
     .dark .step-box {
       background-color: #1e293b;
       border-color: #334155;
     }
   </style>
 
-  <!-- Script inicial do Dark Mode (Evita o piscar branco ao carregar a página) -->
+  <!-- Script inicial do Dark Mode -->
   <script>
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -61,61 +66,102 @@
     }
   </script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
+
+<body
+  class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
 
   <!-- Cabeçalho -->
   <header class="bg-slate-900 dark:bg-slate-950 text-white py-6 border-b border-slate-700 shadow-md">
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div>
         <h1 data-i18n="app_title" class="text-2xl font-bold tracking-tight">Laboratório de Números Irracionais</h1>
-        <p data-i18n="app_subtitle" class="text-slate-400 text-sm mt-1">Investigação e Dedução: TFA, TRR Completo, Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas</p>
+        <p data-i18n="app_subtitle" class="text-slate-400 text-sm mt-1">Investigação e Dedução: TFA, TRR Completo,
+          Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas</p>
       </div>
 
       <div class="flex items-center gap-3 flex-wrap">
         <div class="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded text-slate-300">
           <span data-i18n="project_badge">Iniciação Científica • Sequência Didática</span>
         </div>
-        
+
         <!-- Toggle Dark/Light Mode -->
-        <button id="theme-toggle" onclick="toggleTheme()" class="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors border border-slate-700" title="Alternar Tema">
-          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        <button id="theme-toggle" onclick="toggleTheme()"
+          class="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors border border-slate-700"
+          title="Alternar Tema">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+              fill-rule="evenodd" clip-rule="evenodd"></path>
+          </svg>
         </button>
 
         <!-- Seletor de Idiomas -->
         <div class="inline-flex bg-slate-800 border border-slate-700 rounded-lg p-0.5 text-xs font-medium notranslate">
-          <button onclick="mudarIdioma('pt')" class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors bg-blue-600 text-white font-semibold" data-lang="pt">PT</button>
-          <button onclick="mudarIdioma('en')" class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors" data-lang="en">EN</button>
-          <button onclick="mudarIdioma('es')" class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors" data-lang="es">ES</button>
-          <button onclick="mudarIdioma('fr')" class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors" data-lang="fr">FR</button>
+          <button onclick="mudarIdioma('pt')"
+            class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors bg-blue-600 text-white font-semibold"
+            data-lang="pt">PT</button>
+          <button onclick="mudarIdioma('en')"
+            class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors"
+            data-lang="en">EN</button>
+          <button onclick="mudarIdioma('es')"
+            class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors"
+            data-lang="es">ES</button>
+          <button onclick="mudarIdioma('fr')"
+            class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors"
+            data-lang="fr">FR</button>
         </div>
       </div>
     </div>
   </header>
 
   <!-- Navegação em Abas -->
-  <div class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10 shadow-sm transition-colors duration-300">
+  <div
+    class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10 shadow-sm transition-colors duration-300">
     <nav class="max-w-6xl mx-auto px-4 flex space-x-6 overflow-x-auto text-sm font-medium">
-      <button onclick="switchTab('tfa')" id="tab-tfa" class="tab-btn active py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_tfa">
+      <button onclick="switchTab('tfa')" id="tab-tfa"
+        class="tab-btn active py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_tfa">
         1. Verificador TFA
       </button>
-      <button onclick="switchTab('solver')" id="tab-solver" class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_solver">
+      <button onclick="switchTab('solver')" id="tab-solver"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_solver">
         2. Solucionador de Polinômios
       </button>
-      <button onclick="switchTab('trig')" id="tab-trig" class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_trig">
+      <button onclick="switchTab('trig')" id="tab-trig"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_trig">
         3. Funções Trigonométricas
       </button>
-      <button onclick="switchTab('eisenstein')" id="tab-eisenstein" class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_eisenstein">
-        4. Critério de Eisenstein
+      <button onclick="switchTab('log')" id="tab-log"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_log">
+        4. Logaritmos
       </button>
-      <button onclick="switchTab('fraccont')" id="tab-fraccont" class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_fraccont">
-        5. Frações Contínuas
+      <button onclick="switchTab('eisenstein')" id="tab-eisenstein"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_eisenstein">
+        5. Critério de Eisenstein
       </button>
-      <button onclick="switchTab('tabela')" id="tab-tabela" class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_tabela">
-        6. Tabela de Notáveis
+      <button onclick="switchTab('fraccont')" id="tab-fraccont"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_fraccont">
+        6. Frações Contínuas
       </button>
-      <button onclick="switchTab('historia')" id="tab-historia" class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap" data-i18n="tab_historia">
-        7. Contexto Histórico
+      <button onclick="switchTab('tabela')" id="tab-tabela"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_tabela">
+        7. Tabela de Notáveis
+      </button>
+      <button onclick="switchTab('historia')" id="tab-historia"
+        class="tab-btn py-4 px-1 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 whitespace-nowrap"
+        data-i18n="tab_historia">
+        8. Contexto Histórico
       </button>
     </nav>
   </div>
@@ -125,249 +171,408 @@
 
     <!-- ABA 1: TFA -->
     <section id="pane-tfa" class="space-y-6">
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-        <h2 data-i18n="tfa_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">1. Demonstração via Teorema Fundamental da Aritmética</h2>
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 data-i18n="tfa_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">1. Demonstração via
+          Teorema Fundamental da Aritmética</h2>
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="tfa_desc">
-          Investigue a irracionalidade de raízes \(\sqrt[n]{K}\) examinando a divisibilidade e paridade dos expoentes na decomposição prima canônica. Pela unicidade do TFA, um número inteiro não admite duas fatorações distintas.
+          Investigue a irracionalidade de raízes \(\sqrt[n]{K}\) examinando a divisibilidade e paridade dos expoentes na
+          decomposição prima canônica. Pela unicidade do TFA, um número inteiro não admite duas fatorações distintas.
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end max-w-2xl">
           <div>
-            <label for="tfa-index" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="tfa_lbl_index">Índice (n &ge; 2):</label>
-            <input type="number" id="tfa-index" min="2" max="10" value="2" 
-                   class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+            <label for="tfa-index" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="tfa_lbl_index">Índice (n &ge; 2):</label>
+            <input type="number" id="tfa-index" min="2" max="10" value="2"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
           <div class="sm:col-span-2">
-            <label for="tfa-input" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="tfa_lbl_rad">Radicando (K inteiro positivo):</label>
+            <label for="tfa-input" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="tfa_lbl_rad">Radicando (K inteiro positivo):</label>
             <input type="number" id="tfa-input" min="2" max="1000000" value="" placeholder="ex: 72 "
-                   class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
           <div>
-            <button onclick="executarTFA()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm" data-i18n="tfa_btn">
+            <button onclick="executarTFA()"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm"
+              data-i18n="tfa_btn">
               Demonstrar
             </button>
           </div>
         </div>
       </div>
-
-      <div id="tfa-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors"></div>
+      <div id="tfa-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors">
+      </div>
     </section>
 
-   <!-- ABA 2: SOLVER POLINÔMIOS -->
-<section id="pane-solver" class="space-y-6 hidden">
-  <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-    <h2 data-i18n="solver_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">2. Solucionador de Polinômios</h2>
-    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="solver_desc">
-      Insira qualquer polinômio com coeficientes inteiros \(P(x) = a_n x^n + \dots + a_1 x + a_0\). O algoritmo encontra todos os candidatos racionais \(\pm \frac{p}{q}\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as raízes irracionais remanescentes.
-    </p>
+    <!-- ABA 2: SOLVER POLINÔMIOS -->
+    <section id="pane-solver" class="space-y-6 hidden">
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 data-i18n="solver_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">2. Solucionador de
+          Polinômios</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="solver_desc">
+          Insira qualquer polinômio com coeficientes inteiros \(P(x) = a_n x^n + \dots + a_1 x + a_0\). O algoritmo
+          encontra todos os candidatos racionais \(\pm \frac{p}{q}\) pelo TRR, fatora por Briot-Ruffini, extrai as
+          raízes racionais e isola as raízes irracionais remanescentes.
+        </p>
 
-    <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
-      <span class="text-slate-500 dark:text-slate-400 font-semibold" data-i18n="quick_ex">Exemplos rápidos:</span>
-      <button onclick="carregarExemplo('(2x-1)(x-2)(x+3) = 0')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">(2x-1)(x-2)(x+3) = 0</button>
-      <button onclick="carregarExemplo('x^3 - 2')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x³ - 2</button>
-      <button onclick="carregarExemplo('8x^3 - 6x - 1')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">8x³ - 6x - 1 (cos 20°)</button>
-      <button onclick="carregarExemplo('x^4 - 5x^2 + 6')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x⁴ - 5x² + 6</button>
-      <button onclick="carregarExemplo('2x^2 + 5 = x + 3')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">2x² + 5 = x + 3</button>
-      <button onclick="carregarExemplo('x^3 - x^2 + x - 1')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x³ - x² + x - 1 (Complexas)</button>
-    </div>
-    
-<!-- Gerador de Polinômios para Expressões Algébricas -->
-        <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 mb-6 transition-colors">
-          <h3 class="text-sm font-bold text-blue-900 dark:text-blue-300 mb-2" data-i18n="gen_title">Construtor de Expressões (Gerador de Polinômio Minimal)</h3>
+        <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
+          <span class="text-slate-500 dark:text-slate-400 font-semibold" data-i18n="quick_ex">Exemplos rápidos:</span>
+          <button onclick="carregarExemplo('(2x-1)(x-2)(x+3) = 0')"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">(2x-1)(x-2)(x+3)
+            = 0</button>
+          <button onclick="carregarExemplo('x^3 - 2')"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x³
+            - 2</button>
+          <button onclick="carregarExemplo('8x^3 - 6x - 1')"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">8x³
+            - 6x - 1 (cos 20°)</button>
+          <button onclick="carregarExemplo('x^4 - 5x^2 + 6')"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x⁴
+            - 5x² + 6</button>
+          <button onclick="carregarExemplo('2x^2 + 5 = x + 3')"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">2x²
+            + 5 = x + 3</button>
+          <button onclick="carregarExemplo('x^3 - x^2 + x - 1')"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">x³
+            - x² + x - 1 (Complexas)</button>
+        </div>
+
+        <!-- Gerador de Polinômios com Expressões Algébricas -->
+        <div
+          class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 mb-6 transition-colors">
+          <h3 class="text-sm font-bold text-blue-900 dark:text-blue-300 mb-2" data-i18n="gen_title">Construtor de
+            Expressões (Gerador de Polinômio Minimal)</h3>
           <p class="text-xs text-blue-800 dark:text-blue-400 mb-3" data-i18n="gen_desc">
-            Quer provar que uma expressão como \(\frac{\sqrt{7}}{3}\) é irracional? Insira os valores abaixo para gerar o polinômio correspondente e enviá-lo ao solucionador.
+            Quer provar que uma expressão como \(\frac{\sqrt{7}}{3}\) é irracional? Insira os valores abaixo para gerar
+            o polinômio correspondente e enviá-lo ao solucionador.
           </p>
-          
+
           <div class="flex flex-col sm:flex-row sm:items-center gap-3 text-sm">
             <div class="flex flex-wrap items-center gap-2">
               <span class="font-semibold text-blue-900 dark:text-blue-300">\(x =\)</span>
               <span class="text-xl text-slate-400 dark:text-slate-500 font-light">(</span>
-              
-              <input type="number" id="gen-a" value="" placeholder="A" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Coeficiente A">
-              
+
+              <input type="number" id="gen-a" value="" placeholder="A"
+                class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500"
+                title="Coeficiente A">
+
               <div class="flex items-center">
                 <span class="font-bold text-slate-700 dark:text-slate-300 mr-1">\(\sqrt[n]{k}\)</span>
-                <input type="number" id="gen-n" value="" placeholder="N" min="2" class="w-10 px-1 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500 text-xs" title="Índice da Raiz (N)">
+                <input type="number" id="gen-n" value="" placeholder="N" min="2"
+                  class="w-10 px-1 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500 text-xs"
+                  title="Índice da Raiz (N)">
                 <span class="font-bold text-slate-700 dark:text-slate-300 mx-1">\(]{\vphantom{X}}\)</span>
-                <input type="number" id="gen-k" value="" placeholder="K" class="w-14 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Radicando K">
+                <input type="number" id="gen-k" value="" placeholder="K"
+                  class="w-14 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500"
+                  title="Radicando K">
               </div>
 
               <span class="font-bold text-slate-700 dark:text-slate-300">\(+\)</span>
-              <input type="number" id="gen-b" value="" placeholder="B" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Termo B">
-              
+              <input type="number" id="gen-b" value="" placeholder="B"
+                class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500"
+                title="Termo B">
+
               <span class="text-xl text-slate-400 dark:text-slate-500 font-light">)</span>
               <span class="font-bold text-slate-700 dark:text-slate-300">/</span>
-              <input type="number" id="gen-c" value="" placeholder="C" class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500" title="Denominador C">
+              <input type="number" id="gen-c" value="" placeholder="C"
+                class="w-12 px-2 py-1 bg-white dark:bg-slate-700 dark:text-white text-center border border-slate-300 dark:border-slate-600 rounded focus:ring-1 focus:ring-blue-500"
+                title="Denominador C">
             </div>
-            
-            <button onclick="gerarEEnviarPolinomio()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-1.5 rounded-lg transition-colors text-xs shadow-sm whitespace-nowrap mt-2 sm:mt-0" data-i18n="gen_btn">
+
+            <button onclick="gerarEEnviarPolinomio()"
+              class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-1.5 rounded-lg transition-colors text-xs shadow-sm whitespace-nowrap mt-2 sm:mt-0"
+              data-i18n="gen_btn">
               Gerar e Solucionar
             </button>
           </div>
           <div id="gen-steps" class="mt-3 text-xs text-slate-700 dark:text-slate-300 hidden"></div>
         </div>
-    
-    <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
-      <div class="flex-grow w-full">
-        <label for="poly-input" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="solver_lbl_poly">Polinômio P(x):</label>
-        <input type="text" id="poly-input" value="" placeholder="Ex: x^2 +3x - 2"
-               class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
-      </div>
-      <button onclick="resolverPolinomio()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap" data-i18n="solver_btn">
-        Solucionar Passo a Passo
-      </button>
-    </div>
-  </div>
 
-  <div id="solver-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors"></div>
-</section>
+        <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
+          <div class="flex-grow w-full">
+            <label for="poly-input"
+              class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="solver_lbl_poly">Polinômio P(x):</label>
+            <input type="text" id="poly-input" value="" placeholder="Ex: x^2 +3x - 2"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+          </div>
+          <button onclick="resolverPolinomio()"
+            class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap"
+            data-i18n="solver_btn">
+            Solucionar Passo a Passo
+          </button>
+        </div>
+      </div>
+      <div id="solver-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors">
+      </div>
+    </section>
+
     <!-- ABA 3: TRIGONOMETRIA -->
     <section id="pane-trig" class="space-y-6 hidden">
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-        <h2 data-i18n="trig_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">3. Funções Trigonométricas</h2>
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 data-i18n="trig_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">3. Funções
+          Trigonométricas</h2>
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="trig_desc">
-          Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos racionais \(\theta \in [0^\circ, 90^\circ]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(\theta \in \{0^\circ, 30^\circ, 90^\circ\}\). Todos os outros geram valores irracionais.
+          Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos
+          racionais \(\theta \in [0^\circ, 90^\circ]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são
+          racionais ocorrem em \(\theta \in \{0^\circ, 30^\circ, 90^\circ\}\). Todos os outros geram valores
+          irracionais.
         </p>
 
         <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
-          <span class="text-slate-500 dark:text-slate-400 font-semibold" data-i18n="trig_shortcuts">Atalhos didáticos:</span>
-          <button onclick="setTrig('cos', 20)" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">cos(20°)</button>
-          <button onclick="setTrig('sin', 45)" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(45°) &bull; Diagonal de Pitágoras</button>
-          <button onclick="setTrig('cos', 36)" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">cos(36°) &bull; Proporção Áurea (\(\phi\))</button>
-          <button onclick="setTrig('sin', 15)" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(15°) &bull; Radical Aninhado</button>
-          <button onclick="setTrig('sin', 30)" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(30°) = 1/2 &bull; Racional</button>
+          <span class="text-slate-500 dark:text-slate-400 font-semibold" data-i18n="trig_shortcuts">Atalhos
+            didáticos:</span>
+          <button onclick="setTrig('cos', 20)"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">cos(20°)</button>
+          <button onclick="setTrig('sin', 45)"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(45°)
+            &bull; Diagonal de Pitágoras</button>
+          <button onclick="setTrig('cos', 36)"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">cos(36°)
+            &bull; Proporção Áurea (\(\phi\))</button>
+          <button onclick="setTrig('sin', 15)"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(15°)
+            &bull; Radical Aninhado</button>
+          <button onclick="setTrig('sin', 30)"
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(30°)
+            = 1/2 &bull; Racional</button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
           <div>
-            <label for="trig-func" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="trig_lbl_func">Função:</label>
-            <select id="trig-func" class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+            <label for="trig-func" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="trig_lbl_func">Função:</label>
+            <select id="trig-func"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
               <option value="sin" data-i18n="opt_sin">Seno</option>
               <option value="cos" selected data-i18n="opt_cos">Cosseno</option>
               <option value="tan" data-i18n="opt_tan">Tangente</option>
+              <option value="sec" data-i18n="opt_sec">Secante</option>
+              <option value="csc" data-i18n="opt_csc">Cossecante</option>
+              <option value="cot" data-i18n="opt_cot">Cotangente</option>
             </select>
           </div>
           <div>
-            <label for="trig-angle" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="trig_lbl_angle">Ângulo em Graus (°):</label>
+            <label for="trig-angle"
+              class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="trig_lbl_angle">Ângulo em Graus (°):</label>
             <input type="number" id="trig-angle" min="0" max="360" value="20" step="1"
-                   class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
           <div>
-            <button onclick="analisarTrig()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm" data-i18n="trig_btn">
+            <button onclick="analisarTrig()"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm"
+              data-i18n="trig_btn">
               Analisar Racionalidade
             </button>
           </div>
         </div>
       </div>
-
-      <div id="trig-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors"></div>
+      <div id="trig-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors">
+      </div>
     </section>
 
-    <!-- ABA 4: EISENSTEIN -->
-    <section id="pane-eisenstein" class="space-y-6 hidden">
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-        <h2 data-i18n="eisen_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">4. Critério de Irredutibilidade de Eisenstein</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="eisen_desc">
-          Ferramenta avançada de Álgebra Abstrata: Se existir um primo \(p\) tal que \(p \mid a_i\) para todo \(i < n\), \(p \nmid a_n\) e \(p^2 \nmid a_0\), o polinômio é irredutível sobre \(\mathbb{Q}\). Consequentemente, para graus \(n \ge 2\), nenhuma de suas raízes pode ser racional!
+    <!-- ABA 4: LOGARITMOS -->
+    <section id="pane-log" class="space-y-6 hidden">
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 data-i18n="log_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">4. Demonstração de
+          Irracionalidade de Logaritmos</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="log_desc">
+          Verifique a irracionalidade de \(\log_b(a)\). Se o logaritmo for igual a uma fração racional \(p/q\), então
+          \(b^p = a^q\). Pelo Teorema Fundamental da Aritmética, isso exige que a base e o logaritmando compartilhem os
+          mesmos fatores primos em proporções exatas.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
-          <div class="flex-grow w-full">
-            <label for="eisen-input" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="solver_lbl_poly">Polinômio P(x):</label>
-            <input type="text" id="eisen-input" value="" placeholder="Ex: x^5 - 6x + 12"
-                   class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end max-w-2xl">
+          <div>
+            <label for="log-base" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="log_lbl_base">Base (b &ge; 2):</label>
+            <input type="number" id="log-base" min="2" max="1000000" value="10"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
-          <button onclick="executarEisenstein()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap" data-i18n="eisen_btn">
-            Testar Primos
-          </button>
+          <div class="sm:col-span-2">
+            <label for="log-arg" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="log_lbl_arg">Logaritmando (a &ge; 1):</label>
+            <input type="number" id="log-arg" min="1" max="1000000" value="2"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+          </div>
+          <div>
+            <button onclick="analisarLogaritmo()"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm"
+              data-i18n="log_btn">
+              Analisar
+            </button>
+          </div>
         </div>
       </div>
-
-      <div id="eisen-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors"></div>
+      <div id="log-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors">
+      </div>
     </section>
 
-    <!-- ABA 5: FRAÇÕES CONTÍNUAS -->
+    <!-- ABA 5: EISENSTEIN -->
+    <section id="pane-eisenstein" class="space-y-6 hidden">
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 data-i18n="eisen_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">5. Critério de
+          Irredutibilidade de Eisenstein</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="eisen_desc">
+          Ferramenta avançada de Álgebra Abstrata: Se existir um primo \(p\) tal que \(p \mid a_i\) para todo \(i < n\),
+            \(p \nmid a_n\) e \(p^2 \nmid a_0\), o polinômio é irredutível sobre \(\mathbb{Q}\). Consequentemente, para
+            graus \(n \ge 2\), nenhuma de suas raízes pode ser racional! </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 items-end max-w-3xl">
+              <div class="flex-grow w-full">
+                <label for="eisen-input"
+                  class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+                  data-i18n="solver_lbl_poly">Polinômio P(x):</label>
+                <input type="text" id="eisen-input" value="" placeholder="Ex: x^5 - 6x + 12"
+                  class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+              </div>
+              <button onclick="executarEisenstein()"
+                class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap"
+                data-i18n="eisen_btn">
+                Testar Primos
+              </button>
+            </div>
+      </div>
+      <div id="eisen-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors">
+      </div>
+    </section>
+
+    <!-- ABA 6: FRAÇÕES CONTÍNUAS -->
     <section id="pane-fraccont" class="space-y-6 hidden">
       <!-- Raízes Quadradas -->
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2"> <span data-i18n="cf_title">Reconhecimento Construtivo via Frações Contínuas Simples</span></h2>
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2"> <span data-i18n="cf_title">Reconhecimento
+            Construtivo via Frações Contínuas Simples</span></h2>
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="cf_desc">
-          Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \([a_0; \overline{a_1, a_2, \dots, a_k}]\).
+          Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre
+          termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem
+          expansões periódicas: \([a_0; \overline{a_1, a_2, \dots, a_k}]\).
         </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
           <div class="sm:col-span-2">
-            <label for="cf-radicand" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="cf_lbl_rad">Raiz Quadrada \(\sqrt{N}\) (N não quadrado):</label>
-            <input type="number" id="cf-radicand" min="2" max="1000" value="" placeholder="Ex: 19" 
-                   class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+            <label for="cf-radicand"
+              class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="cf_lbl_rad">Raiz Quadrada \(\sqrt{N}\) (N não quadrado):</label>
+            <input type="number" id="cf-radicand" min="2" max="1000" value="" placeholder="Ex: 19"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
           <div>
-            <button onclick="executarFracaoContinua()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm" data-i18n="cf_btn">
+            <button onclick="executarFracaoContinua()"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm"
+              data-i18n="cf_btn">
               Expandir Fração
             </button>
           </div>
         </div>
       </div>
-      <div id="cf-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors"></div>
+      <div id="cf-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hidden transition-colors">
+      </div>
 
-      <!-- Expressões Gerais (Com Teclado Expandido e Novo Motor Numérico) -->
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm mt-6 transition-colors">
-        <h2 data-i18n="cf_expr_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">Aproximações Fracionárias de Constantes</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="cf_expr_desc">Gere convergentes racionais para expressões, constantes transcendentais ou trigonométricas.</p>
-        
-        <!-- Teclado Matemático Simplificado e Expandido -->
-        <div class="mb-4 p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600 flex flex-wrap gap-2 items-center text-sm shadow-sm transition-colors">
+      <!-- Expressões Gerais -->
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm mt-6 transition-colors">
+        <h2 data-i18n="cf_expr_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">Aproximações
+          Fracionárias de Constantes</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="cf_expr_desc">Gere convergentes racionais
+          para expressões, constantes transcendentais ou trigonométricas.</p>
+
+        <!-- Teclado Matemático Simplificado -->
+        <div
+          class="mb-4 p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600 flex flex-wrap gap-2 items-center text-sm shadow-sm transition-colors">
           <span class="text-slate-500 dark:text-slate-400 font-semibold text-xs uppercase mr-1">Inserir:</span>
-          <button onclick="inserirNoExpr('pi')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\pi\)</button>
-          <button onclick="inserirNoExpr('e')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(e\)</button>
-          <button onclick="inserirNoExpr('(1+sqrt(5))/2')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\phi\)</button>
+          <button onclick="inserirNoExpr('pi')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\pi\)</button>
+          <button onclick="inserirNoExpr('e')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(e\)</button>
+          <button onclick="inserirNoExpr('(1+sqrt(5))/2')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\phi\)</button>
           <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
-          <button onclick="inserirNoExpr('sqrt(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sqrt{x}\)</button>
-          <button onclick="inserirNoExpr('sin(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sin\)</button>
-          <button onclick="inserirNoExpr('cos(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\cos\)</button>
-          <button onclick="inserirNoExpr('log(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\ln\)</button>
+          <button onclick="inserirNoExpr('sqrt(')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sqrt{x}\)</button>
+          <button onclick="inserirNoExpr('sin(')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sin\)</button>
+          <button onclick="inserirNoExpr('cos(')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\cos\)</button>
+          <button onclick="inserirNoExpr('log(')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\ln\)</button>
           <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
-          <button onclick="inserirNoExpr('+')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(+\)</button>
-          <button onclick="inserirNoExpr('-')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(-\)</button>
-          <button onclick="inserirNoExpr('*')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\times\)</button>
-          <button onclick="inserirNoExpr('/')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\div\)</button>
-          <button onclick="inserirNoExpr('^')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(x^y\)</button>
+          <button onclick="inserirNoExpr('+')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(+\)</button>
+          <button onclick="inserirNoExpr('-')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(-\)</button>
+          <button onclick="inserirNoExpr('*')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\times\)</button>
+          <button onclick="inserirNoExpr('/')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\div\)</button>
+          <button onclick="inserirNoExpr('^')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(x^y\)</button>
           <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
-          <button onclick="inserirNoExpr('(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\((\)</button>
-          <button onclick="inserirNoExpr(')')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\()\)</button>
+          <button onclick="inserirNoExpr('(')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\((\)</button>
+          <button onclick="inserirNoExpr(')')"
+            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\()\)</button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-2xl">
           <div class="sm:col-span-2">
-            <label class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="cf_expr_lbl">Expressão:</label>
-            <input type="text" id="cf-expr-input" value="" placeholder="Use os botões acima ou digite..." class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:ring-2 focus:ring-blue-500 dark:text-white font-mono">
+            <label class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="cf_expr_lbl">Expressão:</label>
+            <input type="text" id="cf-expr-input" value="" placeholder="Use os botões acima ou digite..."
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:ring-2 focus:ring-blue-500 dark:text-white font-mono">
           </div>
-            
-            <!-- Botão da Ponte Mágica -->
-            <button onclick="enviarParaAba2()" class="w-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/60 font-medium px-4 py-1.5 rounded-lg transition-colors shadow-sm whitespace-nowrap text-xs flex items-center justify-center gap-1.5 border border-indigo-200 dark:border-indigo-800">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-              Levar para o Construtor (Aba 2)
-            </button>
-            <div class="flex flex-col gap-2 w-full">
-            <button onclick="executarFracaoExpressao()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap">Gerar Convergentes</button>
+
+          <button onclick="enviarParaAba2()"
+            class="w-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900/60 font-medium px-4 py-1.5 rounded-lg transition-colors shadow-sm whitespace-nowrap text-xs flex items-center justify-center gap-1.5 border border-indigo-200 dark:border-indigo-800">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+              </path>
+            </svg>
+            Levar para o Construtor (Aba 2)
+          </button>
+          <div class="flex flex-col gap-2 w-full">
+            <button onclick="executarFracaoExpressao()"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm whitespace-nowrap">Gerar
+              Convergentes</button>
           </div>
         </div>
       </div>
-      <div id="cf-expr-output" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm mt-6 hidden transition-colors"></div>
+      <div id="cf-expr-output"
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm mt-6 hidden transition-colors">
+      </div>
     </section>
 
-    <!-- ABA 6: TABELA -->
+    <!-- ABA 7: TABELA -->
     <section id="pane-tabela" class="space-y-6 hidden">
-      <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
-        <h2 data-i18n="tabela_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">Tabela de Constantes e Irracionais Notáveis</h2>
+      <div
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <h2 data-i18n="tabela_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">Tabela de Constantes
+          e Irracionais Notáveis</h2>
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="tabela_desc">
-          Diferenciação fundamental entre irracionais algébricos (raízes de equações com coeficientes inteiros) e transcendentes (demonstrados fora da álgebra polinomial clássica).
+          Diferenciação fundamental entre irracionais algébricos (raízes de equações com coeficientes inteiros) e
+          transcendentes (demonstrados fora da álgebra polinomial clássica).
         </p>
 
         <div class="overflow-x-auto notranslate rounded border border-slate-200 dark:border-slate-700">
           <table class="w-full text-left text-sm border-collapse">
             <thead>
-              <tr class="bg-slate-100 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200">
+              <tr
+                class="bg-slate-100 dark:bg-slate-700 border-b border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200">
                 <th class="py-3 px-4 font-semibold" data-i18n="th_sym">Símbolo</th>
                 <th class="py-3 px-4 font-semibold" data-i18n="th_name">Nome / Origem</th>
                 <th class="py-3 px-4 font-semibold" data-i18n="th_val">Valor Decimal Aproximado</th>
@@ -378,58 +583,82 @@
             <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-700 dark:text-slate-300">
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-blue-600 dark:text-blue-400 text-base">\(\sqrt{2}\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_sqrt2_name">Constante de Pitágoras (Diagonal do quadrado unitário)</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_sqrt2_name">Constante de Pitágoras (Diagonal do
+                  quadrado unitário)</td>
                 <td class="py-3 px-4 font-mono text-xs">1,414213562373095...</td>
-                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_algebraic">Algébrico</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_algebraic">Algébrico</span></td>
                 <td class="py-3 px-4 font-mono text-xs">x² - 2 = 0</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-blue-600 dark:text-blue-400 text-base">\(\sqrt{3}\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_sqrt3_name">Constante de Teodoro (Diagonal do cubo unitário)</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_sqrt3_name">Constante de Teodoro (Diagonal do cubo
+                  unitário)</td>
                 <td class="py-3 px-4 font-mono text-xs">1,732050807568877...</td>
-                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_algebraic">Algébrico</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_algebraic">Algébrico</span></td>
                 <td class="py-3 px-4 font-mono text-xs">x² - 3 = 0</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-blue-600 dark:text-blue-400 text-base">\(\phi\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_phi_name">Número de Ouro (\(\frac{1+\sqrt{5}}{2}\))</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_phi_name">Número de Ouro (\(\frac{1+\sqrt{5}}{2}\))
+                </td>
                 <td class="py-3 px-4 font-mono text-xs">1,618033988749895...</td>
-                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_algebraic">Algébrico</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_algebraic">Algébrico</span></td>
                 <td class="py-3 px-4 font-mono text-xs">x² - x - 1 = 0</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-indigo-600 dark:text-indigo-400 text-base">\(\pi\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_pi_name">Pi (Razão perímetro/diâmetro na circunferência)</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_pi_name">Pi (Razão perímetro/diâmetro na
+                  circunferência)</td>
                 <td class="py-3 px-4 font-mono text-xs">3,141592653589793...</td>
-                <td class="py-3 px-4"><span class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_transcendent">Transcendente</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_transcendent">Transcendente</span></td>
                 <td class="py-3 px-4 text-xs" data-i18n="row_pi_proof">Provado por Lindemann (1882)</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-indigo-600 dark:text-indigo-400 text-base">\(e\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_e_name">Número de Euler (Base do logaritmo natural)</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_e_name">Número de Euler (Base do logaritmo natural)
+                </td>
                 <td class="py-3 px-4 font-mono text-xs">2,718281828459045...</td>
-                <td class="py-3 px-4"><span class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_transcendent">Transcendente</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_transcendent">Transcendente</span></td>
                 <td class="py-3 px-4 text-xs" data-i18n="row_e_proof">Provado por Hermite (1873)</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-indigo-600 dark:text-indigo-400 text-base">\(\ln(2)\)</td>
                 <td class="py-3 px-4 font-medium" data-i18n="row_ln2_name">Logaritmo natural de 2</td>
                 <td class="py-3 px-4 font-mono text-xs">0,693147180559945...</td>
-                <td class="py-3 px-4"><span class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_transcendent">Transcendente</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_transcendent">Transcendente</span></td>
                 <td class="py-3 px-4 text-xs">Teorema de Lindemann-Weierstrass</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-indigo-600 dark:text-indigo-400 text-base">\(\zeta(3)\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_zeta_name">Constante de Apéry (\(\sum_{n=1}^\infty \frac{1}{n^3}\))</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_zeta_name">Constante de Apéry (\(\sum_{n=1}^\infty
+                  \frac{1}{n^3}\))</td>
                 <td class="py-3 px-4 font-mono text-xs">1,202056903159594...</td>
-                <td class="py-3 px-4"><span class="bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_irrational">Irracional</span></td>
-                <td class="py-3 px-4 text-xs" data-i18n="row_zeta_proof">Provado por Apéry (1979) [Transcendência em aberto]</td>
+                <td class="py-3 px-4"><span
+                    class="bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_irrational">Irracional</span></td>
+                <td class="py-3 px-4 text-xs" data-i18n="row_zeta_proof">Provado por Apéry (1979) [Transcendência em
+                  aberto]</td>
               </tr>
               <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
                 <td class="py-3 px-4 font-bold text-blue-600 dark:text-blue-400 text-base">\(\sqrt[3]{2}\)</td>
-                <td class="py-3 px-4 font-medium" data-i18n="row_delos_name">Constante de Delos (Duplicação do cubo)</td>
+                <td class="py-3 px-4 font-medium" data-i18n="row_delos_name">Constante de Delos (Duplicação do cubo)
+                </td>
                 <td class="py-3 px-4 font-mono text-xs">1,259921049894873...</td>
-                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold" data-i18n="tag_algebraic">Algébrico</span></td>
+                <td class="py-3 px-4"><span
+                    class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded text-xs font-semibold"
+                    data-i18n="tag_algebraic">Algébrico</span></td>
                 <td class="py-3 px-4 font-mono text-xs">x³ - 2 = 0</td>
               </tr>
             </tbody>
@@ -438,12 +667,15 @@
       </div>
     </section>
 
-    <!-- ABA 7: HISTÓRIA -->
+    <!-- ABA 8: HISTÓRIA -->
     <section id="pane-historia" class="space-y-6 hidden">
-      <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed transition-colors">
+      <div
+        class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed transition-colors">
         <div>
-          <h2 data-i18n="hist_title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">A Evolução Histórica e Epistemológica dos Irracionais</h2>
-          <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="hist_subtitle">Da crise da incomensurabilidade grega à formalização analítica de Dedekind e Cantor.</p>
+          <h2 data-i18n="hist_title" class="text-2xl font-bold text-slate-900 dark:text-white mb-2">A Evolução Histórica
+            e Epistemológica dos Irracionais</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="hist_subtitle">Da crise da
+            incomensurabilidade grega à formalização analítica de Dedekind e Cantor.</p>
         </div>
 
         <div class="border-t border-slate-200 dark:border-slate-700 pt-4 space-y-3">
@@ -452,7 +684,11 @@
             <span data-i18n="hist_h1">1. O Colapso Pitagórico e a Incomensurabilidade (séc. V a.C.)</span>
           </h3>
           <p class="text-sm" data-i18n="hist_p1">
-            Para os pitagóricos, toda a harmonia do universo repousava sobre a afirmação de que <em>"tudo é número inteiro"</em>. Qualquer segmento de reta deveria ser medido através de partes inteiras comuns. Ao analisar a diagonal do quadrado unitário (\(d^2 = 1^2 + 1^2 = 2\)), Hipaso de Metaponto descobriu que o lado e a diagonal são incomensuráveis. A ausência de uma fração comum provocou a primeira grande crise nos fundamentos matemáticos.
+            Para os pitagóricos, toda a harmonia do universo repousava sobre a afirmação de que <em>"tudo é número
+              inteiro"</em>. Qualquer segmento de reta deveria ser medido através de partes inteiras comuns. Ao analisar
+            a diagonal do quadrado unitário (\(d^2 = 1^2 + 1^2 = 2\)), Hipaso de Metaponto descobriu que o lado e a
+            diagonal são incomensuráveis. A ausência de uma fração comum provocou a primeira grande crise nos
+            fundamentos matemáticos.
           </p>
         </div>
 
@@ -462,7 +698,10 @@
             <span data-i18n="hist_h2">2. A Barreira dos Polinômios e o Teorema das Raízes Racionais</span>
           </h3>
           <p class="text-sm" data-i18n="hist_p2">
-            Com a evolução da álgebra, a investigação passou da geometria para as equações polinomiais. O Teorema das Raízes Racionais (TRR) consolidou um método finito e irrefutável: se os candidatos racionais definidos pelos coeficientes inteiros não anulam a equação, qualquer raiz real encontrada é estritamente irracional algébrica.
+            Com a evolução da álgebra, a investigação passou da geometria para as equações polinomiais. O Teorema das
+            Raízes Racionais (TRR) consolidou um método finito e irrefutável: se os candidatos racionais definidos pelos
+            coeficientes inteiros não anulam a equação, qualquer raiz real encontrada é estritamente irracional
+            algébrica.
           </p>
         </div>
 
@@ -472,7 +711,11 @@
             <span data-i18n="hist_h3">3. O Teorema de Niven na Trigonometria (1956)</span>
           </h3>
           <p class="text-sm" data-i18n="hist_p3">
-            Ivan Niven estabeleceu a ponte definitiva entre trigonometria e teoria dos números. Seu teorema prova que, se um ângulo em graus \(\theta\) é racional no intervalo fechado \([0, 90^\circ]\), os únicos casos em que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(0^\circ, 30^\circ\) e \(90^\circ\). Para todos os outros ângulos com medidas racionais, a trigonometria mergulha no conjunto dos irracionais.
+            Ivan Niven estabeleceu a ponte definitiva entre trigonometria e teoria dos números. Seu teorema prova que,
+            se um ângulo em graus \(\theta\) é racional no intervalo fechado \([0^\circ, 90^\circ]\), os únicos casos em
+            que \(\sin(\theta)\) ou \(\cos(\theta)\) são racionais ocorrem em \(\theta \in \{0^\circ, 30^\circ,
+            90^\circ\}\). Para todos os outros ângulos com medidas racionais, a trigonometria mergulha no conjunto dos
+            irracionais.
           </p>
         </div>
 
@@ -482,7 +725,10 @@
             <span data-i18n="hist_h4">4. A Transcendência: Liouville, Hermite e Lindemann</span>
           </h3>
           <p class="text-sm" data-i18n="hist_p4">
-            Em 1844, Liouville construiu os primeiros números que não são raízes de nenhuma equação polinomial com coeficientes inteiros (números transcendentes). Posteriormente, Charles Hermite (1873) e Ferdinand von Lindemann (1882) demonstraram a transcendência de \(e\) e \(\pi\). Pelo Teorema de Lindemann-Weierstrass, sabe-se também que \(\sin(x)\) é transcendente para todo \(x \neq 0\) algébrico dado em radianos.
+            Em 1844, Liouville construiu os primeiros números que não são raízes de nenhuma equação polinomial com
+            coeficientes inteiros (números transcendentes). Posteriormente, Charles Hermite (1873) e Ferdinand von
+            Lindemann (1882) demonstraram a transcendência de \(e\) e \(\pi\). Pelo Teorema de Lindemann-Weierstrass,
+            sabe-se também que \(\sin(x)\) é transcendente para todo \(x \neq 0\) algébrico dado em radianos.
           </p>
         </div>
 
@@ -492,7 +738,10 @@
             <span data-i18n="hist_h5">5. A Completude da Reta: Dedekind e Cantor</span>
           </h3>
           <p class="text-sm" data-i18n="hist_p5">
-            Richard Dedekind preencheu os "buracos" deixados pelos números racionais na reta contínua formulando os <em>Cortes de Dedekind</em>. Georg Cantor comprovou que o conjunto dos racionais é enumerável (\(\aleph_0\)), enquanto os irracionais são não enumeráveis (\(2^{\aleph_0}\)), demonstrando que a densidade substantiva da reta real pertence aos irracionais.
+            Richard Dedekind preencheu os "buracos" deixados pelos números racionais na reta contínua formulando os
+            <em>Cortes de Dedekind</em>. Georg Cantor comprovou que o conjunto dos racionais é enumerável
+            (\(\aleph_0\)), enquanto os irracionais são não enumeráveis (\(2^{\aleph_0}\)), demonstrando que a densidade
+            substantiva da reta real pertence aos irracionais.
           </p>
         </div>
       </div>
@@ -500,8 +749,10 @@
 
   </main>
 
-  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
-    <span data-i18n="footer_text">Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo (2002), Marques (2013)</span>
+  <footer
+    class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
+    <span data-i18n="footer_text">Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo
+      (2002), Marques (2013)</span>
   </footer>
 
   <!-- CONTROLE DE TEMA (DARK/LIGHT) -->
@@ -543,10 +794,11 @@
         tab_tfa: "1. Verificador TFA",
         tab_solver: "2. Solucionador de Polinômios",
         tab_trig: "3. Funções Trigonométricas",
-        tab_eisenstein: "4. Critério de Eisenstein",
-        tab_fraccont: "5. Frações Contínuas",
-        tab_tabela: "6. Tabela de Notáveis",
-        tab_historia: "7. Contexto Histórico",
+        tab_log: "4. Logaritmos",
+        tab_eisenstein: "5. Critério de Eisenstein",
+        tab_fraccont: "6. Frações Contínuas",
+        tab_tabela: "7. Tabela de Notáveis",
+        tab_historia: "8. Contexto Histórico",
 
         tfa_title: "1. Demonstração via Teorema Fundamental da Aritmética",
         tfa_desc: "Investigue a irracionalidade de raízes \\(\\sqrt[n]{K}\\) examinando a divisibilidade e paridade dos expoentes na decomposição prima canônica. Pela unicidade do TFA, um número inteiro não admite duas fatorações distintas.",
@@ -560,7 +812,7 @@
         solver_lbl_poly: "Polinômio P(x):",
         solver_btn: "Solucionar Passo a Passo",
         solver_calc_title: "Cálculo Simbólico (Polinômio P(x))",
-        solver_rem_complex_roots: "Raíces Restantes (Irracionais e Complexas):",
+        solver_rem_complex_roots: "Raízes Restantes (Irracionais e Complexas):",
         solver_girard_title: "Relações de Girard",
         solver_girard_sum: "Soma das raízes (\\(S\\)): ",
         solver_girard_prod: "Produto das raízes (\\(P\\)): ",
@@ -584,8 +836,26 @@
         opt_sin: "Seno",
         opt_cos: "Cosseno",
         opt_tan: "Tangente",
+        opt_sec: "Secante",
+        opt_csc: "Cossecante",
+        opt_cot: "Cotangente",
+        trig_num_title: "Cálculo Numérico",
+        trig_num_badge: "Valor Aproximado",
+        trig_dec_val: "Valor Decimal:",
+        trig_rad_val: "Ângulo em Radianos:",
+        trig_exact_title: "Valor Algébrico Exato",
+        trig_exact_badge: "Ângulo Notável",
+        trig_undef_title: "Indefinição Matemática",
+        trig_undef_badge: "Assíntota Vertical",
+        trig_undef_desc: "O valor de \\({funcName}({angle}^\\circ)\\) não está definido nos números reais.",
 
-        eisen_title: "4. Critério de Irredutibilidade de Eisenstein",
+        log_title: "4. Demonstração de Irracionalidade de Logaritmos",
+        log_desc: "Verifique a irracionalidade de \\(\\log_b(a)\\). Se o logaritmo for igual a uma fração racional \\(p/q\\), então \\(b^p = a^q\\). Pelo Teorema Fundamental da Aritmética, isso exige que a base e o logaritmando compartilhem os mesmos fatores primos em proporções exatas.",
+        log_lbl_base: "Base (b ≥ 2):",
+        log_lbl_arg: "Logaritmando (a ≥ 1):",
+        log_btn: "Analisar",
+
+        eisen_title: "5. Critério de Irredutibilidade de Eisenstein",
         eisen_desc: "Ferramenta avançada de Álgebra Abstrata: Se existir um primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) e \\(p^2 \\nmid a_0\\), o polinômio é irredutível sobre \\(\\mathbb{Q}\\). Consequentemente, para graus \\(n \\ge 2\\), nenhuma de suas raízes pode ser racional!",
         eisen_btn: "Testar Primos",
 
@@ -593,7 +863,7 @@
         cf_desc: "Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Raiz Quadrada \\(\\sqrt{N}\\) (N não quadrado):",
         cf_btn: "Expandir Fração",
-        
+
         cf_expr_title: "Aproximações Fracionárias de Constantes",
         cf_expr_desc: "Gere convergentes racionais para expressões, constantes transcendentais ou trigonométricas.",
         cf_expr_lbl: "Expressão (ex: pi, e, sin(1), sqrt(2)/2):",
@@ -701,7 +971,16 @@
         cf_badge: "Irracional Quadrático",
         cf_lagrange: "Pelo Teorema de Lagrange, a expansão em fração contínua de um número real é periódica se, e somente se, o número é um <strong>irracional quadrático</strong>.",
         cf_convergents_lbl: "2. Melhores Aproximações Racionais (Convergentes):",
-        cf_diff_rat: "<strong>Diferença Fundamental com os Racionais:</strong> Um número racional sempre gera uma fração contínua finita (pelo Algoritmo de Euclides). O fato de \\(\\sqrt{{{N}}}\\) gerar um ciclo infinito comprova categoricamente sua irracionalidade."
+        cf_diff_rat: "<strong>Diferença Fundamental com os Racionais:</strong> Um número racional sempre gera uma fração contínua finita (pelo Algoritmo de Euclides). O fato de \\(\\sqrt{{{N}}}\\) gerar um ciclo infinito comprova categoricamente sua irracionalidade.",
+
+        hybrid_title: "Modo de Análise Analítica (Cálculo e Geometria)",
+        hybrid_badge: "Função de \\(\\mathbb{R}\\) em \\(\\mathbb{R}\\)",
+        hybrid_desc: "O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o <strong>rigor absoluto</strong> da sua expressão sem aproximações decimais, o laboratório ativou o motor de Análise Real.",
+        hybrid_func_lbl: "Função Analisada:",
+        hybrid_deriv_lbl: "Derivada \\(\\frac{d}{dx}f(x)\\):",
+        hybrid_int_lbl: "Integral Indefinida \\(\\int f(x) dx\\):",
+        hybrid_error: "Erro ao compilar função para análise. Verifique se a variável dependente é 'x' e se a sintaxe matemática é suportada.",
+        cartesian_chart_lbl: "Plano Cartesiano: Gráfico da Função f(x)"
       },
 
       en: {
@@ -711,10 +990,11 @@
         tab_tfa: "1. FTA Verifier",
         tab_solver: "2. Polynomial Solver",
         tab_trig: "3. Trigonometric Functions",
-        tab_eisenstein: "4. Eisenstein's Criterion",
-        tab_fraccont: "5. Continued Fractions",
-        tab_tabela: "6. Table of Constants",
-        tab_historia: "7. Historical Context",
+        tab_log: "4. Logarithms",
+        tab_eisenstein: "5. Eisenstein's Criterion",
+        tab_fraccont: "6. Continued Fractions",
+        tab_tabela: "7. Table of Constants",
+        tab_historia: "8. Historical Context",
 
         tfa_title: "1. Proof via Fundamental Theorem of Arithmetic",
         tfa_desc: "Investigate the irrationality of roots \\(\\sqrt[n]{K}\\) by examining the divisibility and parity of exponents in canonical prime factorization. By FTA uniqueness, an integer cannot have two distinct prime factorizations.",
@@ -752,8 +1032,26 @@
         opt_sin: "Sine",
         opt_cos: "Cosine",
         opt_tan: "Tangent",
+        opt_sec: "Secant",
+        opt_csc: "Cosecant",
+        opt_cot: "Cotangent",
+        trig_num_title: "Numerical Calculation",
+        trig_num_badge: "Approximate Value",
+        trig_dec_val: "Decimal Value:",
+        trig_rad_val: "Angle in Radians:",
+        trig_exact_title: "Exact Algebraic Value",
+        trig_exact_badge: "Notable Angle",
+        trig_undef_title: "Mathematical Undefinedness",
+        trig_undef_badge: "Vertical Asymptote",
+        trig_undef_desc: "The value of \\({funcName}({angle}^\\circ)\\) is undefined in real numbers.",
 
-        eisen_title: "4. Eisenstein's Irreducibility Criterion",
+        log_title: "4. Logarithm Irrationality Proof",
+        log_desc: "Verify the irrationality of \\(\\log_b(a)\\). If the logarithm is equal to a rational fraction \\(p/q\\), then \\(b^p = a^q\\). By the Fundamental Theorem of Arithmetic, this requires the base and argument to share the exact same prime factors in exact proportions.",
+        log_lbl_base: "Base (b ≥ 2):",
+        log_lbl_arg: "Argument (a ≥ 1):",
+        log_btn: "Analyze",
+
+        eisen_title: "5. Eisenstein's Irreducibility Criterion",
         eisen_desc: "Advanced Abstract Algebra tool: If there is a prime \\(p\\) such that \\(p \\mid a_i\\) for all \\(i < n\\), \\(p \\nmid a_n\\), and \\(p^2 \\nmid a_0\\), the polynomial is irreducible over \\(\\mathbb{Q}\\). Consequently, for degree \\(n \\ge 2\\), none of its roots can be rational!",
         eisen_btn: "Test Primes",
 
@@ -761,7 +1059,7 @@
         cf_desc: "Unlike finite decimal expansions, the continued fraction expansion of any rational number always terminates, whereas for an irrational number it is strictly infinite. Quadratic irrationals produce periodic expansions: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Square Root \\(\\sqrt{N}\\) (non-square N):",
         cf_btn: "Expand Fraction",
-        
+
         cf_expr_title: "Fractional Approximations of Constants",
         cf_expr_desc: "Generate rational convergents for expressions, transcendental or trigonometric constants.",
         cf_expr_lbl: "Expression (e.g., pi, e, sin(1), sqrt(2)/2):",
@@ -869,7 +1167,16 @@
         cf_badge: "Quadratic Irrational",
         cf_lagrange: "By Lagrange's Theorem, the continued fraction expansion of a real number is periodic if and only if it is a <strong>quadratic irrational</strong>.",
         cf_convergents_lbl: "2. Best Rational Approximations (Convergents):",
-        cf_diff_rat: "<strong>Fundamental Difference with Rationals:</strong> A rational number always terminates in a finite continued fraction. The fact that \\(\\sqrt{{{N}}}\\) generates an infinite cycle categorially proves its irrationality."
+        cf_diff_rat: "<strong>Fundamental Difference with Rationals:</strong> A rational number always terminates in a finite continued fraction. The fact that \\(\\sqrt{{{N}}}\\) generates an infinite cycle categorially proves its irrationality.",
+
+        hybrid_title: "Analytical Analysis Mode (Calculus and Geometry)",
+        hybrid_badge: "Function from \\(\\mathbb{R}\\) to \\(\\mathbb{R}\\)",
+        hybrid_desc: "The Rational Root Theorem (RRT) requires polynomials with strictly integer coefficients. To preserve the <strong>absolute rigor</strong> of your expression without decimal approximations, the laboratory activated the Real Analysis engine.",
+        hybrid_func_lbl: "Analyzed Function:",
+        hybrid_deriv_lbl: "Derivative \\(\\frac{d}{dx}f(x)\\):",
+        hybrid_int_lbl: "Indefinite Integral \\(\\int f(x) dx\\):",
+        hybrid_error: "Error compiling function for analysis. Check if the dependent variable is 'x' and if the mathematical syntax is supported.",
+        cartesian_chart_lbl: "Cartesian Plane: Graph of Function f(x)"
       },
 
       es: {
@@ -879,10 +1186,11 @@
         tab_tfa: "1. Verificador TFA",
         tab_solver: "2. Solucionador de Polinomios",
         tab_trig: "3. Funciones Trigonométricas",
-        tab_eisenstein: "4. Criterio de Eisenstein",
-        tab_fraccont: "5. Fracciones Continuas",
-        tab_tabela: "6. Tabla de Notables",
-        tab_historia: "7. Contexto Histórico",
+        tab_log: "4. Logaritmos",
+        tab_eisenstein: "5. Criterio de Eisenstein",
+        tab_fraccont: "6. Fracciones Continuas",
+        tab_tabela: "7. Tabla de Notables",
+        tab_historia: "8. Contexto Histórico",
 
         tfa_title: "1. Demostración mediante el Teorema Fundamental de la Aritmética",
         tfa_desc: "Investigue la irracionalidad de raíces \\(\\sqrt[n]{K}\\) examinando la divisibilidad y paridad de los exponentes en la descomposición canónica en primos. Por la unicidad del TFA, un número entero no admite dos factorizaciones distintas.",
@@ -920,8 +1228,26 @@
         opt_sin: "Seno",
         opt_cos: "Coseno",
         opt_tan: "Tangente",
+        opt_sec: "Secante",
+        opt_csc: "Cosecante",
+        opt_cot: "Cotangente",
+        trig_num_title: "Cálculo Numérico",
+        trig_num_badge: "Valor Aproximado",
+        trig_dec_val: "Valor Decimal:",
+        trig_rad_val: "Ángulo en Radianes:",
+        trig_exact_title: "Valor Algebraico Exacto",
+        trig_exact_badge: "Ángulo Notable",
+        trig_undef_title: "Indefinición Matemática",
+        trig_undef_badge: "Asíntota Vertical",
+        trig_undef_desc: "El valor de \\({funcName}({angle}^\\circ)\\) no está definido en los números reales.",
 
-        eisen_title: "4. Criterio de Irreducibilidad de Eisenstein",
+        log_title: "4. Demostración de Irracionalidad de Logaritmos",
+        log_desc: "Verifique la irracionalidad de \\(\\log_b(a)\\). Si el logaritmo equivale a una fracción racional \\(p/q\\), entonces \\(b^p = a^q\\). Por el Teorema Fundamental de la Aritmética, esto exige que la base y el argumento compartan los mismos factores primos en proporciones exactas.",
+        log_lbl_base: "Base (b ≥ 2):",
+        log_lbl_arg: "Argumento (a ≥ 1):",
+        log_btn: "Analizar",
+
+        eisen_title: "5. Criterio de Irreducibilidad de Eisenstein",
         eisen_desc: "Herramienta avanzada de Álgebra Abstracta: Si existe un primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) y \\(p^2 \\nmid a_0\\), el polinomio es irreducible sobre \\(\\mathbb{Q}\\). ¡Ninguna de sus raíces reales puede ser racional!",
         eisen_btn: "Probar Primos",
 
@@ -929,7 +1255,7 @@
         cf_desc: "A diferencia del desarrollo decimal finito, la fracción continua de cualquier número racional siempre termina, mientras que la de un irracional es estrictamente infinita. Los irracionales cuadráticos generan desarrollos periódicos: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Raíz Cuadrada \\(\\sqrt{N}\\) (N no cuadrado):",
         cf_btn: "Expandir Fracción",
-        
+
         cf_expr_title: "Aproximaciones Fraccionarias de Constantes",
         cf_expr_desc: "Genere convergentes racionales para expresiones, constantes trascendentales o trigonométricas.",
         cf_expr_lbl: "Expresión (ej: pi, e, sin(1), sqrt(2)/2):",
@@ -1037,7 +1363,16 @@
         cf_badge: "Irracional Cuadrático",
         cf_lagrange: "Por el Teorema de Lagrange, la fracción continua de un número real es periódica si y solo si es un <strong>irracional cuadrático</strong>.",
         cf_convergents_lbl: "2. Mejores Aproximaciones Racionales (Convergentes):",
-        cf_diff_rat: "<strong>Diferencia Fundamental con los Racionales:</strong> Un número racional siempre genera una fracción continua finita. El hecho de que \\(\\sqrt{{{N}}}\\) genere un ciclo infinito demuestra categóricamente su irracionalidad."
+        cf_diff_rat: "<strong>Diferencia Fundamental con los Racionales:</strong> Un número racional siempre genera una fracción continua finita. El hecho de que \\(\\sqrt{{{N}}}\\) genere un ciclo infinito demuestra categóricamente su irracionalidad.",
+
+        hybrid_title: "Modo de Análisis Analítico (Cálculo y Geometría)",
+        hybrid_badge: "Función de \\(\\mathbb{R}\\) en \\(\\mathbb{R}\\)",
+        hybrid_desc: "El Teorema de las Raíces Racionales (TRR) requiere polinomios con coeficientes estrictamente enteros. Para preservar el <strong>rigor absoluto</strong> de su expresión sin aproximaciones decimales, el laboratorio activó el motor de Análisis Real.",
+        hybrid_func_lbl: "Función Analizada:",
+        hybrid_deriv_lbl: "Derivada \\(\\frac{d}{dx}f(x)\\):",
+        hybrid_int_lbl: "Integral Indefinida \\(\\int f(x) dx\\):",
+        hybrid_error: "Error al compilar la función para su análisis. Compruebe si la variable dependiente es 'x' y si la sintaxis matemática es compatible.",
+        cartesian_chart_lbl: "Plano Cartesiano: Gráfico de la Función f(x)"
       },
 
       fr: {
@@ -1047,10 +1382,11 @@
         tab_tfa: "1. Vérificateur TFA",
         tab_solver: "2. Résolveur de Polynômes",
         tab_trig: "3. Fonctions Trigonométriques",
-        tab_eisenstein: "4. Critère d'Eisenstein",
-        tab_fraccont: "5. Fractions Continues",
-        tab_tabela: "6. Table des Notables",
-        tab_historia: "7. Contexte Historique",
+        tab_log: "4. Logarithmes",
+        tab_eisenstein: "5. Critère d'Eisenstein",
+        tab_fraccont: "6. Fractions Continues",
+        tab_tabela: "7. Table des Notables",
+        tab_historia: "8. Contexte Historique",
 
         tfa_title: "1. Démonstration via le Théorème Fondamental de l'Arithmétique",
         tfa_desc: "Analysez l'irrationalité des racines \\(\\sqrt[n]{K}\\) en examinant la parité et divisibilité des exposants dans la décomposition en facteurs premiers. Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes.",
@@ -1088,8 +1424,26 @@
         opt_sin: "Sinus",
         opt_cos: "Cosinus",
         opt_tan: "Tangente",
+        opt_sec: "Sécante",
+        opt_csc: "Cosécante",
+        opt_cot: "Cotangente",
+        trig_num_title: "Calcul Numérique",
+        trig_num_badge: "Valeur Approchée",
+        trig_dec_val: "Valeur Décimale :",
+        trig_rad_val: "Angle en Radians :",
+        trig_exact_title: "Valeur Algébrique Exacte",
+        trig_exact_badge: "Angle Remarquable",
+        trig_undef_title: "Indéfinition Mathématique",
+        trig_undef_badge: "Asymptote Verticale",
+        trig_undef_desc: "La valeur de \\({funcName}({angle}^\\circ)\\) n'est pas définie dans les nombres réels.",
 
-        eisen_title: "4. Critère d'Irréductibilité d'Eisenstein",
+        log_title: "4. Démonstration d'Irrationalité des Logarithmes",
+        log_desc: "Vérifiez l'irrationalité de \\(\\log_b(a)\\). Si le logarithme est égal à une fraction rationnelle \\(p/q\\), alors \\(b^p = a^q\\). D'après le Théorème Fondamental de l'Arithmétique, cela exige que la base et l'argument partagent les mêmes facteurs premiers dans des proportions exactes.",
+        log_lbl_base: "Base (b ≥ 2) :",
+        log_lbl_arg: "Argument (a ≥ 1) :",
+        log_btn: "Analyser",
+
+        eisen_title: "5. Critère d'Irréductibilité d'Eisenstein",
         eisen_desc: "Outil d'algèbre abstraite : S'il existe un nombre premier \\(p\\) tel que \\(p \\mid a_i\\) pour tout \\(i < n\\), \\(p \\nmid a_n\\) et \\(p^2 \\nmid a_0\\), le polynôme est irréductible sur \\(\\mathbb{Q}\\\\). Aucune de ses racines réelles ne peut être rationnelle !",
         eisen_btn: "Tester les Nombres Premiers",
 
@@ -1097,7 +1451,7 @@
         cf_desc: "Contrairement à l'écriture décimale finie, la fraction continue d'un nombre rationnel se termine toujours, tandis que celle d'un irrationnel est strictement infinie. Les irrationnels quadratiques produisent des développements périodiques : \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
         cf_lbl_rad: "Racine Carrée \\(\\sqrt{N}\\) (N non carré) :",
         cf_btn: "Développer la Fraction",
-        
+
         cf_expr_title: "Approximations Fractionnaires de Constantes",
         cf_expr_desc: "Générez des convergentes rationnelles pour des expressions, constantes transcendantes ou trigonométriques.",
         cf_expr_lbl: "Expression (ex: pi, e, sin(1), sqrt(2)/2):",
@@ -1205,7 +1559,16 @@
         cf_badge: "Irrationnel Quadratique",
         cf_lagrange: "D'après le Théorème de Lagrange, le développement en fraction continue d'un nombre réel est périodique si et seulement si c'est un <strong>irrationnel quadratique</strong>.",
         cf_convergents_lbl: "2. Meilleures Approximations Rationnelles (Convergentes) :",
-        cf_diff_rat: "<strong>Différence Fondamentale avec les Rationnels :</strong> Un nombre rationnel produit toujours une fraction continue finie. Le fait que \\(\\sqrt{{{N}}}\\) génère un cycle infini prouve catégoriquement son irrationalité."
+        cf_diff_rat: "<strong>Différence Fondamentale avec les Rationnels :</strong> Un nombre rationnel produit toujours une fraction continue finie. Le fait que \\(\\sqrt{{{N}}}\\) génère un cycle infini prouve catégoriquement son irrationalité.",
+
+        hybrid_title: "Mode d'Analyse Analytique (Calcul et Géométrie)",
+        hybrid_badge: "Fonction de \\(\\mathbb{R}\\) dans \\(\\mathbb{R}\\)",
+        hybrid_desc: "Le Théorème des Racines Rationnelles (TRR) exige des polynômes à coefficients strictement entiers. Pour préserver la <strong>rigueur absolue</strong> de votre expression sans approximations décimales, le laboratoire a activé le moteur d'Analyse Réelle.",
+        hybrid_func_lbl: "Fonction Analisée :",
+        hybrid_deriv_lbl: "Dérivée \\(\\frac{d}{dx}f(x)\\):",
+        hybrid_int_lbl: "Intégrale Indéfinie \\(\\int f(x) dx\\):",
+        hybrid_error: "Erreur lors de la compilation de la fonction pour l'analyse. Vérifiez si la variable dépendante est 'x' et si la syntaxe mathématique est supportée.",
+        cartesian_chart_lbl: "Plan Cartésien : Graphique de la Fonction f(x)"
       }
     };
 
@@ -1251,6 +1614,7 @@
       if (!document.getElementById('tfa-output').classList.contains('hidden')) executarTFA();
       if (!document.getElementById('solver-output').classList.contains('hidden')) resolverPolinomio();
       if (!document.getElementById('trig-output').classList.contains('hidden')) analisarTrig();
+      if (!document.getElementById('log-output').classList.contains('hidden')) analisarLogaritmo();
       if (!document.getElementById('eisen-output').classList.contains('hidden')) executarEisenstein();
       if (!document.getElementById('cf-output').classList.contains('hidden')) executarFracaoContinua();
       if (!document.getElementById('cf-expr-output').classList.contains('hidden')) executarFracaoExpressao();
@@ -1261,21 +1625,21 @@
   <!-- MOTORES MATEMÁTICOS-->
   <script>
     function switchTab(tabId) {
-      const tabs = ['tfa', 'solver', 'trig', 'eisenstein', 'fraccont', 'tabela', 'historia'];
+      const tabs = ['tfa', 'solver', 'trig', 'log', 'eisenstein', 'fraccont', 'tabela', 'historia'];
       tabs.forEach(t => {
         document.getElementById('pane-' + t).classList.add('hidden');
         document.getElementById('tab-' + t).classList.remove('active');
       });
       document.getElementById('pane-' + tabId).classList.remove('hidden');
       document.getElementById('tab-' + tabId).classList.add('active');
-      
+
       if (window.renderMathInElement) {
         renderMathInElement(document.getElementById('pane-' + tabId));
       }
     }
 
     function gcd(a, b) {
-      a = Math.round(Math.abs(a)); 
+      a = Math.round(Math.abs(a));
       b = Math.round(Math.abs(b));
       while (b) { let t = b; b = a % b; a = t; }
       return a;
@@ -1396,7 +1760,7 @@
       str = str.replace(/\s+/g, '').replace(/-/g, '+-');
       const terms = str.split('+').filter(t => t.length > 0);
       const polyMap = {};
-      
+
       for (let term of terms) {
         let coef = 1, deg = 0;
         if (term.includes('x')) {
@@ -1426,20 +1790,14 @@
           expr = `(${sides[0]}) - (${sides[1]})`;
         }
 
-        // O Nerdamer expande a expressão primeiro
         let expanded = nerdamer(expr).expand().text();
 
-        // TRAVA DE SEGURANÇA
-        // Se a expressão expandida contiver qualquer caractere que não seja:
-        // 'x', números (0-9), espaços ou operadores básicos
-        // Isso significa que existem frações, decimais, raízes ou constantes (pi, e).
-        // Ao retornar null, o sistema a ativar o modo de calculo
         if (expanded.match(/[^x0-9\+\-\*\^\s]/i)) {
-          return null; 
+          return null;
         }
 
         let cleanStr = expanded.replace(/\*/g, '');
-        
+
         const polyMap = parseExpression(cleanStr);
         const finalMap = {};
         let maxDeg = 0;
@@ -1447,7 +1805,7 @@
         for (let degStr in polyMap) {
           const deg = parseInt(degStr);
           const val = polyMap[degStr];
-          if (Math.abs(val) > 1e-7) { 
+          if (Math.abs(val) > 1e-7) {
             finalMap[deg] = val;
             if (deg > maxDeg) maxDeg = deg;
           }
@@ -1457,13 +1815,13 @@
 
         const coeffs = [];
         for (let i = maxDeg; i >= 0; i--) coeffs.push(finalMap[i] || 0);
-        
+
         return { coeffs, degree: maxDeg };
       } catch (e) {
         return null;
       }
     }
-    
+
     function formatPolynomial(coeffs) {
       const deg = coeffs.length - 1;
       const terms = [];
@@ -1497,8 +1855,6 @@
     }
 
     function gerarSvgFuncaoGeral(f_eval) {
-      // 1. INJEÇÃO DE FUNÇÕES MATEMÁTICAS NATIVAS EM FALTA NO JAVASCRIPT
-      // Garante que o motor consegue desenhar secantes, cossecantes e cotangentes
       if (typeof Math.sec === 'undefined') Math.sec = (x) => 1 / Math.cos(x);
       if (typeof Math.csc === 'undefined') Math.csc = (x) => 1 / Math.sin(x);
       if (typeof Math.cot === 'undefined') Math.cot = (x) => 1 / Math.tan(x);
@@ -1510,58 +1866,55 @@
       const boundX = 6;
       const xMin = -boundX, xMax = boundX;
       const xRange = xMax - xMin;
-      
-      const steps = 400; 
+
+      const steps = 400;
       const dx = xRange / steps;
 
       let points = [];
-      
+
       for (let i = 0; i <= steps; i++) {
         let x = xMin + i * dx;
         try {
-            let y = f_eval(x);
-            if (!isNaN(y) && isFinite(y)) {
-                points.push({x, y});
-            }
-        } catch(e) {}
+          let y = f_eval(x);
+          if (!isNaN(y) && isFinite(y)) {
+            points.push({ x, y });
+          }
+        } catch (e) { }
       }
 
       if (points.length === 0) return '';
 
-      // 2. MOTOR ESTATÍSTICO IQR
       let validYs = points.map(p => p.y).sort((a, b) => a - b);
       let q1 = validYs[Math.floor(validYs.length * 0.25)];
       let q3 = validYs[Math.floor(validYs.length * 0.75)];
       let iqr = q3 - q1;
-      
-      if (iqr === 0) iqr = 2; // Para retas horizontais ou funções muito planas
 
-      // Limite de visualização que ignora tudo o que dispara para o infinito
+      if (iqr === 0) iqr = 2;
+
       let lowerBound = q1 - 3 * iqr;
       let upperBound = q3 + 3 * iqr;
 
       let p5 = validYs[Math.floor(validYs.length * 0.05)];
       let p95 = validYs[Math.floor(validYs.length * 0.95)];
-      
+
       let calcYMin = Math.max(p5, lowerBound);
       let calcYMax = Math.min(p95, upperBound);
-      
-      // Impede que a escala fique em linhas quase retas
-      if (calcYMax - calcYMin < 5) {
-          calcYMax = Math.max(calcYMax, 5);
-          calcYMin = Math.min(calcYMin, -5);
+
+      if (calcYMax - calcYMin < 0.5) {
+        let centro = (calcYMax + calcYMin) / 2;
+        calcYMax = centro + 1;
+        calcYMin = centro - 1;
       }
-      
+
       let yRange = calcYMax - calcYMin;
-      if (yRange < 0.1) yRange = 10; 
+      if (yRange < 0.1) yRange = 10;
 
       let yMin = calcYMin - yRange * 0.15;
       let yMax = calcYMax + yRange * 0.15;
-      
-      // Ancoragem visual no eixo X
+
       if (yMin > 0 && yMin < yRange) yMin = -yRange * 0.15;
       if (yMax < 0 && Math.abs(yMax) < yRange) yMax = yRange * 0.15;
-      
+
       yRange = yMax - yMin;
 
       const toScreenX = (x) => ((x - xMin) / xRange) * width;
@@ -1571,32 +1924,29 @@
       let first = true;
       for (let i = 0; i < points.length; i++) {
         let p = points[i];
-        
-        // 3. QUEBRA DE ASSÍNTOTAS
+
         if (i > 0) {
-            let prevP = points[i-1];
-            let diffY = Math.abs(p.y - prevP.y);
-            
-            // Se o salto de Y num milímetro do eixo X for maior que 80% da tela visível, é uma assíntota
-            if (diffY > yRange * 0.8) {
-                first = true;
-            }
+          let prevP = points[i - 1];
+          let diffY = Math.abs(p.y - prevP.y);
+
+          if (diffY > yRange * 0.8) {
+            first = true;
+          }
         }
 
         let sx = toScreenX(p.x);
         let sy = toScreenY(p.y);
-        
-        // Se a assíntota disparar o pixel para fora dos limites da caixa do SVG, a caneta levanta
+
         if (sy < -height || sy > height * 2) {
-            first = true;
-            continue;
+          first = true;
+          continue;
         }
 
         if (first) {
-            pathD += `M ${sx} ${sy}`;
-            first = false;
+          pathD += `M ${sx} ${sy}`;
+          first = false;
         } else {
-            pathD += ` L ${sx} ${sy}`;
+          pathD += ` L ${sx} ${sy}`;
         }
       }
 
@@ -1607,7 +1957,7 @@
       let rawStepX = xRange / 8;
       let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
       let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
-      
+
       let rawStepY = yRange / 6;
       let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
       let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
@@ -1622,17 +1972,17 @@
 
       let startY = Math.ceil(yMin / yStep) * yStep;
       for (let j = startY; j <= yMax; j += yStep) {
-        if (Math.abs(j) < 1e-7) continue; 
+        if (Math.abs(j) < 1e-7) continue;
         let ty = toScreenY(j);
         let labelY = parseFloat(j.toFixed(2));
         ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
       }
-      
+
       ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
 
       return `
         <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
-          <p class="text-xs text-slate-400 mb-2 font-medium">Plano Cartesiano: Gráfico da Função f(x)</p>
+          <p class="text-xs text-slate-400 mb-2 font-medium" data-i18n="cartesian_chart_lbl">${t('cartesian_chart_lbl') || 'Plano Cartesiano: Gráfico da Função f(x)'}</p>
           <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800">
             <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
             <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
@@ -1645,6 +1995,11 @@
       `;
     }
 
+    const gerarSvgGraficoPolinomio = (coeffs, roots) => {
+      let f_eval = (x) => evalPoly(coeffs, x);
+      return gerarSvgFuncaoGeral(f_eval);
+    };
+
     function gerarSvgPlanoComplexo(allRoots) {
       const width = 300, height = 300;
       let maxAbs = 1;
@@ -1653,10 +2008,10 @@
       }
       let limit = Math.ceil(maxAbs * 1.3);
       if (limit < 2) limit = 2;
-      
+
       const toScreenX = (x) => ((x + limit) / (2 * limit)) * width;
       const toScreenY = (y) => height - ((y + limit) / (2 * limit)) * height;
-      
+
       let gridLines = "";
       for (let i = -limit; i <= limit; i++) {
         if (i === 0) continue;
@@ -1664,7 +2019,7 @@
         let sy = toScreenY(i);
         gridLines += `<line x1="${sx}" y1="0" x2="${sx}" y2="${height}" stroke="#334155" stroke-width="0.5" stroke-dasharray="2,2"/>`;
         gridLines += `<line x1="0" y1="${sy}" x2="${width}" y2="${sy}" stroke="#334155" stroke-width="0.5" stroke-dasharray="2,2"/>`;
-        
+
         gridLines += `<text x="${sx}" y="${toScreenY(0) + 12}" fill="#94a3b8" font-size="10" text-anchor="middle">${i}</text>`;
         gridLines += `<text x="${toScreenX(0) - 6}" y="${sy + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${i}i</text>`;
       }
@@ -1673,7 +2028,7 @@
       for (let r of allRoots) {
         pointsSvg += `<circle cx="${toScreenX(r.re)}" cy="${toScreenY(r.im)}" r="5" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.5" />`;
       }
-      
+
       return `
         <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
           <p class="text-xs text-slate-400 mb-2 font-medium" data-i18n="solver_complex_title">${t('solver_complex_title')}</p>
@@ -1697,8 +2052,8 @@
       add(c) { return new Complexo(this.re + c.re, this.im + c.im); }
       sub(c) { return new Complexo(this.re - c.re, this.im - c.im); }
       mul(c) { return new Complexo(this.re * c.re - this.im * c.im, this.re * c.im + this.im * c.re); }
-      div(c) { 
-        const den = c.re * c.re + c.im * c.im; 
+      div(c) {
+        const den = c.re * c.re + c.im * c.im;
         return new Complexo((this.re * c.re + this.im * c.im) / den, (this.im * c.re - this.re * c.im) / den);
       }
       toTeX() {
@@ -1721,19 +2076,19 @@
     function durandKerner(coeffs) {
       const degree = coeffs.length - 1;
       let roots = [];
-      
+
       for (let i = 0; i < degree; i++) {
         roots.push(new Complexo(Math.cos(i * 2.5) * 1.5, Math.sin(i * 2.5) * 1.5));
       }
-      
+
       for (let iter = 0; iter < 100; iter++) {
         let maxDiff = 0;
         let newRoots = [];
         for (let i = 0; i < degree; i++) {
           let p = evalPolyComplex(coeffs, roots[i]);
-          
+
           let den = new Complexo(coeffs[0], 0);
-          
+
           for (let j = 0; j < degree; j++) {
             if (i !== j) den = den.mul(roots[i].sub(roots[j]));
           }
@@ -1763,31 +2118,31 @@
       A = Math.round(A);
       B = Math.round(B);
       delta = Math.round(delta);
-      
+
       const isComplex = delta < 0;
       const absDelta = Math.abs(delta);
       const { out, inside } = simplificarRaiz(absDelta);
-      
+
       let den = 2 * A;
       let re = -B;
       let im = out;
-      
+
       let g = gcd(gcd(Math.abs(re), im), Math.abs(den));
       re /= g; im /= g; den /= g;
-      
+
       if (den < 0) { re = -re; den = -den; }
-      
+
       let imStr = "";
       if (inside === 1) {
         imStr = (im === 1 ? "" : im) + (isComplex ? "i" : "");
       } else {
         imStr = (im === 1 ? "" : im) + "\\sqrt{" + inside + "}" + (isComplex ? "i" : "");
       }
-      if (imStr === "") imStr = "1"; 
-      if (imStr === "i") imStr = "i"; 
-      
+      if (imStr === "") imStr = "1";
+      if (imStr === "i") imStr = "i";
+
       let sign = isMinus ? "-" : "+";
-      
+
       if (den === 1) {
         if (re === 0) return isMinus ? `-${imStr}` : imStr;
         return `${re} ${sign} ${imStr}`;
@@ -1798,33 +2153,28 @@
     }
 
     function gerarEEnviarPolinomio() {
-      // 1. Coleta de dados
       let A = parseFloat(document.getElementById('gen-a').value);
       if (isNaN(A)) A = 1;
-      
+
       let N = parseInt(document.getElementById('gen-n').value);
       if (isNaN(N) || N < 2) N = 2;
-      
+
       let K = parseFloat(document.getElementById('gen-k').value);
-      
       let B = parseFloat(document.getElementById('gen-b').value);
       if (isNaN(B)) B = 0;
-      
+
       let C = parseFloat(document.getElementById('gen-c').value);
       const stepsDiv = document.getElementById('gen-steps');
 
-      // 2. Trava de segurança para zero no denominador e radicando inválido
       if (isNaN(K) || K < 0 || isNaN(C) || C === 0) {
         stepsDiv.innerHTML = `<span class="text-red-600 dark:text-red-400 font-medium">${t('gen_error') || 'Erro: K deve ser ≥ 0 e C não pode ser 0.'}</span>`;
         stepsDiv.classList.remove('hidden');
         return;
       }
 
-      // 3. Monta a expressão algébrica para expandir
-      // vai resolver: (C*x - B)^N - (A^N * K) = 0
       const aPowK = Math.pow(A, N) * K;
       const exprStr = `expand((${C}*x - (${B}))^${N} - ${aPowK})`;
-      
+
       let polyStr = "";
       try {
         polyStr = nerdamer(exprStr).text();
@@ -1834,23 +2184,18 @@
         return;
       }
 
-      // 4. Formatação didática do isolamento em LaTeX
       const A_str = A !== 1 ? (A === -1 ? '-' : A) : '';
       const raiz_str = N === 2 ? `\\sqrt{${K}}` : `\\sqrt[${N}]{${K}}`;
       const B_str = B !== 0 ? (B > 0 ? `+${B}` : `${B}`) : '';
-      
+
       const step1 = `x = \\frac{${A_str}${raiz_str} ${B_str}}{${C}}`;
-      
       const cx_term = `${C}x`;
       const b_inv_term = B !== 0 ? (B > 0 ? `-${B}` : `+${Math.abs(B)}`) : '';
       const step2 = `${cx_term} ${b_inv_term} = ${A_str}${raiz_str}`;
-      
       const step3 = `(${cx_term} ${b_inv_term})^{${N}} = (${A_str}${raiz_str})^{${N}}`;
-      
-      // Limpar os asteriscos de multiplicação do output do Nerdamer
+
       const cleanPolyForTex = polyStr.replace(/\*/g, '');
 
-      // Renderização com \implies nativo do KaTeX dentro de um bloco
       stepsDiv.innerHTML = `
         <div class="p-3 bg-white dark:bg-slate-800 border border-blue-200 dark:border-slate-600 rounded mt-2">
           <p class="font-semibold text-blue-800 dark:text-blue-300 mb-1" data-i18n="gen_deduction">${t('gen_deduction') || 'Dedução Algébrica (Isolamento):'}</p>
@@ -1860,11 +2205,10 @@
         </div>
       `;
       stepsDiv.classList.remove('hidden');
-      
+
       if (window.renderMathInElement) renderMathInElement(stepsDiv);
 
-      // Envia o resultado para o input principal e dispara a solução
-      document.getElementById('poly-input').value = cleanPolyForTex;
+      document.getElementById('poly-input').value = polyStr;
       resolverPolinomio();
     }
 
@@ -1874,8 +2218,7 @@
       outDiv.classList.remove('hidden');
 
       const parsed = parsePolynomial(inputStr);
-      
-      // Se o TRR falhar por encontrar constantes transcendentes (pi, e) u expressões não-inteiras, ativa o modo de calculo
+
       if (!parsed || parsed.degree < 1) {
         return analisarExpressaoSimbolica(inputStr, outDiv);
       }
@@ -1934,7 +2277,7 @@
             if (Math.abs(val) < 1e-7) {
               const fracStr = cand.q === 1 ? `${cand.p}` : `\\frac{${cand.p}}{${cand.q}}`;
               raizesRacionais.push({ val: cand.val, tex: fracStr });
-              
+
               currentCoeffs = ruffini(currentCoeffs, cand.val);
               currentCoeffs = currentCoeffs.map(c => Math.abs(c - Math.round(c)) < 1e-5 ? Math.round(c) : c);
             } else break;
@@ -1948,7 +2291,7 @@
       let isBinomial = false;
       let biquadraticExata = false;
       const degRem = currentCoeffs.length - 1;
-      
+
       if (degRem >= 3) {
         isBinomial = true;
         for (let i = 1; i < degRem; i++) {
@@ -1960,7 +2303,7 @@
         const A_bq = currentCoeffs[0], B_bq = currentCoeffs[2], C_bq = currentCoeffs[4];
         const delta_bq = B_bq * B_bq - 4 * A_bq * C_bq;
         if (delta_bq >= 0 && Number.isInteger(Math.sqrt(delta_bq))) {
-            biquadraticExata = true;
+          biquadraticExata = true;
         }
       }
 
@@ -1991,8 +2334,8 @@
         } else if (delta < 0) {
           steps.push(t('solver_complex_roots'));
           const absDelta = Math.abs(delta);
-          const re = -B / (2*A);
-          const im = Math.sqrt(absDelta) / (2*A);
+          const re = -B / (2 * A);
+          const im = Math.sqrt(absDelta) / (2 * A);
           const reStr = Math.abs(re) < 1e-7 ? "" : re.toFixed(4);
           const sign1 = reStr === "" ? "" : " + ";
           const sign2 = reStr === "" ? "-" : " - ";
@@ -2000,8 +2343,8 @@
           const valStr2 = `${reStr}${sign2}${Math.abs(im).toFixed(4)}i`;
 
           if (!isIntPoly) {
-             raizesIrracionais.push({ tex: '', valStr: valStr1, isComplex: true, isApproxOnly: true, reNum: re, imNum: im });
-             raizesIrracionais.push({ tex: '', valStr: valStr2, isComplex: true, isApproxOnly: true, reNum: re, imNum: -im });
+            raizesIrracionais.push({ tex: '', valStr: valStr1, isComplex: true, isApproxOnly: true, reNum: re, imNum: im });
+            raizesIrracionais.push({ tex: '', valStr: valStr2, isComplex: true, isApproxOnly: true, reNum: re, imNum: -im });
           } else {
             const r1Tex = formatarRaizQuadratica(A, B, delta, false);
             const r2Tex = formatarRaizQuadratica(A, B, delta, true);
@@ -2009,16 +2352,16 @@
             raizesIrracionais.push({ tex: r2Tex, valStr: valStr2, isComplex: true, reNum: re, imNum: -im });
           }
         } else if (delta === 0) {
-            const r = -B / (2 * A);
-            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true, reNum: r, imNum: 0 });
-            raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true, reNum: r, imNum: 0 });
+          const r = -B / (2 * A);
+          raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true, reNum: r, imNum: 0 });
+          raizesIrracionais.push({ tex: `${parseFloat(r.toFixed(5))}`, val: r, isComplex: false, isApproxOnly: true, reNum: r, imNum: 0 });
         }
-      } 
+      }
       else if (biquadraticExata) {
         const A = currentCoeffs[0], B = currentCoeffs[2], C = currentCoeffs[4];
         const delta = B * B - 4 * A * C;
         const sqrtDelta = Math.round(Math.sqrt(delta));
-        
+
         steps.push(`O polinómio reduzido é uma equação biquadrada da forma \\(${A}x^4 ${B >= 0 ? '+' : ''} ${B}x^2 ${C >= 0 ? '+' : ''} ${C} = 0\\).<br>Substituindo \\(y = x^2\\), obtemos uma equação do 2º grau cujas raízes racionais nos permitem extrair \\(x = \\pm\\sqrt{y}\\).`);
 
         const processY = (num, den) => {
@@ -2028,51 +2371,51 @@
           if (d < 0) { n = -n; d = -d; }
 
           let valY = n / d;
-          
+
           if (valY === 0) {
-              raizesIrracionais.push({ tex: '0', val: 0, isComplex: false, reNum: 0, imNum: 0 });
+            raizesIrracionais.push({ tex: '0', val: 0, isComplex: false, reNum: 0, imNum: 0 });
           } else if (valY > 0) {
-              let texStr = "";
-              if (d === 1) {
-                  let { out, inside } = simplificarRaiz(n);
-                  if (inside === 1) texStr = `${out}`;
-                  else texStr = (out === 1 ? "" : out) + `\\sqrt{${inside}}`;
-              } else {
-                  let { out, inside } = simplificarRaiz(n * d);
-                  let finalNum = out;
-                  let finalDen = d;
-                  let g2 = gcd(finalNum, finalDen);
-                  finalNum /= g2; finalDen /= g2;
-                  let numTex = (inside === 1) ? `${finalNum}` : ((finalNum === 1 ? "" : finalNum) + `\\sqrt{${inside}}`);
-                  if (finalDen === 1) texStr = numTex;
-                  else texStr = `\\frac{${numTex}}{${finalDen}}`;
-              }
-              
-              let rv = Math.sqrt(valY);
-              raizesIrracionais.push({ tex: texStr, val: rv, isComplex: false, reNum: rv, imNum: 0 });
-              raizesIrracionais.push({ tex: `-${texStr}`, val: -rv, isComplex: false, reNum: -rv, imNum: 0 });
+            let texStr = "";
+            if (d === 1) {
+              let { out, inside } = simplificarRaiz(n);
+              if (inside === 1) texStr = `${out}`;
+              else texStr = (out === 1 ? "" : out) + `\\sqrt{${inside}}`;
+            } else {
+              let { out, inside } = simplificarRaiz(n * d);
+              let finalNum = out;
+              let finalDen = d;
+              let g2 = gcd(finalNum, finalDen);
+              finalNum /= g2; finalDen /= g2;
+              let numTex = (inside === 1) ? `${finalNum}` : ((finalNum === 1 ? "" : finalNum) + `\\sqrt{${inside}}`);
+              if (finalDen === 1) texStr = numTex;
+              else texStr = `\\frac{${numTex}}{${finalDen}}`;
+            }
+
+            let rv = Math.sqrt(valY);
+            raizesIrracionais.push({ tex: texStr, val: rv, isComplex: false, reNum: rv, imNum: 0 });
+            raizesIrracionais.push({ tex: `-${texStr}`, val: -rv, isComplex: false, reNum: -rv, imNum: 0 });
           } else {
-              let absN = Math.abs(n);
-              let texStr = "";
-              if (d === 1) {
-                  let { out, inside } = simplificarRaiz(absN);
-                  if (inside === 1) texStr = `${out}i`;
-                  else texStr = (out === 1 ? "" : out) + `\\sqrt{${inside}}i`;
-              } else {
-                  let { out, inside } = simplificarRaiz(absN * d);
-                  let finalNum = out;
-                  let finalDen = d;
-                  let g2 = gcd(finalNum, finalDen);
-                  finalNum /= g2; finalDen /= g2;
-                  let numTex = (inside === 1) ? `${finalNum}i` : ((finalNum === 1 ? "" : finalNum) + `\\sqrt{${inside}}i`);
-                  if (finalDen === 1) texStr = numTex;
-                  else texStr = `\\frac{${numTex}}{${finalDen}}`;
-              }
-              
-              let imVal = Math.sqrt(Math.abs(valY));
-              let valStrApp = imVal.toFixed(5);
-              raizesIrracionais.push({ tex: texStr, valStr: `${valStrApp}i`, isComplex: true, reNum: 0, imNum: imVal });
-              raizesIrracionais.push({ tex: `-${texStr}`, valStr: `-${valStrApp}i`, isComplex: true, reNum: 0, imNum: -imVal });
+            let absN = Math.abs(n);
+            let texStr = "";
+            if (d === 1) {
+              let { out, inside } = simplificarRaiz(absN);
+              if (inside === 1) texStr = `${out}i`;
+              else texStr = (out === 1 ? "" : out) + `\\sqrt{${inside}}i`;
+            } else {
+              let { out, inside } = simplificarRaiz(absN * d);
+              let finalNum = out;
+              let finalDen = d;
+              let g2 = gcd(finalNum, finalDen);
+              finalNum /= g2; finalDen /= g2;
+              let numTex = (inside === 1) ? `${finalNum}i` : ((finalNum === 1 ? "" : finalNum) + `\\sqrt{${inside}}i`);
+              if (finalDen === 1) texStr = numTex;
+              else texStr = `\\frac{${numTex}}{${finalDen}}`;
+            }
+
+            let imVal = Math.sqrt(Math.abs(valY));
+            let valStrApp = imVal.toFixed(5);
+            raizesIrracionais.push({ tex: texStr, valStr: `${valStrApp}i`, isComplex: true, reNum: 0, imNum: imVal });
+            raizesIrracionais.push({ tex: `-${texStr}`, valStr: `-${valStrApp}i`, isComplex: true, reNum: 0, imNum: -imVal });
           }
         };
 
@@ -2084,54 +2427,54 @@
         const C = currentCoeffs[degRem];
         const valK = -C / A;
         const absK = Math.abs(valK);
-        
+
         let sinalA = A === 1 ? '' : (A === -1 ? '-' : A);
         let sinalC = C > 0 ? '+' : '';
         steps.push(`O polinómio reduzido é um binómio puro da forma \\(${sinalA}x^{${degRem}} ${sinalC} ${C} = 0\\). Extraindo raízes algébricas exatas (Radiciação e Notação de Euler)...`);
-        
+
         const rDec = Math.pow(absK, 1 / degRem);
         const isNegative = valK < 0;
-        
+
         let fracTex = Math.abs(A) === 1 ? `${Math.abs(C)}` : `\\frac{${Math.abs(C)}}{${Math.abs(A)}}`;
         let radBaseTex = `\\sqrt[${degRem}]{${fracTex}}`;
-        
+
         for (let k = 0; k < degRem; k++) {
           let theta = isNegative ? Math.PI : 0;
           let angle = (theta + 2 * Math.PI * k) / degRem;
-          
+
           let re = rDec * Math.cos(angle);
           let im = rDec * Math.sin(angle);
-          
+
           if (Math.abs(im) < 1e-6) {
             let signReal = re < 0 ? "-" : "";
             raizesIrracionais.push({ tex: `${signReal}${radBaseTex}`, val: re, isComplex: false, reNum: re, imNum: 0 });
           } else {
             let angleFactor = isNegative ? (1 + 2 * k) : (2 * k);
-            
+
             let g = gcd(angleFactor, degRem);
             let num = angleFactor / g;
             let den = degRem / g;
-            
+
             let angleTex = "";
             if (num === 1 && den === 1) angleTex = "\\pi";
             else if (den === 1) angleTex = `${num}\\pi`;
             else if (num === 1) angleTex = `\\frac{\\pi}{${den}}`;
             else angleTex = `\\frac{${num}\\pi}{${den}}`;
-            
+
             let eulerTex = `e^{i ${angleTex}}`;
-            
+
             let reStr = Math.abs(re) < 1e-7 ? "" : re.toFixed(4);
             let imAbs = Math.abs(im).toFixed(4);
             let sign1 = reStr === "" ? "" : (im > 0 ? " + " : " - ");
             let sign2 = reStr === "" ? (im > 0 ? "" : "-") : "";
-            
+
             raizesIrracionais.push({ tex: `${radBaseTex} \\cdot ${eulerTex}`, valStr: `${reStr}${sign1}${sign2}${imAbs}i`, isComplex: true, reNum: re, imNum: im });
           }
         }
       }
       else if (degRem > 2) {
         steps.push(`O polinómio reduzido tem grau ${degRem}. Extraindo raízes irracionais/complexas restantes via método numérico (Durand-Kerner)`);
-        
+
         const numRoots = durandKerner(currentCoeffs);
         numRoots.forEach(z => {
           if (Math.abs(z.im) < 1e-6) {
@@ -2161,13 +2504,13 @@
 
       const hasComplex = raizesIrracionais.some(r => r.isComplex);
       const hasIrrat = raizesIrracionais.length > 0 && !hasComplex;
-      
+
       const svgGrafico = gerarSvgGraficoPolinomio(originalCoeffs, realRoots);
       let svgPlanoComplexo = '';
       if (hasComplex) {
         svgPlanoComplexo = gerarSvgPlanoComplexo(allRoots);
       }
-      
+
       let visualizacoesHtml = '';
       if (hasComplex) {
         visualizacoesHtml = `
@@ -2190,7 +2533,7 @@
       let resumoRaizes = '';
       if (raizesRacionais.length > 0) {
         resumoRaizes += `<p><strong>${t('solver_rat_roots_found')}</strong></p>
-          <ul class="list-disc list-inside text-slate-800 dark:text-slate-200 space-y-1 mt-1 pl-1">` + 
+          <ul class="list-disc list-inside text-slate-800 dark:text-slate-200 space-y-1 mt-1 pl-1">` +
           raizesRacionais.map(r => {
             if (r.tex.includes('\\frac')) {
               return `<li>\\(x = ${r.tex} \\approx ${r.val.toFixed(5)}\\)</li>`;
@@ -2198,14 +2541,14 @@
             return `<li>\\(x = ${r.tex}\\)</li>`;
           }).join('') + `</ul>`;
       }
-      
+
       if (raizesIrracionais.length > 0) {
         const labelText = hasComplex ? t('solver_rem_complex_roots') : t('solver_irrat_roots_found');
         const labelKey = hasComplex ? 'solver_rem_complex_roots' : 'solver_irrat_roots_found';
         const label = `<strong><span data-i18n="${labelKey}">${labelText}</span></strong>`;
-        
+
         resumoRaizes += `<div class="mt-4 text-blue-900 dark:text-blue-300 font-medium">${label}</div>
-          <ul class="list-disc list-inside text-blue-900 dark:text-blue-300 font-medium space-y-1 mt-1 pl-1"> ` + 
+          <ul class="list-disc list-inside text-blue-900 dark:text-blue-300 font-medium space-y-1 mt-1 pl-1"> ` +
           raizesIrracionais.map(r => {
             if (r.isApproxOnly) {
               return `<li>\\(x \\approx ${r.valStr ? r.valStr : r.val.toFixed(5)}\\)</li>`;
@@ -2218,15 +2561,15 @@
       let verticeHtml = '';
       if (degree === 2) {
         const a = originalCoeffs[0], b = originalCoeffs[1], c = originalCoeffs[2];
-        const delta = b*b - 4*a*c;
-        const xv = -b / (2*a);
-        const yv = -delta / (4*a);
-        
+        const delta = b * b - 4 * a * c;
+        const xv = -b / (2 * a);
+        const yv = -delta / (4 * a);
+
         const tipoKey = a > 0 ? 'solver_geom_min' : 'solver_geom_max';
         const tipoText = a > 0 ? t('solver_geom_min') : t('solver_geom_max');
         const concavKey = a > 0 ? 'solver_geom_up' : 'solver_geom_down';
         const concavText = a > 0 ? t('solver_geom_up') : t('solver_geom_down');
-        
+
         verticeHtml = `
           <div class="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 rounded">
             <h4 class="font-bold text-amber-900 dark:text-amber-300 mb-1" data-i18n="solver_geom_title">${t('solver_geom_title')}</h4>
@@ -2241,7 +2584,7 @@
       const coefN = originalCoeffs[0];
       const coefN_1 = originalCoeffs.length > 1 ? originalCoeffs[1] : 0;
       const coef0 = originalCoeffs[originalCoeffs.length - 1];
-      
+
       const somaNum = -coefN_1;
       const somaDen = coefN;
       const somaGcd = gcd(somaNum, somaDen);
@@ -2276,15 +2619,15 @@
       let calcHtml = '';
       try {
         let nerdStr = originalCoeffs.map((c, i) => {
-            let deg = originalCoeffs.length - 1 - i;
-            if (c === 0) return '';
-            return `${c > 0 ? '+' : ''}${c}*x^${deg}`;
+          let deg = originalCoeffs.length - 1 - i;
+          if (c === 0) return '';
+          return `${c > 0 ? '+' : ''}${c}*x^${deg}`;
         }).join('');
         if (!nerdStr) nerdStr = '0';
-        
+
         const resultDiff = nerdamer(`diff(${nerdStr}, x)`).toTeX();
         const resultInt = nerdamer(`integrate(${nerdStr}, x)`).toTeX();
-        
+
         calcHtml = `
           <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800/80 border-l-4 border-slate-500 rounded">
             <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-2" data-i18n="solver_calc_title">${t('solver_calc_title')}</h4>
@@ -2294,7 +2637,7 @@
             </div>
           </div>
         `;
-      } catch(e) {
+      } catch (e) {
         console.error("Erro ao gerar cálculo diferencial e integral.", e);
       }
 
@@ -2325,82 +2668,318 @@
       document.getElementById('trig-angle').value = angle;
       analisarTrig();
     }
+    function getExactTrig(func, originalAngle) {
+      let ang = ((originalAngle % 360) + 360) % 360;
+
+      // Trata as assíntotas (onde a função tende ao infinito / não existe nos reais)
+      if ((func === 'tan' || func === 'sec') && (ang === 90 || ang === 270)) return { isUndefined: true };
+      if ((func === 'cot' || func === 'csc') && (ang === 0 || ang === 180)) return { isUndefined: true };
+
+      // Redução ao primeiro quadrante e definição do sinal
+      let q = 1;
+      let ref = ang;
+      if (ang > 90 && ang <= 180) { ref = 180 - ang; q = 2; }
+      else if (ang > 180 && ang <= 270) { ref = ang - 180; q = 3; }
+      else if (ang > 270 && ang < 360) { ref = 360 - ang; q = 4; }
+
+      let sign = 1;
+      if (func === 'sin' || func === 'csc') { if (q === 3 || q === 4) sign = -1; }
+      else if (func === 'cos' || func === 'sec') { if (q === 2 || q === 3) sign = -1; }
+      else if (func === 'tan' || func === 'cot') { if (q === 2 || q === 4) sign = -1; }
+
+      const applySign = (tex) => {
+        if (tex === "0") return "0";
+        if (sign === 1) return tex;
+        if (tex.startsWith("-")) return tex.substring(1);
+        return "-" + tex;
+      };
+
+      // Banco de dados em LaTeX (0°, 15°, 18°, 30°, 36°, 45°, 60°, 75°, 90°)
+      const db = {
+        0: { sin: "0", cos: "1", tan: "0", sec: "1" },
+        15: {
+          sin: "\\frac{\\sqrt{6} - \\sqrt{2}}{4}", cos: "\\frac{\\sqrt{6} + \\sqrt{2}}{4}", tan: "2 - \\sqrt{3}",
+          sec: "\\sqrt{6} - \\sqrt{2}", csc: "\\sqrt{6} + \\sqrt{2}", cot: "2 + \\sqrt{3}"
+        },
+        18: {
+          sin: "\\frac{\\sqrt{5} - 1}{4}", cos: "\\frac{\\sqrt{10 + 2\\sqrt{5}}}{4}", tan: "\\frac{\\sqrt{25 - 10\\sqrt{5}}}{5}",
+          sec: "\\frac{\\sqrt{50 - 10\\sqrt{5}}}{5}", csc: "\\sqrt{5} + 1", cot: "\\sqrt{5 + 2\\sqrt{5}}"
+        },
+        30: {
+          sin: "\\frac{1}{2}", cos: "\\frac{\\sqrt{3}}{2}", tan: "\\frac{\\sqrt{3}}{3}",
+          sec: "\\frac{2\\sqrt{3}}{3}", csc: "2", cot: "\\sqrt{3}"
+        },
+        36: {
+          sin: "\\frac{\\sqrt{10 - 2\\sqrt{5}}}{4}", cos: "\\frac{\\sqrt{5} + 1}{4}", tan: "\\sqrt{5 - 2\\sqrt{5}}",
+          sec: "\\sqrt{5} - 1", csc: "\\frac{\\sqrt{50 + 10\\sqrt{5}}}{5}", cot: "\\frac{\\sqrt{25 + 10\\sqrt{5}}}{5}"
+        },
+        45: {
+          sin: "\\frac{\\sqrt{2}}{2}", cos: "\\frac{\\sqrt{2}}{2}", tan: "1",
+          sec: "\\sqrt{2}", csc: "\\sqrt{2}", cot: "1"
+        },
+        60: {
+          sin: "\\frac{\\sqrt{3}}{2}", cos: "\\frac{1}{2}", tan: "\\sqrt{3}",
+          sec: "2", csc: "\\frac{2\\sqrt{3}}{3}", cot: "\\frac{\\sqrt{3}}{3}"
+        },
+        75: {
+          sin: "\\frac{\\sqrt{6} + \\sqrt{2}}{4}", cos: "\\frac{\\sqrt{6} - \\sqrt{2}}{4}", tan: "2 + \\sqrt{3}",
+          sec: "\\sqrt{6} + \\sqrt{2}", csc: "\\sqrt{6} - \\sqrt{2}", cot: "2 - \\sqrt{3}"
+        },
+        90: { sin: "1", cos: "0", csc: "1", cot: "0" }
+      };
+
+      if (db[ref] && db[ref][func]) {
+        return { hasExact: true, tex: applySign(db[ref][func]) };
+      }
+      return { hasExact: false };
+    }
 
     function analisarTrig() {
-      const func = document.getElementById('trig-func').value;
-      let angle = parseFloat(document.getElementById('trig-angle').value);
-      const outDiv = document.getElementById('trig-output');
+  const func = document.getElementById('trig-func').value;
+  let angle = parseFloat(document.getElementById('trig-angle').value);
+  const outDiv = document.getElementById('trig-output');
+  outDiv.classList.remove('hidden');
+
+  if (isNaN(angle)) return;
+
+  const normAngle = ((angle % 360) + 360) % 360;
+  const rad = (normAngle * Math.PI) / 180;
+  
+  let valCalc = 0;
+  if (func === 'sin') valCalc = Math.sin(rad);
+  else if (func === 'cos') valCalc = Math.cos(rad);
+  else if (func === 'tan') valCalc = Math.tan(rad);
+  else if (func === 'sec') valCalc = 1 / Math.cos(rad);
+  else if (func === 'csc') valCalc = 1 / Math.sin(rad);
+  else if (func === 'cot') valCalc = 1 / Math.tan(rad);
+
+  let funcName = '\\' + func;
+  
+  const formatRad = (deg) => {
+    if (deg === 0) return "0";
+    let sign = deg < 0 ? "-" : "";
+    let g = (a, b) => b ? g(b, a % b) : a;
+    let divisor = g(Math.abs(deg), 180);
+    let n = Math.abs(deg) / divisor;
+    let d = 180 / divisor;
+    let nStr = n === 1 ? "\\pi" : `${n}\\pi`;
+    if (d === 1) return `${sign}${nStr}`;
+    return `${sign}\\frac{${nStr}}{${d}}`;
+  };
+  
+  const radTex = formatRad(angle);
+  const exactData = getExactTrig(func, angle); 
+
+  // Lógica de Interceptação do Arco Triplo
+  let refQ1 = normAngle;
+  if (normAngle > 90 && normAngle <= 180) refQ1 = 180 - normAngle;
+  else if (normAngle > 180 && normAngle <= 270) refQ1 = normAngle - 180;
+  else if (normAngle > 270) refQ1 = 360 - normAngle;
+
+  const isCosSecTriplo = (func === 'cos' || func === 'sec') && (refQ1 === 20 || refQ1 === 40 || refQ1 === 80);
+  const isSinCscTriplo = (func === 'sin' || func === 'csc') && (refQ1 === 10 || refQ1 === 50 || refQ1 === 70);
+
+  let html = '';
+
+  if (isCosSecTriplo || isSinCscTriplo) {
+    let formula = isCosSecTriplo ? "\\cos(3\\theta) = 4\\cos^3(\\theta) - 3\\cos(\\theta)" : "\\sin(3\\theta) = 3\\sin(\\theta) - 4\\sin^3(\\theta)";
+    let sinal = "- 1";
+    let resTriplo = "\\frac{1}{2}";
+    
+    if (isCosSecTriplo) {
+        if (refQ1 === 40 || refQ1 === 80) { resTriplo = "-\\frac{1}{2}"; sinal = "+ 1"; }
+    } else {
+        if (refQ1 === 70) { resTriplo = "-\\frac{1}{2}"; sinal = "- 1"; }
+        else { resTriplo = "\\frac{1}{2}"; sinal = "+ 1"; }
+    }
+    let subFormula = isCosSecTriplo ? `4x^3 - 3x = ${resTriplo}` : `${resTriplo} = 3x - 4x^3`;
+
+    html = `
+      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_irrat')}</h3>
+        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
+      </div>
+      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+        <p><strong>${t('trig_triple_arc')}</strong></p>
+        <div class="math-step notranslate">\\(${formula}\\)</div>
+        <p>${t('trig_chebyshev_sub', { angle })}</p>
+        <div class="math-step notranslate">\\(${subFormula} \\iff 8x^3 - 6x ${sinal} = 0\\)</div>
+        <p><strong>${t('trig_trr_filter')}</strong></p>
+        <p>${t('trig_trr_cand_lbl')}</p>
+        <div class="math-step notranslate">\\(\\mathcal{C} \\in \\left\\{ \\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{4}, \\pm \\frac{1}{8} \\right\\}\\)</div>
+        <p>${t('trig_trr_none')}</p>
+        <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
+          ${t('trig_chebyshev_concl', { angle })}
+        </div>
+      </div>
+    `;
+  } else if (exactData.isUndefined) {
+    html = `
+      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg" data-i18n="trig_undef_title">${t('trig_undef_title')}</h3>
+        <span class="bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 font-semibold px-3 py-1 rounded text-xs" data-i18n="trig_undef_badge">${t('trig_undef_badge')}</span>
+      </div>
+      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+        <p>${t('trig_undef_desc', { funcName: funcName, angle: angle })}</p>
+        <div class="math-step notranslate">\\( \\theta = ${angle}^\\circ = ${radTex} \\text{ rad} \\)</div>
+        <div class="math-step notranslate">\\( \\lim_{\\theta \\to ${angle}^\\circ} ${funcName}(\\theta) = \\pm \\infty \\)</div>
+      </div>
+    `;
+  } else if (exactData.hasExact) {
+    html = `
+      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg" data-i18n="trig_exact_title">${t('trig_exact_title')}</h3>
+        <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs" data-i18n="trig_exact_badge">${t('trig_exact_badge')}</span>
+      </div>
+      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+        <div class="math-step notranslate pb-2 text-xl">\\(${funcName}(${angle}^\\circ) = ${exactData.tex}\\)</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_dec_val">${t('trig_dec_val')}</span>
+            <div class="math-step notranslate mt-2 text-lg">\\(\\approx ${valCalc.toFixed(8)}\\)</div>
+          </div>
+          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_rad_val">${t('trig_rad_val')}</span>
+            <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    html = `
+      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg" data-i18n="trig_num_title">${t('trig_num_title')}</h3>
+        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs" data-i18n="trig_num_badge">${t('trig_num_badge')}</span>
+      </div>
+      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_dec_val">${t('trig_dec_val')}</span>
+            <div class="math-step notranslate mt-2 text-lg">\\(${funcName}(${angle}^\\circ) \\approx ${valCalc.toFixed(8)}\\)</div>
+          </div>
+          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_rad_val">${t('trig_rad_val')}</span>
+            <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  outDiv.innerHTML = html;
+  if (window.renderMathInElement) renderMathInElement(outDiv);
+}
+
+
+    // Motor 4: Logaritmos
+    function analisarLogaritmo() {
+      const b = parseInt(document.getElementById('log-base').value);
+      const a = parseInt(document.getElementById('log-arg').value);
+      const outDiv = document.getElementById('log-output');
       outDiv.classList.remove('hidden');
 
-      if (isNaN(angle)) return;
+      if (isNaN(b) || b < 2 || isNaN(a) || a < 1) {
+        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">A base deve ser &ge; 2 e o logaritmando &ge; 1.</div>`;
+        return;
+      }
 
-      angle = ((angle % 360) + 360) % 360;
-      const rad = (angle * Math.PI) / 180;
-      let valCalc = (func === 'sin') ? Math.sin(rad) : (func === 'cos' ? Math.cos(rad) : Math.tan(rad));
-      let funcName = func === 'sin' ? '\\sin' : (func === 'cos' ? '\\cos' : '\\tan');
+      if (a === 1) {
+        outDiv.innerHTML = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_rational_int')}</h3>
+            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(1) = 0 \\in \\mathbb{Q}\\)</span>
+          </div>
+          <div class="text-sm text-slate-700 dark:text-slate-300">O logaritmo de 1 em qualquer base é sempre 0, pois \\(${b}^0 = 1\\).</div>
+        `;
+        if (window.renderMathInElement) renderMathInElement(outDiv);
+        return;
+      }
 
-      const key = `${func}_${angle}`;
+      const factB = primeFactorization(b);
+      const factA = primeFactorization(a);
+      const primesB = Object.keys(factB).sort((x, y) => x - y);
+      const primesA = Object.keys(factA).sort((x, y) => x - y);
+
+      const formatFact = (fact) => Object.entries(fact).map(([p, e]) => e === 1 ? p : `${p}^{${e}}`).join(' \\cdot ');
+      const factB_str = formatFact(factB);
+      const factA_str = formatFact(factA);
+
+      let isRational = true;
+      let p_val = 0, q_val = 1;
+      let absurdoPrimos = false;
+      let absurdoExpoentes = false;
+      let eqSistema = [];
+
+      if (primesA.length !== primesB.length || !primesA.every((v, i) => v === primesB[i])) {
+        isRational = false;
+        absurdoPrimos = true;
+      } else {
+        const p1 = primesA[0];
+        p_val = factA[p1];
+        q_val = factB[p1];
+        const divis = gcd(p_val, q_val);
+        p_val /= divis;
+        q_val /= divis;
+
+        for (let p of primesA) {
+          eqSistema.push(`\\text{Para } ${p}: & ${factB[p]}p = ${factA[p]}q \\implies \\frac{p}{q} = \\frac{${factA[p]}}{${factB[p]}}`);
+          if (factA[p] * q_val !== factB[p] * p_val) {
+            isRational = false;
+            absurdoExpoentes = true;
+          }
+        }
+      }
+
       let html = '';
-
-      if (key === 'cos_20' || key === 'cos_40') {
+      if (isRational) {
+        let fracStr = q_val === 1 ? `${p_val}` : `\\frac{${p_val}}{${q_val}}`;
         html = `
           <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_irrat')}</h3>
-            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_rational_int')}</h3>
+            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) = ${fracStr} \\in \\mathbb{Q}\\)</span>
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-            <p><strong>${t('trig_triple_arc')}</strong></p>
-            <div class="math-step notranslate">\\(\\cos(3\\theta) = 4\\cos^3(\\theta) - 3\\cos(\\theta)\\)</div>
-            <p>${t('trig_chebyshev_sub', { angle })}</p>
-            <div class="math-step notranslate">\\(4x^3 - 3x = \\frac{1}{2} \\iff 8x^3 - 6x - 1 = 0\\)</div>
-            <p><strong>${t('trig_trr_filter')}</strong></p>
-            <p>${t('trig_trr_cand_lbl')}</p>
-            <div class="math-step notranslate">\\(\\mathcal{C} \\in \\left\\{ \\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{4}, \\pm \\frac{1}{8} \\right\\}\\)</div>
-            <p>${t('trig_trr_none')}</p>
-            <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
-              ${t('trig_chebyshev_concl', { angle })}
-            </div>
+            <p>De fato, os dois números compartilham os mesmos fatores primos na mesma proporção exata:</p>
+            <div class="math-step notranslate">\\(${b} = ${factB_str}\\)</div>
+            <div class="math-step notranslate">\\(${a} = ${factA_str}\\)</div>
+            <p>Portanto, \\(${b}^{${fracStr}} = ${a}\\).</p>
           </div>
         `;
       } else {
-        const ehNivenRacional = (func === 'sin' && (angle === 0 || angle === 30 || angle === 150 || angle === 180 || angle === 360)) ||
-                                (func === 'cos' && (angle === 0 || angle === 60 || angle === 90 || angle === 120 || angle === 240 || angle === 270 || angle === 300)) ||
-                                (func === 'tan' && (angle === 0 || angle === 45 || angle === 135 || angle === 180 || angle === 225 || angle === 315 || angle === 360));
-
-        if (ehNivenRacional) {
-          html = `
-            <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-              <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_rat_notable')}</h3>
-              <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\in \\mathbb{Q}\\)</span>
-            </div>
-            <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-              <div class="math-step notranslate">\\(${funcName}(${angle}^\\circ) = ${valCalc.toFixed(4)}\\)</div>
-            </div>
-          `;
-        } else {
-          html = `
-            <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-              <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_niven_irrat')}</h3>
-              <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
-            </div>
-            <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-              <div class="math-step notranslate">\\(${funcName}(${angle}^\\circ) \\approx ${valCalc.toFixed(8)}\\)</div>
-              <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded text-xs italic">
-                ${t('trig_niven_quote')}
-              </div>
-              <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
-                ${t('trig_niven_concl', { angle, val: valCalc.toFixed(4) })}
-              </div>
-            </div>
-          `;
+        let explicacaoAbsurdo = '';
+        if (absurdoPrimos) {
+          explicacaoAbsurdo = `Os números não possuem a mesma base de fatores primos. Há primos em um dos lados da equação \\(b^p = a^q\\) que não existem no outro. Pelo TFA, é impossível que uma potência de ${b} resulte numa potência de ${a} (para \\(p, q \\neq 0\\)).`;
+        } else if (absurdoExpoentes) {
+          explicacaoAbsurdo = `Apesar de compartilharem os mesmos fatores primos, a proporção entre os expoentes não se sustenta para todos simultaneamente. O sistema resultante entra em contradição:<br> <div class="math-step notranslate overflow-x-auto">\\(\\begin{cases} ${eqSistema.join(' \\\\[4pt] ')} \\end{cases}\\)</div>`;
         }
+
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_irrational_proven')}</h3>
+            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) \\notin \\mathbb{Q}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <p><strong>1. Fatoração e Suposição</strong></p>
+            <p>Suponha, por absurdo, que o logaritmo seja um racional \\(p/q\\) (com \\(p, q > 0\\)). Da definição de logaritmo:</p>
+            <div class="math-step notranslate">\\(\\log_{${b}}(${a}) = \\frac{p}{q} \\implies ${b}^{\\frac{p}{q}} = ${a} \\implies ${b}^p = ${a}^q\\)</div>
+            
+            <p><strong>2. Aplicação do TFA</strong></p>
+            <p>Substituindo pelas decomposições em fatores primos:</p>
+            <div class="math-step notranslate overflow-x-auto">\\( (${factB_str})^p = (${factA_str})^q \\)</div>
+            
+            <div class="p-3 bg-red-50 border-l-4 border-red-500 dark:bg-red-900/20 dark:border-red-800 rounded text-red-900 dark:text-red-300 text-xs mt-3">
+              <strong>Contradição:</strong> ${explicacaoAbsurdo}
+            </div>
+            <p class="font-semibold text-slate-900 dark:text-slate-100 pt-1">Logo, \\(\\log_{${b}}(${a})\\) é estritamente irracional (e, pelo Teorema de Gelfond-Schneider, também transcendente).</p>
+          </div>
+        `;
       }
 
       outDiv.innerHTML = html;
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
 
-    // MOTOR 4: EISENSTEIN
+    // MOTOR 5: EISENSTEIN
     function executarEisenstein() {
       const inputStr = document.getElementById('eisen-input').value;
       const outDiv = document.getElementById('eisen-output');
@@ -2436,7 +3015,7 @@
             <ul class="list-disc list-inside space-y-1 pl-2">
               <li>${t('eisen_c1', { p: primoEisenstein, n })}</li>
               <li>${t('eisen_c2', { p: primoEisenstein, n, an })}</li>
-              <li>${t('eisen_c3', { p: primoEisenstein, p2: primoEisenstein*primoEisenstein, a0 })}</li>
+              <li>${t('eisen_c3', { p: primoEisenstein, p2: primoEisenstein * primoEisenstein, a0 })}</li>
             </ul>
             <div class="p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
               ${t('eisen_concl', { n })}
@@ -2460,7 +3039,7 @@
     }
 
     // MOTOR: FRAÇÕES CONTÍNUAS (RAÍZES)
-function executarFracaoContinua() {
+    function executarFracaoContinua() {
       const N = parseInt(document.getElementById('cf-radicand').value);
       const outDiv = document.getElementById('cf-output');
       outDiv.classList.remove('hidden');
@@ -2493,7 +3072,7 @@ function executarFracaoContinua() {
         let p_next = coef * p_cur + p_ant, q_next = coef * q_cur + q_ant;
         p_ant = p_cur; p_cur = p_next;
         q_ant = q_cur; q_cur = q_next;
-        convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur/q_cur).toFixed(6)}`);
+        convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(6)}`);
       }
 
       const html = `
@@ -2524,31 +3103,30 @@ function executarFracaoContinua() {
       const start = input.selectionStart;
       const end = input.selectionEnd;
       const currentVal = input.value;
-      
+
       input.value = currentVal.substring(0, start) + texto + currentVal.substring(end);
-      
+
       input.focus();
       input.selectionStart = input.selectionEnd = start + texto.length;
     }
-    
+
     function executarFracaoExpressao() {
       const expr = document.getElementById('cf-expr-input').value;
       const outDiv = document.getElementById('cf-expr-output');
       outDiv.classList.remove('hidden');
-      
+
       try {
         if (!expr.trim()) throw new Error();
 
-        // Avaliação matemática rigorosa forçando retorno numérico puro do Nerdamer
         const valText = nerdamer(expr).evaluate().text('decimals');
         const val = parseFloat(valText);
-        
+
         if (isNaN(val) || !isFinite(val)) throw new Error();
 
         let a_n = Math.floor(val);
         let x_n = val - a_n;
         const periodo = [a_n];
-        
+
         let stepCount = 0;
         while (x_n > 1e-10 && stepCount < 20) {
           let inverted = 1 / x_n;
@@ -2567,7 +3145,7 @@ function executarFracaoContinua() {
           let q_next = coef * q_cur + q_ant;
           p_ant = p_cur; p_cur = p_next;
           q_ant = q_cur; q_cur = q_next;
-          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur/q_cur).toFixed(8)}`);
+          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(8)}`);
         }
 
         const exprTex = nerdamer(expr).toTeX();
@@ -2584,206 +3162,38 @@ function executarFracaoContinua() {
           </div>
         `;
         renderMathInElement(outDiv);
-      } catch(e) {
+      } catch (e) {
         outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">${t('err_invalid_expr')}</div>`;
       }
     }
 
     function enviarParaAba2() {
       const expr = document.getElementById('cf-expr-input').value.trim();
-      
+
       if (!expr) {
         alert("Digite uma expressão primeiro!");
         return;
       }
 
       try {
-        // Apenas valida se o nerdamer consegue interpretar a sintaxe, sem resolver decimais
         nerdamer(expr);
-        
-        // Mantém a expressão simbólica
-        // Cria a função f(x) = x^2 - (expr)^2, formando uma parábola simétrica
-        const polyStr = `x^2 - (${expr})^2`;
 
-        document.getElementById('poly-input').value = polyStr;
+        document.getElementById('poly-input').value = expr;
         switchTab('solver');
-        
+
         setTimeout(() => {
-            const polyInputDiv = document.getElementById('poly-input').closest('.flex-grow');
-            polyInputDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Efeito visual esmeralda para indicar a transição
-            polyInputDiv.classList.add('ring-4', 'ring-emerald-400', 'transition-all', 'rounded');
-            setTimeout(() => polyInputDiv.classList.remove('ring-4', 'ring-emerald-400', 'rounded'), 1000);
-            
-            // Dispara o solucionador híbrido da Aba 2
-            resolverPolinomio();
+          const polyInputDiv = document.getElementById('poly-input').closest('.flex-grow');
+          polyInputDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          polyInputDiv.classList.add('ring-4', 'ring-emerald-400', 'transition-all', 'rounded');
+          setTimeout(() => polyInputDiv.classList.remove('ring-4', 'ring-emerald-400', 'rounded'), 1000);
+
+          resolverPolinomio();
         }, 300);
 
-      } catch(e) {
+      } catch (e) {
         alert("Erro algébrico. Certifique-se de que a expressão matemática está escrita corretamente.");
       }
-    }
-
-    function analisarExpressaoSimbolica(exprStr, outDiv) {
-      try {
-        // 1. APLICA O TRADUTOR DE SINTAXE AQUI
-        let funcStr = sanitizarSintaxeMatematica(exprStr);
-
-        if (funcStr.includes('=')) {
-          const parts = funcStr.split('=');
-          funcStr = `(${parts[0]}) - (${parts[1]})`;
-        }
-
-        // Auto-correção para constantes sem 'x
-        if (!funcStr.includes('x')) {
-            funcStr = `x^2 - (${funcStr})^2`;
-        }
-
-        const f = nerdamer(funcStr);
-        const texExpr = f.toTeX();
-        
-        // Operações de Cálculo Rigoroso
-        const derivadaTex = nerdamer(`diff(${funcStr}, x)`).toTeX();
-        const integralTex = nerdamer(`integrate(${funcStr}, x)`).toTeX();
-
-        // Compila a função para gerar o Gráfico SVG
-        const f_eval = f.buildFunction(['x']);
-        const svgGrafico = gerarSvgFuncaoGeral(f_eval);
-
-        outDiv.innerHTML = `
-          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
-            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Modo de Análise Analítica (Cálculo e Geometria)</h3>
-            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">Função de R em R</span>
-          </div>
-          
-          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
-            <p>O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o <strong>rigor absoluto</strong> da sua expressão sem aproximações decimais, o laboratório ativou o motor de Análise Real.</p>
-            
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Função Analisada:</span>
-              <div class="math-step notranslate mb-4">\\(f(x) = ${texExpr}\\)</div>
-              
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
-                  <span class="font-semibold text-blue-600 dark:text-blue-400">Derivada \\(\\frac{d}{dx}f(x)\\):</span>
-                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${derivadaTex}\\)</div>
-                </div>
-                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
-                  <span class="font-semibold text-purple-600 dark:text-purple-400">Integral Indefinida \\(\\int f(x) dx\\):</span>
-                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${integralTex} + C\\)</div>
-                </div>
-              </div>
-            </div>
-            
-            ${svgGrafico}
-          </div>
-        `;
-        if (window.renderMathInElement) renderMathInElement(outDiv);
-      } catch(e) {
-        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">Erro ao compilar função para análise. Verifique se a variável dependente é "x" e se a sintaxe matemática é suportada.</div>`;
-      }
-    }
-
-    function gerarSvgFuncaoGeral(f_eval) {
-      const width = 600, height = 300;
-      const boundX = 6;
-      const xMin = -boundX;
-      const xMax = boundX;
-      const xRange = xMax - xMin;
-      
-      const steps = 300;
-      const dx = xRange / steps;
-
-      let calcYMin = Infinity;
-      let calcYMax = -Infinity;
-      let points = [];
-      
-      for (let i = 0; i <= steps; i++) {
-        let x = xMin + i * dx;
-        try {
-            let y = f_eval(x);
-            // Ignora descontinuidades, raízes complexas de números negativos, etc
-            if (!isNaN(y) && isFinite(y)) {
-                points.push({x, y});
-                if (y < calcYMin) calcYMin = y;
-                if (y > calcYMax) calcYMax = y;
-            }
-        } catch(e) {}
-      }
-
-      if (points.length === 0) return '';
-
-      let yRange = calcYMax - calcYMin;
-      if (yRange === 0) yRange = 10; 
-
-      let yMin = calcYMin - yRange * 0.15;
-      let yMax = calcYMax + yRange * 0.15;
-      
-      if (yMin > 0) yMin = -yRange * 0.15;
-      if (yMax < 0) yMax = yRange * 0.15;
-      yRange = yMax - yMin;
-
-      const toScreenX = (x) => ((x - xMin) / xRange) * width;
-      const toScreenY = (y) => height - ((y - yMin) / yRange) * height;
-
-      let pathD = "";
-      let first = true;
-      for (let p of points) {
-        let sx = toScreenX(p.x);
-        let sy = toScreenY(p.y);
-        sy = Math.max(-5000, Math.min(height + 5000, sy)); 
-        if (first) {
-            pathD += `M ${sx} ${sy}`;
-            first = false;
-        } else {
-            pathD += ` L ${sx} ${sy}`;
-        }
-      }
-
-      const xAxisY = toScreenY(0);
-      const yAxisX = toScreenX(0);
-      let ticksEixos = "";
-
-      let rawStepX = xRange / 8;
-      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
-      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
-      
-      let rawStepY = yRange / 6;
-      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
-      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
-
-      let startX = Math.ceil(xMin / xStep) * xStep;
-      for (let i = startX; i <= xMax; i += xStep) {
-        if (Math.abs(i) < 1e-7) continue;
-        let tx = toScreenX(i);
-        let labelX = parseFloat(i.toFixed(2));
-        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
-      }
-
-      let startY = Math.ceil(yMin / yStep) * yStep;
-      for (let j = startY; j <= yMax; j += yStep) {
-        if (Math.abs(j) < 1e-7) continue; 
-        let ty = toScreenY(j);
-        let labelY = parseFloat(j.toFixed(2));
-        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
-      }
-      
-      ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
-
-      return `
-        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
-          <p class="text-xs text-slate-400 mb-2 font-medium">Plano Cartesiano: Gráfico da Função f(x)</p>
-          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800">
-            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
-            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
-            ${ticksEixos}
-            <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="3" />
-            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
-            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
-          </svg>
-        </div>
-      `;
     }
 
     // 1. TRADUTOR DE SINTAXE (Português -> Internacional)
@@ -2803,7 +3213,7 @@ function executarFracaoContinua() {
       return limpa;
     }
 
-    // 2. O ANALISADOR HÍBRIDO -->
+    // 2. O ANALISADOR HÍBRIDO DEFINITIVO
     function analisarExpressaoSimbolica(exprStr, outDiv) {
       try {
         let funcStr = sanitizarSintaxeMatematica(exprStr);
@@ -2813,14 +3223,9 @@ function executarFracaoContinua() {
           funcStr = `(${parts[0]}) - (${parts[1]})`;
         }
 
-        // Se o utilizador apenas digitou uma constante força a parábola geométrica
-        if (!funcStr.includes('x')) {
-            funcStr = `x^2 - (${funcStr})^2`;
-        }
-
         const f = nerdamer(funcStr);
         const texExpr = f.toTeX();
-        
+
         const derivadaTex = nerdamer(`diff(${funcStr}, x)`).toTeX();
         const integralTex = nerdamer(`integrate(${funcStr}, x)`).toTeX();
 
@@ -2829,21 +3234,21 @@ function executarFracaoContinua() {
 
         outDiv.innerHTML = `
           <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
-            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Modo de Análise Analítica (Cálculo e Geometria)</h3>
-            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">Função de R em R</span>
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('hybrid_title')}</h3>
+            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">${t('hybrid_badge')}</span>
           </div>
           <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
-            <p>O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o <strong>rigor absoluto</strong> da sua expressão sem aproximações decimais, o laboratório ativou o motor de Análise Real.</p>
+            <p>${t('hybrid_desc')}</p>
             <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Função Analisada:</span>
+              <span class="font-semibold text-slate-700 dark:text-slate-300">${t('hybrid_func_lbl')}</span>
               <div class="math-step notranslate mb-4">\\(f(x) = ${texExpr}\\)</div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
-                  <span class="font-semibold text-blue-600 dark:text-blue-400">Derivada \\(\\frac{d}{dx}f(x)\\):</span>
+                  <span class="font-semibold text-blue-600 dark:text-blue-400">${t('hybrid_deriv_lbl')}</span>
                   <div class="math-step notranslate mt-2 overflow-x-auto">\\(${derivadaTex}\\)</div>
                 </div>
                 <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
-                  <span class="font-semibold text-purple-600 dark:text-purple-400">Integral Indefinida \\(\\int f(x) dx\\):</span>
+                  <span class="font-semibold text-purple-600 dark:text-purple-400">${t('hybrid_int_lbl')}</span>
                   <div class="math-step notranslate mt-2 overflow-x-auto">\\(${integralTex} + C\\)</div>
                 </div>
               </div>
@@ -2852,149 +3257,9 @@ function executarFracaoContinua() {
           </div>
         `;
         if (window.renderMathInElement) renderMathInElement(outDiv);
-      } catch(e) {
-        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">Erro ao compilar função para análise. Verifique se a variável dependente é "x" e se a sintaxe matemática é suportada.</div>`;
+      } catch (e) {
+        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">${t('hybrid_error')}</div>`;
       }
-    }
-
-    // 3. O RENDERIZADOR GRÁFICO 
-    function gerarSvgFuncaoGeral(f_eval) {
-      // Injeta suporte a funções recíprocas no JavaScript nativo
-      if (typeof Math.sec === 'undefined') Math.sec = (x) => 1 / Math.cos(x);
-      if (typeof Math.csc === 'undefined') Math.csc = (x) => 1 / Math.sin(x);
-      if (typeof Math.cot === 'undefined') Math.cot = (x) => 1 / Math.tan(x);
-      if (typeof Math.asec === 'undefined') Math.asec = (x) => Math.acos(1 / x);
-      if (typeof Math.acsc === 'undefined') Math.acsc = (x) => Math.asin(1 / x);
-      if (typeof Math.acot === 'undefined') Math.acot = (x) => Math.PI / 2 - Math.atan(x);
-
-      const width = 600, height = 300;
-      const xMin = -6, xMax = 6;
-      const xRange = xMax - xMin;
-      const steps = 600; 
-      const dx = xRange / steps;
-
-      let validPoints = [];
-      for (let i = 0; i <= steps; i++) {
-        let x = xMin + i * dx;
-        try {
-            let y = f_eval(x);
-            // Salva apenas números reais válidos (Ignora NaNs de inversas fora do domínio)
-            if (typeof y === 'number' && !isNaN(y) && isFinite(y)) {
-                validPoints.push({x, y});
-            }
-        } catch(e) {}
-      }
-
-      if (validPoints.length === 0) return '';
-
-      // Enquadramento
-      let sortedY = validPoints.map(p => p.y).sort((a, b) => a - b);
-      let p10 = sortedY[Math.floor(sortedY.length * 0.10)];
-      let p90 = sortedY[Math.floor(sortedY.length * 0.90)];
-      
-      let calcYMin = p10;
-      let calcYMax = p90;
-
-      // Se a variação de Y for assíntotas
-      if (calcYMax - calcYMin > 25) {
-          let median = sortedY[Math.floor(sortedY.length / 2)];
-          calcYMin = median - 10;
-          calcYMax = median + 10;
-      }
-
-      // Se a variação for microscópica
-      if (calcYMax - calcYMin < 4) {
-          let mid = (calcYMax + calcYMin) / 2;
-          calcYMin = mid - 3;
-          calcYMax = mid + 3;
-      }
-
-      let yRange = calcYMax - calcYMin;
-      calcYMin -= yRange * 0.1;
-      calcYMax += yRange * 0.1;
-      
-      // Ancoragem do Eixo X no centro visual
-      if (calcYMin > 0 && calcYMin < yRange) calcYMin = -yRange * 0.15;
-      if (calcYMax < 0 && Math.abs(calcYMax) < yRange) calcYMax = yRange * 0.15;
-      yRange = calcYMax - calcYMin;
-
-      const toScreenX = (x) => ((x - xMin) / xRange) * width;
-      const toScreenY = (y) => height - ((y - calcYMin) / yRange) * height;
-
-      let pathD = "";
-      let first = true;
-      
-      for (let i = 0; i < validPoints.length; i++) {
-        let p = validPoints[i];
-        
-        // Se houver um salto vertical grande em curto passo horizontal
-        if (i > 0) {
-            let prev = validPoints[i-1];
-            if (Math.abs(p.y - prev.y) > yRange * 0.4) {
-                first = true;
-            }
-        }
-
-        let sx = toScreenX(p.x);
-        let sy = toScreenY(p.y);
-
-        // Clip-path de segurança: Se o ponto estiver muito fora da caixa SVG, ignora o desenho
-        if (p.y > calcYMax + yRange || p.y < calcYMin - yRange) {
-            first = true;
-            continue;
-        }
-
-        if (first) {
-            pathD += `M ${sx} ${sy}`;
-            first = false;
-        } else {
-            pathD += ` L ${sx} ${sy}`;
-        }
-      }
-
-      const xAxisY = toScreenY(0);
-      const yAxisX = toScreenX(0);
-      let ticksEixos = "";
-
-      let rawStepX = xRange / 8;
-      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
-      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
-      
-      let rawStepY = yRange / 6;
-      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
-      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
-
-      let startX = Math.ceil(xMin / xStep) * xStep;
-      for (let i = startX; i <= xMax; i += xStep) {
-        if (Math.abs(i) < 1e-7) continue;
-        let tx = toScreenX(i);
-        let labelX = parseFloat(i.toFixed(2));
-        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
-      }
-
-      let startY = Math.ceil(calcYMin / yStep) * yStep;
-      for (let j = startY; j <= calcYMax; j += yStep) {
-        if (Math.abs(j) < 1e-7) continue; 
-        let ty = toScreenY(j);
-        let labelY = parseFloat(j.toFixed(2));
-        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
-      }
-      
-      ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
-
-      return `
-        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
-          <p class="text-xs text-slate-400 mb-2 font-medium">Plano Cartesiano: Gráfico da Função f(x)</p>
-          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800">
-            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
-            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
-            ${ticksEixos}
-            <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
-            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
-          </svg>
-        </div>
-      `;
     }
 
     // Inicialização ao carregar
@@ -3005,4 +3270,5 @@ function executarFracaoContinua() {
     });
   </script>
 </body>
+
 </html>
