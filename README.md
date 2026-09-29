@@ -48,6 +48,17 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.1.3]
+* **Novo:** Suporte a texto sobrescrito na aba "Solucionador de polinômios"
+* **Novo:** Gráfico interativo no modo de Análise na aba "Solucionador de polinômios"
+* **Novo:** Circulo trigonométrico na aba "Funções trigonométricas"
+* **Novo:** Suporte a secante, cossecante e cotangente na aba "Funções trigonométricas"
+* **Novo:** Suporte a ângulos negativos na aba "Funções Trigonométricas"
+* **Novo:** Suporte a raízes n-ésimas na aba "Frações contínuas"
+* **Novo:** Suporte a input de símbolos na aba "Frações contínuas"
+* **Correção:** Bug crítico que não identificava quociente de polinômios na aba "Solucionador de polinômios"
+* **Correção:** Mensagem "ângulo ∉ Q" que não estava aparecendo em alguns ângulos da aba "Funções trigonométricas"
+
 ## [1.1.2]
 * **Novo:** Aba dedicada aos logaritimos
 * **Novo:** Suporte a valores em radianos para ângulos na aba "Funções Trigonométricas"
