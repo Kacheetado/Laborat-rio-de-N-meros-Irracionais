@@ -241,7 +241,7 @@
             - x² + x - 1 (Complexas)</button>
         </div>
 
-        <!-- Gerador de Polinômios com Expressões Algébricas -->
+        <!-- gerador de polinômios com expressões algébricas -->
         <div
           class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 mb-6 transition-colors">
           <h3 class="text-sm font-bold text-blue-900 dark:text-blue-300 mb-2" data-i18n="gen_title">Construtor de
@@ -451,7 +451,7 @@
 
     <!-- ABA 6: FRAÇÕES CONTÍNUAS -->
     <section id="pane-fraccont" class="space-y-6 hidden">
-      <!-- Raízes Quadradas -->
+      <!-- Raizes n-esimas -->
       <div
         class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
         <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2"> <span data-i18n="cf_title">Reconhecimento
@@ -462,11 +462,17 @@
           expansões periódicas: \([a_0; \overline{a_1, a_2, \dots, a_k}]\).
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end max-w-2xl">
+          <div>
+            <!-- Reutilizamos o i18n da Aba 1 para manter o sistema de idiomas funcionando 100% -->
+            <label for="cf-index" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="tfa_lbl_index">Índice (n &ge; 2):</label>
+            <input type="number" id="cf-index" min="2" max="10" value="2"
+              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
+          </div>
           <div class="sm:col-span-2">
-            <label for="cf-radicand"
-              class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
-              data-i18n="cf_lbl_rad">Raiz Quadrada \(\sqrt{N}\) (N não quadrado):</label>
+            <label for="cf-radicand" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
+              data-i18n="tfa_lbl_rad">Radicando (K inteiro positivo):</label>
             <input type="number" id="cf-radicand" min="2" max="1000" value="" placeholder="Ex: 19"
               class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
@@ -492,48 +498,34 @@
           para expressões, constantes transcendentais ou trigonométricas.</p>
 
         <!-- Teclado Matemático Simplificado -->
-        <div
-          class="mb-4 p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600 flex flex-wrap gap-2 items-center text-sm shadow-sm transition-colors">
+        <div class="mb-4 p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600 flex flex-wrap gap-2 items-center text-sm shadow-sm transition-colors">
           <span class="text-slate-500 dark:text-slate-400 font-semibold text-xs uppercase mr-1">Inserir:</span>
-          <button onclick="inserirNoExpr('pi')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\pi\)</button>
-          <button onclick="inserirNoExpr('e')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(e\)</button>
-          <button onclick="inserirNoExpr('(1+sqrt(5))/2')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\phi\)</button>
+          <button onclick="inserirNoExpr('π')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\pi\)</button>
+          <button onclick="inserirNoExpr('e')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(e\)</button>
+          <button onclick="inserirNoExpr('φ')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:text-blue-700 dark:hover:text-blue-400 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif font-bold transition-all shadow-sm">\(\phi\)</button>
           <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
-          <button onclick="inserirNoExpr('sqrt(')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sqrt{x}\)</button>
-          <button onclick="inserirNoExpr('sin(')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sin\)</button>
-          <button onclick="inserirNoExpr('cos(')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\cos\)</button>
-          <button onclick="inserirNoExpr('log(')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\ln\)</button>
+          <button onclick="inserirNoExpr('√(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sqrt{\phantom{x}}\)</button>
+          <button onclick="inserirNoExpr('∛(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sqrt[3]{\phantom{x}}\)</button>
+          <button onclick="inserirNoExpr('∜(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sqrt[4]{\phantom{x}}\)</button>
           <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
-          <button onclick="inserirNoExpr('+')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(+\)</button>
-          <button onclick="inserirNoExpr('-')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(-\)</button>
-          <button onclick="inserirNoExpr('*')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\times\)</button>
-          <button onclick="inserirNoExpr('/')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\div\)</button>
-          <button onclick="inserirNoExpr('^')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(x^y\)</button>
+          <button onclick="inserirNoExpr('sen(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\sin\)</button>
+          <button onclick="inserirNoExpr('cos(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\cos\)</button>
+          <button onclick="inserirNoExpr('tg(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 font-serif transition-all shadow-sm">\(\tan\)</button>
           <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
-          <button onclick="inserirNoExpr('(')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\((\)</button>
-          <button onclick="inserirNoExpr(')')"
-            class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\()\)</button>
+          <button onclick="inserirNoExpr('+')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(+\)</button>
+          <button onclick="inserirNoExpr('-')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(-\)</button>
+          <button onclick="inserirNoExpr('*')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\times\)</button>
+          <button onclick="inserirNoExpr('/')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(\div\)</button>
+          <button onclick="inserirNoExpr('^')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\(x^y\)</button>
+          <span class="w-px h-6 bg-slate-300 dark:bg-slate-600 mx-1"></span>
+          <button onclick="inserirNoExpr('(')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\((\)</button>
+          <button onclick="inserirNoExpr(')')" class="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 px-3 py-1.5 rounded text-slate-700 dark:text-slate-200 transition-all shadow-sm font-bold">\()\)</button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-2xl">
           <div class="sm:col-span-2">
-            <label class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
-              data-i18n="cf_expr_lbl">Expressão:</label>
-            <input type="text" id="cf-expr-input" value="" placeholder="Use os botões acima ou digite..."
-              class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:ring-2 focus:ring-blue-500 dark:text-white font-mono">
+            <label class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1" data-i18n="cf_expr_lbl">Expressão:</label>
+            <input type="text" id="cf-expr-input" value="" placeholder="Use os botões acima ou digite..." oninput="this.value = this.value.toLowerCase()" class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:ring-2 focus:ring-blue-500 dark:text-white font-mono lowercase">
           </div>
 
           <button onclick="enviarParaAba2()"
@@ -667,7 +659,7 @@
       </div>
     </section>
 
-    <!-- ABA 8: HISTÓRIA -->
+    <!-- ABA 8: [senta que la vem] HISTÓRIA -->
     <section id="pane-historia" class="space-y-6 hidden">
       <div
         class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed transition-colors">
@@ -784,7 +776,7 @@
     });
   </script>
 
-  <!-- DICIONÁRIO I18N COMPLETO -->
+  <!-- DICIONÁRIO I18N COMPLETO (ou quase, sempre falta alguma traduçao) -->
   <script>
     const i18n = {
       pt: {
@@ -1622,7 +1614,7 @@
 
   </script>
 
-  <!-- MOTORES MATEMÁTICOS-->
+  <!-- MOTORES MATEMÁTICOS (não mexa em nada pelo amor de deus)-->
   <script>
     function switchTab(tabId) {
       const tabs = ['tfa', 'solver', 'trig', 'log', 'eisenstein', 'fraccont', 'tabela', 'historia'];
@@ -1757,10 +1749,14 @@
 
     function parseExpression(str) {
       if (!str || str.trim() === '') return {};
+      // Normaliza expoentes sobrescritos (x², x³, etc.)
+      str = str.replace(/²/g, '^2').replace(/³/g, '^3').replace(/⁴/g, '^4').replace(/⁵/g, '^5')
+               .replace(/⁶/g, '^6').replace(/⁷/g, '^7').replace(/⁸/g, '^8').replace(/⁹/g, '^9').replace(/⁰/g, '^0');
+      
       str = str.replace(/\s+/g, '').replace(/-/g, '+-');
       const terms = str.split('+').filter(t => t.length > 0);
       const polyMap = {};
-
+      
       for (let term of terms) {
         let coef = 1, deg = 0;
         if (term.includes('x')) {
@@ -1784,28 +1780,75 @@
 
     function parsePolynomial(str) {
       try {
-        let expr = str;
-        if (str.includes('=')) {
-          const sides = str.split('=');
+        let expr = str.toLowerCase();
+        
+        // Normaliza expoentes sobrescritos
+        expr = expr.replace(/²/g, '^2').replace(/³/g, '^3').replace(/⁴/g, '^4').replace(/⁵/g, '^5')
+                   .replace(/⁶/g, '^6').replace(/⁷/g, '^7').replace(/⁸/g, '^8').replace(/⁹/g, '^9').replace(/⁰/g, '^0');
+
+        // força a multiplicação explícita onde o usuário costuma omitir
+        expr = expr.replace(/\)\(/g, ')*(');         
+        expr = expr.replace(/(\d)([a-z\(])/g, '$1*$2'); 
+
+        // transforma igualdade em subtração (tudo pruum lado só)
+        if (expr.includes('=')) {
+          const sides = expr.split('=');
           expr = `(${sides[0]}) - (${sides[1]})`;
         }
 
-        let expanded = nerdamer(expr).expand().text();
+        // MMC de denominadores
+        let simplificado = nerdamer(`simplify(${expr})`).text();
 
-        if (expanded.match(/[^x0-9\+\-\*\^\s]/i)) {
-          return null;
+        // Se o nerdamer devolver expoente negativo em vez de divisão converte de volta
+        simplificado = simplificado.replace(/\*\s*\((.*?)\)\^\(-1\)/g, '/($1)');
+        simplificado = simplificado.replace(/\*([a-z0-9]+)\^\(-1\)/g, '/$1');
+
+        // Isola o numerador
+        let numStr = simplificado;
+        let depth = 0;
+        let mainSlashIndex = -1;
+
+        for (let i = 0; i < simplificado.length; i++) {
+            if (simplificado[i] === '(') depth++;
+            else if (simplificado[i] === ')') depth--;
+            else if (simplificado[i] === '/' && depth === 0) {
+                mainSlashIndex = i; // Achou a barra de divisão global (fora de qualquer parêntese)
+                break;
+            }
         }
 
-        let cleanStr = expanded.replace(/\*/g, '');
+        if (mainSlashIndex !== -1) {
+            numStr = simplificado.substring(0, mainSlashIndex);
+        }
+
+        // expande apenas o polinômio do numerador resultante
+        let expanded = nerdamer(`expand(${numStr})`).text();
+
+        // novo filtro de segurança atualizado que permite parenteses
+        if (expanded.match(/[^x0-9\+\-\*\^\s\.\(\)]/i)) {
+          return null; 
+        }
+
+        // Limpeza final para o extrator de coeficientes
+        let cleanStr = expanded.replace(/\s+/g, '').replace(/\*/g, '');
+        
+        // Remove os parênteses ao redor de números para o parseFloat não falhar
+        cleanStr = cleanStr.replace(/\(([0-9\.\-]+)\)/g, '$1');
+        
+        // Se ainda sobrar algum parêntese irresolvível, significa que não é um polinômio puro
+        if (cleanStr.includes('(') || cleanStr.includes(')')) {
+            return null;
+        }
 
         const polyMap = parseExpression(cleanStr);
+        
         const finalMap = {};
         let maxDeg = 0;
 
         for (let degStr in polyMap) {
           const deg = parseInt(degStr);
           const val = polyMap[degStr];
-          if (Math.abs(val) > 1e-7) {
+          if (Math.abs(val) > 1e-7) { 
             finalMap[deg] = val;
             if (deg > maxDeg) maxDeg = deg;
           }
@@ -1815,29 +1858,12 @@
 
         const coeffs = [];
         for (let i = maxDeg; i >= 0; i--) coeffs.push(finalMap[i] || 0);
-
+        
         return { coeffs, degree: maxDeg };
       } catch (e) {
-        return null;
+        // vai pra análise híbrida
+        return null; 
       }
-    }
-
-    function formatPolynomial(coeffs) {
-      const deg = coeffs.length - 1;
-      const terms = [];
-      for (let i = 0; i <= deg; i++) {
-        const c = coeffs[i];
-        const currentDeg = deg - i;
-        if (c === 0) continue;
-        let sign = c > 0 ? (terms.length > 0 ? '+ ' : '') : '- ';
-        let absC = Math.abs(c);
-        let cStr = (absC !== 1 || currentDeg === 0) ? absC.toString() : '';
-
-        if (currentDeg === 0) terms.push(`${sign}${absC}`);
-        else if (currentDeg === 1) terms.push(`${sign}${cStr}x`);
-        else terms.push(`${sign}${cStr}x^{${currentDeg}}`);
-      }
-      return terms.length > 0 ? terms.join(' ') : '0';
     }
 
     function evalPoly(coeffs, x) {
@@ -1988,6 +2014,187 @@
             <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
             ${ticksEixos}
             <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
+            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
+          </svg>
+        </div>
+      `;
+    }
+
+    // Função global de clique para ativar os gráficos
+    window.toggleHybridGraph = function(k) {
+      const path = document.getElementById(`hybrid-path-${k}`);
+      const legend = document.getElementById(`hybrid-legend-${k}`);
+      if (!path || !legend) return;
+
+      if (path.getAttribute('data-active') === 'true') {
+        path.setAttribute('data-active', 'false');
+        path.style.opacity = '0';
+        legend.style.opacity = '0.4';
+      } else {
+        path.setAttribute('data-active', 'true');
+        path.style.opacity = '1';
+        legend.style.opacity = '1';
+      }
+    };
+
+    function gerarSvgAnaliseHibrida(funcs) {
+      if (typeof Math.sec === 'undefined') Math.sec = (x) => 1 / Math.cos(x);
+      if (typeof Math.csc === 'undefined') Math.csc = (x) => 1 / Math.sin(x);
+      if (typeof Math.cot === 'undefined') Math.cot = (x) => 1 / Math.tan(x);
+
+      const width = 600, height = 300;
+      const boundX = 6;
+      const xMin = -boundX, xMax = boundX;
+      const xRange = xMax - xMin;
+      const steps = 400;
+      const dx = xRange / steps;
+
+      let allPoints = [];
+      let globalYs = [];
+
+      // Avalia todas as funções simultaneamente para unificar a escala de forma proporcional
+      for (let fObj of funcs) {
+        let pts = [];
+        for (let i = 0; i <= steps; i++) {
+          let x = xMin + i * dx;
+          try {
+            let y = fObj.eval(x);
+            if (!isNaN(y) && isFinite(y)) {
+              pts.push({ x, y });
+              globalYs.push(y);
+            }
+          } catch (e) { }
+        }
+        allPoints.push(pts);
+      }
+
+      if (globalYs.length === 0) return '';
+
+      // Calculos de dispersão para estabilizar o eixo Y contra assíntotas
+      let validYs = globalYs.sort((a, b) => a - b);
+      let q1 = validYs[Math.floor(validYs.length * 0.25)];
+      let q3 = validYs[Math.floor(validYs.length * 0.75)];
+      let iqr = q3 - q1;
+
+      if (iqr === 0) iqr = 2;
+
+      let lowerBound = q1 - 3 * iqr;
+      let upperBound = q3 + 3 * iqr;
+
+      let p5 = validYs[Math.floor(validYs.length * 0.05)];
+      let p95 = validYs[Math.floor(validYs.length * 0.95)];
+
+      let calcYMin = Math.max(p5, lowerBound);
+      let calcYMax = Math.min(p95, upperBound);
+
+      if (calcYMax - calcYMin < 0.5) {
+        let centro = (calcYMax + calcYMin) / 2;
+        calcYMax = centro + 1;
+        calcYMin = centro - 1;
+      }
+
+      let yRange = calcYMax - calcYMin;
+      if (yRange < 0.1) yRange = 10;
+
+      let yMin = calcYMin - yRange * 0.15;
+      let yMax = calcYMax + yRange * 0.15;
+
+      if (yMin > 0 && yMin < yRange) yMin = -yRange * 0.15;
+      if (yMax < 0 && Math.abs(yMax) < yRange) yMax = yRange * 0.15;
+      yRange = yMax - yMin;
+
+      const toScreenX = (x) => ((x - xMin) / xRange) * width;
+      const toScreenY = (y) => height - ((y - yMin) / yRange) * height;
+
+      // Desenha as curvas com os IDs para alternância
+      let pathsSvg = "";
+      for (let k = 0; k < funcs.length; k++) {
+        let pts = allPoints[k];
+        let color = funcs[k].color;
+        let pathD = "";
+        let first = true;
+        
+        for (let i = 0; i < pts.length; i++) {
+          let p = pts[i];
+          if (i > 0) {
+            let prevP = pts[i - 1];
+            let diffY = Math.abs(p.y - prevP.y);
+            if (diffY > yRange * 0.8) first = true; // Quebra a linha em assíntotas
+          }
+          let sx = toScreenX(p.x);
+          let sy = toScreenY(p.y);
+          if (sy < -height || sy > height * 2) {
+            first = true;
+            continue;
+          }
+          if (first) {
+            pathD += `M ${sx} ${sy}`;
+            first = false;
+          } else {
+            pathD += ` L ${sx} ${sy}`;
+          }
+        }
+        
+        if (pathD !== "") {
+          // Apenas a função original vem ativa; Derivada (1) e Integral (2) vêm opacas
+          const isActive = (k === 0);
+          pathsSvg += `<path id="hybrid-path-${k}" data-active="${isActive}" d="${pathD}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: ${isActive ? 1 : 0}; transition: opacity 0.3s ease;" />`;
+        }
+      }
+
+      const xAxisY = toScreenY(0);
+      const yAxisX = toScreenX(0);
+      let ticksEixos = "";
+
+      let rawStepX = xRange / 8;
+      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+      let rawStepY = yRange / 6;
+      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
+      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
+
+      let startX = Math.ceil(xMin / xStep) * xStep;
+      for (let i = startX; i <= xMax; i += xStep) {
+        if (Math.abs(i) < 1e-7) continue;
+        let tx = toScreenX(i);
+        let labelX = parseFloat(i.toFixed(2));
+        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
+      }
+
+      let startY = Math.ceil(yMin / yStep) * yStep;
+      for (let j = startY; j <= yMax; j += yStep) {
+        if (Math.abs(j) < 1e-7) continue;
+        let ty = toScreenY(j);
+        let labelY = parseFloat(j.toFixed(2));
+        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
+      }
+      ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
+
+      // A Legenda agora é um botãoque responde a cliques e escurece
+      let legendSvg = funcs.map((f, k) => {
+        const isActive = (k === 0);
+        return `
+          <div id="hybrid-legend-${k}" onclick="toggleHybridGraph(${k})" class="flex items-center gap-1.5 cursor-pointer hover:bg-slate-800 p-1.5 rounded transition-all select-none" style="opacity: ${isActive ? 1 : 0.4};" title="Clique para mostrar/ocultar">
+            <span class="w-3 h-3 rounded-full shadow-sm" style="background-color: ${f.color};"></span>
+            <span class="text-xs font-semibold text-slate-300 notranslate">\\(${f.label}\\)</span>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden h-full">
+          <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-3">
+            <p class="text-xs text-slate-400 font-medium">Análise Gráfica: Função, Derivada e Integral</p>
+            <div class="flex flex-wrap items-center gap-4">
+              ${legendSvg}
+            </div>
+          </div>
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800 shadow-sm">
+            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
+            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
+            ${ticksEixos}
+            ${pathsSvg}
             <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">x</text>
             <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
           </svg>
@@ -2210,6 +2417,41 @@
 
       document.getElementById('poly-input').value = polyStr;
       resolverPolinomio();
+    }
+
+    function formatPolynomial(coeffs) {
+      const degree = coeffs.length - 1;
+      let terms = [];
+
+      for (let i = 0; i <= degree; i++) {
+        let c = coeffs[i];
+        if (c === 0) continue; 
+
+        let deg = degree - i;
+        let term = "";
+
+        // Controle do sinal dos termos
+        if (c < 0) {
+          term += terms.length === 0 ? "-" : " - ";
+        } else if (terms.length > 0) {
+          term += " + ";
+        }
+
+        let absC = Math.abs(c);
+
+        // Formatação do coeficiente algébrico e da variável x
+        if (deg === 0) {
+          term += absC;
+        } else if (deg === 1) {
+          term += (absC === 1 ? "" : absC) + "x";
+        } else {
+          term += (absC === 1 ? "" : absC) + "x^" + deg;
+        }
+
+        terms.push(term);
+      }
+
+      return terms.length > 0 ? terms.join("") : "0";
     }
 
     function resolverPolinomio() {
@@ -2671,7 +2913,7 @@
     function getExactTrig(func, originalAngle) {
       let ang = ((originalAngle % 360) + 360) % 360;
 
-      // Trata as assíntotas (onde a função tende ao infinito / não existe nos reais)
+      // Trata as assíntotas
       if ((func === 'tan' || func === 'sec') && (ang === 90 || ang === 270)) return { isUndefined: true };
       if ((func === 'cot' || func === 'csc') && (ang === 0 || ang === 180)) return { isUndefined: true };
 
@@ -2694,7 +2936,7 @@
         return "-" + tex;
       };
 
-      // Banco de dados em LaTeX (0°, 15°, 18°, 30°, 36°, 45°, 60°, 75°, 90°)
+      // Banco de dados
       const db = {
         0: { sin: "0", cos: "1", tan: "0", sec: "1" },
         15: {
@@ -2734,144 +2976,299 @@
       return { hasExact: false };
     }
 
-    function analisarTrig() {
-  const func = document.getElementById('trig-func').value;
-  let angle = parseFloat(document.getElementById('trig-angle').value);
-  const outDiv = document.getElementById('trig-output');
-  outDiv.classList.remove('hidden');
+        function getAlternativasHTML(func, angle) {
+      // Define a cofunção
+      const cofunc = {
+        'sin': 'cos', 'cos': 'sin',
+        'tan': 'cot', 'cot': 'tan',
+        'sec': 'csc', 'csc': 'sec'
+      }[func];
+      
+      const formatVal = (v) => v + '^\\circ';
+      const alts = [];
 
-  if (isNaN(angle)) return;
+      // Identidade da Cofunção
+      alts.push(`\\${cofunc}(${formatVal(90 - angle)})`);
 
-  const normAngle = ((angle % 360) + 360) % 360;
-  const rad = (normAngle * Math.PI) / 180;
-  
-  let valCalc = 0;
-  if (func === 'sin') valCalc = Math.sin(rad);
-  else if (func === 'cos') valCalc = Math.cos(rad);
-  else if (func === 'tan') valCalc = Math.tan(rad);
-  else if (func === 'sec') valCalc = 1 / Math.cos(rad);
-  else if (func === 'csc') valCalc = 1 / Math.sin(rad);
-  else if (func === 'cot') valCalc = 1 / Math.tan(rad);
+      //Identidades de Paridade e Deslocamento de Período
+      if (func === 'sin' || func === 'csc') {
+        alts.push(`\\${func}(${formatVal(180 - angle)})`);
+        alts.push(`-\\${func}(${formatVal(-angle)})`);
+      } else if (func === 'cos' || func === 'sec') {
+        alts.push(`\\${func}(${formatVal(-angle)})`);
+        alts.push(`-\\${func}(${formatVal(180 - angle)})`);
+      } else if (func === 'tan' || func === 'cot') {
+        alts.push(`-\\${func}(${formatVal(-angle)})`);
+        alts.push(`\\${func}(${formatVal(angle > 0 ? angle - 180 : angle + 180)})`);
+      }
 
-  let funcName = '\\' + func;
-  
-  const formatRad = (deg) => {
-    if (deg === 0) return "0";
-    let sign = deg < 0 ? "-" : "";
-    let g = (a, b) => b ? g(b, a % b) : a;
-    let divisor = g(Math.abs(deg), 180);
-    let n = Math.abs(deg) / divisor;
-    let d = 180 / divisor;
-    let nStr = n === 1 ? "\\pi" : `${n}\\pi`;
-    if (d === 1) return `${sign}${nStr}`;
-    return `${sign}\\frac{${nStr}}{${d}}`;
-  };
-  
-  const radTex = formatRad(angle);
-  const exactData = getExactTrig(func, angle); 
+      // Remove eventuais duplicatas caso o ângulo seja 0
+      const uniqueAlts = [...new Set(alts)];
 
-  // Lógica de Interceptação do Arco Triplo
-  let refQ1 = normAngle;
-  if (normAngle > 90 && normAngle <= 180) refQ1 = 180 - normAngle;
-  else if (normAngle > 180 && normAngle <= 270) refQ1 = normAngle - 180;
-  else if (normAngle > 270) refQ1 = 360 - normAngle;
+      let listHtml = uniqueAlts.map(a => `
+        <div class="py-3 border-b border-slate-200 dark:border-slate-700/60 last:border-0">
+          <div class="math-step notranslate text-sm">\\(\\\\%s(${angle}^\\circ) = ${a}\\)</div>
+        </div>
+      `.replace('%s', func)).join('');
 
-  const isCosSecTriplo = (func === 'cos' || func === 'sec') && (refQ1 === 20 || refQ1 === 40 || refQ1 === 80);
-  const isSinCscTriplo = (func === 'sin' || func === 'csc') && (refQ1 === 10 || refQ1 === 50 || refQ1 === 70);
-
-  let html = '';
-
-  if (isCosSecTriplo || isSinCscTriplo) {
-    let formula = isCosSecTriplo ? "\\cos(3\\theta) = 4\\cos^3(\\theta) - 3\\cos(\\theta)" : "\\sin(3\\theta) = 3\\sin(\\theta) - 4\\sin^3(\\theta)";
-    let sinal = "- 1";
-    let resTriplo = "\\frac{1}{2}";
-    
-    if (isCosSecTriplo) {
-        if (refQ1 === 40 || refQ1 === 80) { resTriplo = "-\\frac{1}{2}"; sinal = "+ 1"; }
-    } else {
-        if (refQ1 === 70) { resTriplo = "-\\frac{1}{2}"; sinal = "- 1"; }
-        else { resTriplo = "\\frac{1}{2}"; sinal = "+ 1"; }
+      return `
+        <div class="mt-6 bg-slate-50 dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-sm">
+          <div class="px-4 py-2 bg-slate-100 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+            <span class="text-sm font-medium text-slate-700 dark:text-cyan-400">Representações Alternativas:</span>
+          </div>
+          <div class="px-4">
+            ${listHtml}
+          </div>
+        </div>
+      `;
     }
-    let subFormula = isCosSecTriplo ? `4x^3 - 3x = ${resTriplo}` : `${resTriplo} = 3x - 4x^3`;
 
-    html = `
-      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_irrat')}</h3>
-        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
-      </div>
-      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-        <p><strong>${t('trig_triple_arc')}</strong></p>
-        <div class="math-step notranslate">\\(${formula}\\)</div>
-        <p>${t('trig_chebyshev_sub', { angle })}</p>
-        <div class="math-step notranslate">\\(${subFormula} \\iff 8x^3 - 6x ${sinal} = 0\\)</div>
-        <p><strong>${t('trig_trr_filter')}</strong></p>
-        <p>${t('trig_trr_cand_lbl')}</p>
-        <div class="math-step notranslate">\\(\\mathcal{C} \\in \\left\\{ \\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{4}, \\pm \\frac{1}{8} \\right\\}\\)</div>
-        <p>${t('trig_trr_none')}</p>
-        <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
-          ${t('trig_chebyshev_concl', { angle })}
+    function analisarTrig() {
+      const func = document.getElementById('trig-func').value;
+      let angle = parseFloat(document.getElementById('trig-angle').value);
+      const outDiv = document.getElementById('trig-output');
+      outDiv.classList.remove('hidden');
+
+      if (isNaN(angle)) return;
+
+      const normAngle = ((angle % 360) + 360) % 360;
+      const rad = (normAngle * Math.PI) / 180;
+      
+      let valCalc = 0;
+      if (func === 'sin') valCalc = Math.sin(rad);
+      else if (func === 'cos') valCalc = Math.cos(rad);
+      else if (func === 'tan') valCalc = Math.tan(rad);
+      else if (func === 'sec') valCalc = 1 / Math.cos(rad);
+      else if (func === 'csc') valCalc = 1 / Math.sin(rad);
+      else if (func === 'cot') valCalc = 1 / Math.tan(rad);
+
+      let funcName = '\\' + func;
+      
+      const formatRad = (deg) => {
+        if (deg === 0) return "0";
+        let sign = deg < 0 ? "-" : "";
+        let g = (a, b) => b ? g(b, a % b) : a;
+        let divisor = g(Math.abs(deg), 180);
+        let n = Math.abs(deg) / divisor;
+        let d = 180 / divisor;
+        // AQUI ESTAVA O ERRO! Corrigido para ${n}\\pi
+        let nStr = n === 1 ? "\\pi" : `${n}\\pi`;
+        if (d === 1) return `${sign}${nStr}`;
+        return `${sign}\\frac{${nStr}}{${d}}`;
+      };
+      
+      const radTex = formatRad(angle);
+      const exactData = getExactTrig(func, normAngle); 
+
+      let refQ1 = normAngle;
+      if (normAngle > 90 && normAngle <= 180) refQ1 = 180 - normAngle;
+      else if (normAngle > 180 && normAngle <= 270) refQ1 = normAngle - 180;
+      else if (normAngle > 270) refQ1 = 360 - normAngle;
+
+      const isCosSecTriplo = (func === 'cos' || func === 'sec') && (refQ1 === 20 || refQ1 === 40 || refQ1 === 80);
+      const isSinCscTriplo = (func === 'sin' || func === 'csc') && (refQ1 === 10 || refQ1 === 50 || refQ1 === 70);
+
+      let html = '';
+
+      if (isCosSecTriplo || isSinCscTriplo) {
+        let formula = isCosSecTriplo ? "\\cos(3\\theta) = 4\\cos^3(\\theta) - 3\\cos(\\theta)" : "\\sin(3\\theta) = 3\\sin(\\theta) - 4\\sin^3(\\theta)";
+        let sinal = "- 1";
+        let resTriplo = "\\frac{1}{2}";
+        
+        if (isCosSecTriplo) {
+            if (refQ1 === 40 || refQ1 === 80) { resTriplo = "-\\frac{1}{2}"; sinal = "+ 1"; }
+        } else {
+            if (refQ1 === 70) { resTriplo = "-\\frac{1}{2}"; sinal = "- 1"; }
+            else { resTriplo = "\\frac{1}{2}"; sinal = "+ 1"; }
+        }
+        let subFormula = isCosSecTriplo ? `4x^3 - 3x = ${resTriplo}` : `${resTriplo} = 3x - 4x^3`;
+
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_irrat')}</h3>
+            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <p><strong>${t('trig_triple_arc')}</strong></p>
+            <div class="math-step notranslate">\\(${formula}\\)</div>
+            <p>${t('trig_chebyshev_sub', { angle })}</p>
+            <div class="math-step notranslate">\\(${subFormula} \\iff 8x^3 - 6x ${sinal} = 0\\)</div>
+            <p><strong>${t('trig_trr_filter')}</strong></p>
+            <p>${t('trig_trr_cand_lbl')}</p>
+            <div class="math-step notranslate">\\(\\mathcal{C} \\in \\left\\{ \\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{4}, \\pm \\frac{1}{8} \\right\\}\\)</div>
+            <p>${t('trig_trr_none')}</p>
+            <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
+              ${t('trig_chebyshev_concl', { angle })}
+            </div>
+          </div>
+        `;
+      } else if (exactData.isUndefined) {
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Valor Indefinido</h3>
+            <span class="bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 font-semibold px-3 py-1 rounded text-xs">Assíntota Vertical</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <p>A função não está definida para o ângulo de ${angle}°.</p>
+            <div class="math-step notranslate">\\( \\theta = ${angle}^\\circ = ${radTex} \\text{ rad} \\)</div>
+            <div class="math-step notranslate">\\( \\lim_{\\theta \\to ${angle}^\\circ} ${funcName}(\\theta) = \\pm \\infty \\)</div>
+          </div>
+        `;
+      } else if (exactData.hasExact) {
+        const isRational = !exactData.tex.includes('\\sqrt');
+        const badgeText = isRational ? `\\(${funcName}(${angle}^\\circ) \\in \\mathbb{Q}\\)` : `\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)`;
+        const badgeClass = isRational 
+          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300"
+          : "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300";
+
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Valor Algébrico Exato</h3>
+            <span class="${badgeClass} font-semibold px-3 py-1 rounded text-xs">${badgeText}</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <div class="math-step notranslate pb-2 text-xl">\\(${funcName}(${angle}^\\circ) = ${exactData.tex}\\)</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Valor Decimal:</span>
+                <div class="math-step notranslate mt-2 text-lg">\\(\\approx ${valCalc.toFixed(8)}\\)</div>
+              </div>
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Ângulo em Radianos:</span>
+                <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Valor Numérico</h3>
+            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Valor Decimal:</span>
+                <div class="math-step notranslate mt-2 text-lg">\\(${funcName}(${angle}^\\circ) \\approx ${valCalc.toFixed(8)}\\)</div>
+              </div>
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Ângulo em Radianos:</span>
+                <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (!exactData.isUndefined) {
+        html += getAlternativasHTML(func, angle);
+      }
+
+      if (!exactData.isUndefined || (func !== 'tan' && func !== 'cot' && func !== 'sec' && func !== 'csc')) {
+        html += gerarSvgCirculoTrigonometrico(func, angle);
+      }
+
+      if (!exactData.hasExact && !exactData.isUndefined && !isCosSecTriplo && !isSinCscTriplo) {
+        html += `
+          <div class="mt-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center w-full mx-auto">
+            <p class="text-sm font-medium text-slate-300">
+              Como o ângulo <strong>${angle}°</strong> é racional em graus, mas o resultado <strong>${valCalc.toFixed(4)}</strong> não pertence a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), o Teorema de Niven garante que o valor é estritamente irracional.
+            </p>
+          </div>
+        `;
+      }
+
+      outDiv.innerHTML = html;
+      if (window.renderMathInElement) renderMathInElement(outDiv);
+    }
+    //circulo trigonométrico
+    function gerarSvgCirculoTrigonometrico(func, angleDeg) {
+      const width = 700, height = 300;
+      const cx = width / 2, cy = height / 2;
+      const R = 100;
+      
+      const normAngle = ((angleDeg % 360) + 360) % 360;
+      const rad = (normAngle * Math.PI) / 180;
+      
+      const px = cx + R * Math.cos(rad);
+      const py = cy - R * Math.sin(rad);
+
+      let svgContent = `
+        <!-- Eixos Cartesianos e Círculo -->
+        <line x1="0" y1="${cy}" x2="${width}" y2="${cy}" stroke="#64748b" stroke-width="1.5" />
+        <line x1="${cx}" y1="0" x2="${cx}" y2="${height}" stroke="#64748b" stroke-width="1.5" />
+        <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" />
+        <text x="${width - 15}" y="${cy - 10}" fill="#94a3b8" font-size="12" font-style="italic">x</text>
+        <text x="${cx + 10}" y="15" fill="#94a3b8" font-size="12" font-style="italic">y</text>
+      `;
+
+      // Arco indicador de ângulo
+      if (angleDeg % 360 !== 0) {
+        const drawAngle = angleDeg % 360; 
+        const radDraw = (drawAngle * Math.PI) / 180;
+        const arcPx = cx + 25 * Math.cos(radDraw);
+        const arcPy = cy - 25 * Math.sin(radDraw);
+        const arcLarge = Math.abs(drawAngle) > 180 ? 1 : 0;
+        const sweepFlag = drawAngle < 0 ? 1 : 0; 
+        
+        svgContent += `
+          <path d="M ${cx + 25} ${cy} A 25 25 0 ${arcLarge} ${sweepFlag} ${arcPx} ${arcPy}" fill="none" stroke="#f59e0b" stroke-width="2" />
+          <text x="${cx + 38 * Math.cos(radDraw/2)}" y="${cy - 38 * Math.sin(radDraw/2) + 4}" fill="#f59e0b" font-size="10" text-anchor="middle">${angleDeg}°</text>
+        `;
+      }
+
+      // Raiop rincipal
+      svgContent += `<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}" stroke="#94a3b8" stroke-width="2" />`;
+
+      // Geometria das funções
+      if (func === 'sin') {
+        svgContent += `<line x1="${px}" y1="${cy}" x2="${px}" y2="${py}" stroke="#ef4444" stroke-width="3" />`; 
+        svgContent += `<line x1="${cx}" y1="${cy}" x2="${px}" y2="${cy}" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2,2" />`; 
+      } else if (func === 'cos') {
+        svgContent += `<line x1="${cx}" y1="${cy}" x2="${px}" y2="${cy}" stroke="#3b82f6" stroke-width="3" />`; 
+        svgContent += `<line x1="${px}" y1="${cy}" x2="${px}" y2="${py}" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2" />`; 
+      } else if (func === 'tan' && normAngle !== 90 && normAngle !== 270) {
+        const tanY = cy - R * Math.tan(rad);
+        svgContent += `<line x1="${cx + R}" y1="0" x2="${cx + R}" y2="${height}" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" />`; 
+        // Projeção tracejada conectando a origem à reta tangente exterior
+        svgContent += `<line x1="${cx}" y1="${cy}" x2="${cx + R}" y2="${tanY}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />`; 
+        svgContent += `<line x1="${cx + R}" y1="${cy}" x2="${cx + R}" y2="${tanY}" stroke="#8b5cf6" stroke-width="3" />`; 
+        svgContent += `<circle cx="${cx + R}" cy="${tanY}" r="4" fill="#8b5cf6" />`;
+      } else if (func === 'cot' && normAngle !== 0 && normAngle !== 180) {
+        const cotX = cx + R / Math.tan(rad);
+        svgContent += `<line x1="0" y1="${cy - R}" x2="${width}" y2="${cy - R}" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4" />`; 
+        // Projeção tracejada conectando a origem à reta cotangente exterior
+        svgContent += `<line x1="${cx}" y1="${cy}" x2="${cotX}" y2="${cy - R}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />`; 
+        svgContent += `<line x1="${cx}" y1="${cy - R}" x2="${cotX}" y2="${cy - R}" stroke="#f97316" stroke-width="3" />`; 
+        svgContent += `<circle cx="${cotX}" cy="${cy - R}" r="4" fill="#f97316" />`;
+      } else if (func === 'sec' && normAngle !== 90 && normAngle !== 270) {
+        const secX = cx + R / Math.cos(rad);
+        svgContent += `<line x1="${cx}" y1="${cy}" x2="${secX}" y2="${cy}" stroke="#ec4899" stroke-width="3" />`; 
+        svgContent += `<line x1="${px}" y1="${py}" x2="${secX}" y2="${cy}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />`;
+        svgContent += `<circle cx="${secX}" cy="${cy}" r="4" fill="#ec4899" />`;
+      } else if (func === 'csc' && normAngle !== 0 && normAngle !== 180) {
+        const cscY = cy - R / Math.sin(rad);
+        svgContent += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cscY}" stroke="#14b8a6" stroke-width="3" />`;
+        svgContent += `<line x1="${px}" y1="${py}" x2="${cx}" y2="${cscY}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />`;
+        svgContent += `<circle cx="${cx}" cy="${cscY}" r="4" fill="#14b8a6" />`;
+      }
+
+      // Ponto da extremidade do raio no círculo unitário 
+      svgContent += `<circle cx="${px}" cy="${py}" r="4" fill="#10b981" />`;
+
+      return `
+        <div class="mt-6">
+          <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center w-full mx-auto">
+            <p class="text-xs text-slate-400 mb-2 font-medium">Visualização Geométrica: ${func}(${angleDeg}°)</p>
+            <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
+              ${svgContent}
+            </svg>
+          </div>
         </div>
-      </div>
-    `;
-  } else if (exactData.isUndefined) {
-    html = `
-      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg" data-i18n="trig_undef_title">${t('trig_undef_title')}</h3>
-        <span class="bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 font-semibold px-3 py-1 rounded text-xs" data-i18n="trig_undef_badge">${t('trig_undef_badge')}</span>
-      </div>
-      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-        <p>${t('trig_undef_desc', { funcName: funcName, angle: angle })}</p>
-        <div class="math-step notranslate">\\( \\theta = ${angle}^\\circ = ${radTex} \\text{ rad} \\)</div>
-        <div class="math-step notranslate">\\( \\lim_{\\theta \\to ${angle}^\\circ} ${funcName}(\\theta) = \\pm \\infty \\)</div>
-      </div>
-    `;
-  } else if (exactData.hasExact) {
-    html = `
-      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg" data-i18n="trig_exact_title">${t('trig_exact_title')}</h3>
-        <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs" data-i18n="trig_exact_badge">${t('trig_exact_badge')}</span>
-      </div>
-      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-        <div class="math-step notranslate pb-2 text-xl">\\(${funcName}(${angle}^\\circ) = ${exactData.tex}\\)</div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
-            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_dec_val">${t('trig_dec_val')}</span>
-            <div class="math-step notranslate mt-2 text-lg">\\(\\approx ${valCalc.toFixed(8)}\\)</div>
-          </div>
-          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
-            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_rad_val">${t('trig_rad_val')}</span>
-            <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
-          </div>
-        </div>
-      </div>
-    `;
-  } else {
-    html = `
-      <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg" data-i18n="trig_num_title">${t('trig_num_title')}</h3>
-        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs" data-i18n="trig_num_badge">${t('trig_num_badge')}</span>
-      </div>
-      <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
-            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_dec_val">${t('trig_dec_val')}</span>
-            <div class="math-step notranslate mt-2 text-lg">\\(${funcName}(${angle}^\\circ) \\approx ${valCalc.toFixed(8)}\\)</div>
-          </div>
-          <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
-            <span class="font-bold text-slate-700 dark:text-slate-300" data-i18n="trig_rad_val">${t('trig_rad_val')}</span>
-            <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  outDiv.innerHTML = html;
-  if (window.renderMathInElement) renderMathInElement(outDiv);
-}
-
-
-    // Motor 4: Logaritmos
+      `;
+    }
+     // MOTOR 4: LORATIMOS
     function analisarLogaritmo() {
       const b = parseInt(document.getElementById('log-base').value);
       const a = parseInt(document.getElementById('log-arg').value);
@@ -3038,60 +3435,115 @@
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
 
-    // MOTOR: FRAÇÕES CONTÍNUAS (RAÍZES)
+    // MOTOR: FRAÇÕES CONTÍNUAS
     function executarFracaoContinua() {
-      const N = parseInt(document.getElementById('cf-radicand').value);
+      // Caso o input cf-index não exista na tela assume n=2
+      const elIndex = document.getElementById('cf-index');
+      const n = elIndex ? parseInt(elIndex.value) : 2;
+      const k = parseInt(document.getElementById('cf-radicand').value);
       const outDiv = document.getElementById('cf-output');
       outDiv.classList.remove('hidden');
 
-      const m0 = Math.floor(Math.sqrt(N));
-      if (m0 * m0 === N) {
-        outDiv.innerHTML = `<div class="text-emerald-700 dark:text-emerald-400 font-medium text-sm">\\(\\sqrt{${N}} = ${m0}\\) &in; \\(\\mathbb{Z}\\) &rarr; [${m0}].</div>`;
+      if (isNaN(n) || n < 2 || isNaN(k) || k < 2) {
+        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">n &ge; 2 e K &ge; 2.</div>`;
+        return;
+      }
+
+      // verifica se a raiz é exata
+      const exactRoot = Math.round(Math.pow(k, 1 / n));
+      if (Math.pow(exactRoot, n) === k) {
+        let raizTex = n === 2 ? `\\sqrt{${k}}` : `\\sqrt[${n}]{${k}}`;
+        outDiv.innerHTML = `<div class="text-emerald-700 dark:text-emerald-400 font-medium text-sm">\\(${raizTex} = ${exactRoot}\\) &in; \\(\\mathbb{Z}\\) &rarr; Fração Contínua: [${exactRoot}].</div>`;
         if (window.renderMathInElement) renderMathInElement(outDiv);
         return;
       }
 
-      let m = 0, d = 1, a = m0;
-      const a0 = m0, periodo = [];
+      let html = '';
 
-      let stepCount = 0;
-      while (stepCount < 100) {
-        m = d * a - m;
-        d = Math.floor((N - m * m) / d);
-        a = Math.floor((m0 + m) / d);
-        periodo.push(a);
-        stepCount++;
-        if (a === 2 * a0) break;
-      }
+      // CASO N = 2: Irracionais quadráticos
+      if (n === 2) {
+        let m0 = Math.floor(Math.sqrt(k));
+        let m = 0, d = 1, a = m0;
+        const a0 = m0, periodo = [];
+        
+        let stepCount = 0;
+        while (stepCount < 100) {
+          m = d * a - m;
+          d = Math.floor((k - m * m) / d);
+          a = Math.floor((m0 + m) / d);
+          periodo.push(a);
+          stepCount++;
+          if (a === 2 * a0) break; // Encontrou o ciclo
+        }
 
-      let p_ant = 1, p_cur = a0, q_ant = 0, q_cur = 1;
-      const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
+        let p_ant = 1, p_cur = a0, q_ant = 0, q_cur = 1;
+        const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
 
-      for (let i = 0; i < Math.min(periodo.length, 6); i++) {
-        const coef = periodo[i];
-        let p_next = coef * p_cur + p_ant, q_next = coef * q_cur + q_ant;
-        p_ant = p_cur; p_cur = p_next;
-        q_ant = q_cur; q_cur = q_next;
-        convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(6)}`);
-      }
+        for (let i = 0; i < Math.min(periodo.length, 6); i++) {
+          const coef = periodo[i];
+          let p_next = coef * p_cur + p_ant, q_next = coef * q_cur + q_ant;
+          p_ant = p_cur; p_cur = p_next;
+          q_ant = q_cur; q_cur = q_next;
+          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(6)}`);
+        }
 
-      const html = `
-        <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-          <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('cf_res_title')}</h3>
-          <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">${t('cf_badge')}</span>
-        </div>
-        <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-          <div class="math-step notranslate overflow-x-auto pb-2">\\(\\sqrt{${N}} = [${a0}; \\overline{${periodo.join(', ')}}]\\)</div>
-          <p>${t('cf_lagrange')}</p>
-          <p><strong>${t('cf_convergents_lbl')}</strong></p>
-          <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
-            ${convergentes.map((c, idx) => `<div><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('cf_res_title') || 'Expansão em Fração Contínua Periódica'}</h3>
+            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">${t('cf_badge') || 'Irracional Quadrático'}</span>
           </div>
-          <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
-            ${t('cf_diff_rat', { N })}
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <div class="math-step notranslate overflow-x-auto pb-2">\\(\\sqrt{${k}} = [${a0}; \\overline{${periodo.join(', ')}}]\\)</div>
+            <p>${t('cf_lagrange')}</p>
+            <p><strong>${t('cf_convergents_lbl') || '2. Melhores Aproximações Racionais (Convergentes):'}</strong></p>
+            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
+              ${convergentes.map((c, idx) => `<div><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      } 
+      // caso N > 2: irracionais de grau maior
+      else {
+        let val = Math.pow(k, 1/n);
+        let a_n = Math.floor(val);
+        let x_n = val - a_n;
+        const terms = [a_n];
+        
+        let stepCount = 0;
+        // limita a 15 termos
+        while (x_n > 1e-10 && stepCount < 15) {
+          let inverted = 1 / x_n;
+          a_n = Math.floor(inverted);
+          terms.push(a_n);
+          x_n = inverted - a_n;
+          stepCount++;
+        }
+
+        let p_ant = 1, p_cur = terms[0], q_ant = 0, q_cur = 1;
+        const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
+        for (let i = 1; i < Math.min(terms.length, 7); i++) {
+          const coef = terms[i];
+          let p_next = coef * p_cur + p_ant, q_next = coef * q_cur + q_ant;
+          p_ant = p_cur; p_cur = p_next;
+          q_ant = q_cur; q_cur = q_next;
+          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(6)}`);
+        }
+
+        html = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Expansão em Fração Contínua (Aperiódica)</h3>
+            <span class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 font-semibold px-3 py-1 rounded text-xs">Irracional de Grau ${n}</span>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <div class="math-step notranslate overflow-x-auto pb-2">\\(\\sqrt[${n}]{${k}} \\approx [${terms.join('; ')}...]\\)</div>
+            <p><strong>Diferença Fundamental (Teorema de Lagrange):</strong> Ao contrário das raízes quadradas (que geram ciclos periódicos perfeitos e repetitivos), os irracionais algébricos de grau maior que 2 não possuem repetição. Suas frações contínuas são estritamente <strong>aperiódicas e infinitas</strong>, e os padrões de distribuição desses números ainda são objeto de intenso estudo na Matemática moderna.</p>
+            <p><strong>${t('cf_convergents_lbl') || '2. Melhores Aproximações Racionais (Convergentes):'}</strong></p>
+            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
+              ${convergentes.map((c, idx) => `<div><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+            </div>
+          </div>
+        `;
+      }
 
       outDiv.innerHTML = html;
       if (window.renderMathInElement) renderMathInElement(outDiv);
@@ -3111,12 +3563,15 @@
     }
 
     function executarFracaoExpressao() {
-      const expr = document.getElementById('cf-expr-input').value;
+      let expr = document.getElementById('cf-expr-input').value;
       const outDiv = document.getElementById('cf-expr-output');
       outDiv.classList.remove('hidden');
 
       try {
         if (!expr.trim()) throw new Error();
+
+        // aciona o tradutor antes de repassar ao motor
+        expr = sanitizarSintaxeMatematica(expr);
 
         const valText = nerdamer(expr).evaluate().text('decimals');
         const val = parseFloat(valText);
@@ -3148,7 +3603,7 @@
           convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(8)}`);
         }
 
-        const exprTex = nerdamer(expr).toTeX();
+        const exprTex = formatarRaizesLaTeX(nerdamer(expr).toTeX());
         outDiv.innerHTML = `
           <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
             <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Aproximações Racionais para \\(${exprTex}\\)</h3>
@@ -3168,12 +3623,15 @@
     }
 
     function enviarParaAba2() {
-      const expr = document.getElementById('cf-expr-input').value.trim();
+      let expr = document.getElementById('cf-expr-input').value.trim();
 
       if (!expr) {
         alert("Digite uma expressão primeiro!");
         return;
       }
+
+      // depura a expressão usando a mesma tradução
+      expr = sanitizarSintaxeMatematica(expr);
 
       try {
         nerdamer(expr);
@@ -3196,24 +3654,68 @@
       }
     }
 
-    // 1. TRADUTOR DE SINTAXE (Português -> Internacional)
+    // TRADUTOR DE SINTAXE E SÍMBOLOS (PT -> EN)
     function sanitizarSintaxeMatematica(expr) {
       let limpa = expr.toLowerCase();
-      // Inversas
+
+      // força multiplicação explícita
+      limpa = limpa.replace(/\)\(/g, ')*(');
+      limpa = limpa.replace(/(\d)([a-z\(])/g, '$1*$2');
+
+      // Normaliza expoentes sobrescritos (x², x³)
+      limpa = limpa.replace(/²/g, '^2').replace(/³/g, '^3').replace(/⁴/g, '^4').replace(/⁵/g, '^5')
+                   .replace(/⁶/g, '^6').replace(/⁷/g, '^7').replace(/⁸/g, '^8').replace(/⁹/g, '^9').replace(/⁰/g, '^0');
+      
+      // Tradutor de Constantes
+      limpa = limpa.replace(/π/g, 'pi');
+      limpa = limpa.replace(/φ/g, '((1+sqrt(5))/2)');
+      
+      // Tradutor de Raízes
+      limpa = limpa.replace(/√\(([^)]+)\)/g, 'sqrt($1)');
+      limpa = limpa.replace(/√([0-9a-z.]+)/g, 'sqrt($1)');
+      
+      limpa = limpa.replace(/∛\(([^)]+)\)/g, '($1)^(1/3)');
+      limpa = limpa.replace(/∛([0-9a-z.]+)/g, '($1)^(1/3)');
+      
+      limpa = limpa.replace(/∜\(([^)]+)\)/g, '($1)^(1/4)');
+      limpa = limpa.replace(/∜([0-9a-z.]+)/g, '($1)^(1/4)');
+
+      // Funções Trigonométricas (PT -> EN)
+      limpa = limpa.replace(/\bseno\b/g, 'sin');
+      limpa = limpa.replace(/\bcoseno\b/g, 'cos');
+      limpa = limpa.replace(/\bcosseno\b/g, 'cos');
+      limpa = limpa.replace(/\btangente\b/g, 'tan');
+      limpa = limpa.replace(/\bsecante\b/g, 'sec');
+      limpa = limpa.replace(/\bcosecante\b/g, 'csc');
+      limpa = limpa.replace(/\bcossecante\b/g, 'csc');
+      limpa = limpa.replace(/\bcotangente\b/g, 'cot');
+
+      // Funções inversas (PT -> EN)
       limpa = limpa.replace(/\barcsen\b/g, 'asin');
+      limpa = limpa.replace(/\barcseno\b/g, 'asin');
       limpa = limpa.replace(/\barccos\b/g, 'acos');
       limpa = limpa.replace(/\barctg\b/g, 'atan');
       limpa = limpa.replace(/\barctan\b/g, 'atan');
-      // Recíprocas e normais
+      
+      // Recíprocas e normais (PT -> EN)
       limpa = limpa.replace(/\bcossec\b/g, 'csc');
       limpa = limpa.replace(/\bcosec\b/g, 'csc');
       limpa = limpa.replace(/\bcotg\b/g, 'cot');
       limpa = limpa.replace(/\btg\b/g, 'tan');
       limpa = limpa.replace(/\bsen\b/g, 'sin');
+      limpa = limpa.replace(/\bseno\b/g, 'sin');
+
+      // Funções logarítmicas (PT -> EN)
+      limpa = limpa.replace(/\bln\b/g, 'log');
+      limpa = limpa.replace(/\blogaritmo\b/g, 'log');
+
+      // conversor de graus para radianos
+      limpa = limpa.replace(/\b(sin|cos|tan|cot|sec|csc|asin|acos|atan)\(([^a-zA-Z]+)\)/g, '$1(($2)*pi/180)');
+      
       return limpa;
     }
 
-    // 2. O ANALISADOR HÍBRIDO DEFINITIVO
+    // o analisador potente mwahaahha
     function analisarExpressaoSimbolica(exprStr, outDiv) {
       try {
         let funcStr = sanitizarSintaxeMatematica(exprStr);
@@ -3223,14 +3725,27 @@
           funcStr = `(${parts[0]}) - (${parts[1]})`;
         }
 
+        // Constrói os objetos primários via Nerdamer
         const f = nerdamer(funcStr);
-        const texExpr = f.toTeX();
+        const texExpr = formatarRaizesLaTeX(f.toTeX());
 
-        const derivadaTex = nerdamer(`diff(${funcStr}, x)`).toTeX();
-        const integralTex = nerdamer(`integrate(${funcStr}, x)`).toTeX();
+        const diffObj = nerdamer(`diff(${funcStr}, x)`);
+        const intObj = nerdamer(`integrate(${funcStr}, x)`);
 
+        const derivadaTex = formatarRaizesLaTeX(diffObj.toTeX());
+        const integralTex = formatarRaizesLaTeX(intObj.toTeX());
+
+        // Converte em funções Javascript para os eixos (x, y)
         const f_eval = f.buildFunction(['x']);
-        const svgGrafico = gerarSvgFuncaoGeral(f_eval);
+        const df_eval = diffObj.buildFunction(['x']);
+        const int_eval = intObj.buildFunction(['x']);
+
+        // chama o motor de plotagem enviando as 3 funções juntas
+        const svgGrafico = gerarSvgAnaliseHibrida([
+          { eval: f_eval, color: '#10b981', label: 'f(x)' },           // Verde (original)
+          { eval: df_eval, color: '#3b82f6', label: 'f\\\'(x)' },      // Azul (derivada)
+          { eval: int_eval, color: '#a855f7', label: '\\int f(x) dx' } // Roxo (integral)
+        ]);
 
         outDiv.innerHTML = `
           <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
@@ -3243,26 +3758,65 @@
               <span class="font-semibold text-slate-700 dark:text-slate-300">${t('hybrid_func_lbl')}</span>
               <div class="math-step notranslate mb-4">\\(f(x) = ${texExpr}\\)</div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
+                <div class="p-4 bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-900/40 rounded shadow-sm">
                   <span class="font-semibold text-blue-600 dark:text-blue-400">${t('hybrid_deriv_lbl')}</span>
-                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${derivadaTex}\\)</div>
+                  <div class="math-step notranslate mt-2 overflow-x-auto text-blue-900 dark:text-blue-200">\\(${derivadaTex}\\)</div>
                 </div>
-                <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded">
+                <div class="p-4 bg-white dark:bg-slate-800 border border-purple-200 dark:border-purple-900/40 rounded shadow-sm">
                   <span class="font-semibold text-purple-600 dark:text-purple-400">${t('hybrid_int_lbl')}</span>
-                  <div class="math-step notranslate mt-2 overflow-x-auto">\\(${integralTex} + C\\)</div>
+                  <div class="math-step notranslate mt-2 overflow-x-auto text-purple-900 dark:text-purple-200">\\(${integralTex} + C\\)</div>
                 </div>
               </div>
             </div>
             ${svgGrafico}
           </div>
         `;
-        if (window.renderMathInElement) renderMathInElement(outDiv);
+        
+        // Renderiza as legendas e formulas em LaTeX
+        if (window.renderMathInElement) {
+          setTimeout(() => renderMathInElement(outDiv), 10);
+        }
       } catch (e) {
         outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">${t('hybrid_error')}</div>`;
       }
     }
+    // Converte expoente fracionario em raiz n-ésima para LaTeX
+    function formatarRaizesLaTeX(texStr) {
+      if (!texStr) return texStr;
+      
+      let prevTex;
+      do {
+        prevTex = texStr;
+        
+        // Padrão 1: Parênteses dimensionados
+        texStr = texStr.replace(/\\left\((.*?)\\right\)\^\{\\frac\{1\}\{([0-9]+)\}\}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/\\left\((.*?)\\right\)\^{\\frac\{1\}\{([0-9]+)\}}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/\\left\((.*?)\\right\)\^\{1\/([0-9]+)\}/g, '\\sqrt[$2]{$1}');
+        
+        // Padrão 2: Parênteses simples
+        texStr = texStr.replace(/\((.*?)\)\^\{\\frac\{1\}\{([0-9]+)\}\}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/\((.*?)\)\^{\\frac\{1\}\{([0-9]+)\}}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/\((.*?)\)\^\{1\/([0-9]+)\}/g, '\\sqrt[$2]{$1}');
+        
+        // Padrão 3: Base com chaves
+        texStr = texStr.replace(/\{([^{}]+)\}\^\{\\frac\{1\}\{([0-9]+)\}\}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/\{([^{}]+)\}\^{\\frac\{1\}\{([0-9]+)\}}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/\{([^{}]+)\}\^\{1\/([0-9]+)\}/g, '\\sqrt[$2]{$1}');
+        
+        // Padrão 4: Base simples
+        texStr = texStr.replace(/([a-zA-Z0-9_]+)\^\{\\frac\{1\}\{([0-9]+)\}\}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/([a-zA-Z0-9_]+)\^{\\frac\{1\}\{([0-9]+)\}}/g, '\\sqrt[$2]{$1}');
+        texStr = texStr.replace(/([a-zA-Z0-9_]+)\^\{1\/([0-9]+)\}/g, '\\sqrt[$2]{$1}');
+        
+      } while (texStr !== prevTex); // Repete o ciclo para processar raízes aninhadas (tipo raiz de raiz)
+      
+      // Limpeza final: Se uma raiz quadrada vier marcada com [2], oculta o índice para ficar bonitão
+      texStr = texStr.replace(/\\sqrt\[2\]\{(.*?)\}/g, '\\sqrt{$1}');
+      
+      return texStr;
+    }
 
-    // Inicialização ao carregar
+    // Inicialização ao carregar e blablabla
     window.addEventListener('DOMContentLoaded', () => {
       executarTFA();
       resolverPolinomio();
@@ -3270,5 +3824,4 @@
     });
   </script>
 </body>
-
 </html>
