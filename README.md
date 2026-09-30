@@ -48,6 +48,11 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 
 ## 📝 Histórico de Versões
 
+## [1.1.4]
+* **Melhoria:** Suporte a variáveis diferentes de x
+* **Melhoria:** Gráfico do modo de análise faz tracejado para valores complexos
+* **Correção:** Integrais elementares não quebram mais o algoritmo
+
 ## [1.1.3]
 * **Novo:** Suporte a texto sobrescrito na aba "Solucionador de polinômios"
 * **Novo:** Gráfico interativo no modo de Análise na aba "Solucionador de polinômios"
