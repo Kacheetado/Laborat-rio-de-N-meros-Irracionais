@@ -331,17 +331,14 @@
           <button onclick="setTrig('cos', 20)"
             class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">cos(20°)</button>
           <button onclick="setTrig('sin', 45)"
-            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(45°)
-            &bull; Diagonal de Pitágoras</button>
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(45°)</button>
           <button onclick="setTrig('cos', 36)"
             class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">cos(36°)
-            &bull; Proporção Áurea (\(\phi\))</button>
+            &bull; (\(\phi\))</button>
           <button onclick="setTrig('sin', 15)"
-            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(15°)
-            &bull; Radical Aninhado</button>
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(15°)</button>
           <button onclick="setTrig('sin', 30)"
-            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(30°)
-            = 1/2 &bull; Racional</button>
+            class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 px-2 py-1 rounded text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">sin(30°)</button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end max-w-xl">
@@ -382,7 +379,7 @@
     <!-- ABA 4: LOGARITMOS -->
     <section id="pane-log" class="space-y-6 hidden">
       <div
-        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors ">
         <h2 data-i18n="log_title" class="text-xl font-bold text-slate-900 dark:text-white mb-2">4. Demonstração de
           Irracionalidade de Logaritmos</h2>
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-6" data-i18n="log_desc">
@@ -779,790 +776,932 @@
   <!-- DICIONÁRIO I18N COMPLETO (ou quase, sempre falta alguma traduçao) -->
   <script>
     const i18n = {
-      pt: {
-        app_title: "Laboratório de Números Irracionais",
-        app_subtitle: "Investigação e Dedução: TFA, TRR Completo, Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas",
-        project_badge: "Iniciação Científica • Sequência Didática",
-        tab_tfa: "1. Verificador TFA",
-        tab_solver: "2. Solucionador de Polinômios",
-        tab_trig: "3. Funções Trigonométricas",
-        tab_log: "4. Logaritmos",
-        tab_eisenstein: "5. Critério de Eisenstein",
-        tab_fraccont: "6. Frações Contínuas",
-        tab_tabela: "7. Tabela de Notáveis",
-        tab_historia: "8. Contexto Histórico",
-
-        tfa_title: "1. Demonstração via Teorema Fundamental da Aritmética",
-        tfa_desc: "Investigue a irracionalidade de raízes \\(\\sqrt[n]{K}\\) examinando a divisibilidade e paridade dos expoentes na decomposição prima canônica. Pela unicidade do TFA, um número inteiro não admite duas fatorações distintas.",
-        tfa_lbl_index: "Índice (n ≥ 2):",
-        tfa_lbl_rad: "Radicando (K inteiro positivo):",
-        tfa_btn: "Demonstrar",
-
-        solver_title: "2. Solucionador de Polinômios",
-        solver_desc: "Insira qualquer polinômio com coeficientes inteiros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). O algoritmo encontra todos os candidatos racionais \\(\\pm \\frac{p}{q}\\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as raízes irracionais remanescentes.",
-        quick_ex: "Exemplos rápidos:",
-        solver_lbl_poly: "Polinômio P(x):",
-        solver_btn: "Solucionar Passo a Passo",
-        solver_calc_title: "Cálculo Simbólico (Polinômio P(x))",
-        solver_rem_complex_roots: "Raízes Restantes (Irracionais e Complexas):",
-        solver_girard_title: "Relações de Girard",
-        solver_girard_sum: "Soma das raízes (\\(S\\)): ",
-        solver_girard_prod: "Produto das raízes (\\(P\\)): ",
-        solver_geom_title: "Geometria da Parábola (Grau 2)",
-        solver_geom_concav: "Concavidade:",
-        solver_geom_up: "Voltada para cima",
-        solver_geom_down: "Voltada para baixo",
-        solver_geom_vertex: "Vértice",
-        solver_geom_min: "Ponto de Mínimo",
-        solver_geom_max: "Ponto de Máximo",
-        solver_err_invalid: "Polinômio inválido. Verifique a sintaxe.",
-        solver_cartesian_title: "Visualização Cartesiana do Polinômio P(x) e Raízes",
-        solver_complex_title: "Plano Complexo (Argand-Gauss) - Distribuição das Raízes",
-
-        trig_title: "3. Funções Trigonométricas",
-        trig_desc: "Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos racionais \\(\\theta \\in [0^\\circ, 90^\\circ]\\), os únicos casos em que \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) são racionais ocorrem em \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos os outros geram valores irracionais.",
-        trig_shortcuts: "Atalhos didáticos:",
-        trig_lbl_func: "Função:",
-        trig_lbl_angle: "Ângulo em Graus (°):",
-        trig_btn: "Analisar Racionalidade",
-        opt_sin: "Seno",
-        opt_cos: "Cosseno",
-        opt_tan: "Tangente",
-        opt_sec: "Secante",
-        opt_csc: "Cossecante",
-        opt_cot: "Cotangente",
-        trig_num_title: "Cálculo Numérico",
-        trig_num_badge: "Valor Aproximado",
-        trig_dec_val: "Valor Decimal:",
-        trig_rad_val: "Ângulo em Radianos:",
-        trig_exact_title: "Valor Algébrico Exato",
-        trig_exact_badge: "Ângulo Notável",
-        trig_undef_title: "Indefinição Matemática",
-        trig_undef_badge: "Assíntota Vertical",
-        trig_undef_desc: "O valor de \\({funcName}({angle}^\\circ)\\) não está definido nos números reais.",
-
-        log_title: "4. Demonstração de Irracionalidade de Logaritmos",
-        log_desc: "Verifique a irracionalidade de \\(\\log_b(a)\\). Se o logaritmo for igual a uma fração racional \\(p/q\\), então \\(b^p = a^q\\). Pelo Teorema Fundamental da Aritmética, isso exige que a base e o logaritmando compartilhem os mesmos fatores primos em proporções exatas.",
-        log_lbl_base: "Base (b ≥ 2):",
-        log_lbl_arg: "Logaritmando (a ≥ 1):",
-        log_btn: "Analisar",
-
-        eisen_title: "5. Critério de Irredutibilidade de Eisenstein",
-        eisen_desc: "Ferramenta avançada de Álgebra Abstrata: Se existir um primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) e \\(p^2 \\nmid a_0\\), o polinômio é irredutível sobre \\(\\mathbb{Q}\\). Consequentemente, para graus \\(n \\ge 2\\), nenhuma de suas raízes pode ser racional!",
-        eisen_btn: "Testar Primos",
-
-        cf_title: "Reconhecimento Construtivo via Frações Contínuas Simples",
-        cf_desc: "Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
-        cf_lbl_rad: "Raiz Quadrada \\(\\sqrt{N}\\) (N não quadrado):",
-        cf_btn: "Expandir Fração",
-
-        cf_expr_title: "Aproximações Fracionárias de Constantes",
-        cf_expr_desc: "Gere convergentes racionais para expressões, constantes transcendentais ou trigonométricas.",
-        cf_expr_lbl: "Expressão (ex: pi, e, sin(1), sqrt(2)/2):",
-        cf_expr_btn: "Gerar Convergentes",
-        err_invalid_expr: "Expressão inválida. Utilize formatações matemáticas em inglês (ex: pi, e, sin(1), sqrt(2)).",
-        err_syntax: "Erro de sintaxe algébrica. Certifique-se de usar notações matemáticas explícitas.",
-
-        tabela_title: "Tabela de Constantes e Irracionais Notáveis",
-        tabela_desc: "Diferenciação fundamental entre irracionais algébricos (raízes de equações com coeficientes inteiros) e transcendentes (demonstrados fora da álgebra polinomial clássica).",
-        th_sym: "Símbolo",
-        th_name: "Nome / Origem",
-        th_val: "Valor Decimal Aproximado",
-        th_class: "Classificação",
-        th_poly: "Polinômio Minimal / Prova",
-        tag_algebraic: "Algébrico",
-        tag_transcendent: "Transcendente",
-        tag_irrational: "Irracional",
-        row_sqrt2_name: "Constante de Pitágoras (Diagonal do quadrado unitário)",
-        row_sqrt3_name: "Constante de Teodoro (Diagonal do cubo unitário)",
-        row_phi_name: "Número de Ouro (\\(\\frac{1+\\sqrt{5}}{2}\\))",
-        row_pi_name: "Pi (Razão perímetro/diâmetro na circunferência)",
-        row_pi_proof: "Provado por Lindemann (1882)",
-        row_e_name: "Número de Euler (Base do logaritmo natural)",
-        row_e_proof: "Provado por Hermite (1873)",
-        row_ln2_name: "Logaritmo natural de 2",
-        row_zeta_name: "Constante de Apéry (\\(\\sum_{n=1}^\\infty \\frac{1}{n^3}\\))",
-        row_zeta_proof: "Provado por Apéry (1979) [Transcedência em aberto]",
-        row_delos_name: "Constante de Delos (Duplicação do cubo)",
-
-        hist_title: "A Evolução Histórica e Epistemológica dos Irracionais",
-        hist_subtitle: "Da crise da incomensurabilidade grega à formalização analítica de Dedekind e Cantor.",
-        hist_h1: "1. O Colapso Pitagórico e a Incomensurabilidade (séc. V a.C.)",
-        hist_p1: "Para os pitagóricos, toda a harmonia do universo repousava sobre a afirmação de que <em>'tudo é número inteiro'</em>. Qualquer segmento de reta deveria ser medido através de partes inteiras comuns. Ao analisar a diagonal do quadrado unitário (\\(d^2 = 1^2 + 1^2 = 2\\)), Hipaso de Metaponto descobriu que o lado e a diagonal são <strong>incomensuráveis</strong>. A ausência de uma fração comum provocou a primeira grande crise nos fundamentos matemáticos.",
-        hist_h2: "2. A Barreira dos Polinômios e o Teorema das Raízes Racionais",
-        hist_p2: "Com a evolução da álgebra, a investigação passou da geometria para as equações polinomiais. O Teorema das Raízes Racionais (TRR) consolidou um método finito e irrefutável: se os candidatos racionais definidos pelos coeficientes inteiros não anulam a equação, qualquer raiz real encontrada é <strong>estritamente irracional algébrica</strong>.",
-        hist_h3: "3. O Teorema de Niven na Trigonometria",
-        hist_p3: "Ivan Niven estabeleceu a ponte definitiva entre trigonometria e teoria dos números. Seu teorema prova que, se um ângulo em graus \\(\\theta\\) é racional no intervalo fechado \\([0, 90]\\), os únicos casos em que \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) são racionais ocorrem em \\(0^\\circ, 30^\\circ\\) e \\(90^\\circ\\). Para todos os outros ângulos com medidas racionais, a trigonometria mergulha no conjunto dos irracionais.",
-        hist_h4: "4. A Transcendência: Liouville, Hermite e Lindemann",
-        hist_p4: "Em 1844, Liouville construiu os primeiros números que não são raízes de nenhuma equação polinomial com coeficientes inteiros (números transcendentes). Posteriormente, Charles Hermite (1873) e Ferdinand von Lindemann (1882) demonstraram a transcendência de \\(e\\) e \\(\\pi\\). Pelo Teorema de Lindemann-Weierstrass, sabe-se também que \\(\\sin(x)\\) é transcendente para todo \\(x \\neq 0\\) algébrico dado em radianos.",
-        hist_h5: "5. A Completude da Reta: Dedekind e Cantor",
-        hist_p5: "Richard Dedekind preencheu os 'buracos' deixados pelos números racionais na reta contínua formulando os <em>Cortes de Dedekind</em>. Georg Cantor comprovou que o conjunto dos racionais é enumerável (\\(\\aleph_0\\)), enquanto os irracionais são não enumeráveis (\\(2^{\\aleph_0}\\)), demonstrando que a densidade substantiva da reta real pertence aos irracionais.",
-
-        footer_text: "Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo (2002), Marques (2013)",
-
-        res_rational_int: "Resultado: Racional (Inteiro)",
-        res_irrational_proven: "Resultado: Irracional Demonstrado",
-        tfa_step1: "1. Decomposição Canônica em Primos (TFA):",
-        tfa_perf_power: "Todos os expoentes dos fatores primos são múltiplos exatos do índice {n}. Portanto, {k} é uma potência perfeita.",
-        tfa_odd_obs: "Observe o fator primo <strong>{p}</strong>: seu expoente é <strong>{exp}</strong>, que <strong>não é divisível por {n}</strong>.",
-        tfa_step2: "2. Estrutura da Demonstração por Redução ao Absurdo:",
-        tfa_suppose: "Suponha que \\(\\sqrt[{n}]{{{k}}}\\) seja racional irredutível \\(p/q\\) com \\(\\text{mdc}(p,q)=1\\):",
-        tfa_step3: "3. Confronto da Divisibilidade dos Expoentes:",
-        tfa_left_exp: "No membro esquerdo (\\(p^{{{n}}}\\)), o expoente de todo fator primo é necessariamente um múltiplo de {n}.",
-        tfa_right_exp: "No membro direito (\\({k} \\cdot q^{{{n}}}\\)), o fator primo <strong>{p}</strong> comparece em \\(q^{{{n}}}\\) com expoente múltiplo de {n}, somado a {exp}. Logo, seu expoente total não é múltiplo de {n}.",
-        tfa_contradiction_title: "Contradição com o TFA:",
-        tfa_contradiction_desc: "Pela unicidade da fatoração em primos, um número inteiro não pode admitir duas contagens de fatores distintas. Logo, \\(p^{{{n}}} = {k}q^{{{n}}}\\) não possui soluções inteiras com \\(q > 0\\).",
-        tfa_conclusion: "Conclusão: \\(\\sqrt[{n}]{{{k}}}\\) é irracional.",
-
-        gen_title: "Construtor de Expressões (Gerador de Polinômio Minimal)",
-        gen_desc: "Quer provar que uma expressão como \\(\\frac{\\sqrt{7}}{3}\\) é irracional? Insira os valores abaixo para gerar o polinômio correspondente e enviá-lo ao solucionador.",
-        gen_btn: "Gerar e Solucionar",
-        gen_deduction: "Dedução Algébrica (Isolamento):",
-        gen_error: "Erro: K deve ser ≥ 0 e C não pode ser 0.",
-
-        solver_res_title: "Solução Completa da Equação Polinomial",
-        solver_badge_has_irrat: "Contém Raízes Irracionais",
-        solver_badge_only_rat: "Apenas Raízes Racionais",
-        solver_poly_lbl: "Polinômio:",
-        solver_deg_lbl: "Grau:",
-        solver_zero_root: "O termo independente é 0. Logo, \\(x = 0\\) é raiz racional imediata.",
-        solver_cand_intro: "<strong>Candidatos pelo TRR:</strong> Divisores de \\(a_0 = {a0}\\) sobre divisores de \\(a_n = {an}\\):",
-        solver_cand_tested: "candidatos testados",
-        solver_quadratic_rem: "Após divisão sintética (Briot-Ruffini), resta a equação quadrática:",
-        solver_disc: "Discriminante:",
-        solver_irrat_delta: "Como \\(\\Delta = {delta}\\) não é quadrado perfeito, as raízes reais de \\(Q(x)\\) são <strong>estritamente irracionais algébricas</strong>.",
-        solver_complex_roots: "Como \\(\\Delta < 0\\), as raízes restantes pertencem a \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complexas conjugadas).",
-        solver_no_rat_roots: "Nenhum candidato do TRR zerou o polinômio. Logo, <strong>o polinômio não possui raízes racionais</strong>.",
-        solver_all_real_irrat: "Pelo Teorema das Raízes Racionais, todas as raízes reais existentes são <strong>irracionais algébricas</strong>.",
-        solver_rat_roots_found: "Raízes Racionais Encontradas (\\(\\mathbb{Q}\\)):",
-        solver_irrat_roots_found: "Raízes Irracionais Algébricas (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
-        solver_no_real_roots: "Nenhuma raiz real encontrada no corpo avaliado.",
-
-        trig_res_irrat: "Resultado: Irracional Algébrico Comprovado",
-        trig_res_rat_notable: "Resultado: Racional Notável",
-        trig_res_niven_irrat: "Resultado: Irracional Comprovado (Teorema de Niven)",
-        trig_triple_arc: "1. Conexão Algébrica via Fórmula do Arco Triplo:",
-        trig_chebyshev_sub: "Como \\(3 \\times {angle}^\\circ = 60^\\circ\\) e \\(\\cos(60^\\circ) = \\frac{1}{2}\\), chamando \\(x = \\cos({angle}^\\circ)\\):",
-        trig_trr_filter: "3. Filtro pelo Teorema das Raízes Racionais (TRR):",
-        trig_trr_cand_lbl: "Para o polinômio \\(P(x) = 8x^3 - 6x - 1\\), os únicos candidatos racionais possíveis são:",
-        trig_trr_none: "Testando cada candidato: nenhum anula o polinômio (\\(P(x) \\neq 0\\) para todos).",
-        trig_chebyshev_concl: "<strong>Conclusão Rigorosa:</strong> O polinômio \\(8x^3 - 6x - 1\\) não tem raízes racionais. Como \\(\\cos({angle}^\\circ)\\) é sua raiz real, conclui-se que <strong>\\(\\cos({angle}^\\circ)\\) é estritamente irracional algébrico</strong>. Este mesmo fato prova geometricamente a <em>impossibilidade da trissecção do ângulo de 60° com régua e compasso</em>!",
-        trig_niven_quote: "\"Para qualquer ângulo \\(\\theta\\) tal que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), os únicos valores de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) que são racionais são \\(0, \\pm \\frac{1}{2}\\) e \\(\\pm 1\\).\"",
-        trig_niven_concl: "Como o ângulo <strong>{angle}°</strong> é racional em graus, mas o resultado <strong>{val}</strong> não pertence a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), o Teorema de Niven garante que o valor é <strong>estritamente irracional</strong>.",
-
-        eisen_sat_title: "Critério Satisfeito: Polinômio Irredutível sobre \\(\\mathbb{Q}\\)",
-        eisen_sat_desc: "O Critério de Eisenstein foi satisfeito com o número primo <strong>\\(p = {p}\\)</strong>:",
-        eisen_c1: "\\({p} \\mid a_i\\) para todo \\(i < {n}\\) (divide todos os coeficientes exceto o líder).",
-        eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (não divide o coeficiente líder).",
-        eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (seu quadrado não divide o termo independente).",
-        eisen_concl: "<strong>Teorema de Irredutibilidade:</strong> \\(P(x)\\) não pode ser fatorado em \\(\\mathbb{Q}\\). Como o grau é {n} ≥ 2, <strong>todas as suas raízes reais são estritamente irracionais algébricas</strong>.",
-        eisen_inconc_title: "Critério Inconclusivo para os Primeiros Primos",
-        eisen_inconc_desc: "Nenhum dos primos testados satisfez simultaneamente as 3 condições de Eisenstein. Utilize a aba 2 (Solucionador TRR) para investigar as raízes.",
-
-        cf_res_title: "Expansão em Fração Contínua Periódica",
-        cf_badge: "Irracional Quadrático",
-        cf_lagrange: "Pelo Teorema de Lagrange, a expansão em fração contínua de um número real é periódica se, e somente se, o número é um <strong>irracional quadrático</strong>.",
-        cf_convergents_lbl: "2. Melhores Aproximações Racionais (Convergentes):",
-        cf_diff_rat: "<strong>Diferença Fundamental com os Racionais:</strong> Um número racional sempre gera uma fração contínua finita (pelo Algoritmo de Euclides). O fato de \\(\\sqrt{{{N}}}\\) gerar um ciclo infinito comprova categoricamente sua irracionalidade.",
-
-        hybrid_title: "Modo de Análise Analítica",
-        hybrid_badge: "Função de \\(\\mathbb{R}\\) em \\(\\mathbb{C}\\)",
-        hybrid_desc: "O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o <strong>rigor absoluto</strong> da sua expressão sem aproximações decimais, o laboratório ativou o motor de Análise Real.",
-        hybrid_func_lbl: "Função Analisada:",
-        hybrid_deriv_lbl: "Derivada:",
-        hybrid_int_lbl: "Integral Indefinida:",
-        hybrid_error: "Erro ao compilar função para análise. Verifique se a sintaxe matemática é suportada.",
-        cartesian_chart_lbl: "Plano Cartesiano com Suporte a R → C",
-      },
-
-      en: {
-        app_title: "Irrational Numbers Laboratory",
-        app_subtitle: "Investigation and Deduction: FTA, Full RRT, General Polynomials, Trigonometry, Eisenstein, and Continued Fractions",
-        project_badge: "Scientific Research • Didactic Sequence",
-        tab_tfa: "1. FTA Verifier",
-        tab_solver: "2. Polynomial Solver",
-        tab_trig: "3. Trigonometric Functions",
-        tab_log: "4. Logarithms",
-        tab_eisenstein: "5. Eisenstein's Criterion",
-        tab_fraccont: "6. Continued Fractions",
-        tab_tabela: "7. Table of Constants",
-        tab_historia: "8. Historical Context",
-
-        tfa_title: "1. Proof via Fundamental Theorem of Arithmetic",
-        tfa_desc: "Investigate the irrationality of roots \\(\\sqrt[n]{K}\\) by examining the divisibility and parity of exponents in canonical prime factorization. By FTA uniqueness, an integer cannot have two distinct prime factorizations.",
-        tfa_lbl_index: "Index (n ≥ 2):",
-        tfa_lbl_rad: "Radicand (Positive integer K):",
-        tfa_btn: "Prove",
-
-        solver_title: "2. Polynomial Solver",
-        solver_desc: "Enter any polynomial with integer coefficients \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). The algorithm tests all rational candidates \\(\\pm \\frac{p}{q}\\) via RRT, factors using Ruffini's rule, extracts rational roots, and isolates the remaining irrational roots.",
-        quick_ex: "Quick examples:",
-        solver_lbl_poly: "Polynomial P(x):",
-        solver_btn: "Solve Step-by-Step",
-        solver_calc_title: "Symbolic Calculus (Polynomial P(x))",
-        solver_rem_complex_roots: "Remaining Roots (Irrational and Complex):",
-        solver_girard_title: "Vieta's Formulas",
-        solver_girard_sum: "Sum of roots (\\(S\\)): ",
-        solver_girard_prod: "Product of roots (\\(P\\)): ",
-        solver_geom_title: "Parabola Geometry (Degree 2)",
-        solver_geom_concav: "Concavity:",
-        solver_geom_up: "Upwards",
-        solver_geom_down: "Downwards",
-        solver_geom_vertex: "Vertex",
-        solver_geom_min: "Minimum Point",
-        solver_geom_max: "Maximum Point",
-        solver_err_invalid: "Invalid polynomial. Check syntax.",
-        solver_cartesian_title: "Cartesian Visualization of Polynomial P(x) and Roots",
-        solver_complex_title: "Complex Plane (Argand-Gauss) - Root Distribution",
-
-        trig_title: "3. Trigonometric Functions",
-        trig_desc: "Investigate the irrationality of trigonometric values. According to Niven's Theorem, for rational angles \\(\\theta \\in [0^\\circ, 90^\\circ]\\), the only cases where \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) are rational occur at \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). All other angles produce irrational values.",
-        trig_shortcuts: "Didactic shortcuts:",
-        trig_lbl_func: "Function:",
-        trig_lbl_angle: "Angle in Degrees (°):",
-        trig_btn: "Analyze Rationality",
-        opt_sin: "Sine",
-        opt_cos: "Cosine",
-        opt_tan: "Tangent",
-        opt_sec: "Secant",
-        opt_csc: "Cosecant",
-        opt_cot: "Cotangent",
-        trig_num_title: "Numerical Calculation",
-        trig_num_badge: "Approximate Value",
-        trig_dec_val: "Decimal Value:",
-        trig_rad_val: "Angle in Radians:",
-        trig_exact_title: "Exact Algebraic Value",
-        trig_exact_badge: "Notable Angle",
-        trig_undef_title: "Mathematical Undefinedness",
-        trig_undef_badge: "Vertical Asymptote",
-        trig_undef_desc: "The value of \\({funcName}({angle}^\\circ)\\) is undefined in real numbers.",
-
-        log_title: "4. Logarithm Irrationality Proof",
-        log_desc: "Verify the irrationality of \\(\\log_b(a)\\). If the logarithm is equal to a rational fraction \\(p/q\\), then \\(b^p = a^q\\). By the Fundamental Theorem of Arithmetic, this requires the base and argument to share the exact same prime factors in exact proportions.",
-        log_lbl_base: "Base (b ≥ 2):",
-        log_lbl_arg: "Argument (a ≥ 1):",
-        log_btn: "Analyze",
-
-        eisen_title: "5. Eisenstein's Irreducibility Criterion",
-        eisen_desc: "Advanced Abstract Algebra tool: If there is a prime \\(p\\) such that \\(p \\mid a_i\\) for all \\(i < n\\), \\(p \\nmid a_n\\), and \\(p^2 \\nmid a_0\\), the polynomial is irreducible over \\(\\mathbb{Q}\\). Consequently, for degree \\(n \\ge 2\\), none of its roots can be rational!",
-        eisen_btn: "Test Primes",
-
-        cf_title: "Constructive Recognition via Simple Continued Fractions",
-        cf_desc: "Unlike finite decimal expansions, the continued fraction expansion of any rational number always terminates, whereas for an irrational number it is strictly infinite. Quadratic irrationals produce periodic expansions: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
-        cf_lbl_rad: "Square Root \\(\\sqrt{N}\\) (non-square N):",
-        cf_btn: "Expand Fraction",
-
-        cf_expr_title: "Fractional Approximations of Constants",
-        cf_expr_desc: "Generate rational convergents for expressions, transcendental or trigonometric constants.",
-        cf_expr_lbl: "Expression (e.g., pi, e, sin(1), sqrt(2)/2):",
-        cf_expr_btn: "Generate Convergents",
-        err_invalid_expr: "Invalid expression. Use English mathematical formatting (e.g., pi, e, sin(1), sqrt(2)).",
-        err_syntax: "Algebraic syntax error. Ensure explicit notations.",
-
-        tabela_title: "Table of Constants & Notable Irrationals",
-        tabela_desc: "Fundamental distinction between algebraic irrationals (roots of integer polynomials) and transcendental numbers (proven outside classical polynomial algebra).",
-        th_sym: "Symbol",
-        th_name: "Name / Origin",
-        th_val: "Approximate Decimal Value",
-        th_class: "Classification",
-        th_poly: "Minimal Polynomial / Proof",
-        tag_algebraic: "Algebraic",
-        tag_transcendent: "Transcendental",
-        tag_irrational: "Irrational",
-        row_sqrt2_name: "Pythagoras' Constant (Unit square diagonal)",
-        row_sqrt3_name: "Theodorus' Constant (Unit cube diagonal)",
-        row_phi_name: "Golden Ratio (\\(\\frac{1+\\sqrt{5}}{2}\\))",
-        row_pi_name: "Pi (Circumference-to-diameter ratio)",
-        row_pi_proof: "Proven by Lindemann (1882)",
-        row_e_name: "Euler's Number (Base of natural logarithm)",
-        row_e_proof: "Proven by Hermite (1873)",
-        row_ln2_name: "Natural logarithm of 2",
-        row_zeta_name: "Apéry's Constant (\\(\\sum_{n=1}^\\infty \\frac{1}{n^3}\\))",
-        row_zeta_proof: "Proven by Apéry (1979) [Open transcendence]",
-        row_delos_name: "Delian Constant (Doubling the cube)",
-
-        hist_title: "Historical and Epistemological Evolution of Irrationals",
-        hist_subtitle: "From the Pythagorean crisis of incommensurability to the analytical formalization of Dedekind and Cantor.",
-        hist_h1: "1. The Pythagorean Collapse and Incommensurability (5th century BC)",
-        hist_p1: "For the Pythagoreans, universal harmony rested on the principle that <em>'all is integer number'</em>. Every segment was believed to be measurable through common integer units. By analyzing the diagonal of a unit square (\\(d^2 = 1^2 + 1^2 = 2\\)), Hippasus discovered that the side and diagonal are incommensurables, creating the first major crisis in the foundations of mathematics.",
-        hist_h2: "2. The Polynomial Barrier and the Rational Root Theorem",
-        hist_p2: "With modern algebra, investigation shifted from geometry to polynomial equations. The Rational Root Theorem (RRT) established a finite, definitive method: if the rational candidates derived from integer coefficients do not vanish the equation, any existing real root is strictly algebraic irrational.",
-        hist_h3: "3. Niven's Theorem in Trigonometry (1956)",
-        hist_p3: "Ivan Niven bridged trigonometry and number theory. His theorem proves that if an angle in degrees \\(\\theta\\) is rational in \\([0, 90]\\), the only instances where \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) are rational are \\(0^\\circ, 30^\\circ\\), and \\(90^\\circ\\). For all other rational degree angles, trigonometry strictly produces irrationals.",
-        hist_h4: "4. Transcendence: Liouville, Hermite, and Lindemann",
-        hist_p4: "In 1844, Liouville proved the existence of numbers that are not roots of any non-zero integer polynomial (transcendental numbers). Hermite (1873) and Lindemann (1882) proved the transcendence of \\(e\\) and \\(\\pi\\). By the Lindemann-Weierstrass theorem, \\(\\sin(x)\\) is transcendental for all algebraic non-zero \\(x\\) in radians.",
-        hist_h5: "5. Completeness of the Real Line: Dedekind and Cantor",
-        hist_p5: "Richard Dedekind filled the gaps left by rational numbers on the continuum line through <em>Dedekind cuts</em>. Georg Cantor proved that the rationals are countable (\\(\\aleph_0\\)) while irrationals are uncountable (\\(2^{\\aleph_0}\\)), demonstrating that almost all points on the real line are irrational.",
-
-        footer_text: "Irrational Numbers Laboratory • References: Niven (1956, 1990), Figueiredo (2002), Marques (2013)",
-
-        res_rational_int: "Result: Rational (Integer)",
-        res_irrational_proven: "Result: Irrational Proven",
-        tfa_step1: "1. Canonical Prime Factorization (FTA):",
-        tfa_perf_power: "All prime factor exponents are exact multiples of index {n}. Therefore, {k} is an exact perfect power.",
-        tfa_odd_obs: "Notice prime factor <strong>{p}</strong>: its exponent is <strong>{exp}</strong>, which is <strong>not divisible by {n}</strong>.",
-        tfa_step2: "2. Proof Structure by Contradiction (Reductio ad Absurdum):",
-        tfa_suppose: "Suppose \\(\\sqrt[{n}]{{{k}}}\\) is an irreducible rational fraction \\(p/q\\) with \\(\\gcd(p,q)=1\\):",
-        tfa_step3: "3. Exponent Divisibility Conflict:",
-        tfa_left_exp: "On the left-hand side (\\(p^{{{n}}}\\)), every prime factor's exponent is strictly a multiple of {n}.",
-        tfa_right_exp: "On the right-hand side (\\({k} \\cdot q^{{{n}}}\\)), prime factor <strong>{p}</strong> appears in \\(q^{{{n}}}\\) with an exponent multiple of {n}, plus {exp}. Hence its total exponent is not a multiple of {n}.",
-        tfa_contradiction_title: "Contradiction with FTA:",
-        tfa_contradiction_desc: "By the uniqueness of prime factorization, an integer cannot have two distinct prime factor counts. Thus \\(p^{{{n}}} = {k}q^{{{n}}}\\) has no integer solutions with \\(q > 0\\).",
-        tfa_conclusion: "Conclusion: \\(\\sqrt[{n}]{{{k}}}\\) is irrational.",
-
-        gen_title: "Expression Builder (Minimal Polynomial Generator)",
-        gen_desc: "Want to prove that an expression like \\(\\frac{\\sqrt{7}}{3}\\) is irrational? Enter the values below to generate the corresponding polynomial and send it to the solver.",
-        gen_btn: "Generate and Solve",
-        gen_deduction: "Algebraic Deduction (Isolation):",
-        gen_error: "Error: K must be ≥ 0 and C cannot be 0.",
-
-        solver_res_title: "Complete Solution of the Polynomial Equation",
-        solver_badge_has_irrat: "Contains Irrational Roots",
-        solver_badge_only_rat: "Only Rational Roots",
-        solver_poly_lbl: "Polynomial:",
-        solver_deg_lbl: "Degree:",
-        solver_zero_root: "Constant term is 0. Therefore, \\(x = 0\\) is an immediate rational root.",
-        solver_cand_intro: "<strong>Candidates via RRT:</strong> Divisors of \\(a_0 = {a0}\\) over divisors of \\(a_n = {an}\\):",
-        solver_cand_tested: "candidates tested",
-        solver_quadratic_rem: "After synthetic division (Ruffini), the remaining quadratic equation is:",
-        solver_disc: "Discriminant:",
-        solver_irrat_delta: "Since \\(\\Delta = {delta}\\) is not a perfect square, the real roots of \\(Q(x)\\) are <strong>strictly algebraic irrationals</strong>.",
-        solver_complex_roots: "Since \\(\\Delta < 0\\), the remaining roots belong to \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complex conjugates).",
-        solver_no_rat_roots: "No RRT candidate satisfied the polynomial. Hence, <strong>the polynomial has no rational roots</strong>.",
-        solver_all_real_irrat: "By the Rational Root Theorem, all existing real roots are <strong>strictly algebraic irrationals</strong>.",
-        solver_rat_roots_found: "Rational Roots Found (\\(\\mathbb{Q}\\)):",
-        solver_irrat_roots_found: "Algebraic Irrational Roots (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
-        solver_no_real_roots: "No real roots found in the evaluated domain.",
-
-        trig_res_irrat: "Result: Proven Algebraic Irrational",
-        trig_res_rat_notable: "Result: Notable Rational Value",
-        trig_res_niven_irrat: "Result: Irrational Proven (Niven's Theorem)",
-        trig_triple_arc: "1. Algebraic Connection via Triple-Angle Formula:",
-        trig_chebyshev_sub: "Since \\(3 \\times {angle}^\\circ = 60^\\circ\\) and \\(\\cos(60^\\circ) = \\frac{1}{2}\\), setting \\(x = \\cos({angle}^\\circ)\\):",
-        trig_trr_filter: "3. Rational Root Theorem (RRT) Filter:",
-        trig_trr_cand_lbl: "For polynomial \\(P(x) = 8x^3 - 6x - 1\\), the only possible rational candidates are:",
-        trig_trr_none: "Testing each candidate: none vanishes the polynomial (\\(P(x) \\neq 0\\) for all).",
-        trig_chebyshev_concl: "<strong>Rigorous Conclusion:</strong> \\(8x^3 - 6x - 1\\) has no rational roots. Since \\(\\cos({angle}^\\circ)\\) is its real root, <strong>\\(\\cos({angle}^\\circ)\\) is strictly an algebraic irrational</strong>. This also proves the <em>impossibility of trisecting a 60° angle with straightedge and compass</em>!",
-        trig_niven_quote: "\"For any angle \\(\\theta\\) such that \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), the only values of \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) that are rational are \\(0, \\pm \\frac{1}{2}\\), and \\(\\pm 1\\).\"",
-        trig_niven_concl: "Since <strong>{angle}°</strong> is rational in degrees, but the evaluated result <strong>{val}</strong> does not belong to \\(\\{0, \\pm 1/2, \\pm 1\\}\\), Niven's Theorem proves the value is <strong>strictly irrational</strong>.",
-
-        eisen_sat_title: "Criterion Satisfied: Irreducible Polynomial over \\(\\mathbb{Q}\\)",
-        eisen_sat_desc: "Eisenstein's Criterion was satisfied with prime number <strong>\\(p = {p}\\)</strong>:",
-        eisen_c1: "\\({p} \\mid a_i\\) for all \\(i < {n}\\) (divides all non-leading coefficients).",
-        eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (does not divide leading coefficient).",
-        eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (its square does not divide constant term).",
-        eisen_concl: "<strong>Irreducibility Theorem:</strong> \\(P(x)\\) cannot be factored over \\(\\mathbb{Q}\\). Since degree is {n} ≥ 2, <strong>all its real roots are strictly algebraic irrationals</strong>.",
-        eisen_inconc_title: "Criterion Inconclusive for First Primes",
-        eisen_inconc_desc: "None of the tested primes satisfied all 3 conditions. Use Tab 2 (RRT Solver) to test rational roots exhaustively.",
-
-        cf_res_title: "Periodic Continued Fraction Expansion",
-        cf_badge: "Quadratic Irrational",
-        cf_lagrange: "By Lagrange's Theorem, the continued fraction expansion of a real number is periodic if and only if it is a <strong>quadratic irrational</strong>.",
-        cf_convergents_lbl: "2. Best Rational Approximations (Convergents):",
-        cf_diff_rat: "<strong>Fundamental Difference with Rationals:</strong> A rational number always terminates in a finite continued fraction. The fact that \\(\\sqrt{{{N}}}\\) generates an infinite cycle categorially proves its irrationality.",
-
-        hybrid_title: "Analytical Analysis Mode",
-        hybrid_badge: "Function from \\(\\mathbb{R}\\) to \\(\\mathbb{C}\\)",
-        hybrid_desc: "The Rational Root Theorem (RRT) requires polynomials with strictly integer coefficients. To preserve the <strong>absolute rigor</strong> of your expression without decimal approximations, the laboratory activated the Real Analysis engine.",
-        hybrid_func_lbl: "Analyzed Function:",
-        hybrid_deriv_lbl: "Derivative:",
-        hybrid_int_lbl: "Indefinite Integral:",
-        hybrid_error: "Error compiling function for analysis. Check if the mathematical syntax is supported.",
-        cartesian_chart_lbl: "Cartesian Plane: Graph of Function f(x)"
-      },
-
-      es: {
-        app_title: "Laboratorio de Números Irracionales",
-        app_subtitle: "Investigación y Deducción: TFA, TRR Completo, Polinomios Generales, Trigonometría, Eisenstein y Fracciones Continuas",
-        project_badge: "Iniciación Científica • Secuencia Didáctica",
-        tab_tfa: "1. Verificador TFA",
-        tab_solver: "2. Solucionador de Polinomios",
-        tab_trig: "3. Funciones Trigonométricas",
-        tab_log: "4. Logaritmos",
-        tab_eisenstein: "5. Criterio de Eisenstein",
-        tab_fraccont: "6. Fracciones Continuas",
-        tab_tabela: "7. Tabla de Notables",
-        tab_historia: "8. Contexto Histórico",
-
-        tfa_title: "1. Demostración mediante el Teorema Fundamental de la Aritmética",
-        tfa_desc: "Investigue la irracionalidad de raíces \\(\\sqrt[n]{K}\\) examinando la divisibilidad y paridad de los exponentes en la descomposición canónica en primos. Por la unicidad del TFA, un número entero no admite dos factorizaciones distintas.",
-        tfa_lbl_index: "Índice (n ≥ 2):",
-        tfa_lbl_rad: "Radicando (K entero positivo):",
-        tfa_btn: "Demostrar",
-
-        solver_title: "2. Solucionador de Polinomios",
-        solver_desc: "Ingrese cualquier polinomio con coeficientes enteros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). El algoritmo prueba los candidatos racionales \\(\\pm \\frac{p}{q}\\) por el TRR, factoriza mediante la regla de Ruffini, extrae las raíces racionales y aísla las raíces irracionales restantes.",
-        quick_ex: "Ejemplos rápidos:",
-        solver_lbl_poly: "Polinomio P(x):",
-        solver_btn: "Resolver Paso a Paso",
-        solver_calc_title: "Cálculo Simbólico (Polinomio P(x))",
-        solver_rem_complex_roots: "Raíces Restantes (Irracionales y Complejas):",
-        solver_girard_title: "Fórmulas de Vieta (Relaciones de Girard)",
-        solver_girard_sum: "Suma de las raíces (\\(S\\)): ",
-        solver_girard_prod: "Producto de las raíces (\\(P\\)): ",
-        solver_geom_title: "Geometría de la Parábola (Grado 2)",
-        solver_geom_concav: "Concavidad:",
-        solver_geom_up: "Hacia arriba",
-        solver_geom_down: "Hacia abajo",
-        solver_geom_vertex: "Vértice",
-        solver_geom_min: "Punto Mínimo",
-        solver_geom_max: "Punto Máximo",
-        solver_err_invalid: "Polinomio inválido. Verifique la sintaxis.",
-        solver_cartesian_title: "Visualización Cartesiana del Polinomio P(x) y Raíces",
-        solver_complex_title: "Plano Complejo (Argand-Gauss) - Distribución de las Raíces",
-
-        trig_title: "3. Funciones Trigonométricas",
-        trig_desc: "Investigue la irracionalidad de los valores trigonométricos. Según el Teorema de Niven, para ángulos racionales \\(\\theta \\in [0^\\circ, 90^\\circ]\\), los únicos casos donde \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son racionales ocurren en \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos los demás generan valores irracionales.",
-        trig_shortcuts: "Atajos didácticos:",
-        trig_lbl_func: "Función:",
-        trig_lbl_angle: "Ángulo en Grados (°):",
-        trig_btn: "Analizar Racionalidad",
-        opt_sin: "Seno",
-        opt_cos: "Coseno",
-        opt_tan: "Tangente",
-        opt_sec: "Secante",
-        opt_csc: "Cosecante",
-        opt_cot: "Cotangente",
-        trig_num_title: "Cálculo Numérico",
-        trig_num_badge: "Valor Aproximado",
-        trig_dec_val: "Valor Decimal:",
-        trig_rad_val: "Ángulo en Radianes:",
-        trig_exact_title: "Valor Algebraico Exacto",
-        trig_exact_badge: "Ángulo Notable",
-        trig_undef_title: "Indefinición Matemática",
-        trig_undef_badge: "Asíntota Vertical",
-        trig_undef_desc: "El valor de \\({funcName}({angle}^\\circ)\\) no está definido en los números reales.",
-
-        log_title: "4. Demostración de Irracionalidad de Logaritmos",
-        log_desc: "Verifique la irracionalidad de \\(\\log_b(a)\\). Si el logaritmo equivale a una fracción racional \\(p/q\\), entonces \\(b^p = a^q\\). Por el Teorema Fundamental de la Aritmética, esto exige que la base y el argumento compartan los mismos factores primos en proporciones exactas.",
-        log_lbl_base: "Base (b ≥ 2):",
-        log_lbl_arg: "Argumento (a ≥ 1):",
-        log_btn: "Analizar",
-
-        eisen_title: "5. Criterio de Irreducibilidad de Eisenstein",
-        eisen_desc: "Herramienta avanzada de Álgebra Abstracta: Si existe un primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) y \\(p^2 \\nmid a_0\\), el polinomio es irreducible sobre \\(\\mathbb{Q}\\). ¡Ninguna de sus raíces reales puede ser racional!",
-        eisen_btn: "Probar Primos",
-
-        cf_title: "Reconocimiento Constructivo mediante Fracciones Continuas",
-        cf_desc: "A diferencia del desarrollo decimal finito, la fracción continua de cualquier número racional siempre termina, mientras que la de un irracional es estrictamente infinita. Los irracionales cuadráticos generan desarrollos periódicos: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
-        cf_lbl_rad: "Raíz Cuadrada \\(\\sqrt{N}\\) (N no cuadrado):",
-        cf_btn: "Expandir Fracción",
-
-        cf_expr_title: "Aproximaciones Fraccionarias de Constantes",
-        cf_expr_desc: "Genere convergentes racionales para expresiones, constantes trascendentales o trigonométricas.",
-        cf_expr_lbl: "Expresión (ej: pi, e, sin(1), sqrt(2)/2):",
-        cf_expr_btn: "Generar Convergentes",
-        err_invalid_expr: "Expresión inválida. Utilice formato matemático explícito.",
-        err_syntax: "Error de sintaxis algebraica.",
-
-        tabela_title: "Tabla de Constantes e Irracionales Notables",
-        tabela_desc: "Diferenciación fundamental entre irracionales algebraicos (raíces de polinomios con coeficientes enteros) y trascendentes.",
-        th_sym: "Símbolo",
-        th_name: "Nombre / Origen",
-        th_val: "Valor Decimal Aproximado",
-        th_class: "Clasificación",
-        th_poly: "Polinomio Minimal / Prueba",
-        tag_algebraic: "Algebraico",
-        tag_transcendent: "Trascendente",
-        tag_irrational: "Irracional",
-        row_sqrt2_name: "Constante de Pitágoras (Diagonal del cuadrado unidad)",
-        row_sqrt3_name: "Constante de Teodoro (Diagonal del cubo unidad)",
-        row_phi_name: "Número de Oro (\\(\\frac{1+\\sqrt{5}}{2}\\))",
-        row_pi_name: "Pi (Razón circunferencia-diámetro)",
-        row_pi_proof: "Probado por Lindemann (1882)",
-        row_e_name: "Número de Euler (Base del logaritmo natural)",
-        row_e_proof: "Probado por Hermite (1873)",
-        row_ln2_name: "Logaritmo natural de 2",
-        row_zeta_name: "Constante de Apéry (\\(\\sum_{n=1}^\\infty \\frac{1}{n^3}\\))",
-        row_zeta_proof: "Probado por Apéry (1979) [Trascendencia abierta]",
-        row_delos_name: "Constante de Delos (Duplicación del cubo)",
-
-        hist_title: "Evolución Histórica y Epistemológica de los Irracionales",
-        hist_subtitle: "De la crisis de inconmensurabilidad pitagórica a la formalización analítica de Dedekind y Cantor.",
-        hist_h1: "1. El Colapso Pitagórico y la Inconmensurabilidad (s. V a.C.)",
-        hist_p1: "Para los pitagóricos, la armonía universal residía en la afirmación de que <em>'todo es número entero'</em>. Al analizar la diagonal del cuadrado unitario (\\(d^2 = 1^2 + 1^2 = 2\\)), Hipaso descubrió que el lado y la diagonal son inconmensurables, desatando la primera gran crisis de la matemática.",
-        hist_h2: "2. La Barrera de los Polinomios y el Teorema de las Raíces Racionales",
-        hist_p2: "Con el álgebra moderna, la investigación pasó a las ecuaciones polinomiales. El TRR consolidó un algoritmo finito: si ningún candidato racional satisface el polinomio, cualquier raíz real existente es estrictamente irracional algebraica.",
-        hist_h3: "3. El Teorema de Niven en Trigonometría (1956)",
-        hist_p3: "Ivan Niven demostró que para ángulos en grados racionales en \\([0, 90]\\), los únicos valores racionales de \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son \\(0, 1/2\\) y \\(1\\). Todo otro ángulo racional genera valores irracionales.",
-        hist_h4: "4. Trascendencia: Liouville, Hermite y Lindemann",
-        hist_p4: "Liouville (1844), Hermite (1873) y Lindemann (1882) demostraron la existencia y trascendencia de \\(e\\) y \\(\\pi\\), demostrando que no pertenecen a ninguna ecuación polinomial entera.",
-        hist_h5: "5. La Completitud de la Recta: Dedekind y Cantor",
-        hist_p5: "Dedekind construyó los cortes en la recta real y Cantor probó que los irracionales no son numerables (\\(2^{\\aleph_0}\\)), demostrando que la densidad sustancial de la recta real es irracional.",
-
-        footer_text: "Laboratorio de Números Irracionales • Referencias: Niven (1956, 1990), Figueiredo (2002), Marques (2013)",
-
-        res_rational_int: "Resultado: Racional (Entero)",
-        res_irrational_proven: "Resultado: Irracional Demostrado",
-        tfa_step1: "1. Descomposición Canónica en Primos (TFA):",
-        tfa_perf_power: "Todos los exponentes primos son múltiplos exactos de {n}. Por lo tanto, {k} es una potencia perfecta.",
-        tfa_odd_obs: "Observe el factor primo <strong>{p}</strong>: su exponente es <strong>{exp}</strong>, que <strong>no es divisible por {n}</strong>.",
-        tfa_step2: "2. Estructura de la Demostración por Reducción al Absurdo:",
-        tfa_suppose: "Suponga que \\(\\sqrt[{n}]{{{k}}}\\) es una fracción racional irreducible \\(p/q\\) con \\(\\gcd(p,q)=1\\):",
-        tfa_step3: "3. Conflicto de Divisibilidad de los Exponentes:",
-        tfa_left_exp: "En el lado izquierdo (\\(p^{{{n}}}\\)), el exponente de todo primo es estrictamente un múltiplo de {n}.",
-        tfa_right_exp: "En el lado derecho (\\({k} \\cdot q^{{{n}}}\\)), el primo <strong>{p}</strong> tiene exponente múltiplo de {n} sumado a {exp}. Por ende, no es múltiplo de {n}.",
-        tfa_contradiction_title: "Contradicción con el TFA:",
-        tfa_contradiction_desc: "Por la unicidad del TFA, un entero no puede tener dos factorizaciones distintas. \\(p^{{{n}}} = {k}q^{{{n}}}\\) es imposible.",
-        tfa_conclusion: "Conclusión: \\(\\sqrt[{n}]{{{k}}}\\) es irracional.",
-
-        gen_title: "Constructor de Expresiones (Generador de Polinomio Minimal)",
-        gen_desc: "¿Quieres probar que una expresión como \\(\\frac{\\sqrt{7}}{3}\\) es irracional? Ingresa los valores a continuación para generar el polinomio correspondiente y enviarlo al solucionador.",
-        gen_btn: "Generar y Resolver",
-        gen_deduction: "Deducción Algebraica (Aislamiento):",
-        gen_error: "Error: K debe ser ≥ 0 y C no puede ser 0.",
-
-        solver_res_title: "Solución Completa de la Ecuación Polinomial",
-        solver_badge_has_irrat: "Contiene Raíces Irracionales",
-        solver_badge_only_rat: "Solo Raíces Racionales",
-        solver_poly_lbl: "Polinomio:",
-        solver_deg_lbl: "Grado:",
-        solver_zero_root: "El término independiente es 0. Por ende, \\(x = 0\\) es raíz racional inmediata.",
-        solver_cand_intro: "<strong>Candidatos por el TRR:</strong> Divisores de \\(a_0 = {a0}\\) sobre divisores de \\(a_n = {an}\\):",
-        solver_cand_tested: "candidatos probados",
-        solver_quadratic_rem: "Tras la división sintética (Ruffini), queda la ecuación cuadrática:",
-        solver_disc: "Discriminante:",
-        solver_irrat_delta: "Como \\(\\Delta = {delta}\\) no es cuadrado perfecto, las raíces reales de \\(Q(x)\\) son <strong>estrictamente irracionales algebraicas</strong>.",
-        solver_complex_roots: "Como \\(\\Delta < 0\\), las raíces restantes pertenecen a \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complejas conjugadas).",
-        solver_no_rat_roots: "Ningún candidato del TRR satisfizo el polinomio. Por lo tanto, <strong>no tiene raíces racionales</strong>.",
-        solver_all_real_irrat: "Por el TRR, todas sus raíces reales existentes son <strong>irracionales algebraicas</strong>.",
-        solver_rat_roots_found: "Raíces Racionales Encontradas (\\(\\mathbb{Q}\\)):",
-        solver_irrat_roots_found: "Raíces Irracionales Algebraicas (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
-        solver_no_real_roots: "No se encontraron raíces reales.",
-
-        trig_res_irrat: "Resultado: Irracional Algebraico Demostrado",
-        trig_res_rat_notable: "Resultado: Racional Notable",
-        trig_res_niven_irrat: "Resultado: Irracional Demostrado (Teorema de Niven)",
-        trig_triple_arc: "1. Conexión Algebraica mediante Arco Triple:",
-        trig_chebyshev_sub: "Como \\(3 \\times {angle}^\\circ = 60^\\circ\\) y \\(\\cos(60^\\circ) = \\frac{1}{2}\\), definiendo \\(x = \\cos({angle}^\\circ)\\):",
-        trig_trr_filter: "3. Filtro mediante el Teorema de las Raíces Racionales (TRR):",
-        trig_trr_cand_lbl: "Para el polinomio \\(P(x) = 8x^3 - 6x - 1\\), los candidatos racionales son:",
-        trig_trr_none: "Probando candidatos: ninguno anula el polinomio (\\(P(x) \\neq 0\\) para todos).",
-        trig_chebyshev_concl: "<strong>Conclusión Rigurosa:</strong> \\(8x^3 - 6x - 1\\) no tiene raíces racionales. Como \\(\\cos({angle}^\\circ)\\) es su raíz real, <strong>\\(\\cos({angle}^\\circ)\\) es estrictamente irracional algebraico</strong>. ¡Esto demuestra la <em>imposibilidad de trisecar el ángulo de 60° con regla y compás</em>!",
-        trig_niven_quote: "\"Para cualquier ángulo \\(\\theta\\) tal que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), los únicos valores racionales de \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son \\(0, \\pm \\frac{1}{2}\\) y \\(\\pm 1\\).\"",
-        trig_niven_concl: "Como <strong>{angle}°</strong> es racional en grados, pero <strong>{val}</strong> no pertenece a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), el Teorema de Niven demuestra que es <strong>irracional</strong>.",
-
-        eisen_sat_title: "Criterio Satisfecho: Polinomio Irreducible sobre \\(\\mathbb{Q}\\)",
-        eisen_sat_desc: "El Criterio de Eisenstein se satisface con el primo <strong>\\(p = {p}\\)</strong>:",
-        eisen_c1: "\\({p} \\mid a_i\\) para todo \\(i < {n}\\) (divide todos los coeficientes no líderes).",
-        eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (no divide al coeficiente líder).",
-        eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (su cuadrado no divide al término independiente).",
-        eisen_concl: "<strong>Teorema de Irreducibilidad:</strong> \\(P(x)\\) no puede factorizarse en \\(\\mathbb{Q}\\). Como el grado es {n} ≥ 2, <strong>todas sus raíces reales son estrictamente irracionales algebraicas</strong>.",
-        eisen_inconc_title: "Criterio Inconcluso para los Primeros Primos",
-        eisen_inconc_desc: "Ninguno de los primos probados cumplió las 3 condiciones. Utilice la pestaña 2 (Solucionador TRR).",
-
-        cf_res_title: "Desarrollo en Fracción Continua Periódica",
-        cf_badge: "Irracional Cuadrático",
-        cf_lagrange: "Por el Teorema de Lagrange, la fracción continua de un número real es periódica si y solo si es un <strong>irracional cuadrático</strong>.",
-        cf_convergents_lbl: "2. Mejores Aproximaciones Racionales (Convergentes):",
-        cf_diff_rat: "<strong>Diferencia Fundamental con los Racionales:</strong> Un número racional siempre genera una fracción continua finita. El hecho de que \\(\\sqrt{{{N}}}\\) genere un ciclo infinito demuestra categóricamente su irracionalidad.",
-
-        hybrid_title: "Modo de Análisis Analítico",
-        hybrid_badge: "Función de \\(\\mathbb{R}\\) en \\(\\mathbb{C}\\)",
-        hybrid_desc: "El Teorema de las Raíces Racionales (TRR) requiere polinomios con coeficientes estrictamente enteros. Para preservar el <strong>rigor absoluto</strong> de su expresión sin aproximaciones decimales, el laboratorio activó el motor de Análisis Real.",
-        hybrid_func_lbl: "Función Analizada:",
-        hybrid_deriv_lbl: "Derivada:",
-        hybrid_int_lbl: "Integral Indefinida:",
-        hybrid_error: "Error al compilar la función para su análisis. Compruebe si la sintaxis matemática es compatible.",
-        cartesian_chart_lbl: "Plano Cartesiano: Gráfico de la Función f(x)"
-      },
-
-      fr: {
-        app_title: "Laboratoire des Nombres Irrationnels",
-        app_subtitle: "Investigation et Déduction : TFA, TRR Complet, Polynômes Généraux, Trigonométrie, Eisenstein et Fractions Continues",
-        project_badge: "Recherche Scientifique • Séquence Didactique",
-        tab_tfa: "1. Vérificateur TFA",
-        tab_solver: "2. Résolveur de Polynômes",
-        tab_trig: "3. Fonctions Trigonométriques",
-        tab_log: "4. Logarithmes",
-        tab_eisenstein: "5. Critère d'Eisenstein",
-        tab_fraccont: "6. Fractions Continues",
-        tab_tabela: "7. Table des Notables",
-        tab_historia: "8. Contexte Historique",
-
-        tfa_title: "1. Démonstration via le Théorème Fondamental de l'Arithmétique",
-        tfa_desc: "Analysez l'irrationalité des racines \\(\\sqrt[n]{K}\\) en examinant la parité et divisibilité des exposants dans la décomposition en facteurs premiers. Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes.",
-        tfa_lbl_index: "Indice (n ≥ 2) :",
-        tfa_lbl_rad: "Radicande (K entier positif) :",
-        tfa_btn: "Démontrer",
-
-        solver_title: "2. Résolveur de Polynômes",
-        solver_desc: "Entrez un polynôme à coefficients entiers \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). L'algorithme teste les candidats rationnels \\(\\pm \\frac{p}{q}\\), factorise par la méthode de Ruffini et isole les racines irrationnelles restantes.",
-        quick_ex: "Exemples rapides :",
-        solver_lbl_poly: "Polynôme P(x) :",
-        solver_btn: "Résoudre Étape par Étape",
-        solver_calc_title: "Calcul Symbolique (Polynôme P(x))",
-        solver_rem_complex_roots: "Racines Restantes (Irrationnelles et Complexes) :",
-        solver_girard_title: "Relations de Viète",
-        solver_girard_sum: "Somme des racines (\\(S\\)) : ",
-        solver_girard_prod: "Produit des racines (\\(P\\)) : ",
-        solver_geom_title: "Géométrie de la Parabole (Degré 2)",
-        solver_geom_concav: "Concavité :",
-        solver_geom_up: "Vers le haut",
-        solver_geom_down: "Vers le bas",
-        solver_geom_vertex: "Sommet",
-        solver_geom_min: "Point Minimum",
-        solver_geom_max: "Point Maximum",
-        solver_err_invalid: "Polynôme invalide. Vérifiez la syntaxe.",
-        solver_cartesian_title: "Visualisation Cartesienne du Polynôme P(x) et Racines",
-        solver_complex_title: "Plan Complexe (Argand-Gauss) - Distribution des Racines",
-
-        trig_title: "3. Fonctions Trigonométriques",
-        trig_desc: "Examinez l'irrationalité des valeurs trigonométriques. D'après le Théorème de Niven, pour des angles rationnels \\(\\theta \\in [0^\\circ, 90^\\circ]\\), les seuls cas où \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont rationnels sont \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Tous les autres produisent des nombres irrationnels.",
-        trig_shortcuts: "Raccourcis didactiques :",
-        trig_lbl_func: "Fonction :",
-        trig_lbl_angle: "Angle en Degrés (°) :",
-        trig_btn: "Analyser la Rationalité",
-        opt_sin: "Sinus",
-        opt_cos: "Cosinus",
-        opt_tan: "Tangente",
-        opt_sec: "Sécante",
-        opt_csc: "Cosécante",
-        opt_cot: "Cotangente",
-        trig_num_title: "Calcul Numérique",
-        trig_num_badge: "Valeur Approchée",
-        trig_dec_val: "Valeur Décimale :",
-        trig_rad_val: "Angle en Radians :",
-        trig_exact_title: "Valeur Algébrique Exacte",
-        trig_exact_badge: "Angle Remarquable",
-        trig_undef_title: "Indéfinition Mathématique",
-        trig_undef_badge: "Asymptote Verticale",
-        trig_undef_desc: "La valeur de \\({funcName}({angle}^\\circ)\\) n'est pas définie dans les nombres réels.",
-
-        log_title: "4. Démonstration d'Irrationalité des Logarithmes",
-        log_desc: "Vérifiez l'irrationalité de \\(\\log_b(a)\\). Si le logarithme est égal à une fraction rationnelle \\(p/q\\), alors \\(b^p = a^q\\). D'après le Théorème Fondamental de l'Arithmétique, cela exige que la base et l'argument partagent les mêmes facteurs premiers dans des proportions exactes.",
-        log_lbl_base: "Base (b ≥ 2) :",
-        log_lbl_arg: "Argument (a ≥ 1) :",
-        log_btn: "Analyser",
-
-        eisen_title: "5. Critère d'Irréductibilité d'Eisenstein",
-        eisen_desc: "Outil d'algèbre abstraite : S'il existe un nombre premier \\(p\\) tel que \\(p \\mid a_i\\) pour tout \\(i < n\\), \\(p \\nmid a_n\\) et \\(p^2 \\nmid a_0\\), le polynôme est irréductible sur \\(\\mathbb{Q}\\\\). Aucune de ses racines réelles ne peut être rationnelle !",
-        eisen_btn: "Tester les Nombres Premiers",
-
-        cf_title: "Reconnaissance Constructive via Fractions Continues Simples",
-        cf_desc: "Contrairement à l'écriture décimale finie, la fraction continue d'un nombre rationnel se termine toujours, tandis que celle d'un irrationnel est strictement infinie. Les irrationnels quadratiques produisent des développements périodiques : \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
-        cf_lbl_rad: "Racine Carrée \\(\\sqrt{N}\\) (N non carré) :",
-        cf_btn: "Développer la Fraction",
-
-        cf_expr_title: "Approximations Fractionnaires de Constantes",
-        cf_expr_desc: "Générez des convergentes rationnelles pour des expressions, constantes transcendantes ou trigonométriques.",
-        cf_expr_lbl: "Expression (ex: pi, e, sin(1), sqrt(2)/2):",
-        cf_expr_btn: "Générer les Convergents",
-        err_invalid_expr: "Expression invalide.",
-        err_syntax: "Erreur de syntaxe algébrique.",
-
-        tabela_title: "Tableau des Constantes et Irrationnels Notables",
-        tabela_desc: "Distinction fondamentale entre irrationnels algébriques (racines de polynômes à coefficients entiers) et nombres transcendants.",
-        th_sym: "Symbole",
-        th_name: "Nom / Origine",
-        th_val: "Valeur Décimale Approchée",
-        th_class: "Classification",
-        th_poly: "Polynôme Minimal / Preuve",
-        tag_algebraic: "Algébrique",
-        tag_transcendent: "Transcendant",
-        tag_irrational: "Irrationnel",
-        row_sqrt2_name: "Constante de Pythagore (Diagonale du carré unité)",
-        row_sqrt3_name: "Constante de Théodore (Diagonale du cube unité)",
-        row_phi_name: "Nombre d'Or (\\(\\frac{1+\\sqrt{5}}{2}\\))",
-        row_pi_name: "Pi (Rapport circonférence/diamètre)",
-        row_pi_proof: "Démontré par Lindemann (1882)",
-        row_e_name: "Nombre d'Euler (Base du logarithme naturel)",
-        row_e_proof: "Démontré par Hermite (1873)",
-        row_ln2_name: "Logarithme naturel de 2",
-        row_zeta_name: "Constante d'Apéry (\\(\\sum_{n=1}^\\infty \\frac{1}{n^3}\\))",
-        row_zeta_proof: "Démontré par Apéry (1979) [Transcendance en suspens]",
-        row_delos_name: "Constante de Délos (Duplication du cube)",
-
-        hist_title: "Évolution Historique et Épistémologique des Irrationnels",
-        hist_subtitle: "De la crise de l'incommensurabilité pythagoricienne à la formalisation analytique de Dedekind et Cantor.",
-        hist_h1: "1. L'Effondrement Pythagoricien et l'Incommensurabilité (Ve siècle av. J.-C.)",
-        hist_p1: "Pour les pythagoriciens, l'harmonie du cosmos reposait sur le principe selon lequel <em>'tout est nombre entier'</em>. En calculant la diagonale du carré unité (\\(d^2 = 1^2 + 1^2 = 2\\)), Hippase découvrit que le côté et la diagonale sont incommensurables, déclenchant la première grande crise des fondements mathématiques.",
-        hist_h2: "2. La Barrière des Polynômes et le Théorème des Racines Rationnelles",
-        hist_p2: "Avec l'algèbre classique, le problème s'est déplacé vers les équations polynomiales. Le TRR a fourni un algorithme fini : si aucun candidat rationnel n'annule l'équation, toute racine réelle existante est strictement irrationnelle algébrique.",
-        hist_h3: "3. Le Théorème de Niven en Trigonométrie (1956)",
-        hist_p3: "Ivan Niven a démontré que pour des angles rationnels en degrés dans \\([0, 90]\\), les seules valeurs rationnelles de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont \\(0, 1/2\\) et \\(1\\). Tout autre angle engendre des irrationnels.",
-        hist_h4: "4. La Transcendance : Liouville, Hermite et Lindemann",
-        hist_p4: "Liouville (1844), Hermite (1873) et Lindemann (1882) ont établi l'existence et la transcendance de \\(e\\) et \\(\\pi\\), démontrant qu'ils n'appartiennent à aucune équation algébrique entière.",
-        hist_h5: "5. La Complétude de la Droite : Dedekind et Cantor",
-        hist_p5: "Dedekind a comblé les lacunes laissées par les rationnels grâce aux <em>coupures de Dedekind</em>, et Cantor a prouvé que les irrationnels sont indénombrables (\\(2^{\\aleph_0}\\)), révélant que presque tous les réels sont irrationnels.",
-
-        footer_text: "Laboratoire des Nombres Irrationnels • Références : Niven (1956, 1990), Figueiredo (2002), Marques (2013)",
-
-        res_rational_int: "Résultat : Rationnel (Entier)",
-        res_irrational_proven: "Résultat : Irrationnel Démontré",
-        tfa_step1: "1. Décomposition Canonique en Facteurs Premiers (TFA) :",
-        tfa_perf_power: "Tous les exposants premiers sont des multiples exacts de {n}. Ainsi, {k} est une puissance parfaite.",
-        tfa_odd_obs: "Notez le facteur premier <strong>{p}</strong> : son exposant est <strong>{exp}</strong>, qui <strong>n'est pas divisible par {n}</strong>.",
-        tfa_step2: "2. Structure de la Démonstration par l'Absurde :",
-        tfa_suppose: "Supposons que \\(\\sqrt[{n}]{{{k}}}\\) soit une fraction rationnelle irréductible \\(p/q\\) avec \\(\\gcd(p,q)=1\\) :",
-        tfa_step3: "3. Conflit de Divisibilité des Exposants :",
-        tfa_left_exp: "Dans le membre de gauche (\\(p^{{{n}}}\\)), l'exposant de tout nombre premier est strictement un multiple de {n}.",
-        tfa_right_exp: "Dans le membre de droite (\\({k} \\cdot q^{{{n}}}\\)), le nombre premier <strong>{p}</strong> a un exposant multiple de {n} additionné de {exp}. Il n'est donc pas multiple de {n}.",
-        tfa_contradiction_title: "Contradiction avec le TFA :",
-        tfa_contradiction_desc: "Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes. L'égalité est impossible.",
-        tfa_conclusion: "Conclusion : \\(\\sqrt[{n}]{{{k}}}\\) est irrationnel.",
-
-        gen_title: "Constructeur d'Expressions (Générateur de Polynôme Minimal)",
-        gen_desc: "Vous voulez prouver qu'une expression comme \\(\\frac{\\sqrt{7}}{3}\\) est irrationnelle ? Entrez les valeurs ci-dessous pour générer le polynôme correspondant et l'envoyer au résolveur.",
-        gen_btn: "Générer et Résoudre",
-        gen_deduction: "Déduction Algébrique (Isolement) :",
-        gen_error: "Erreur : K doit être ≥ 0 et C ne peut pas être 0.",
-
-        solver_res_title: "Solution Complète de l'Équation Polynomiale",
-        solver_badge_has_irrat: "Contient des Racines Irrationnelles",
-        solver_badge_only_rat: "Uniquement des Racines Rationnelles",
-        solver_poly_lbl: "Polynôme :",
-        solver_deg_lbl: "Degré :",
-        solver_zero_root: "Le terme constant est 0. Ainsi, \\(x = 0\\) est une racine rationnelle immédiate.",
-        solver_cand_intro: "<strong>Candidats via le TRR :</strong> Diviseurs de \\(a_0 = {a0}\\) sur diviseurs de \\(a_n = {an}\\) :",
-        solver_cand_tested: "candidats testés",
-        solver_quadratic_rem: "Après division synthétique (Ruffini), reste l'équation quadratique :",
-        solver_disc: "Discriminant :",
-        solver_irrat_delta: "Comme \\(\\Delta = {delta}\\) n'est pas un carré parfait, les racines réelles de \\(Q(x)\\) sont strictement irrationnelles algébriques.",
-        solver_complex_roots: "Comme \\(\\Delta < 0\\), les racines restantes appartiennent à \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complexes conjuguées).",
-        solver_no_rat_roots: "Aucun candidat du TRR n'annule le polynôme. <strong>Le polynôme ne possède aucune racine rationnelle</strong>.",
-        solver_all_real_irrat: "D'après le TRR, toutes les racines réelles existantes sont <strong>irrationnelles algébriques</strong>.",
-        solver_rat_roots_found: "Racines Rationnelles Trouvées (\\(\\mathbb{Q}\\)) :",
-        solver_irrat_roots_found: "Racines Irrationnelles Algébriques (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)) :",
-        solver_no_real_roots: "Aucune racine réelle trouvée.",
-
-        trig_res_irrat: "Résultat : Irrationnel Algébrique Démontré",
-        trig_res_rat_notable: "Résultat : Valeur Rationnelle Notable",
-        trig_res_niven_irrat: "Résultat : Irrationnel Démontré (Théorème de Niven)",
-        trig_triple_arc: "1. Connexion Algébrique via la Formule de l'Arc Triple :",
-        trig_chebyshev_sub: "Comme \\(3 \\times {angle}^\\circ = 60^\\circ\\) et \\(\\cos(60^\\circ) = \\frac{1}{2}\\), en posant \\(x = \\cos({angle}^\\circ)\\) :",
-        trig_trr_filter: "3. Filtre du Théorème des Racines Rationnelles (TRR) :",
-        trig_trr_cand_lbl: "Pour le polynôme \\(P(x) = 8x^3 - 6x - 1\\), les seuls candidats rationnels sont :",
-        trig_trr_none: "Test des candidats : aucun n'annule le polynôme (\\(P(x) \\neq 0\\) pour tous).",
-        trig_chebyshev_concl: "<strong>Conclusion Rigoureuse :</strong> \\(8x^3 - 6x - 1\\) n'a pas de racines rationnelles. Comme \\(\\cos({angle}^\\circ)\\) est sa racine réelle, <strong>\\(\\cos({angle}^\\circ)\\) est strictement irrationnel algébrique</strong>. Cela démontre aussi <em>l'impossibilité de la trisection de l'angle de 60° à la règle et au compas</em> !",
-        trig_niven_quote: "\"Pour tout angle \\(\\theta\\) tel que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), les seules valeurs rationnelles de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont \\(0, \\pm \\frac{1}{2}\\) et \\(\\pm 1\\).\"",
-        trig_niven_concl: "Comme <strong>{angle}°</strong> est rationnel en degrés, mais <strong>{val}</strong> n'appartient pas à \\(\\{0, \\pm 1/2, \\pm 1\\}\\), le Théorème de Niven prouve que la valeur est <strong>strictement irrationnelle</strong>.",
-
-        eisen_sat_title: "Critère Satisfait : Polynôme Irréductible sur \\(\\mathbb{Q}\\)",
-        eisen_sat_desc: "Le Critère d'Eisenstein est satisfait avec le nombre premier <strong>\\(p = {p}\\)</strong> :",
-        eisen_c1: "\\({p} \\mid a_i\\) pour tout \\(i < {n}\\) (divise tous les coefficients non dominants).",
-        eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (ne divise pas le coefficient dominant).",
-        eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (son carré ne divise pas le terme constant).",
-        eisen_concl: "<strong>Théorème d'Irréductibilité :</strong> \\(P(x)\\) est irréductible sur \\(\\mathbb{Q}\\). Comme son degré est {n} ≥ 2, <strong>toutes ses racines réelles sont strictement irrationnelles algébriques</strong>.",
-        eisen_inconc_title: "Critère Inconcluant pour les Premiers Nombres Premiers",
-        eisen_inconc_desc: "Aucun des nombres premiers testés n'a satisfait les 3 conditions. Utilisez l'onglet 2 (Résolveur TRR).",
-
-        cf_res_title: "Développement en Fraction Continue Périodique",
-        cf_badge: "Irrationnel Quadratique",
-        cf_lagrange: "D'après le Théorème de Lagrange, le développement en fraction continue d'un nombre réel est périodique si et seulement si c'est un <strong>irrationnel quadratique</strong>.",
-        cf_convergents_lbl: "2. Meilleures Approximations Rationnelles (Convergentes) :",
-        cf_diff_rat: "<strong>Différence Fondamentale avec les Rationnels :</strong> Un nombre rationnel produit toujours une fraction continue finie. Le fait que \\(\\sqrt{{{N}}}\\) génère un cycle infini prouve catégoriquement son irrationalité.",
-
-        hybrid_title: "Mode d'Analyse Analytique",
-        hybrid_badge: "Fonction de \\(\\mathbb{R}\\) dans \\(\\mathbb{C}\\)",
-        hybrid_desc: "Le Théorème des Racines Rationnelles (TRR) exige des polynômes à coefficients strictement entiers. Pour préserver la <strong>rigueur absolue</strong> de votre expression sans approximations décimales, le laboratoire a activé le moteur d'Analyse Réelle.",
-        hybrid_func_lbl: "Fonction Analisée :",
-        hybrid_deriv_lbl: "Dérivée:",
-        hybrid_int_lbl: "Intégrale Indéfinie:",
-        hybrid_error: "Erreur lors de la compilation de la fonction pour l'analyse. Vérifiez si la syntaxe mathématique est supportée.",
-        cartesian_chart_lbl: "Plan Cartésien : Graphique de la Fonction f(x)"
-      }
-    };
+  pt: {
+    app_title: "Laboratório de Números Irracionais",
+    app_subtitle: "Investigação e Dedução: TFA, TRR Completo, Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas",
+    project_badge: "Iniciação Científica • Sequência Didática",
+    tab_tfa: "1. Verificador TFA",
+    tab_solver: "2. Solucionador de Polinômios",
+    tab_trig: "3. Funções Trigonométricas",
+    tab_log: "4. Logaritmos",
+    tab_eisenstein: "5. Critério de Eisenstein",
+    tab_fraccont: "6. Frações Contínuas",
+    tab_tabela: "7. Tabela de Notáveis",
+    tab_historia: "8. Contexto Histórico",
+
+    /* Aba 1: TFA */
+    tfa_title: "1. Demonstração via Teorema Fundamental da Aritmética",
+    tfa_desc: "Investigue a irracionalidade de raízes \\(\\sqrt[n]{K}\\) examinando a divisibilidade e paridade dos expoentes na decomposição prima canônica. Pela unicidade do TFA, um número inteiro não admite duas fatorações distintas.",
+    tfa_lbl_index: "Índice (n ≥ 2):",
+    tfa_lbl_rad: "Radicando (K inteiro positivo):",
+    tfa_btn: "Demonstrar",
+    res_rational_int: "Resultado: Racional (Inteiro)",
+    res_irrational_proven: "Resultado: Irracional Demonstrado",
+    tfa_step1: "1. Decomposição Canônica em Primos (TFA):",
+    tfa_perf_power: "Todos os expoentes dos fatores primos são múltiplos exatos do índice {n}. Portanto, {k} é uma potência perfeita.",
+    tfa_odd_obs: "Observe o fator primo <strong>{p}</strong>: seu expoente é <strong>{exp}</strong>, que <strong>não é divisível por {n}</strong>.",
+    tfa_step2: "2. Estrutura da Demonstração por Redução ao Absurdo:",
+    tfa_suppose: "Suponha que \\(\\sqrt[{n}]{{{k}}}\\) seja racional irredutível \\(p/q\\) com \\(\\text{mdc}(p,q)=1\\):",
+    tfa_step3: "3. Confronto da Divisibilidade dos Expoentes:",
+    tfa_left_exp: "No membro esquerdo (\\(p^{{{n}}}\\)), o expoente de todo fator primo é necessariamente um múltiplo de {n}.",
+    tfa_right_exp: "No membro direito (\\({k} \\cdot q^{{{n}}}\\)), o fator primo <strong>{p}</strong> comparece em \\(q^{{{n}}}\\) com expoente múltiplo de {n}, somado a {exp}. Logo, seu expoente total não é múltiplo de {n}.",
+    tfa_contradiction_title: "Contradição com o TFA:",
+    tfa_contradiction_desc: "Pela unicidade da fatoração em primos, um número inteiro não pode admitir duas contagens de fatores distintas. Logo, \\(p^{{{n}}} = {k}q^{{{n}}}\\) não possui soluções inteiras com \\(q > 0\\).",
+    tfa_conclusion: "Conclusão: \\(\\sqrt[{n}]{{{k}}}\\) é irracional.",
+
+    /* Aba 2: Solucionador TRR */
+    solver_title: "2. Solucionador de Polinômios",
+    solver_desc: "Insira qualquer polinômio com coeficientes inteiros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). O algoritmo encontra todos os candidatos racionais \\(\\pm \\frac{p}{q}\\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as raízes irracionais remanescentes.",
+    quick_ex: "Exemplos rápidos:",
+    solver_lbl_poly: "Polinômio P(x):",
+    solver_btn: "Solucionar Passo a Passo",
+    solver_calc_title: "Cálculo Simbólico (Polinômio P(x))",
+    solver_rem_complex_roots: "Raízes Restantes (Irracionais e Complexas):",
+    solver_girard_title: "Relações de Girard",
+    solver_girard_sum: "Soma das raízes (\\(S\\)): ",
+    solver_girard_prod: "Produto das raízes (\\(P\\)): ",
+    solver_geom_title: "Geometria da Parábola (Grau 2)",
+    solver_geom_concav: "Concavidade:",
+    solver_geom_up: "Voltada para cima",
+    solver_geom_down: "Voltada para baixo",
+    solver_geom_vertex: "Vértice",
+    solver_geom_min: "Ponto de Mínimo",
+    solver_geom_max: "Ponto de Máximo",
+    solver_err_invalid: "Polinômio inválido. Verifique a sintaxe.",
+    solver_cartesian_title: "Visualização Cartesiana do Polinômio P(x) e Raízes",
+    solver_complex_title: "Plano Complexo (Argand-Gauss) - Distribuição das Raízes",
+    solver_res_title: "Solução Completa da Equação Polinomial",
+    solver_badge_has_irrat: "Contém Raízes Irracionais",
+    solver_badge_only_rat: "Apenas Raízes Racionais",
+    solver_poly_lbl: "Polinômio:",
+    solver_deg_lbl: "Grau:",
+    solver_zero_root: "O termo independente é 0. Logo, \\(x = 0\\) é raiz racional imediata.",
+    solver_cand_intro: "<strong>Candidatos pelo TRR:</strong> Divisores de \\(a_0 = {a0}\\) sobre divisores de \\(a_n = {an}\\):",
+    solver_cand_tested: "candidatos testados",
+    solver_quadratic_rem: "Após divisão sintética (Briot-Ruffini), resta a equação quadrática:",
+    solver_disc: "Discriminante:",
+    solver_irrat_delta: "Como \\(\\Delta = {delta}\\) não é quadrado perfeito, as raízes reais de \\(Q(x)\\) são <strong>estritamente irracionais algébricas</strong>.",
+    solver_complex_roots: "Como \\(\\Delta < 0\\), as raízes restantes pertencem a \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complexas conjugadas).",
+    solver_no_rat_roots: "Nenhum candidato do TRR zerou o polinômio. Logo, <strong>o polinômio não possui raízes racionais</strong>.",
+    solver_all_real_irrat: "Pelo Teorema das Raízes Racionais, todas as raízes reais existentes são <strong>irracionais algébricas</strong>.",
+    solver_rat_roots_found: "Raízes Racionais Encontradas (\\(\\mathbb{Q}\\)):",
+    solver_irrat_roots_found: "Raízes Irracionais Algébricas (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
+    solver_no_real_roots: "Nenhuma raiz real encontrada no corpo avaliado.",
+
+    /* Aba 3: Trigonometria */
+    trig_title: "3. Funções Trigonométricas",
+    trig_desc: "Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos racionais \\(\\theta \\in [0^\\circ, 90^\\circ]\\), os únicos casos em que \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) são racionais ocorrem em \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos os outros geram valores irracionais.",
+    trig_shortcuts: "Atalhos didáticos:",
+    trig_lbl_func: "Função:",
+    trig_lbl_angle: "Ângulo em Graus (°):",
+    trig_btn: "Analisar Racionalidade",
+    opt_sin: "Seno",
+    opt_cos: "Cosseno",
+    opt_tan: "Tangente",
+    opt_sec: "Secante",
+    opt_csc: "Cossecante",
+    opt_cot: "Cotangente",
+    trig_num_title: "Cálculo Numérico",
+    trig_num_badge: "Valor Aproximado",
+    trig_dec_val: "Valor Decimal:",
+    trig_rad_val: "Ângulo em Radianos:",
+    trig_exact_title: "Valor Algébrico Exato",
+    trig_exact_badge: "Ângulo Notável",
+    trig_undef_title: "Indefinição Matemática",
+    trig_undef_badge: "Assíntota Vertical",
+    trig_undef_desc: "O valor de \\({funcName}({angle}^\\circ)\\) não está definido nos números reais.",
+    trig_res_irrat: "Resultado: Irracional Algébrico Comprovado",
+    trig_res_rat_notable: "Resultado: Racional Notável",
+    trig_res_niven_irrat: "Resultado: Irracional Comprovado (Teorema de Niven)",
+    trig_triple_arc: "1. Conexão Algébrica via Fórmula do Arco Triplo:",
+    trig_chebyshev_sub: "Como \\(3 \\times {angle}^\\circ = 60^\\circ\\) e \\(\\cos(60^\\circ) = \\frac{1}{2}\\), chamando \\(x = \\cos({angle}^\\circ)\\):",
+    trig_trr_filter: "3. Filtro pelo Teorema das Raízes Racionais (TRR):",
+    trig_trr_cand_lbl: "Para o polinômio \\(P(x) = 8x^3 - 6x - 1\\), os únicos candidatos racionais possíveis são:",
+    trig_trr_none: "Testando cada candidato: nenhum anula o polinômio (\\(P(x) \\neq 0\\) para todos).",
+    trig_chebyshev_concl: "<strong>Conclusão Rigorosa:</strong> O polinômio \\(8x^3 - 6x - 1\\) não tem raízes racionais. Como \\(\\cos({angle}^\\circ)\\) é sua raiz real, conclui-se que <strong>\\(\\cos({angle}^\\circ)\\) é estritamente irracional algébrico</strong>. Este mesmo fato prova geometricamente a <em>impossibilidade da trissecção do ângulo de 60° com régua e compasso</em>!",
+    trig_niven_quote: "\"Para qualquer ângulo \\(\\theta\\) tal que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), os únicos valores de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) que são racionais são \\(0, \\pm \\frac{1}{2}\\) e \\(\\pm 1\\).\"",
+    trig_niven_concl: "Como o ângulo <strong>{angle}°</strong> é racional em graus, mas o resultado <strong>{val}</strong> não pertence a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), o Teorema de Niven garante que o valor é <strong>estritamente irracional</strong>.",
+    
+    // Novas chaves - Trigonometria (Análise Analítica e Representações Alternativas)
+    trig_alt_title: "Representações Alternativas",
+    trig_alt_euler: "Representação Exponencial:",
+    trig_alt_taylor: "Série de Taylor:",
+    trig_analyt_title: "Análise Analítica",
+    trig_analyt_deriv: "Derivada no ponto \\(\\theta\\):",
+    trig_analyt_int: "Integral Indefinida:",
+
+    /* Aba 4: Logaritmos */
+    log_title: "4. Demonstração de Irracionalidade de Logaritmos",
+    log_desc: "Verifique a irracionalidade de \\(\\log_b(a)\\). Se o logaritmo for igual a uma fração racional \\(p/q\\), então \\(b^p = a^q\\). Pelo Teorema Fundamental da Aritmética, isso exige que a base e o logaritmando compartilhem os mesmos fatores primos em proporções exatas.",
+    log_lbl_base: "Base (b ≥ 2):",
+    log_lbl_arg: "Logaritmando (a ≥ 1):",
+    log_btn: "Analisar",
+    
+    // Explicação e Passos dos Logaritmos
+    log_res_rat: "Resultado: Racional Comprovado",
+    log_res_irrat: "Resultado: Irracional Comprovado",
+    log_step1: "1. Suposição de Racionalidade:",
+    log_step1_desc: "Suponha por absurdo que \\(\\log_{b}(a)\\) seja um número racional \\(\\frac{p}{q}\\), com \\(p, q \\in \\mathbb{Z}^*\\) e \\(\\text{mdc}(p,q)=1\\).",
+    log_step2: "2. Conversão para Forma Exponencial:",
+    log_step2_desc: "Pela definição fundamental de logaritmo, temos: \\(b^{\\frac{p}{q}} = a \\implies b^p = a^q\\).",
+    log_step3: "3. Decomposição Canônica (TFA):",
+    log_step3_desc: "Aplicando o Teorema Fundamental da Aritmética na base e no logaritmando:",
+    log_step4: "4. Análise de Fatores Primos:",
+    log_step4_irrat: "Para que a igualdade \\(b^p = a^q\\) se sustente, as bases primeiramente deveriam compartilhar exatamente os mesmos fatores primos. Como existem fatores primos incompatíveis (ex: {diff}), a igualdade é impossível. Logo, o logaritmo é estritamente irracional.",
+    log_step4_rat: "A base e o logaritmando são potências de uma mesma raiz base, permitindo a igualdade das proporções.",
+
+    /* Aba 5: Eisenstein */
+    eisen_title: "5. Critério de Irredutibilidade de Eisenstein",
+    eisen_desc: "Ferramenta avançada de Álgebra Abstrata: Se existir um primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) e \\(p^2 \\nmid a_0\\), o polinômio é irredutível sobre \\(\\mathbb{Q}\\). Consequentemente, para graus \\(n \\ge 2\\), nenhuma de suas raízes pode ser racional!",
+    eisen_btn: "Testar Primos",
+    eisen_sat_title: "Critério Satisfeito: Polinômio Irredutível sobre \\(\\mathbb{Q}\\)",
+    eisen_sat_desc: "O Critério de Eisenstein foi satisfeito com o número primo <strong>\\(p = {p}\\)</strong>:",
+    eisen_c1: "\\({p} \\mid a_i\\) para todo \\(i < {n}\\) (divide todos os coeficientes exceto o líder).",
+    eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (não divide o coeficiente líder).",
+    eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (seu quadrado não divide o termo independente).",
+    eisen_concl: "<strong>Teorema de Irredutibilidade:</strong> \\(P(x)\\) não pode ser fatorado em \\(\\mathbb{Q}\\). Como o grau é {n} ≥ 2, <strong>todas as suas raízes reais são estritamente irracionais algébricas</strong>.",
+    eisen_inconc_title: "Critério Inconclusivo para os Primeiros Primos",
+    eisen_inconc_desc: "Nenhum dos primos testados satisfez simultaneamente as 3 condições de Eisenstein. Utilize a aba 2 (Solucionador TRR) para investigar as raízes.",
+
+    /* Aba 6: Frações Contínuas */
+    cf_title: "Reconhecimento Construtivo via Frações Contínuas Simples",
+    cf_desc: "Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
+    cf_lbl_rad: "Raiz Quadrada \\(\\sqrt{N}\\) (N não quadrado):",
+    cf_btn: "Expandir Fração",
+    cf_expr_title: "Aproximações Fracionárias de Constantes",
+    cf_expr_desc: "Gere convergentes racionais para expressões, constantes transcendentais ou trigonométricas.",
+    cf_expr_lbl: "Expressão:",
+    cf_expr_btn: "Gerar Convergentes",
+    cf_res_title: "Expansão em Fração Contínua Periódica",
+    cf_badge: "Irracional Quadrático",
+    cf_lagrange: "Pelo Teorema de Lagrange, a expansão em fração contínua de um número real é periódica se, e somente se, o número é um <strong>irracional quadrático</strong>.",
+    cf_convergents_lbl: "2. Melhores Aproximações Racionais (Convergentes):",
+    cf_diff_rat: "<strong>Diferença Fundamental com os Racionais:</strong> Um número racional sempre gera uma fração contínua finita. O fato de \\(\\sqrt{{{N}}}\\) gerar um ciclo infinito comprova categoricamente sua irracionalidade.",
+
+    /* Híbrido, Erros e Ferramentas */
+    hybrid_title: "Modo de Análise Analítica",
+    hybrid_badge: "Função de \\(\\mathbb{R}\\) em \\(\\mathbb{C}\\)",
+    hybrid_desc: "O Teorema das Raízes Racionais (TRR) requer polinômios com coeficientes estritamente inteiros. Para preservar o rigor da expressão, o laboratório ativou o motor de Análise Real.",
+    hybrid_func_lbl: "Função Analisada:",
+    hybrid_deriv_lbl: "Derivada:",
+    hybrid_int_lbl: "Integral Indefinida:",
+    hybrid_error: "Erro ao compilar função para análise.",
+    err_invalid_expr: "Expressão inválida. Utilize formatação em inglês (ex: pi, e, sin(1), sqrt(2)).",
+    err_syntax: "Erro de sintaxe algébrica.",
+
+    /* Placeholders das Caixas de Texto (Inputs) */
+    cf_expr_placeholder: "ex: pi, e, sin(1), sqrt(2)/2",
+    solver_poly_placeholder: "ex: x^2 - 2, 8x^3 - 6x - 1",
+    placeholder_idx: "ex: 2, 3, 4...",
+    placeholder_rad: "ex: 2, 3, 5...",
+    placeholder_base: "ex: 2, 10...",
+    placeholder_arg: "ex: 3, 5, 10...",
+    placeholder_angle: "ex: 30, 45, 60...",
+
+    /* Gráficos (Eixos, Legendas e Títulos) */
+    chart_title_poly: "Gráfico do Polinômio",
+    chart_title_trig: "Gráfico Trigonométrico",
+    chart_xaxis: "Eixo X (Reais)",
+    chart_yaxis: "Eixo Y (Reais)",
+    chart_legend_poly: "Função P(x)",
+    chart_legend_roots: "Raízes Reais",
+    chart_complex_real: "Eixo Real (Re)",
+    chart_complex_imag: "Eixo Imaginário (Im)",
+    chart_complex_legend: "Raízes Complexas",
+
+    /* Aba 7: Tabela */
+    tabela_title: "Tabela de Constantes e Irracionais Notáveis",
+    tabela_desc: "Diferenciação fundamental entre irracionais algébricos (raízes de equações com coeficientes inteiros) e transcendentes.",
+    th_sym: "Símbolo",
+    th_name: "Nome / Origem",
+    th_val: "Valor Decimal Aproximado",
+    th_class: "Classificação",
+    th_poly: "Polinômio Minimal / Prova",
+    tag_algebraic: "Algébrico",
+    tag_transcendent: "Transcendente",
+    tag_irrational: "Irracional",
+    row_sqrt2_name: "Constante de Pitágoras",
+    row_sqrt3_name: "Constante de Teodoro",
+    row_phi_name: "Número de Ouro",
+    row_pi_name: "Pi (Razão perímetro/diâmetro)",
+    row_pi_proof: "Provado por Lindemann (1882)",
+    row_e_name: "Número de Euler",
+    row_e_proof: "Provado por Hermite (1873)",
+    row_ln2_name: "Logaritmo natural de 2",
+    row_zeta_name: "Constante de Apéry",
+    row_zeta_proof: "Provado por Apéry (1979)",
+    row_delos_name: "Constante de Delos",
+
+    /* Aba 8: História */
+    hist_title: "A Evolução Histórica e Epistemológica dos Irracionais",
+    hist_subtitle: "Da crise da incomensurabilidade grega à formalização analítica de Dedekind.",
+    hist_h1: "1. O Colapso Pitagórico e a Incomensurabilidade (séc. V a.C.)",
+    hist_p1: "Para os pitagóricos, toda a harmonia repousava sobre a afirmação de que 'tudo é número inteiro'. Ao analisar a diagonal do quadrado (\\(d^2 = 1^2 + 1^2 = 2\\)), Hipaso descobriu que o lado e a diagonal são incomensuráveis.",
+    hist_h2: "2. A Barreira dos Polinômios e o TRR",
+    hist_p2: "O Teorema das Raízes Racionais consolidou um método finito: se os candidatos racionais não anulam a equação, qualquer raiz real encontrada é irracional algébrica.",
+    hist_h3: "3. O Teorema de Niven na Trigonometria",
+    hist_p3: "Niven provou que, se um ângulo em graus é racional, os únicos casos em que o seno ou cosseno são racionais ocorrem em 0°, 30° e 90°.",
+    hist_h4: "4. A Transcendência: Liouville, Hermite e Lindemann",
+    hist_p4: "Liouville (1844) construiu os primeiros transcendentes. Hermite (1873) e Lindemann (1882) demonstraram a transcendência de e e π.",
+    hist_h5: "5. A Completude da Reta: Dedekind e Cantor",
+    hist_p5: "Dedekind formulou os Cortes. Cantor comprovou que os racionais são enumeráveis enquanto os irracionais são não enumeráveis.",
+
+    footer_text: "Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo (2002), Marques (2013)"
+  },
+
+  en: {
+    app_title: "Irrational Numbers Laboratory",
+    app_subtitle: "Investigation and Deduction: FTA, Full RRT, General Polynomials, Trigonometry, Eisenstein and Continued Fractions",
+    project_badge: "Scientific Research • Didactic Sequence",
+    tab_tfa: "1. FTA Verifier",
+    tab_solver: "2. Polynomial Solver",
+    tab_trig: "3. Trigonometric Functions",
+    tab_log: "4. Logarithms",
+    tab_eisenstein: "5. Eisenstein's Criterion",
+    tab_fraccont: "6. Continued Fractions",
+    tab_tabela: "7. Table of Constants",
+    tab_historia: "8. Historical Context",
+
+    /* Tab 1: FTA */
+    tfa_title: "1. Proof via Fundamental Theorem of Arithmetic",
+    tfa_desc: "Investigate the irrationality of roots \\(\\sqrt[n]{K}\\) by examining the divisibility and parity of exponents in canonical prime factorization. By FTA uniqueness, an integer cannot have two distinct prime factorizations.",
+    tfa_lbl_index: "Index (n ≥ 2):",
+    tfa_lbl_rad: "Radicand (Positive integer K):",
+    tfa_btn: "Prove",
+    res_rational_int: "Result: Rational (Integer)",
+    res_irrational_proven: "Result: Irrational Proven",
+    tfa_step1: "1. Canonical Prime Factorization (FTA):",
+    tfa_perf_power: "All prime factor exponents are exact multiples of index {n}. Therefore, {k} is an exact perfect power.",
+    tfa_odd_obs: "Notice prime factor <strong>{p}</strong>: its exponent is <strong>{exp}</strong>, which is <strong>not divisible by {n}</strong>.",
+    tfa_step2: "2. Proof Structure by Contradiction (Reductio ad Absurdum):",
+    tfa_suppose: "Suppose \\(\\sqrt[{n}]{{{k}}}\\) is an irreducible rational fraction \\(p/q\\) with \\(\\gcd(p,q)=1\\):",
+    tfa_step3: "3. Exponent Divisibility Conflict:",
+    tfa_left_exp: "On the left-hand side (\\(p^{{{n}}}\\)), the exponent of every prime factor is strictly a multiple of {n}.",
+    tfa_right_exp: "On the right-hand side (\\({k} \\cdot q^{{{n}}}\\)), prime factor <strong>{p}</strong> appears in \\(q^{{{n}}}\\) with an exponent multiple of {n}, plus {exp}. Hence its total exponent is not a multiple of {n}.",
+    tfa_contradiction_title: "Contradiction with FTA:",
+    tfa_contradiction_desc: "By the uniqueness of prime factorization, an integer cannot have two distinct prime factor counts. Thus \\(p^{{{n}}} = {k}q^{{{n}}}\\) has no integer solutions with \\(q > 0\\).",
+    tfa_conclusion: "Conclusion: \\(\\sqrt[{n}]{{{k}}}\\) is irrational.",
+
+    /* Tab 2: RRT Solver */
+    solver_title: "2. Polynomial Solver",
+    solver_desc: "Enter any polynomial with integer coefficients \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). The algorithm tests all rational candidates \\(\\pm \\frac{p}{q}\\) via RRT, factors using Briot-Ruffini, extracts rational roots, and isolates the remaining irrational roots.",
+    quick_ex: "Quick examples:",
+    solver_lbl_poly: "Polynomial P(x):",
+    solver_btn: "Solve Step-by-Step",
+    solver_calc_title: "Symbolic Calculus (Polynomial P(x))",
+    solver_rem_complex_roots: "Remaining Roots (Irrational and Complex):",
+    solver_girard_title: "Vieta's Formulas",
+    solver_girard_sum: "Sum of roots (\\(S\\)): ",
+    solver_girard_prod: "Product of roots (\\(P\\)): ",
+    solver_geom_title: "Parabola Geometry (Degree 2)",
+    solver_geom_concav: "Concavity:",
+    solver_geom_up: "Upwards",
+    solver_geom_down: "Downwards",
+    solver_geom_vertex: "Vertex",
+    solver_geom_min: "Minimum Point",
+    solver_geom_max: "Maximum Point",
+    solver_err_invalid: "Invalid polynomial. Check syntax.",
+    solver_cartesian_title: "Cartesian Visualization of Polynomial P(x) and Roots",
+    solver_complex_title: "Complex Plane (Argand-Gauss) - Root Distribution",
+    solver_res_title: "Complete Solution of the Polynomial Equation",
+    solver_badge_has_irrat: "Contains Irrational Roots",
+    solver_badge_only_rat: "Only Rational Roots",
+    solver_poly_lbl: "Polynomial:",
+    solver_deg_lbl: "Degree:",
+    solver_zero_root: "The constant term is 0. Therefore, \\(x = 0\\) is an immediate rational root.",
+    solver_cand_intro: "<strong>Candidates via RRT:</strong> Divisors of \\(a_0 = {a0}\\) over divisors of \\(a_n = {an}\\):",
+    solver_cand_tested: "candidates tested",
+    solver_quadratic_rem: "After synthetic division (Briot-Ruffini), the quadratic equation remains:",
+    solver_disc: "Discriminant:",
+    solver_irrat_delta: "Since \\(\\Delta = {delta}\\) is not a perfect square, the real roots of \\(Q(x)\\) are <strong>strictly algebraic irrationals</strong>.",
+    solver_complex_roots: "Since \\(\\Delta < 0\\), the remaining roots belong to \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complex conjugates).",
+    solver_no_rat_roots: "No RRT candidate annulled the polynomial. Therefore, <strong>the polynomial has no rational roots</strong>.",
+    solver_all_real_irrat: "By the Rational Root Theorem, all existing real roots are <strong>algebraic irrationals</strong>.",
+    solver_rat_roots_found: "Rational Roots Found (\\(\\mathbb{Q}\\)):",
+    solver_irrat_roots_found: "Algebraic Irrational Roots (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
+    solver_no_real_roots: "No real roots found in the evaluated domain.",
+
+    /* Tab 3: Trigonometry */
+    trig_title: "3. Trigonometric Functions",
+    trig_desc: "Investigate the irrationality of trigonometric values. According to Niven's Theorem, for rational angles \\(\\theta \\in [0^\\circ, 90^\\circ]\\), the only cases where \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) are rational occur at \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). All other angles produce irrational values.",
+    trig_shortcuts: "Didactic shortcuts:",
+    trig_lbl_func: "Function:",
+    trig_lbl_angle: "Angle in Degrees (°):",
+    trig_btn: "Analyze Rationality",
+    opt_sin: "Sine",
+    opt_cos: "Cosine",
+    opt_tan: "Tangent",
+    opt_sec: "Secant",
+    opt_csc: "Cosecant",
+    opt_cot: "Cotangent",
+    trig_num_title: "Numerical Calculation",
+    trig_num_badge: "Approximate Value",
+    trig_dec_val: "Decimal Value:",
+    trig_rad_val: "Angle in Radians:",
+    trig_exact_title: "Exact Algebraic Value",
+    trig_exact_badge: "Notable Angle",
+    trig_undef_title: "Mathematical Undefinedness",
+    trig_undef_badge: "Vertical Asymptote",
+    trig_undef_desc: "The value of \\({funcName}({angle}^\\circ)\\) is undefined in real numbers.",
+    trig_res_irrat: "Result: Proven Algebraic Irrational",
+    trig_res_rat_notable: "Result: Notable Rational Value",
+    trig_res_niven_irrat: "Result: Irrational Proven (Niven's Theorem)",
+    trig_triple_arc: "1. Algebraic Connection via Triple-Angle Formula:",
+    trig_chebyshev_sub: "Since \\(3 \\times {angle}^\\circ = 60^\\circ\\) and \\(\\cos(60^\\circ) = \\frac{1}{2}\\), setting \\(x = \\cos({angle}^\\circ)\\):",
+    trig_trr_filter: "3. Rational Root Theorem (RRT) Filter:",
+    trig_trr_cand_lbl: "For polynomial \\(P(x) = 8x^3 - 6x - 1\\), the only possible rational candidates are:",
+    trig_trr_none: "Testing each candidate: none vanishes the polynomial (\\(P(x) \\neq 0\\) for all).",
+    trig_chebyshev_concl: "<strong>Rigorous Conclusion:</strong> \\(8x^3 - 6x - 1\\) has no rational roots. Since \\(\\cos({angle}^\\circ)\\) is its real root, <strong>\\(\\cos({angle}^\\circ)\\) is strictly an algebraic irrational</strong>. This also proves the <em>impossibility of trisecting a 60° angle with straightedge and compass</em>!",
+    trig_niven_quote: "\"For any angle \\(\\theta\\) such that \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), the only values of \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) that are rational are \\(0, \\pm \\frac{1}{2}\\), and \\(\\pm 1\\).\"",
+    trig_niven_concl: "Since <strong>{angle}°</strong> is rational in degrees, but the evaluated result <strong>{val}</strong> does not belong to \\(\\{0, \\pm 1/2, \\pm 1\\}\\), Niven's Theorem proves the value is <strong>strictly irrational</strong>.",
+    
+    // New Keys - Trigonometry (Analytical Analysis and Alternative Reps)
+    trig_alt_title: "Alternative Representations",
+    trig_alt_euler: "Exponential Representation (Euler's Formula):",
+    trig_alt_taylor: "Taylor/Maclaurin Series:",
+    trig_analyt_title: "Analytical Analysis (Calculus)",
+    trig_analyt_deriv: "Derivative at point \\(\\theta\\):",
+    trig_analyt_int: "Indefinite Integral:",
+
+    /* Tab 4: Logarithms */
+    log_title: "4. Logarithm Irrationality Proof",
+    log_desc: "Verify the irrationality of \\(\\log_b(a)\\). If the logarithm is equal to a rational fraction \\(p/q\\), then \\(b^p = a^q\\). By the Fundamental Theorem of Arithmetic, this requires the base and argument to share the exact same prime factors in exact proportions.",
+    log_lbl_base: "Base (b ≥ 2):",
+    log_lbl_arg: "Argument (a ≥ 1):",
+    log_btn: "Analyze",
+    
+    // New Keys - Logarithms Explanation and Steps
+    log_res_rat: "Result: Rational (Exact Ratio)",
+    log_res_irrat: "Result: Irrational Proven",
+    log_step1: "1. Assumption of Rationality:",
+    log_step1_desc: "Suppose by contradiction that \\(\\log_{b}(a)\\) is a rational number \\(\\frac{p}{q}\\), with \\(p, q \\in \\mathbb{Z}^*\\) and \\(\\gcd(p,q)=1\\).",
+    log_step2: "2. Conversion to Exponential Form:",
+    log_step2_desc: "By the fundamental definition of logarithms: \\(b^{\\frac{p}{q}} = a \\implies b^p = a^q\\).",
+    log_step3: "3. Canonical Factorization (FTA):",
+    log_step3_desc: "Applying the Fundamental Theorem of Arithmetic to the base and the argument:",
+    log_step4: "4. Prime Factor Analysis:",
+    log_step4_irrat: "For the equality \\(b^p = a^q\\) to hold, both sides must share exactly the same prime factors. Since there are incompatible prime factors (e.g., {diff}), the equality is impossible. Therefore, the logarithm is strictly irrational.",
+    log_step4_rat: "The base and the argument are powers of the same root base, allowing the proportions to be equal.",
+
+    /* Tab 5: Eisenstein */
+    eisen_title: "5. Eisenstein's Irreducibility Criterion",
+    eisen_desc: "Advanced Abstract Algebra tool: If there is a prime \\(p\\) such that \\(p \\mid a_i\\) for all \\(i < n\\), \\(p \\nmid a_n\\), and \\(p^2 \\nmid a_0\\), the polynomial is irreducible over \\(\\mathbb{Q}\\). Consequently, for degree \\(n \\ge 2\\), none of its roots can be rational!",
+    eisen_btn: "Test Primes",
+    eisen_sat_title: "Criterion Satisfied: Irreducible Polynomial over \\(\\mathbb{Q}\\)",
+    eisen_sat_desc: "Eisenstein's Criterion was satisfied with prime number <strong>\\(p = {p}\\)</strong>:",
+    eisen_c1: "\\({p} \\mid a_i\\) for all \\(i < {n}\\) (divides all non-leading coefficients).",
+    eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (does not divide leading coefficient).",
+    eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (its square does not divide constant term).",
+    eisen_concl: "<strong>Irreducibility Theorem:</strong> \\(P(x)\\) cannot be factored over \\(\\mathbb{Q}\\). Since degree is {n} ≥ 2, <strong>all its real roots are strictly algebraic irrationals</strong>.",
+    eisen_inconc_title: "Criterion Inconclusive for First Primes",
+    eisen_inconc_desc: "None of the tested primes satisfied all 3 conditions. Use Tab 2 (RRT Solver) to test rational roots exhaustively.",
+
+    /* Tab 6: Continued Fractions */
+    cf_title: "Constructive Recognition via Simple Continued Fractions",
+    cf_desc: "Unlike finite decimal expansions, the continued fraction expansion of any rational number always terminates, whereas for an irrational number it is strictly infinite. Quadratic irrationals produce periodic expansions: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
+    cf_lbl_rad: "Square Root \\(\\sqrt{N}\\) (non-square N):",
+    cf_btn: "Expand Fraction",
+    cf_expr_title: "Fractional Approximations of Constants",
+    cf_expr_desc: "Generate rational convergents for expressions, transcendental or trigonometric constants.",
+    cf_expr_lbl: "Expression:",
+    cf_expr_btn: "Generate Convergents",
+    cf_res_title: "Periodic Continued Fraction Expansion",
+    cf_badge: "Quadratic Irrational",
+    cf_lagrange: "By Lagrange's Theorem, the continued fraction expansion of a real number is periodic if and only if it is a <strong>quadratic irrational</strong>.",
+    cf_convergents_lbl: "2. Best Rational Approximations (Convergents):",
+    cf_diff_rat: "<strong>Fundamental Difference with Rationals:</strong> A rational number always terminates in a finite continued fraction. The fact that \\(\\sqrt{{{N}}}\\) generates an infinite cycle categorially proves its irrationality.",
+
+    /* Hybrid, Errors & Tools */
+    hybrid_title: "Analytical Analysis Mode",
+    hybrid_badge: "Function from \\(\\mathbb{R}\\) to \\(\\mathbb{C}\\)",
+    hybrid_desc: "The RRT requires integer coefficients. To preserve absolute rigor without decimals, Real Analysis was activated.",
+    hybrid_func_lbl: "Analyzed Function:",
+    hybrid_deriv_lbl: "Derivative:",
+    hybrid_int_lbl: "Indefinite Integral:",
+    hybrid_error: "Error compiling function for analysis.",
+    err_invalid_expr: "Invalid expression. Use English formatting (e.g., pi, e, sin(1)).",
+    err_syntax: "Algebraic syntax error.",
+
+    /* Placeholders for Textboxes (Inputs) */
+    cf_expr_placeholder: "e.g., pi, e, sin(1), sqrt(2)/2",
+    solver_poly_placeholder: "e.g., x^2 - 2, 8x^3 - 6x - 1",
+    placeholder_idx: "e.g., 2, 3, 4...",
+    placeholder_rad: "e.g., 2, 3, 5...",
+    placeholder_base: "e.g., 2, 10...",
+    placeholder_arg: "e.g., 3, 5, 10...",
+    placeholder_angle: "e.g., 30, 45, 60...",
+
+    /* Charts (Axes, Legends, and Titles) */
+    chart_title_poly: "Polynomial Graph",
+    chart_title_trig: "Trigonometric Graph",
+    chart_xaxis: "X Axis (Reals)",
+    chart_yaxis: "Y Axis (Reals)",
+    chart_legend_poly: "Function P(x)",
+    chart_legend_roots: "Real Roots",
+    chart_complex_real: "Real Axis (Re)",
+    chart_complex_imag: "Imaginary Axis (Im)",
+    chart_complex_legend: "Complex Roots",
+
+    /* Tab 7: Table */
+    tabela_title: "Table of Constants & Notable Irrationals",
+    tabela_desc: "Fundamental distinction between algebraic irrationals and transcendental numbers.",
+    th_sym: "Symbol",
+    th_name: "Name / Origin",
+    th_val: "Approximate Decimal Value",
+    th_class: "Classification",
+    th_poly: "Minimal Polynomial / Proof",
+    tag_algebraic: "Algebraic",
+    tag_transcendent: "Transcendental",
+    tag_irrational: "Irrational",
+    row_sqrt2_name: "Pythagoras' Constant",
+    row_sqrt3_name: "Theodorus' Constant",
+    row_phi_name: "Golden Ratio",
+    row_pi_name: "Pi (Circumference-to-diameter ratio)",
+    row_pi_proof: "Proven by Lindemann (1882)",
+    row_e_name: "Euler's Number",
+    row_e_proof: "Proven by Hermite (1873)",
+    row_ln2_name: "Natural logarithm of 2",
+    row_zeta_name: "Apéry's Constant",
+    row_zeta_proof: "Proven by Apéry (1979)",
+    row_delos_name: "Delian Constant",
+
+    /* Tab 8: History */
+    hist_title: "Historical and Epistemological Evolution of Irrationals",
+    hist_subtitle: "From the Pythagorean crisis to the formalization of Dedekind.",
+    hist_h1: "1. The Pythagorean Collapse (5th century BC)",
+    hist_p1: "Hippasus discovered that the side and diagonal of a unit square are incommensurables.",
+    hist_h2: "2. The Polynomial Barrier and the RRT",
+    hist_p2: "The RRT established a definitive method to isolate algebraic irrationals.",
+    hist_h3: "3. Niven's Theorem in Trigonometry",
+    hist_p3: "Niven proved trigonometric rationality constraints for degree angles.",
+    hist_h4: "4. Transcendence: Liouville, Hermite, and Lindemann",
+    hist_p4: "Existence and proofs of transcendental numbers outside polynomial algebra.",
+    hist_h5: "5. Completeness of the Real Line",
+    hist_p5: "Dedekind cuts and Cantor's proofs on uncountability of irrationals."
+  },
+
+  es: {
+    app_title: "Laboratorio de Números Irracionales",
+    app_subtitle: "Investigación y Deducción: TFA, TRR Completo, Polinomios Generales, Trigonometría, Eisenstein y Fracciones Continuas",
+    project_badge: "Iniciación Científica • Secuencia Didáctica",
+    tab_tfa: "1. Verificador TFA",
+    tab_solver: "2. Solucionador de Polinomios",
+    tab_trig: "3. Funciones Trigonométricas",
+    tab_log: "4. Logaritmos",
+    tab_eisenstein: "5. Criterio de Eisenstein",
+    tab_fraccont: "6. Fracciones Continuas",
+    tab_tabela: "7. Tabla de Notables",
+    tab_historia: "8. Contexto Histórico",
+
+    /* Aba 1: TFA */
+    tfa_title: "1. Demostración mediante el Teorema Fundamental de la Aritmética",
+    tfa_desc: "Investigue la irracionalidad de raíces \\(\\sqrt[n]{K}\\) examinando la divisibilidad y paridad de los exponentes en la descomposición canónica en primos. Por la unicidad del TFA, un número entero no admite dos factorizaciones distintas.",
+    tfa_lbl_index: "Índice (n ≥ 2):",
+    tfa_lbl_rad: "Radicando (K entero positivo):",
+    tfa_btn: "Demostrar",
+    res_rational_int: "Resultado: Racional (Entero)",
+    res_irrational_proven: "Resultado: Irracional Demostrado",
+    tfa_step1: "1. Descomposición Canónica en Primos (TFA):",
+    tfa_perf_power: "Todos los exponentes de los factores primos son múltiplos exactos del índice {n}. Por lo tanto, {k} es una potencia perfecta.",
+    tfa_odd_obs: "Observe el factor primo <strong>{p}</strong>: su exponente es <strong>{exp}</strong>, que <strong>no es divisible por {n}</strong>.",
+    tfa_step2: "2. Estructura de la Demostración por Reducción al Absurdo:",
+    tfa_suppose: "Suponga que \\(\\sqrt[{n}]{{{k}}}\\) es una fracción racional irreducible \\(p/q\\) con \\(\\text{mcd}(p,q)=1\\):",
+    tfa_step3: "3. Conflicto de Divisibilidad de los Exponentes:",
+    tfa_left_exp: "En el miembro izquierdo (\\(p^{{{n}}}\\)), el exponente de cada factor primo es necesariamente un múltiplo de {n}.",
+    tfa_right_exp: "En el miembro derecho (\\({k} \\cdot q^{{{n}}}\\)), el primo <strong>{p}</strong> tiene exponente múltiplo de {n} sumado a {exp}. Por ende, no es múltiplo de {n}.",
+    tfa_contradiction_title: "Contradicción con el TFA:",
+    tfa_contradiction_desc: "Por la unicidad del TFA, un entero no puede tener dos factorizaciones distintas. \\(p^{{{n}}} = {k}q^{{{n}}}\\) no tiene soluciones enteras con \\(q > 0\\).",
+    tfa_conclusion: "Conclusión: \\(\\sqrt[{n}]{{{k}}}\\) es irracional.",
+
+    /* Aba 2: Solucionador TRR */
+    solver_title: "2. Solucionador de Polinomios",
+    solver_desc: "Ingrese cualquier polinomio con coeficientes enteros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). El algoritmo prueba los candidatos racionales \\(\\pm \\frac{p}{q}\\) por el TRR, factoriza mediante la regla de Briot-Ruffini, extrae las raíces racionales y aísla las raíces irracionales restantes.",
+    quick_ex: "Ejemplos rápidos:",
+    solver_lbl_poly: "Polinomio P(x):",
+    solver_btn: "Resolver Paso a Paso",
+    solver_calc_title: "Cálculo Simbólico (Polinomio P(x))",
+    solver_rem_complex_roots: "Raíces Restantes (Irracionales y Complejas):",
+    solver_girard_title: "Fórmulas de Vieta (Relaciones de Girard)",
+    solver_girard_sum: "Suma de las raíces (\\(S\\)): ",
+    solver_girard_prod: "Producto de las raíces (\\(P\\)): ",
+    solver_geom_title: "Geometría de la Parábola (Grado 2)",
+    solver_geom_concav: "Concavidad:",
+    solver_geom_up: "Hacia arriba",
+    solver_geom_down: "Hacia abajo",
+    solver_geom_vertex: "Vértice",
+    solver_geom_min: "Punto Mínimo",
+    solver_geom_max: "Punto Máximo",
+    solver_err_invalid: "Polinomio inválido. Verifique la sintaxis.",
+    solver_cartesian_title: "Visualización Cartesiana del Polinomio P(x) y Raíces",
+    solver_complex_title: "Plano Complejo (Argand-Gauss) - Distribución de las Raíces",
+    solver_res_title: "Solución Completa de la Ecuación Polinomial",
+    solver_badge_has_irrat: "Contiene Raíces Irracionales",
+    solver_badge_only_rat: "Solo Raíces Racionales",
+    solver_poly_lbl: "Polinomio:",
+    solver_deg_lbl: "Grado:",
+    solver_zero_root: "El término independiente es 0. Por lo tanto, \\(x = 0\\) es una raíz racional inmediata.",
+    solver_cand_intro: "<strong>Candidatos por el TRR:</strong> Divisores de \\(a_0 = {a0}\\) sobre divisores de \\(a_n = {an}\\):",
+    solver_cand_tested: "candidatos probados",
+    solver_quadratic_rem: "Tras la división sintética (Briot-Ruffini), queda la ecuación cuadrática:",
+    solver_disc: "Discriminante:",
+    solver_irrat_delta: "Como \\(\\Delta = {delta}\\) no es cuadrado perfecto, las raíces reales de \\(Q(x)\\) son <strong>estrictamente irracionales algebraicas</strong>.",
+    solver_complex_roots: "Como \\(\\Delta < 0\\), las raíces restantes pertenecen a \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complejas conjugadas).",
+    solver_no_rat_roots: "Ningún candidato del TRR satisfizo el polinomio. Por lo tanto, <strong>no tiene raíces racionales</strong>.",
+    solver_all_real_irrat: "Por el TRR, todas sus raíces reales existentes son <strong>irracionales algebraicas</strong>.",
+    solver_rat_roots_found: "Raíces Racionales Encontradas (\\(\\mathbb{Q}\\)):",
+    solver_irrat_roots_found: "Raíces Irracionales Algebraicas (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
+    solver_no_real_roots: "No se encontraron raíces reales en el dominio evaluado.",
+
+    /* Aba 3: Trigonometria */
+    trig_title: "3. Funciones Trigonométricas",
+    trig_desc: "Investigue la irracionalidad de los valores trigonométricos. Según el Teorema de Niven, para ángulos racionales \\(\\theta \\in [0^\\circ, 90^\\circ]\\), los únicos casos donde \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son racionales ocurren en \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos los demás generan valores irracionales.",
+    trig_shortcuts: "Atajos didácticos:",
+    trig_lbl_func: "Función:",
+    trig_lbl_angle: "Ángulo en Grados (°):",
+    trig_btn: "Analizar Racionalidad",
+    opt_sin: "Seno",
+    opt_cos: "Coseno",
+    opt_tan: "Tangente",
+    opt_sec: "Secante",
+    opt_csc: "Cosecante",
+    opt_cot: "Cotangente",
+    trig_num_title: "Cálculo Numérico",
+    trig_num_badge: "Valor Aproximado",
+    trig_dec_val: "Valor Decimal:",
+    trig_rad_val: "Ángulo en Radianes:",
+    trig_exact_title: "Valor Algebraico Exacto",
+    trig_exact_badge: "Ángulo Notable",
+    trig_undef_title: "Indefinición Matemática",
+    trig_undef_badge: "Asíntota Vertical",
+    trig_undef_desc: "El valor de \\({funcName}({angle}^\\circ)\\) no está definido en los números reales.",
+    trig_res_irrat: "Resultado: Irracional Algebraico Demostrado",
+    trig_res_rat_notable: "Resultado: Racional Notable",
+    trig_res_niven_irrat: "Resultado: Irracional Demostrado (Teorema de Niven)",
+    trig_triple_arc: "1. Conexión Algebraica mediante Arco Triple:",
+    trig_chebyshev_sub: "Como \\(3 \\times {angle}^\\circ = 60^\\circ\\) y \\(\\cos(60^\\circ) = \\frac{1}{2}\\), definiendo \\(x = \\cos({angle}^\\circ)\\):",
+    trig_trr_filter: "3. Filtro mediante el Teorema de las Raíces Racionales (TRR):",
+    trig_trr_cand_lbl: "Para el polinomio \\(P(x) = 8x^3 - 6x - 1\\), los candidatos racionales posibles son:",
+    trig_trr_none: "Probando candidatos: ninguno anula el polinomio (\\(P(x) \\neq 0\\) para todos).",
+    trig_chebyshev_concl: "<strong>Conclusión Rigurosa:</strong> \\(8x^3 - 6x - 1\\) no tiene raíces racionales. Como \\(\\cos({angle}^\\circ)\\) es su raíz real, <strong>\\(\\cos({angle}^\\circ)\\) es estrictamente irracional algebraico</strong>. ¡Esto demuestra la <em>imposibilidad de trisecar el ángulo de 60° con regla y compás</em>!",
+    trig_niven_quote: "\"Para cualquier ángulo \\(\\theta\\) tal que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), los únicos valores racionales de \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son \\(0, \\pm \\frac{1}{2}\\) y \\(\\pm 1\\).\"",
+    trig_niven_concl: "Como <strong>{angle}°</strong> es racional en grados, pero <strong>{val}</strong> no pertenece a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), el Teorema de Niven demuestra que es <strong>irracional</strong>.",
+    
+    // New Keys - Trigonometry (Analytical Analysis and Alternative Reps)
+    trig_alt_title: "Representaciones Alternativas",
+    trig_alt_euler: "Representación Exponencial (Fórmula de Euler):",
+    trig_alt_taylor: "Serie de Taylor/Maclaurin:",
+    trig_analyt_title: "Análisis Analítico (Cálculo)",
+    trig_analyt_deriv: "Derivada en el punto \\(\\theta\\):",
+    trig_analyt_int: "Integral Indefinida:",
+
+    /* Aba 4: Logaritmos */
+    log_title: "4. Demostración de Irracionalidad de Logaritmos",
+    log_desc: "Verifique la irracionalidad de \\(\\log_b(a)\\). Si el logaritmo equivale a una fracción racional \\(p/q\\), entonces \\(b^p = a^q\\). Por el Teorema Fundamental de la Aritmética, esto exige que la base y el argumento compartan los mismos factores primos en proporciones exactas.",
+    log_lbl_base: "Base (b ≥ 2):",
+    log_lbl_arg: "Argumento (a ≥ 1):",
+    log_btn: "Analizar",
+    
+    // New Keys - Logarithms Explanation and Steps
+    log_res_rat: "Resultado: Racional (Razón Exacta)",
+    log_res_irrat: "Resultado: Irracional Demostrado",
+    log_step1: "1. Suposición de Racionalidad:",
+    log_step1_desc: "Suponga por absurdo que \\(\\log_{b}(a)\\) es un número racional \\(\\frac{p}{q}\\), con \\(p, q \\in \\mathbb{Z}^*\\) y \\(\\text{mcd}(p,q)=1\\).",
+    log_step2: "2. Conversión a Forma Exponencial:",
+    log_step2_desc: "Por la definición fundamental de logaritmos: \\(b^{\\frac{p}{q}} = a \\implies b^p = a^q\\).",
+    log_step3: "3. Descomposición Canónica (TFA):",
+    log_step3_desc: "Aplicando el Teorema Fundamental de la Aritmética a la base y al argumento:",
+    log_step4: "4. Análisis de Factores Primos:",
+    log_step4_irrat: "Para que la igualdad \\(b^p = a^q\\) se mantenga, ambos lados deben compartir exactamente los mismos factores primos. Como hay factores primos incompatibles (ej. {diff}), la igualdad es imposible. Por lo tanto, el logaritmo es estrictamente irracional.",
+    log_step4_rat: "La base y el argumento son potencias de una misma base raíz, permitiendo que las proporciones sean iguales.",
+
+    /* Aba 5: Eisenstein */
+    eisen_title: "5. Criterio de Irreducibilidad de Eisenstein",
+    eisen_desc: "Herramienta avanzada de Álgebra Abstracta: Si existe un primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) y \\(p^2 \\nmid a_0\\), el polinomio es irreducible sobre \\(\\mathbb{Q}\\). ¡Ninguna de sus raíces reales puede ser racional!",
+    eisen_btn: "Probar Primos",
+    eisen_sat_title: "Criterio Satisfecho: Polinomio Irreducible sobre \\(\\mathbb{Q}\\)",
+    eisen_sat_desc: "El Criterio de Eisenstein se satisface con el primo <strong>\\(p = {p}\\)</strong>:",
+    eisen_c1: "\\({p} \\mid a_i\\) para todo \\(i < {n}\\) (divide a todos los coeficientes excepto el principal).",
+    eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (no divide al coeficiente principal).",
+    eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (su cuadrado no divide al término independiente).",
+    eisen_concl: "<strong>Teorema de Irreducibilidad:</strong> \\(P(x)\\) no puede factorizarse en \\(\\mathbb{Q}\\). Como el grado es {n} ≥ 2, <strong>todas sus raíces reales son estrictamente irracionales algebraicas</strong>.",
+    eisen_inconc_title: "Criterio Inconcluso para los Primeros Primos",
+    eisen_inconc_desc: "Ninguno de los primos probados cumplió las 3 condiciones de Eisenstein. Utilice la pestaña 2 (Solucionador TRR).",
+
+    /* Aba 6: Fracciones Continuas */
+    cf_title: "Reconocimiento Constructivo mediante Fracciones Continuas Simples",
+    cf_desc: "A diferencia del desarrollo decimal finito, la fracción continua de cualquier número racional siempre termina, mientras que la de un irracional es estrictamente infinita. Los irracionales cuadráticos generan desarrollos periódicos: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
+    cf_lbl_rad: "Raíz Cuadrada \\(\\sqrt{N}\\) (N no cuadrado):",
+    cf_btn: "Expandir Fracción",
+    cf_expr_title: "Aproximaciones Fraccionarias de Constantes",
+    cf_expr_desc: "Genere convergentes racionales para expresiones, constantes trascendentales o trigonométricas.",
+    cf_expr_lbl: "Expresión:",
+    cf_expr_btn: "Generar Convergentes",
+    cf_res_title: "Desarrollo en Fracción Continua Periódica",
+    cf_badge: "Irracional Cuadrático",
+    cf_lagrange: "Por el Teorema de Lagrange, la fracción continua de un número real es periódica si y solo si es un <strong>irracional cuadrático</strong>.",
+    cf_convergents_lbl: "2. Mejores Aproximaciones Racionales (Convergentes):",
+    cf_diff_rat: "<strong>Diferencia Fundamental con los Racionales:</strong> Un número racional siempre genera una fracción continua finita. El hecho de que \\(\\sqrt{{{N}}}\\) genere un ciclo infinito demuestra categóricamente su irracionalidad.",
+
+    /* Hybrid, Errors & Tools */
+    hybrid_title: "Modo de Análisis Analítico",
+    hybrid_badge: "Función de \\(\\mathbb{R}\\) en \\(\\mathbb{C}\\)",
+    hybrid_desc: "El TRR requiere coeficientes enteros. Para preservar el rigor absoluto sin decimales, se activó el motor de Análisis Real.",
+    hybrid_func_lbl: "Función Analizada:",
+    hybrid_deriv_lbl: "Derivada:",
+    hybrid_int_lbl: "Integral Indefinida:",
+    hybrid_error: "Error al compilar la función para su análisis.",
+    err_invalid_expr: "Expresión inválida. Utilice formato en inglés (ej: pi, e, sin(1)).",
+    err_syntax: "Error de sintaxis algebraica.",
+
+    /* Placeholders for Textboxes (Inputs) */
+    cf_expr_placeholder: "ej: pi, e, sin(1), sqrt(2)/2",
+    solver_poly_placeholder: "ej: x^2 - 2, 8x^3 - 6x - 1",
+    placeholder_idx: "ej: 2, 3, 4...",
+    placeholder_rad: "ej: 2, 3, 5...",
+    placeholder_base: "ej: 2, 10...",
+    placeholder_arg: "ej: 3, 5, 10...",
+    placeholder_angle: "ej: 30, 45, 60...",
+
+    /* Charts (Axes, Legends, and Titles) */
+    chart_title_poly: "Gráfico del Polinomio",
+    chart_title_trig: "Gráfico Trigonométrico",
+    chart_xaxis: "Eje X (Reales)",
+    chart_yaxis: "Eje Y (Reales)",
+    chart_legend_poly: "Función P(x)",
+    chart_legend_roots: "Raíces Reales",
+    chart_complex_real: "Eje Real (Re)",
+    chart_complex_imag: "Eje Imaginario (Im)",
+    chart_complex_legend: "Raíces Complejas",
+
+    /* Aba 7: Tabela */
+    tabela_title: "Tabla de Constantes e Irracionales Notables",
+    tabela_desc: "Diferenciación fundamental entre irracionales algebraicos y trascendentes.",
+    th_sym: "Símbolo",
+    th_name: "Nombre / Origen",
+    th_val: "Valor Decimal Aproximado",
+    th_class: "Clasificación",
+    th_poly: "Polinomio Minimal / Prueba",
+    tag_algebraic: "Algebraico",
+    tag_transcendent: "Trascendente",
+    tag_irrational: "Irracional",
+    row_sqrt2_name: "Constante de Pitágoras",
+    row_sqrt3_name: "Constante de Teodoro",
+    row_phi_name: "Número de Oro",
+    row_pi_name: "Pi (Razón circunferencia-diámetro)",
+    row_pi_proof: "Probado por Lindemann (1882)",
+    row_e_name: "Número de Euler",
+    row_e_proof: "Probado por Hermite (1873)",
+    row_ln2_name: "Logaritmo natural de 2",
+    row_zeta_name: "Constante de Apéry",
+    row_zeta_proof: "Probado por Apéry (1979)",
+    row_delos_name: "Constante de Delos",
+
+    /* Aba 8: Historia */
+    hist_title: "Evolución Histórica y Epistemológica de los Irracionales",
+    hist_subtitle: "De la crisis de inconmensurabilidad pitagórica a la formalización de Dedekind.",
+    hist_h1: "1. El Colapso Pitagórico (s. V a.C.)",
+    hist_p1: "Hipaso descubrió que el lado y la diagonal de un cuadrado unitario son inconmensurables.",
+    hist_h2: "2. La Barrera de los Polinomios y el TRR",
+    hist_p2: "El TRR consolidó un algoritmo finito para aislar raíces irracionales.",
+    hist_h3: "3. El Teorema de Niven en Trigonometría",
+    hist_p3: "Niven demostró las limitaciones racionales de las funciones trigonométricas.",
+    hist_h4: "4. Trascendencia: Liouville, Hermite y Lindemann",
+    hist_p4: "Demostraciones de la existencia de números ajenos al álgebra polinomial.",
+    hist_h5: "5. La Completitud de la Recta",
+    hist_p5: "Formalización a través de los cortes de Dedekind y pruebas de Cantor."
+  },
+
+  fr: {
+    app_title: "Laboratoire des Nombres Irrationnels",
+    app_subtitle: "Investigation et Déduction : TFA, TRR Complet, Polynômes Généraux, Trigonométrie, Eisenstein et Fractions Continues",
+    project_badge: "Recherche Scientifique • Séquence Didactique",
+    tab_tfa: "1. Vérificateur TFA",
+    tab_solver: "2. Résolveur de Polynômes",
+    tab_trig: "3. Fonctions Trigonométriques",
+    tab_log: "4. Logarithmes",
+    tab_eisenstein: "5. Critère d'Eisenstein",
+    tab_fraccont: "6. Fractions Continues",
+    tab_tabela: "7. Table des Notables",
+    tab_historia: "8. Contexte Historique",
+
+    /* Aba 1: TFA */
+    tfa_title: "1. Démonstration via le Théorème Fondamental de l'Arithmétique",
+    tfa_desc: "Analysez l'irrationalité des racines \\(\\sqrt[n]{K}\\) en examinant la divisibilité et parité des exposants dans la décomposition en facteurs premiers. Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes.",
+    tfa_lbl_index: "Indice (n ≥ 2) :",
+    tfa_lbl_rad: "Radicande (K entier positif) :",
+    tfa_btn: "Démontrer",
+    res_rational_int: "Résultat : Rationnel (Entier)",
+    res_irrational_proven: "Résultat : Irrationnel Démontré",
+    tfa_step1: "1. Décomposition Canonique en Facteurs Premiers (TFA) :",
+    tfa_perf_power: "Tous les exposants des facteurs premiers sont des multiples exacts de {n}. Ainsi, {k} est une puissance parfaite.",
+    tfa_odd_obs: "Notez le facteur premier <strong>{p}</strong> : son exposant est <strong>{exp}</strong>, qui <strong>n'est pas divisible par {n}</strong>.",
+    tfa_step2: "2. Structure de la Démonstration par l'Absurde :",
+    tfa_suppose: "Supposons que \\(\\sqrt[{n}]{{{k}}}\\) soit une fraction rationnelle irréductible \\(p/q\\) avec \\(\\text{pgcd}(p,q)=1\\) :",
+    tfa_step3: "3. Conflit de Divisibilité des Exposants :",
+    tfa_left_exp: "Dans le membre de gauche (\\(p^{{{n}}}\\)), l'exposant de tout facteur premier est nécessairement un multiple de {n}.",
+    tfa_right_exp: "Dans le membre de droite (\\({k} \\cdot q^{{{n}}}\\)), le facteur premier <strong>{p}</strong> a un exposant multiple de {n} additionné de {exp}. Il n'est donc pas multiple de {n}.",
+    tfa_contradiction_title: "Contradiction avec le TFA :",
+    tfa_contradiction_desc: "Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes. L'égalité \\(p^{{{n}}} = {k}q^{{{n}}}\\) n'a pas de solutions entières avec \\(q > 0\\).",
+    tfa_conclusion: "Conclusion : \\(\\sqrt[{n}]{{{k}}}\\) est irrationnel.",
+
+    /* Aba 2: Solucionador TRR */
+    solver_title: "2. Résolveur de Polynômes",
+    solver_desc: "Entrez un polynôme à coefficients entiers \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). L'algorithme teste les candidats rationnels \\(\\pm \\frac{p}{q}\\) par le TRR, factorise par Briot-Ruffini, extrait les racines rationnelles et isole les racines irrationnelles restantes.",
+    quick_ex: "Exemples rapides :",
+    solver_lbl_poly: "Polynôme P(x) :",
+    solver_btn: "Résoudre Étape par Étape",
+    solver_calc_title: "Calcul Symbolique (Polynôme P(x))",
+    solver_rem_complex_roots: "Racines Restantes (Irrationnelles et Complexes) :",
+    solver_girard_title: "Relations de Viète",
+    solver_girard_sum: "Somme des racines (\\(S\\)) : ",
+    solver_girard_prod: "Produit des racines (\\(P\\)) : ",
+    solver_geom_title: "Géométrie de la Parabole (Degré 2)",
+    solver_geom_concav: "Concavité :",
+    solver_geom_up: "Vers le haut",
+    solver_geom_down: "Vers le bas",
+    solver_geom_vertex: "Sommet",
+    solver_geom_min: "Point Minimum",
+    solver_geom_max: "Point Maximum",
+    solver_err_invalid: "Polynôme invalide. Vérifiez la syntaxe.",
+    solver_cartesian_title: "Visualisation Cartésienne du Polynôme P(x) et Racines",
+    solver_complex_title: "Plan Complexe (Argand-Gauss) - Distribution des Racines",
+    solver_res_title: "Solution Complète de l'Équation Polynomiale",
+    solver_badge_has_irrat: "Contient des Racines Irrationnelles",
+    solver_badge_only_rat: "Uniquement des Racines Rationnelles",
+    solver_poly_lbl: "Polynôme :",
+    solver_deg_lbl: "Degré :",
+    solver_zero_root: "Le terme indépendant est 0. Donc, \\(x = 0\\) est une racine rationnelle immédiate.",
+    solver_cand_intro: "<strong>Candidats par le TRR :</strong> Diviseurs de \\(a_0 = {a0}\\) sur les diviseurs de \\(a_n = {an}\\) :",
+    solver_cand_tested: "candidats testés",
+    solver_quadratic_rem: "Après division synthétique (Briot-Ruffini), il reste l'équation quadratique :",
+    solver_disc: "Discriminant :",
+    solver_irrat_delta: "Comme \\(\\Delta = {delta}\\) n'est pas un carré parfait, les racines réelles de \\(Q(x)\\) sont <strong>strictement irrationnelles algébriques</strong>.",
+    solver_complex_roots: "Comme \\(\\Delta < 0\\), les racines restantes appartiennent à \\(\\mathbb{C} \\setminus \\mathbb{R}\\) (complexes conjuguées).",
+    solver_no_rat_roots: "Aucun candidat du TRR n'annule le polynôme. <strong>Le polynôme ne possède aucune racine rationnelle</strong>.",
+    solver_all_real_irrat: "D'après le TRR, toutes les racines réelles existantes sont <strong>irrationnelles algébriques</strong>.",
+    solver_rat_roots_found: "Racines Rationnelles Trouvées (\\(\\mathbb{Q}\\)) :",
+    solver_irrat_roots_found: "Racines Irrationnelles Algébriques (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)) :",
+    solver_no_real_roots: "Aucune racine réelle trouvée dans le domaine évalué.",
+
+    /* Aba 3: Trigonometria */
+    trig_title: "3. Fonctions Trigonométriques",
+    trig_desc: "Examinez l'irrationalité des valeurs trigonométriques. D'après le Théorème de Niven, pour des angles rationnels \\(\\theta \\in [0^\\circ, 90^\\circ]\\), les seuls cas où \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont rationnels sont \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Tous les autres produisent des nombres irrationnels.",
+    trig_shortcuts: "Raccourcis didactiques :",
+    trig_lbl_func: "Fonction :",
+    trig_lbl_angle: "Angle en Degrés (°) :",
+    trig_btn: "Analyser la Rationalité",
+    opt_sin: "Sinus",
+    opt_cos: "Cosinus",
+    opt_tan: "Tangente",
+    opt_sec: "Sécante",
+    opt_csc: "Cosécante",
+    opt_cot: "Cotangente",
+    trig_num_title: "Calcul Numérique",
+    trig_num_badge: "Valeur Approchée",
+    trig_dec_val: "Valeur Décimale :",
+    trig_rad_val: "Angle en Radians :",
+    trig_exact_title: "Valeur Algébrique Exacte",
+    trig_exact_badge: "Angle Remarquable",
+    trig_undef_title: "Indéfinition Mathématique",
+    trig_undef_badge: "Asymptote Verticale",
+    trig_undef_desc: "La valeur de \\({funcName}({angle}^\\circ)\\) n'est pas définie dans les nombres réels.",
+    trig_res_irrat: "Résultat : Irrationnel Algébrique Démontré",
+    trig_res_rat_notable: "Résultat : Valeur Rationnelle Notable",
+    trig_res_niven_irrat: "Résultat : Irrationnel Démontré (Théorème de Niven)",
+    trig_triple_arc: "1. Connexion Algébrique via la Formule de l'Arc Triple :",
+    trig_chebyshev_sub: "Comme \\(3 \\times {angle}^\\circ = 60^\\circ\\) et \\(\\cos(60^\\circ) = \\frac{1}{2}\\), en posant \\(x = \\cos({angle}^\\circ)\\) :",
+    trig_trr_filter: "3. Filtre du Théorème des Racines Rationnelles (TRR) :",
+    trig_trr_cand_lbl: "Pour le polynôme \\(P(x) = 8x^3 - 6x - 1\\), les seuls candidats rationnels possibles sont :",
+    trig_trr_none: "Test des candidats : aucun n'annule le polynôme (\\(P(x) \\neq 0\\) pour tous).",
+    trig_chebyshev_concl: "<strong>Conclusion Rigoureuse :</strong> \\(8x^3 - 6x - 1\\) n'a pas de racines rationnelles. Comme \\(\\cos({angle}^\\circ)\\) est sa racine réelle, <strong>\\(\\cos({angle}^\\circ)\\) est strictement irrationnel algébrique</strong>. Cela démontre aussi <em>l'impossibilité de la trisection de l'angle de 60° à la règle et au compas</em> !",
+    trig_niven_quote: "\"Pour tout angle \\(\\theta\\) tel que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), les seules valeurs rationnelles de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont \\(0, \\pm \\frac{1}{2}\\) et \\(\\pm 1\\).\"",
+    trig_niven_concl: "Comme <strong>{angle}°</strong> est rationnel en degrés, mais <strong>{val}</strong> n'appartient pas à \\(\\{0, \\pm 1/2, \\pm 1\\}\\), le Théorème de Niven prouve que la valeur est <strong>strictement irrationnelle</strong>.",
+    
+    // New Keys - Trigonometry (Analytical Analysis and Alternative Reps)
+    trig_alt_title: "Représentations Alternatives",
+    trig_alt_euler: "Représentation Exponentielle (Formule d'Euler) :",
+    trig_alt_taylor: "Série de Taylor/Maclaurin :",
+    trig_analyt_title: "Analyse Analytique (Calcul)",
+    trig_analyt_deriv: "Dérivée au point \\(\\theta\\) :",
+    trig_analyt_int: "Intégrale Indéfinie :",
+
+    /* Aba 4: Logaritmos */
+    log_title: "4. Démonstration de l'Irrationalité des Logarithmes",
+    log_desc: "Vérifiez l'irrationalité de \\(\\log_b(a)\\). Si le logarithme est égal à une fraction rationnelle \\(p/q\\), alors \\(b^p = a^q\\). D'après le Théorème Fondamental de l'Arithmétique, cela exige que la base et l'argument partagent les mêmes facteurs premiers dans des proportions exactes.",
+    log_lbl_base: "Base (b ≥ 2) :",
+    log_lbl_arg: "Argument (a ≥ 1) :",
+    log_btn: "Analyser",
+    
+    // New Keys - Logarithms Explanation and Steps
+    log_res_rat: "Résultat : Rationnel (Rapport Exact)",
+    log_res_irrat: "Résultat : Irrationnel Démontré",
+    log_step1: "1. Hypothèse de Rationalité :",
+    log_step1_desc: "Supposons par l'absurde que \\(\\log_{b}(a)\\) est un nombre rationnel \\(\\frac{p}{q}\\), avec \\(p, q \\in \\mathbb{Z}^*\\) et \\(\\text{pgcd}(p,q)=1\\).",
+    log_step2: "2. Conversion en Forme Exponentielle :",
+    log_step2_desc: "Par la définition fondamentale des logarithmes : \\(b^{\\frac{p}{q}} = a \\implies b^p = a^q\\).",
+    log_step3: "3. Décomposition Canonique (TFA) :",
+    log_step3_desc: "Application du Théorème Fondamental de l'Arithmétique à la base et à l'argument :",
+    log_step4: "4. Analyse des Facteurs Premiers :",
+    log_step4_irrat: "Pour que l'égalité \\(b^p = a^q\\) soit vraie, les deux côtés doivent partager exactement les mêmes facteurs premiers. Puisqu'il y a des facteurs premiers incompatibles (ex. {diff}), l'égalité est impossible. Par conséquent, le logarithme est strictement irrationnel.",
+    log_step4_rat: "La base et l'argument sont des puissances d'une même base racine, permettant l'égalité des proportions.",
+
+    /* Aba 5: Eisenstein */
+    eisen_title: "5. Critère d'Irréductibilité d'Eisenstein",
+    eisen_desc: "Outil d'algèbre abstraite : S'il existe un nombre premier \\(p\\) tel que \\(p \\mid a_i\\) pour tout \\(i < n\\), \\(p \\nmid a_n\\) et \\(p^2 \\nmid a_0\\), le polynôme est irréductible sur \\(\\mathbb{Q}\\). Par conséquent, pour un degré \\(n \\ge 2\\), aucune de ses racines réelles ne peut être rationnelle !",
+    eisen_btn: "Tester les Nombres Premiers",
+    eisen_sat_title: "Critère Satisfait : Polynôme Irréductible sur \\(\\mathbb{Q}\\)",
+    eisen_sat_desc: "Le Critère d'Eisenstein est satisfait avec le nombre premier <strong>\\(p = {p}\\)</strong> :",
+    eisen_c1: "\\({p} \\mid a_i\\) pour tout \\(i < {n}\\) (divise tous les coefficients sauf le dominant).",
+    eisen_c2: "\\({p} \\nmid a_{{{n}}} = {an}\\) (ne divise pas le coefficient dominant).",
+    eisen_c3: "\\({p}^2 = {p2} \\nmid a_0 = {a0}\\) (son carré ne divise pas le terme indépendant).",
+    eisen_concl: "<strong>Théorème d'Irréductibilité :</strong> \\(P(x)\\) ne peut pas être factorisé dans \\(\\mathbb{Q}\\). Le degré étant {n} ≥ 2, <strong>toutes ses racines réelles sont strictement irrationnelles algébriques</strong>.",
+    eisen_inconc_title: "Critère Inconcluant pour les Premiers Nombres Premiers",
+    eisen_inconc_desc: "Aucun des nombres premiers testés n'a satisfait les 3 conditions d'Eisenstein. Utilisez l'onglet 2 (Résolveur TRR) pour investiguer les racines.",
+
+    /* Aba 6: Fracciones Continuas */
+    cf_title: "Reconnaissance Constructive via Fractions Continues Simples",
+    cf_desc: "Contrairement à l'écriture décimale finie, la fraction continue d'un nombre rationnel se termine toujours, tandis que celle d'un irrationnel est strictement infinie. Les irrationnels quadratiques produisent des développements périodiques : \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
+    cf_lbl_rad: "Racine Carrée \\(\\sqrt{N}\\) (N non carré) :",
+    cf_btn: "Développer la Fraction",
+    cf_expr_title: "Approximations Fractionnaires de Constantes",
+    cf_expr_desc: "Générez des convergentes rationnelles pour des expressions, constantes transcendantes ou trigonométriques.",
+    cf_expr_lbl: "Expression:",
+    cf_expr_btn: "Générer les Convergents",
+    cf_res_title: "Développement en Fraction Continue Périodique",
+    cf_badge: "Irrationnel Quadratique",
+    cf_lagrange: "D'après le Théorème de Lagrange, le développement en fraction continue d'un nombre réel est périodique si et seulement si c'est un <strong>irrationnel quadratique</strong>.",
+    cf_convergents_lbl: "2. Meilleures Approximations Rationnelles (Convergentes) :",
+    cf_diff_rat: "<strong>Différence Fondamentale avec les Rationnels :</strong> Un nombre rationnel génère toujours une fraction continue finie. Le fait que \\(\\sqrt{{{N}}}\\) produise un cycle infini prouve catégoriquement son irrationalité.",
+
+    /* Hybrid, Errors & Tools */
+    hybrid_title: "Mode d'Analyse Analytique",
+    hybrid_badge: "Fonction de \\(\\mathbb{R}\\) dans \\(\\mathbb{C}\\)",
+    hybrid_desc: "Le TRR exige des polynômes à coefficients entiers. Pour préserver la rigueur, le moteur d'Analyse Réelle est activé.",
+    hybrid_func_lbl: "Fonction Analisée :",
+    hybrid_deriv_lbl: "Dérivée :",
+    hybrid_int_lbl: "Intégrale Indéfinie :",
+    hybrid_error: "Erreur lors de la compilation de la fonction pour l'analyse.",
+    err_invalid_expr: "Expression invalide. Utilisez le formatage en anglais (ex: pi, e, sin(1)).",
+    err_syntax: "Erreur de syntaxe algébrique.",
+
+    /* Placeholders for Textboxes (Inputs) */
+    cf_expr_placeholder: "ex: pi, e, sin(1), sqrt(2)/2",
+    solver_poly_placeholder: "ex: x^2 - 2, 8x^3 - 6x - 1",
+    placeholder_idx: "ex: 2, 3, 4...",
+    placeholder_rad: "ex: 2, 3, 5...",
+    placeholder_base: "ex: 2, 10...",
+    placeholder_arg: "ex: 3, 5, 10...",
+    placeholder_angle: "ex: 30, 45, 60...",
+
+    /* Charts (Axes, Legends, and Titles) */
+    chart_title_poly: "Graphique du Polynôme",
+    chart_title_trig: "Graphique Trigonométrique",
+    chart_xaxis: "Axe X (Réels)",
+    chart_yaxis: "Axe Y (Réels)",
+    chart_legend_poly: "Fonction P(x)",
+    chart_legend_roots: "Racines Réelles",
+    chart_complex_real: "Axe Réel (Re)",
+    chart_complex_imag: "Axe Imaginaire (Im)",
+    chart_complex_legend: "Racines Complexes",
+
+    /* Aba 7: Tabela */
+    tabela_title: "Tableau des Constantes et Irrationnels Notables",
+    tabela_desc: "Distinction fondamentale entre irrationnels algébriques et nombres transcendants.",
+    th_sym: "Symbole",
+    th_name: "Nom / Origine",
+    th_val: "Valeur Décimale Approchée",
+    th_class: "Classification",
+    th_poly: "Polynôme Minimal / Preuve",
+    tag_algebraic: "Algébrique",
+    tag_transcendent: "Transcendant",
+    tag_irrational: "Irrationnel",
+    row_sqrt2_name: "Constante de Pythagore",
+    row_sqrt3_name: "Constante de Théodore",
+    row_phi_name: "Nombre d'Or",
+    row_pi_name: "Pi (Rapport circonférence/diamètre)",
+    row_pi_proof: "Démontré par Lindemann (1882)",
+    row_e_name: "Nombre d'Euler",
+    row_e_proof: "Démontré par Hermite (1873)",
+    row_ln2_name: "Logarithme naturel de 2",
+    row_zeta_name: "Constante d'Apéry",
+    row_zeta_proof: "Démontré par Apéry (1979)",
+    row_delos_name: "Constante de Délos",
+
+    /* Aba 8: Historia */
+    hist_title: "Évolution Historique et Épistémologique des Irrationnels",
+    hist_subtitle: "De la crise de l'incommensurabilité à la formalisation analytique de Dedekind.",
+    hist_h1: "1. L'Effondrement Pythagoricien (Ve siècle av. J.-C.)",
+    hist_p1: "Hippase découvrit que le côté et la diagonale sont incommensurables.",
+    hist_h2: "2. La Barrière des Polynômes et le TRR",
+    hist_p2: "Le TRR a consolidé une méthode finie pour les irrationnels algébriques.",
+    hist_h3: "3. Le Théorème de Niven en Trigonométrie",
+    hist_p3: "Niven a démontré les limites de la rationalité dans la trigonométrie.",
+    hist_h4: "4. La Transcendance : Liouville, Hermite et Lindemann",
+    hist_p4: "L'existence de nombres au-delà des équations algébriques.",
+    hist_h5: "5. La Complétude de la Droite",
+    hist_p5: "Coupures de Dedekind et preuves de Cantor sur l'indénombrabilité."
+  }
+};
 
     let idiomaAtual = 'pt';
 
@@ -1588,10 +1727,19 @@
         }
       });
 
+      // Traduz o innerHTML padrão
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) {
           el.innerHTML = dict[key];
+        }
+      });
+
+      // Traduz os placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) {
+          el.placeholder = dict[key];
         }
       });
 
@@ -1616,6 +1764,177 @@
 
   <!-- MOTORES MATEMÁTICOS (não mexa em nada pelo amor de deus)-->
   <script>
+    // 1. DICIONÁRIO DE INTEGRAIS PRÉ-CALCULADAS E CASOS ESPECIAIS
+    const BANCO_INTEGRAIS = {
+      // Composições Logarítmicas e Trigonométricas Solúveis
+      "cos(log(x))": {
+        suportada: true,
+        tex: "\\frac{x}{2} \\left(\\cos(\\ln(x)) + \\sin(\\ln(x))\\right) + C",
+        nota: "Integrada por partes"
+      },
+      "sin(log(x))": {
+        suportada: true,
+        tex: "\\frac{x}{2} \\left(\\sin(\\ln(x)) - \\cos(\\ln(x))\\right) + C",
+        nota: "Integrada por partes"
+      },
+
+      // Logaritmos de Trigonométricas (Funções Especiais)
+      "log(cos(x))": {
+        suportada: false,
+        tex: "-x \\ln(2) - \\frac{1}{2} \\text{Cl}_2(2x + \\pi) + C",
+        nota: "Primitiva não-elementar (Função de Clausen)"
+      },
+      "log(sin(x))": {
+        suportada: false,
+        tex: "-x \\ln(2) - \\frac{1}{2} \\text{Cl}_2(2x) + C",
+        nota: "Primitiva não-elementar (Função de Clausen)"
+      },
+      "log(tan(x))": {
+        suportada: false,
+        tex: "\\frac{i}{2} \\text{Li}_2(-e^{2ix}) - \\frac{i}{2} \\text{Li}_2(e^{2ix}) + C",
+        nota: "Primitiva não-elementar (Dilogaritmo Li₂)"
+      },
+
+      // Trigonométricas Aninhadas (Séries de Bessel)
+      "cos(cos(x))": {
+        suportada: false,
+        tex: "J_0(1) x + 2 \\sum_{k=1}^{\\infty} (-1)^k \\frac{J_{2k}(1)}{2k} \\sin(2kx) + C",
+        nota: "Primitiva não-elementar (Série de Bessel)"
+      },
+      "sin(cos(x))": {
+        suportada: false,
+        tex: "2 \\sum_{k=0}^{\\infty} (-1)^k \\frac{J_{2k+1}(1)}{2k+1} \\sin((2k+1)x) + C",
+        nota: "Primitiva não-elementar (Série de Bessel)"
+      },
+      "cos(sin(x))": {
+        suportada: false,
+        tex: "J_0(1) x + 2 \\sum_{k=1}^{\\infty} \\frac{J_{2k}(1)}{2k} \\sin(2kx) + C",
+        nota: "Primitiva não-elementar (Série de Bessel)"
+      },
+      "sin(sin(x))": {
+        suportada: false,
+        tex: "2 \\sum_{k=0}^{\\infty} \\frac{J_{2k+1}(1)}{2k+1} \\sin((2k+1)x) + C",
+        nota: "Primitiva não-elementar (Série de Bessel)"
+      },
+      "cot(sec(x))": {
+        suportada: false,
+        tex: "\\text{Sem forma fechada elementar}",
+        nota: "Primitiva não-elementar"
+      },
+
+      // Logaritmos Aninhados
+      "log(log(x))": {
+        suportada: false,
+        tex: "x \\ln(\\ln(x)) - \\text{li}(x) + C",
+        nota: "Primitiva não-elementar (Integral Logarítmica li)"
+      },
+      "log(log(-x))": {
+        suportada: false,
+        tex: "x \\ln(\\ln(-x)) - \\text{li}(-x) + C",
+        nota: "Primitiva não-elementar (Integral Logarítmica li)"
+      },
+
+      // Razões e Exponenciais Clássicas
+      "sin(x)/x": {
+        suportada: false,
+        tex: "\\text{Si}(x) + C",
+        nota: "Integral do Seno Si(x)"
+      },
+      "cos(x)/x": {
+        suportada: false,
+        tex: "\\text{Ci}(x) + C",
+        nota: "Integral do Cosseno Ci(x)"
+      },
+      "exp(cos(x))": {
+        suportada: false,
+        tex: "I_0(1)x + 2 \\sum_{k=1}^{\\infty} \\frac{I_k(1)}{k} \\sin(kx) + C",
+        nota: "Expressa por Funções Modificadas de Bessel"
+      },
+      // Função Erro (Clássica estatística)
+      "exp(-x^2)": {
+        suportada: false,
+        tex: "\\frac{\\sqrt{\\pi}}{2} \\text{erf}(x) + C",
+        nota: "Primitiva não-elementar (Função Erro Gaussiana)"
+      },
+      // Integral Exponencial
+      "exp(x)/x": {
+        suportada: false,
+        tex: "\\text{Ei}(x) + C",
+        nota: "Primitiva não-elementar (Integral Exponencial)"
+      },
+      // Arco Tangente
+      "1/(1+x^2)": {
+        suportada: true,
+        tex: "\\arctan(x) + C",
+        nota: "Integral imediata"
+      },
+      // Função de Fresnel
+      "sin(x^2)": {
+        suportada: false,
+        tex: "\\sqrt{\\frac{\\pi}{2}} \\text{S}\\left(\\sqrt{\\frac{2}{\\pi}} x\\right) + C",
+        nota: "Primitiva não-elementar (Integral de Fresnel S)"
+      }
+    };
+
+    // 2. NORMALIZADOR DE SINTAXE (Garante match mesmo com 'sen', 'tg', 'ln' ou espaços)
+    function normalizarExpressao(expr) {
+      if (!expr || typeof expr !== 'string') return '';
+      
+      let s = expr.toLowerCase().replace(/\s+/g, '');
+      
+      s = s.replace(/sen/g, 'sin');
+      s = s.replace(/tg/g, 'tan');
+      s = s.replace(/ctg|cotg/g, 'cot');
+      s = s.replace(/ln/g, 'log');
+      s = s.replace(/e\^\((.*?)\)/g, 'exp($1)');
+      s = s.replace(/e\^([a-z0-9]+)/g, 'exp($1)');
+      
+      return s;
+    }
+
+    // 3. CONSULTA AO BANCO (Padrão Cache-First) COM SUPORTE A QUALQUER VARIÁVEL
+    function resolverIntegralComCache(exprBruta, mainVar = 'x') {
+      // 1. Substitui a variável do utilizador por 'x' temporariamente para a busca
+      let exprBusca = exprBruta;
+      if (mainVar !== 'x') {
+        const regexVar = new RegExp(`\\b${mainVar}\\b`, 'g');
+        exprBusca = exprBusca.replace(regexVar, 'x');
+      }
+      
+      const exprNorm = normalizarExpressao(exprBusca);
+      
+      if (BANCO_INTEGRAIS[exprNorm]) {
+        const item = BANCO_INTEGRAIS[exprNorm];
+        let texResultado = item.tex;
+        
+        // 2. Se a variável não for 'x', devolvemos a variável original ao LaTeX gerado
+        if (mainVar !== 'x') {
+          // Prevenção de colisão matemática: se o utilizador usar a variável 'k' ou 'i', 
+          // mudamos o 'k' das séries de Bessel para 'm' para não misturar as letras!
+          if (mainVar === 'k' || mainVar === 'i') {
+            texResultado = texResultado.replace(/k=/g, 'm=').replace(/\{k\}/g, '{m}').replace(/_\{2k\}/g, '_{2m}').replace(/_\{2k\+1\}/g, '_{2m+1}').replace(/2k/g, '2m');
+          }
+          
+          // Regex cirúrgica: substitui o 'x' matemático, mas ignora o 'x' da palavra \text{}
+          texResultado = texResultado
+            .replace(/\bx\b/g, mainVar)             // Ex: x/2 -> k/2
+            .replace(/([0-9i])x\b/g, `$1${mainVar}`) // Ex: 2x -> 2k, 2ix -> 2ik
+            .replace(/mx\b/g, `m${mainVar}`)         // Ex: 2mx -> 2mk (após mudar k para m)
+            .replace(/kx\b/g, `k${mainVar}`);        // Ex: 2kx -> 2kk
+        }
+        
+        return {
+          sucesso: true,
+          suportada: item.suportada,
+          latex: texResultado,
+          nota: item.nota,
+          origem: 'dicionario'
+        };
+      }
+      
+      return { sucesso: false };
+    }
+
     function switchTab(tabId) {
       const tabs = ['tfa', 'solver', 'trig', 'log', 'eisenstein', 'fraccont', 'tabela', 'historia'];
       tabs.forEach(t => {
@@ -1892,6 +2211,7 @@
     }
 
     // função global para alternar a exibição das linhas no gráfico SVG
+    // função global para alternar a exibição das linhas no gráfico SVG
     window.toggleGraphLine = function(k) {
       const pathRe = document.getElementById(`graph-path-re-${k}`);
       const pathIm = document.getElementById(`graph-path-im-${k}`);
@@ -1904,22 +2224,360 @@
         if (pathRe) { pathRe.setAttribute('data-active', 'false'); pathRe.style.opacity = '0'; }
         if (pathIm) { pathIm.setAttribute('data-active', 'false'); pathIm.style.opacity = '0'; }
         legend.style.opacity = '0.4';
+        
+        document.querySelectorAll(`.graph-root-${k}`).forEach(el => el.style.opacity = '0');
+        
+        if (k === 0) {
+            const fxCont = pathRe.closest('.relative').querySelector('.coord-fx-container');
+            if (fxCont) fxCont.style.display = 'none';
+        }
       } else {
         if (pathRe) { pathRe.setAttribute('data-active', 'true'); pathRe.style.opacity = '1'; }
-        if (pathIm) { pathIm.setAttribute('data-active', 'true'); pathIm.style.opacity = '0.8'; } // Imaginária fica levemente translúcida
+        if (pathIm) { pathIm.setAttribute('data-active', 'true'); pathIm.style.opacity = '0.8'; } 
         legend.style.opacity = '1';
+        
+        document.querySelectorAll(`.graph-root-${k}`).forEach(el => el.style.opacity = '1');
+        
+        if (k === 0) {
+            const fxCont = pathRe.closest('.relative').querySelector('.coord-fx-container');
+            if (fxCont) fxCont.style.display = 'block';
+        }
       }
     };
-    window.toggleHybridGraph = window.toggleGraphLine; // Alias
 
-    // parseador ultrarrápido para extrair real e imaginário da saída text('decimals') do motor algébrico
+    window.focusGraphLine = function(k, container) {
+      const rel = container.closest('.relative');
+      const total = parseInt(rel.getAttribute('data-total-funcs') || 0);
+      for(let i = 0; i < total; i++) {
+        const pRe = rel.querySelector(`#graph-path-re-${i}`);
+        const pIm = rel.querySelector(`#graph-path-im-${i}`);
+        const leg = rel.querySelector(`#graph-legend-${i}`);
+        const pts = rel.querySelectorAll(`.graph-root-${i}`);
+
+        if (i !== k) {
+          if(pRe && pRe.getAttribute('data-active') === 'true') pRe.style.opacity = '0.15';
+          if(pIm && pIm.getAttribute('data-active') === 'true') pIm.style.opacity = '0.1';
+          if(leg) leg.style.opacity = '0.3';
+          pts.forEach(pt => { if (pt.style.opacity !== '0') pt.style.opacity = '0.15'; });
+        } else {
+          if(pRe && pRe.getAttribute('data-active') === 'true') pRe.style.opacity = '1';
+          if(pIm && pIm.getAttribute('data-active') === 'true') pIm.style.opacity = '0.8';
+          if(leg) leg.style.opacity = '1';
+          pts.forEach(pt => { if (pt.style.opacity !== '0') pt.style.opacity = '1'; });
+        }
+      }
+    };
+
+    window.unfocusGraphLine = function(container) {
+      const rel = container.closest('.relative');
+      const total = parseInt(rel.getAttribute('data-total-funcs') || 0);
+      for(let i = 0; i < total; i++) {
+        const pRe = rel.querySelector(`#graph-path-re-${i}`);
+        const pIm = rel.querySelector(`#graph-path-im-${i}`);
+        const leg = rel.querySelector(`#graph-legend-${i}`);
+        const pts = rel.querySelectorAll(`.graph-root-${i}`);
+
+        let isActive = pRe && pRe.getAttribute('data-active') === 'true';
+        if (isActive) {
+          if(pRe) pRe.style.opacity = '1';
+          if(pIm) pIm.style.opacity = '0.8';
+          if(leg) leg.style.opacity = '1';
+          pts.forEach(pt => pt.style.opacity = '1');
+        } else {
+          if(pRe) pRe.style.opacity = '0';
+          if(pIm) pIm.style.opacity = '0';
+          if(leg) leg.style.opacity = '0.4';
+          pts.forEach(pt => pt.style.opacity = '0');
+        }
+      }
+    };
+
+    window.hideCrosshairs = function(svgEl) {
+      const cx = svgEl.querySelector('#crosshair-x');
+      const cy = svgEl.querySelector('#crosshair-y');
+      if(cx) cx.style.opacity = '0';
+      if(cy) cy.style.opacity = '0';
+    };
+
+    // Formatador Elegante de Radianos em PI
+    function formatRadian(x) {
+      if (Math.abs(x) < 1e-5) return "0";
+      let ratio = x / Math.PI;
+      let bestA = Math.round(ratio), bestB = 1, minErr = Math.abs(ratio - bestA);
+      
+      for (let b = 2; b <= 12; b++) {
+        let a = Math.round(ratio * b);
+        let err = Math.abs(ratio - a / b);
+        if (err < minErr - 1e-6) {
+          minErr = err;
+          bestA = a;
+          bestB = b;
+        }
+      }
+      
+      if (minErr > 0.05) return parseFloat(x.toFixed(2)).toString(); 
+      
+      let sign = bestA < 0 ? "-" : "";
+      let absA = Math.abs(bestA);
+      let numStr = absA === 1 ? "π" : `${absA}π`;
+      if (absA === 0) return "0";
+      if (bestB === 1) return `${sign}${numStr}`;
+      return `${sign}${numStr}/${bestB}`;
+    }
+
+    // Atualização Dinâmica da Malha (Utilizada em Funções Não-Trigonométricas)
+    window.updateDynamicGrid = function(svgEl) {
+      const gridGroup = svgEl.querySelector('.dynamic-grid-group');
+      if (!gridGroup) return;
+
+      let vb = svgEl.getAttribute('viewBox').split(' ').map(Number);
+      let vx = vb[0], vy = vb[1], vw = vb[2], vh = vb[3];
+
+      const xMin = parseFloat(svgEl.getAttribute('data-xmin'));
+      const xRange = parseFloat(svgEl.getAttribute('data-xrange'));
+      const yMin = parseFloat(svgEl.getAttribute('data-ymin'));
+      const yRange = parseFloat(svgEl.getAttribute('data-yrange'));
+
+      const toScreenX = (x) => ((x - xMin) / xRange) * 600;
+      const toScreenY = (y) => 300 - ((y - yMin) / yRange) * 300;
+      const xAxisY = toScreenY(0);
+      const yAxisX = toScreenX(0);
+
+      const mathXMin = xMin + (vx / 600) * xRange;
+      const mathXMax = xMin + ((vx + vw) / 600) * xRange;
+      const mathYMax = yMin + ((300 - vy) / 300) * yRange;
+      const mathYMin = yMin + ((300 - (vy + vh)) / 300) * yRange;
+
+      let rawStepX = (mathXMax - mathXMin) / 8;
+      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+
+      let rawStepY = (mathYMax - mathYMin) / 6;
+      let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
+      let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
+
+      let html = '';
+      let currentScale = vw / 600;
+      let fontSize = 10 * currentScale; 
+
+      let startX = Math.ceil(mathXMin / xStep) * xStep;
+      for (let i = startX; i <= mathXMax; i += xStep) {
+        if (Math.abs(i) < 1e-7) continue;
+        let tx = toScreenX(i);
+        let label = parseFloat(i.toFixed(4)); 
+        html += `<line x1="${tx}" y1="-50000" x2="${tx}" y2="50000" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" opacity="0.6" vector-effect="non-scaling-stroke" />`;
+        html += `<line x1="${tx}" y1="${xAxisY - 4*currentScale}" x2="${tx}" y2="${xAxisY + 4*currentScale}" stroke="#64748b" stroke-width="1.5" vector-effect="non-scaling-stroke" />`;
+        html += `<text x="${tx}" y="${xAxisY + 16*currentScale}" fill="#94a3b8" font-size="${fontSize}" text-anchor="middle">${label}</text>`;
+      }
+
+      let startY = Math.ceil(mathYMin / yStep) * yStep;
+      for (let j = startY; j <= mathYMax; j += yStep) {
+        if (Math.abs(j) < 1e-7) continue;
+        let ty = toScreenY(j);
+        let label = parseFloat(j.toFixed(4));
+        html += `<line x1="-50000" y1="${ty}" x2="50000" y2="${ty}" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" opacity="0.6" vector-effect="non-scaling-stroke" />`;
+        html += `<line x1="${yAxisX - 4*currentScale}" y1="${ty}" x2="${yAxisX + 4*currentScale}" y2="${ty}" stroke="#64748b" stroke-width="1.5" vector-effect="non-scaling-stroke" />`;
+        html += `<text x="${yAxisX - 8*currentScale}" y="${ty + 4*currentScale}" fill="#94a3b8" font-size="${fontSize}" text-anchor="end">${label}</text>`;
+      }
+      
+      html += `<text x="${yAxisX - 6*currentScale}" y="${xAxisY + 12*currentScale}" fill="#94a3b8" font-size="${fontSize}" text-anchor="end">0</text>`;
+      
+      gridGroup.innerHTML = html;
+
+      const labelX = svgEl.querySelector('.axis-label-x');
+      const labelY = svgEl.querySelector('.axis-label-y');
+      if (labelX) {
+          labelX.setAttribute('x', vx + vw - 15 * currentScale);
+          labelX.setAttribute('y', xAxisY - 10 * currentScale);
+          labelX.setAttribute('font-size', 12 * currentScale);
+      }
+      if (labelY) {
+          labelY.setAttribute('x', yAxisX + 10 * currentScale);
+          labelY.setAttribute('y', vy + 15 * currentScale);
+          labelY.setAttribute('font-size', 12 * currentScale);
+      }
+    };
+
+    let rafGridTimer = null;
+    window.scheduleGridUpdate = function(svgEl) {
+      if (rafGridTimer) return;
+      rafGridTimer = requestAnimationFrame(() => {
+        window.updateDynamicGrid(svgEl);
+        rafGridTimer = null;
+      });
+    };
+
+    let isPanning = false;
+    let startPanX = 0, startPanY = 0;
+    let startVb = [];
+
+    window.handleGraphZoom = function(evt, svgEl) {
+      if (svgEl.getAttribute('data-istrig') === 'true') return; // Desativa Zoom para Trigonometria
+      evt.preventDefault(); 
+      let vb = svgEl.getAttribute('viewBox').split(' ').map(Number);
+      let zoom = evt.deltaY > 0 ? 1.05 : 0.95; 
+      let newW = vb[2] * zoom;
+      let newH = vb[3] * zoom;
+      if (newW < 20 || newW > 10000) return; 
+      
+      let rect = svgEl.getBoundingClientRect();
+      let mouseX = evt.clientX - rect.left;
+      let mouseY = evt.clientY - rect.top;
+      
+      let svgMouseX = vb[0] + (mouseX / rect.width) * vb[2];
+      let svgMouseY = vb[1] + (mouseY / rect.height) * vb[3];
+      
+      let newX = svgMouseX - (mouseX / rect.width) * newW;
+      let newY = svgMouseY - (mouseY / rect.height) * newH;
+      
+      svgEl.setAttribute('viewBox', `${newX} ${newY} ${newW} ${newH}`);
+      window.scheduleGridUpdate(svgEl);
+    };
+
+    window.startGraphPan = function(evt, svgEl) {
+      if (svgEl.getAttribute('data-istrig') === 'true') return; // Desativa Pan para Trigonometria
+      if(evt.button !== 0) return; 
+      isPanning = true;
+      startPanX = evt.clientX;
+      startPanY = evt.clientY;
+      startVb = svgEl.getAttribute('viewBox').split(' ').map(Number);
+      svgEl.style.cursor = 'grabbing'; 
+    };
+
+    window.doGraphPan = function(evt, svgEl) {
+      if (!isPanning) return;
+      let rect = svgEl.getBoundingClientRect();
+      let dx = evt.clientX - startPanX;
+      let dy = evt.clientY - startPanY;
+      
+      let vbDx = (dx / rect.width) * startVb[2];
+      let vbDy = (dy / rect.height) * startVb[3];
+      
+      svgEl.setAttribute('viewBox', `${startVb[0] - vbDx} ${startVb[1] - vbDy} ${startVb[2]} ${startVb[3]}`);
+      window.scheduleGridUpdate(svgEl); 
+    };
+
+    window.endGraphPan = function(evt, svgEl) {
+      if (isPanning) {
+        isPanning = false;
+        svgEl.style.cursor = 'default';
+        window.scheduleGridUpdate(svgEl); 
+      }
+    };
+
+    window.resetGraphZoom = function(btnOrSvg) {
+      let svgEl = btnOrSvg.tagName === 'SVG' ? btnOrSvg : btnOrSvg.closest('.relative').querySelector('.math-graph-svg');
+      if (!svgEl) return;
+      
+      svgEl.setAttribute('viewBox', '0 0 600 300');
+      
+      svgEl.querySelectorAll('.graph-root-point').forEach(c => {
+          let baseR = c.getAttribute('data-base-r') || 4.5;
+          c.setAttribute('r', baseR);
+      });
+      
+      window.scheduleGridUpdate(svgEl);
+    };
+
+    // RASTREADOR O(1)
+    let rafTrackTimer = null;
+    window.trackCoordinates = function(evt, svgEl) {
+      if (isPanning) return; 
+
+      if (rafTrackTimer) cancelAnimationFrame(rafTrackTimer);
+
+      rafTrackTimer = requestAnimationFrame(() => {
+        const tracker = svgEl.closest('.relative').querySelector('.coord-tracker');
+        if (!tracker) return;
+
+        let pt = svgEl.createSVGPoint();
+        pt.x = evt.clientX;
+        pt.y = evt.clientY;
+        let cursorPt = pt.matrixTransform(svgEl.getScreenCTM().inverse());
+        
+        const svgX = cursorPt.x;
+        const svgY = cursorPt.y;
+
+        const cx = svgEl.querySelector('#crosshair-x');
+        const cy = svgEl.querySelector('#crosshair-y');
+        if (cx && cy) { 
+           cx.setAttribute('y1', svgY);
+           cx.setAttribute('y2', svgY);
+           cy.setAttribute('x1', svgX);
+           cy.setAttribute('x2', svgX);
+           cx.style.opacity = '0.7';
+           cy.style.opacity = '0.7';
+        }
+
+        const xMin = parseFloat(svgEl.getAttribute('data-xmin'));
+        const xRange = parseFloat(svgEl.getAttribute('data-xrange'));
+        const yMin = parseFloat(svgEl.getAttribute('data-ymin'));
+        const yRange = parseFloat(svgEl.getAttribute('data-yrange'));
+
+        const mathX = xMin + (svgX / 600) * xRange;
+        const mathY = yMin + ((300 - svgY) / 300) * yRange;
+
+        let closestY = null;
+        if (svgEl._mainEval) {
+           try { closestY = svgEl._mainEval(mathX); } catch(e){}
+        }
+
+        const mouseSpan = tracker.querySelector('.coord-mouse');
+        const fxContainer = tracker.querySelector('.coord-fx-container');
+        const fxSpan = tracker.querySelector('.coord-fx');
+        
+        mouseSpan.innerHTML = `(${mathX.toFixed(2)}, ${mathY.toFixed(2)})`;
+
+        const mainGraph = svgEl.querySelector('#graph-path-re-0');
+        const isMainActive = mainGraph && mainGraph.getAttribute('data-active') !== 'false';
+
+        if (isMainActive) {
+            fxContainer.style.display = 'block';
+            fxSpan.innerHTML = (closestY !== null && !isNaN(closestY) && isFinite(closestY)) ? closestY.toFixed(2) : '-';
+        } else {
+            fxContainer.style.display = 'none';
+        }
+      });
+    };
+
+    window.downloadGraph = function(btn) {
+      const container = btn.closest('.relative');
+      const originalSvg = container.querySelector('svg.math-graph-svg');
+      if (!originalSvg) return;
+      
+      const svg = originalSvg.cloneNode(true);
+      svg.setAttribute('width', '1200');
+      svg.setAttribute('height', '600');
+      
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const imgSrc = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
+      
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      
+      img.onload = function() {
+        canvas.width = 1200;
+        canvas.height = 600;
+        ctx.fillStyle = '#020617'; 
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, 1200, 600);
+        
+        const a = document.createElement('a');
+        a.download = 'grafico_polinomio.png';
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+      };
+      
+      img.src = imgSrc;
+    };
+
     function extrairComplexoNerdamer(valText) {
-      let s = valText.replace(/[\(\)\s]/g, ''); // Limpa a string
+      let s = valText.replace(/[\(\)\s]/g, ''); 
       if (s === 'i') return { re: 0, im: 1 };
       if (s === '-i') return { re: 0, im: -1 };
       if (!s.includes('i')) return { re: parseFloat(s), im: 0 };
       
-      // Se for puramente imaginário (ex: "3*i", "-3.5*i")
       if (s.match(/^[+-]?[\d\.]+\*?i$/)) {
          let numStr = s.replace(/\*?i/, '');
          if (numStr === '' || numStr === '+') return { re: 0, im: 1 };
@@ -1927,7 +2585,6 @@
          return { re: 0, im: parseFloat(numStr) };
       }
       
-      // Se tiver Real + Imaginário (ex: "2+3*i", "-2-3.5*i")
       let firstChar = s[0];
       let rest = s.substring(1);
       let signIndex = rest.search(/[+-]/);
@@ -1940,77 +2597,121 @@
           if (imStr === '-') imStr = '-1';
           return { re: parseFloat(reStr), im: parseFloat(imStr) };
       }
-      
       return { re: NaN, im: 0 };
     }
 
-    // Alias para compatibilidade
     window.toggleHybridGraph = window.toggleGraphLine;
 
-    // MOTOR GRÁFICO UNIVERSAL 2.0 (Suporte total à Avaliação Complexa e Plotagem 2-Path)
-    function gerarSvgFuncaoGeral(input, axisVar = 'x') {
+    // MOTOR GRÁFICO UNIVERSAL 21.0 (Trig Estática Radianos + Filtro de Integral Não Suportada)
+    function gerarSvgFuncaoGeral(input, axisVar = 'x', roots = []) {
       let funcs;
       if (typeof input === 'function') {
         funcs = [{ eval: input, color: '#10b981', label: `f(${axisVar})` }];
       } else {
-        funcs = input; // Array de { eval, nerdObj, color, label, isIntegral }
+        funcs = input; 
       }
+
+      // FILTRO: Remove integrais não suportadas para não desenhar curvas quebradas nem poluir a legenda
+      funcs = funcs.filter(f => {
+        if (f.isIntegral) {
+          if (f.unsupported || f.isUnsupported || !f.eval || typeof f.eval !== 'function') {
+            return false;
+          }
+          try {
+            let testVal = f.eval(1);
+            if (testVal === null || typeof testVal === 'undefined') return false;
+          } catch(e) {
+            return false;
+          }
+        }
+        return true;
+      });
 
       if (typeof Math.sec === 'undefined') Math.sec = (x) => 1 / Math.cos(x);
       if (typeof Math.csc === 'undefined') Math.csc = (x) => 1 / Math.sin(x);
       if (typeof Math.cot === 'undefined') Math.cot = (x) => 1 / Math.tan(x);
 
+      // DETECÇÃO DE TRIGONOMETRIA PARA MODO ESTÁTICO EM RADIANOS
+      const isTrig = (function() {
+        if (!funcs || funcs.length === 0) return false;
+        let exprText = (typeof input === 'string' ? input : '');
+        if (funcs[0]) {
+          if (funcs[0].raw) exprText += ' ' + funcs[0].raw;
+          if (funcs[0].expr) exprText += ' ' + funcs[0].expr;
+          if (funcs[0].label) exprText += ' ' + funcs[0].label;
+        }
+
+        const nonTrigRegex = /\b(log|ln|exp|sqrt|abs)\b/i;
+        if (nonTrigRegex.test(exprText)) return false;
+
+        const trigRegex = /\b(sin|sen|cos|tan|tg|sec|csc|cot|ctg)\b/i;
+        return trigRegex.test(exprText);
+      })();
+
       const width = 600, height = 300;
-      const boundX = 6;
-      const xMin = -boundX, xMax = boundX;
+      
+      let xMin = -6, xMax = 6;
+      if (isTrig) {
+        xMin = -2 * Math.PI;
+        xMax = 2 * Math.PI;
+      } else if (roots && roots.length > 0) {
+        let minR = Math.min(...roots);
+        let maxR = Math.max(...roots);
+        let span = maxR - minR;
+        if (span < 2) span = 2; 
+        let margin = span * 0.5; 
+        xMin = minR - margin;
+        xMax = maxR + margin;
+      }
+
       const xRange = xMax - xMin;
-      const steps = 400;
-      const dx = xRange / steps;
+
+      const renderXMin = xMin - xRange * 10;
+      const renderXMax = xMax + xRange * 10;
+      const renderSteps = 2000; 
+      const dx = (renderXMax - renderXMin) / renderSteps;
 
       let allPoints = [];
-      let globalYs = [];
+      let globalYs = []; 
 
-      for (let fObj of funcs) {
+      for (let k = 0; k < funcs.length; k++) {
+        let fObj = funcs[k];
         let pts = [];
-        for (let i = 0; i <= steps; i++) {
-          let x = xMin + i * dx;
+        for (let i = 0; i <= renderSteps; i++) {
+          let x = renderXMin + i * dx;
           let yRe = NaN, yIm = 0, isReal = true;
 
-          // 1. TENTATIVA NATIVA: Rápida e com adaptação de módulo para integrais
           if (fObj.isIntegral) {
             const originalLog = Math.log;
             try {
               Math.log = (v) => originalLog(Math.abs(v));
               yRe = fObj.eval(x);
-            } catch (e) {
-            } finally {
+            } catch (e) {} finally {
               Math.log = originalLog; 
             }
           } else {
             try { yRe = fObj.eval(x); } catch(e) {}
           }
 
-          // 2. FALLBACK PARA O PLANO COMPLEXO
           if (isNaN(yRe) || !isFinite(yRe)) {
             if (fObj.nerdObj) {
               try {
-                // AQUI ESTAVA O BUG: Agora injetamos dinamicamente a variável do eixo!
                 let valText = fObj.nerdObj.evaluate({ [axisVar]: x }).text('decimals');
                 let complexData = extrairComplexoNerdamer(valText);
-                
                 yRe = complexData.re;
                 yIm = complexData.im;
                 isReal = Math.abs(yIm) < 1e-7; 
-              } catch(e) {
-                yRe = NaN; 
-              }
+              } catch(e) { yRe = NaN; }
             }
           }
 
           if (!isNaN(yRe) && isFinite(yRe)) {
             pts.push({ x, re: yRe, im: yIm, isReal });
-            globalYs.push(yRe);
-            if (!isReal) globalYs.push(yIm);
+            
+            if (k === 0 && x >= xMin && x <= xMax) {
+              globalYs.push(yRe);
+              if (!isReal) globalYs.push(yIm);
+            }
           }
         }
         allPoints.push(pts);
@@ -2021,25 +2722,79 @@
           <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden h-full flex flex-col items-center justify-center min-h-[200px]">
              <svg class="w-10 h-10 text-slate-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
              <p class="text-sm text-slate-400 font-medium text-center">Gráfico Indisponível</p>
-             <p class="text-xs text-slate-500 mt-1">A função falhou até mesmo na avaliação complexa.</p>
           </div>
         `;
       }
 
-      // escalonamento de eixos
-      let validYs = globalYs.sort((a, b) => a - b);
-      let q1 = validYs[Math.floor(validYs.length * 0.25)];
-      let q3 = validYs[Math.floor(validYs.length * 0.75)];
-      let iqr = q3 - q1;
-      if (iqr === 0) iqr = 2;
+      let allCrosses = [];
+      let mainCrosses = (roots && roots.length > 0) ? [...roots].sort((a,b)=>a-b) : [];
+      allCrosses[0] = mainCrosses;
 
-      let lowerBound = q1 - 3 * iqr;
-      let upperBound = q3 + 3 * iqr;
+      for (let k = 1; k < funcs.length; k++) {
+        if (isTrig) {
+          allCrosses[k] = [];
+          continue;
+        }
+
+        let pts = allPoints[k];
+        let crosses = [];
+        for(let i = 1; i < pts.length; i++) {
+           let p1 = pts[i-1];
+           let p2 = pts[i];
+           if (p1.isReal && p2.isReal && !isNaN(p1.re) && !isNaN(p2.re)) {
+               if (Math.abs(p1.re) < 1e-7) { 
+                   crosses.push(p1.x); 
+               } else if (p1.re * p2.re < 0) {
+                   if (Math.abs(p1.re - p2.re) < 50) {
+                       let crossX = p1.x + Math.abs(p1.re) / (Math.abs(p1.re) + Math.abs(p2.re)) * (p2.x - p1.x);
+                       crosses.push(crossX);
+                   }
+               }
+           }
+        }
+
+        let uniqueCrosses = [];
+        if (crosses.length <= 25) {
+            crosses.forEach(c => {
+               if (c >= xMin - xRange * 2 && c <= xMax + xRange * 2) {
+                   if (!uniqueCrosses.some(uc => Math.abs(uc - c) < dx * 1.5)) { uniqueCrosses.push(c); }
+               }
+            });
+        }
+        allCrosses[k] = uniqueCrosses.sort((a,b)=>a-b);
+      }
+
+      function toFractionText(num) {
+          if (isTrig) return formatRadian(num);
+          if (Number.isInteger(num)) return num.toString();
+          for(let den = 2; den <= 100; den++) {
+              let numr = num * den;
+              if (Math.abs(numr - Math.round(numr)) < 1e-5) {
+                  return Math.round(numr) + '/' + den;
+              }
+          }
+          return parseFloat(num.toFixed(3)).toString().replace('.', ',');
+      }
+
+      const getTooltipText = (k) => {
+          let arr = allCrosses[k];
+          if (!arr || arr.length === 0) return "Não corta o eixo x de forma isolada.";
+          let fmt = arr.map(n => toFractionText(n));
+          if (fmt.length === 1) return `O gráfico corta o eixo x no ponto ${fmt[0]}.`;
+          let last = fmt.pop();
+          return `O gráfico corta o eixo x nos pontos ${fmt.join(', ')} e ${last}.`;
+      };
+
+      let validYs = globalYs.sort((a, b) => a - b);
       let p5 = validYs[Math.floor(validYs.length * 0.05)];
       let p95 = validYs[Math.floor(validYs.length * 0.95)];
 
-      let calcYMin = Math.max(p5, lowerBound);
-      let calcYMax = Math.min(p95, upperBound);
+      let calcYMin = p5;
+      let calcYMax = p95;
+
+      if (calcYMax <= 1 && calcYMin > -5) {
+        calcYMin = -5;
+      }
 
       if (calcYMax - calcYMin < 0.5) {
         let centro = (calcYMax + calcYMin) / 2;
@@ -2058,8 +2813,9 @@
 
       const toScreenX = (x) => ((x - xMin) / xRange) * width;
       const toScreenY = (y) => height - ((y - yMin) / yRange) * height;
+      const xAxisY = toScreenY(0);
+      const yAxisX = toScreenX(0);
 
-      // desenho MEIO inteligente com 2 layers (real e imaginário)
       let pathsSvg = "";
       for (let k = 0; k < funcs.length; k++) {
         let pts = allPoints[k];
@@ -2071,50 +2827,73 @@
         
         for (let i = 0; i < pts.length; i++) {
           let p = pts[i];
-          
           if (i > 0) {
             let prevP = pts[i - 1];
-            if (Math.abs(p.re - prevP.re) > yRange * 0.8) firstRe = true; 
-            if (Math.abs(p.im - prevP.im) > yRange * 0.8) firstIm = true; 
+            
+            // NOVO DETETOR DE ASSÍNTOTAS: 
+            // Só quebra a linha se o salto atravessar a tela de ponta a ponta (ex: tan(x)).
+            // Curvas íngremes como 1/x^2 agora vão desenhar além da borda sem quebrar.
+            let jumpRe = Math.abs(p.re - prevP.re);
+            if (jumpRe > yRange * 1.5) {
+                let maxRe = Math.max(p.re, prevP.re);
+                let minRe = Math.min(p.re, prevP.re);
+                if (maxRe > yMax && minRe < yMin) firstRe = true;
+            }
+            
+            let jumpIm = Math.abs(p.im - prevP.im);
+            if (jumpIm > yRange * 1.5) {
+                let maxIm = Math.max(p.im, prevP.im);
+                let minIm = Math.min(p.im, prevP.im);
+                if (maxIm > yMax && minIm < yMin) firstIm = true;
+            }
           }
-          
           let sx = toScreenX(p.x);
           let syRe = toScreenY(p.re);
           let syIm = toScreenY(p.im);
           
-          if (syRe >= -height && syRe <= height * 2) {
+          if (syRe >= -100000 && syRe <= 100000) {
             if (firstRe) { pathD_Re += `M ${sx} ${syRe}`; firstRe = false; }
             else { pathD_Re += ` L ${sx} ${syRe}`; }
           } else { firstRe = true; }
 
           if (!p.isReal) {
-            if (syIm >= -height && syIm <= height * 2) {
+            if (syIm >= -100000 && syIm <= 100000) {
               if (firstIm) { pathD_Im += `M ${sx} ${syIm}`; firstIm = false; }
               else { pathD_Im += ` L ${sx} ${syIm}`; }
             } else { firstIm = true; }
-          } else {
-            firstIm = true; 
-          }
+          } else { firstIm = true; }
         }
         
         const isActive = (k === 0);
         const opacidadeBase = isActive ? 1 : 0;
+        const animClass = isActive ? "anim-draw" : ""; 
         
         if (pathD_Re !== "") {
-          pathsSvg += `<path id="graph-path-re-${k}" data-active="${isActive}" d="${pathD_Re}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: ${opacidadeBase}; transition: opacity 0.3s ease;" />`;
+          let titleStr = getTooltipText(k);
+          pathsSvg += `<path id="graph-path-re-${k}" data-active="${isActive}" d="${pathD_Re}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: ${opacidadeBase}; transition: opacity 0.3s ease;" class="${animClass}"><title>${titleStr}</title></path>`;
         }
         if (pathD_Im !== "") {
-          pathsSvg += `<path id="graph-path-im-${k}" data-active="${isActive}" d="${pathD_Im}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,6" style="opacity: ${isActive ? 0.8 : 0}; transition: opacity 0.3s ease;" />`;
+          pathsSvg += `<path id="graph-path-im-${k}" data-active="${isActive}" d="${pathD_Im}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,6" style="opacity: ${isActive ? 0.8 : 0}; transition: opacity 0.3s ease;" class="${animClass}" />`;
         }
       }
 
-      const xAxisY = toScreenY(0);
-      const yAxisX = toScreenX(0);
+      let gridEixos = "";
       let ticksEixos = "";
 
-      let rawStepX = xRange / 8;
-      let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
-      let xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+      let xStep = 1;
+      if (isTrig) {
+        let piSteps = [1/12, 1/6, 1/4, 1/3, 1/2, 1, 2, 4, 8, 10, 20];
+        let targetPiStep = xRange / (8 * Math.PI);
+        xStep = Math.PI;
+        for (let s of piSteps) {
+          if (s >= targetPiStep) { xStep = s * Math.PI; break; }
+        }
+      } else {
+        let rawStepX = xRange / 8;
+        let magX = Math.pow(10, Math.floor(Math.log10(rawStepX)));
+        xStep = (rawStepX / magX > 5) ? 10 * magX : (rawStepX / magX > 2 ? 5 * magX : magX);
+      }
+
       let rawStepY = yRange / 6;
       let magY = Math.pow(10, Math.floor(Math.log10(rawStepY)));
       let yStep = (rawStepY / magY > 5) ? 10 * magY : (rawStepY / magY > 2 ? 5 * magY : magY);
@@ -2123,50 +2902,181 @@
       for (let i = startX; i <= xMax; i += xStep) {
         if (Math.abs(i) < 1e-7) continue;
         let tx = toScreenX(i);
-        let labelX = parseFloat(i.toFixed(2));
-        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" /><text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
+        let labelX = isTrig ? formatRadian(i) : parseFloat(i.toFixed(3));
+        gridEixos += `<line x1="${tx}" y1="-50000" x2="${tx}" y2="50000" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" opacity="0.6" vector-effect="non-scaling-stroke" />`;
+        ticksEixos += `<line x1="${tx}" y1="${xAxisY - 4}" x2="${tx}" y2="${xAxisY + 4}" stroke="#64748b" stroke-width="1.5" vector-effect="non-scaling-stroke" />`;
+        ticksEixos += `<text x="${tx}" y="${xAxisY + 16}" fill="#94a3b8" font-size="10" text-anchor="middle">${labelX}</text>`;
       }
 
       let startY = Math.ceil(yMin / yStep) * yStep;
       for (let j = startY; j <= yMax; j += yStep) {
         if (Math.abs(j) < 1e-7) continue;
         let ty = toScreenY(j);
-        let labelY = parseFloat(j.toFixed(2));
-        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" /><text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
+        let labelY = parseFloat(j.toFixed(3));
+        gridEixos += `<line x1="-50000" y1="${ty}" x2="50000" y2="50000" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" opacity="0.6" vector-effect="non-scaling-stroke" />`;
+        ticksEixos += `<line x1="${yAxisX - 4}" y1="${ty}" x2="${yAxisX + 4}" y2="${ty}" stroke="#64748b" stroke-width="1.5" vector-effect="non-scaling-stroke" />`;
+        ticksEixos += `<text x="${yAxisX - 8}" y="${ty + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${labelY}</text>`;
       }
       ticksEixos += `<text x="${yAxisX - 6}" y="${xAxisY + 12}" fill="#94a3b8" font-size="10" text-anchor="end">0</text>`;
 
       let legendSvg = funcs.map((f, k) => {
         const isActive = (k === 0);
         return `
-          <div id="graph-legend-${k}" onclick="toggleGraphLine(${k})" class="flex items-center gap-1.5 cursor-pointer hover:bg-slate-800 p-1.5 rounded transition-all select-none" style="opacity: ${isActive ? 1 : 0.4};" title="Clique para mostrar/ocultar">
+          <div id="graph-legend-${k}" onclick="toggleGraphLine(${k})" onmouseenter="focusGraphLine(${k}, this)" onmouseleave="unfocusGraphLine(this)" class="flex items-center gap-1.5 cursor-pointer hover:bg-slate-800 p-1.5 rounded transition-all select-none" style="opacity: ${isActive ? 1 : 0.4};" title="Clique para mostrar/ocultar">
             <span class="w-3 h-3 rounded-full shadow-sm" style="background-color: ${f.color};"></span>
             <span class="text-xs font-semibold text-slate-300 notranslate">\\(${f.label}\\)</span>
           </div>
         `;
       }).join('');
 
-      return `
-        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden h-full">
+      let pontosRaizesSvg = "";
+      if (allCrosses[0].length > 0) {
+        let fraseBase = getTooltipText(0);
+        allCrosses[0].forEach(r => {
+          let rx = toScreenX(r);
+          let ry = toScreenY(0);
+          if (rx >= -5000 && rx <= width + 5000) {
+            let tooltip = `Raiz em: x = ${toFractionText(r)}\n\n${fraseBase}`;
+            pontosRaizesSvg += `<circle class="graph-root-point graph-root-0 cursor-pointer anim-draw" cx="${rx}" cy="${ry}" r="4.5" data-base-r="4.5" fill="#ef4444" stroke="#7f1d1d" stroke-width="1.5" vector-effect="non-scaling-stroke"><title>${tooltip}</title></circle>`;
+          }
+        });
+      }
+
+      for (let k = 1; k < funcs.length; k++) {
+        let color = funcs[k].color;
+        let strokeColor = "#1e293b"; 
+        if (color === '#3b82f6') strokeColor = "#1e3a8a"; 
+        if (color === '#a855f7') strokeColor = "#581c87"; 
+
+        let fraseBase = getTooltipText(k);
+        allCrosses[k].forEach(r => {
+           let rx = toScreenX(r);
+           let ry = toScreenY(0);
+           if (rx >= -5000 && rx <= width + 5000) {
+             let tooltip = `Ponto em: x = ${toFractionText(r)}\n\n${fraseBase}`;
+             pontosRaizesSvg += `<circle class="graph-root-point graph-root-${k} cursor-pointer" cx="${rx}" cy="${ry}" r="4" data-base-r="4" fill="${color}" stroke="${strokeColor}" stroke-width="1.5" vector-effect="non-scaling-stroke" style="opacity: 0;"><title>${tooltip}</title></circle>`;
+           }
+        });
+      }
+
+      let yInterceptSvg = "";
+      if (0 >= renderXMin && 0 <= renderXMax) {
+          let yIntRe = NaN;
+          try { yIntRe = funcs[0].eval(0); } catch(e){}
+          if (!isNaN(yIntRe) && isFinite(yIntRe)) {
+              let sx = toScreenX(0);
+              let sy = toScreenY(yIntRe);
+              if (sy >= -100000 && sy <= 100000) {
+                  let tooltip = `Corte no Eixo Y\n\nx = 0\ny = ${toFractionText(yIntRe)}`;
+                  yInterceptSvg = `<circle class="graph-root-point graph-root-0 cursor-pointer" cx="${sx}" cy="${sy}" r="12" data-base-r="12" fill="transparent" stroke="transparent" pointer-events="all"><title>${tooltip}</title></circle>`;
+              }
+          }
+      }
+
+      // Desativa o Botão Home para Trigonometria (pois o gráfico é estático)
+      const homeBtnSvg = isTrig ? '' : `
+        <button onclick="resetGraphZoom(this)" class="absolute bottom-6 left-6 bg-slate-950/90 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 p-2 rounded shadow-lg z-10 backdrop-blur-sm transition-all flex items-center justify-center opacity-0 group-hover:opacity-100" title="Centralizar Gráfico (0,0)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        </button>
+      `;
+
+      const subTitleText = isTrig 
+        ? t('chart_subtitle_trig', { default: 'Linha contínua: Parte Real / Tracejada: Parte Im.' })
+        : t('chart_subtitle_poly', { default: 'Scroll para Zoom' });
+
+      const svgHtml = `
+        <style>
+          @keyframes drawGraphAnim {
+            from { clip-path: inset(0 100% 0 0); }
+            to { clip-path: inset(0 0 0 0); }
+          }
+          .anim-draw { animation: drawGraphAnim 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+          
+          svg.math-graph-svg path, 
+          svg.math-graph-svg line,
+          svg.math-graph-svg circle {
+            vector-effect: non-scaling-stroke;
+          }
+          
+          .graph-root-point {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+            transform-box: fill-box;
+          }
+          
+          .graph-root-point:hover {
+            transform: scale(1.6);
+          }
+        </style>
+
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden h-full relative group" data-total-funcs="${funcs.length}">
           <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-3">
             <div class="flex flex-col">
               <p class="text-xs text-slate-400 font-medium">Plano Cartesiano com Suporte a <strong>R &rarr; C</strong></p>
-              <p class="text-[10px] text-slate-500">Linha contínua: Parte Real / Tracejada: Parte Imaginária</p>
+              <p class="text-[10px] text-slate-500">${subTitleText}</p>
             </div>
-            <div class="flex flex-wrap items-center gap-4">
+            <div class="flex flex-wrap items-center gap-2">
               ${legendSvg}
+              
+              <!-- Botão de Download -->
+              <button onclick="downloadGraph(this)" class="flex items-center gap-1.5 hover:bg-slate-800 p-1.5 rounded transition-all text-slate-500 hover:text-white ml-2 border border-transparent hover:border-slate-700" title="Baixar Imagem do Gráfico (PNG)">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              </button>
             </div>
           </div>
-          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800 shadow-sm">
-            <line x1="0" y1="${xAxisY}" x2="${width}" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" />
-            <line x1="${yAxisX}" y1="0" x2="${yAxisX}" y2="${height}" stroke="#334155" stroke-width="1.5" />
-            ${ticksEixos}
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" 
+               data-xmin="${xMin}" data-xrange="${xRange}" data-ymin="${yMin}" data-yrange="${yRange}"
+               data-istrig="${isTrig}"
+               onwheel="handleGraphZoom(event, this)"
+               onmousedown="startGraphPan(event, this)"
+               onmousemove="trackCoordinates(event, this); doGraphPan(event, this)"
+               onmouseup="endGraphPan(event, this)"
+               onmouseleave="hideCrosshairs(this); endGraphPan(event, this)"
+               ondblclick="resetGraphZoom(this)"
+               class="math-graph-svg w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800 shadow-sm cursor-default">
+            
+            <!-- Grupo da Malha -->
+            <g class="dynamic-grid-group">
+                ${gridEixos}
+                ${ticksEixos}
+            </g>
+            
+            <!-- Eixos Principais Fixos -->
+            <line x1="-50000" y1="${xAxisY}" x2="50000" y2="${xAxisY}" stroke="#334155" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+            <line x1="${yAxisX}" y1="-50000" x2="${yAxisX}" y2="50000" stroke="#334155" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+            
+            <!-- Linhas Sniper -->
+            <line id="crosshair-x" x1="-50000" y1="0" x2="50000" y2="0" stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="3,3" style="opacity: 0; pointer-events: none;" vector-effect="non-scaling-stroke" />
+            <line id="crosshair-y" x1="0" y1="-50000" x2="0" y2="50000" stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="3,3" style="opacity: 0; pointer-events: none;" vector-effect="non-scaling-stroke" />
+            
             ${pathsSvg}
-            <text x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">${axisVar}</text>
-            <text x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
+            ${pontosRaizesSvg}
+            ${yInterceptSvg}
+            
+            <!-- Letras flutuantes do eixo -->
+            <text class="axis-label-x" x="${width - 15}" y="${xAxisY - 10}" fill="#cbd5e1" font-size="12" font-style="italic">${axisVar}</text>
+            <text class="axis-label-y" x="${yAxisX + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">y</text>
           </svg>
+
+          ${homeBtnSvg}
+
+          <!-- Tracker de Coordenadas -->
+          <div class="coord-tracker absolute bottom-6 right-6 bg-slate-950/90 border border-slate-800 text-[10px] px-2.5 py-1.5 rounded shadow-lg pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-mono z-10 backdrop-blur-sm leading-tight text-right">
+            <div class="text-slate-500 mb-0.5">Mouse: <span class="coord-mouse text-slate-300">0.00, 0.00</span></div>
+            <div class="coord-fx-container font-semibold text-emerald-400 border-t border-slate-700/50 pt-0.5 mt-0.5" style="transition: opacity 0.2s;">f(x) = <span class="coord-fx text-emerald-300">0.00</span></div>
+          </div>
         </div>
       `;
+
+      setTimeout(() => {
+        const svgEls = document.querySelectorAll('svg.math-graph-svg');
+        if (svgEls.length > 0) {
+          svgEls[svgEls.length - 1]._mainEval = funcs[0].eval;
+        }
+      }, 0);
+
+      return svgHtml;
     }
 
     // função global de clique para ativar os gráficos
@@ -2368,11 +3278,12 @@
       intCoeffs.push(0);
       let int_eval = (x) => evalPoly(intCoeffs, x);
 
+      // Agora o Array de roots é repassado corretamente no final
       return gerarSvgFuncaoGeral([
         { eval: f_eval, color: '#10b981', label: `P(${v})` },
         { eval: df_eval, color: '#3b82f6', label: `P'(${v})` },
-        { eval: int_eval, color: '#a855f7', label: `\\int P(${v}) d${v}` }
-      ], v);
+        { eval: int_eval, color: '#a855f7', label: `\\int P(${v}) d${v}`, isIntegral: true }
+      ], v, roots);
     };
 
     function gerarSvgPlanoComplexo(allRoots) {
@@ -3503,7 +4414,7 @@
             <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) = ${fracStr} \\in \\mathbb{Q}\\)</span>
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-            <p>De fato, os dois números compartilham os mesmos fatores primos na mesma proporção exata:</p>
+            <p>${t('log_step4_rat')}</p>
             <div class="math-step notranslate">\\(${b} = ${factB_str}\\)</div>
             <div class="math-step notranslate">\\(${a} = ${factA_str}\\)</div>
             <p>Portanto, \\(${b}^{${fracStr}} = ${a}\\).</p>
@@ -3512,9 +4423,9 @@
       } else {
         let explicacaoAbsurdo = '';
         if (absurdoPrimos) {
-          explicacaoAbsurdo = `Os números não possuem a mesma base de fatores primos. Há primos em um dos lados da equação \\(b^p = a^q\\) que não existem no outro. Pelo TFA, é impossível que uma potência de ${b} resulte numa potência de ${a} (para \\(p, q \\neq 0\\)).`;
+          explicacaoAbsurdo = t('log_step4_irrat', { diff: 'bases divergentes' });
         } else if (absurdoExpoentes) {
-          explicacaoAbsurdo = `Apesar de compartilharem os mesmos fatores primos, a proporção entre os expoentes não se sustenta para todos simultaneamente. O sistema resultante entra em contradição:<br> <div class="math-step notranslate overflow-x-auto">\\(\\begin{cases} ${eqSistema.join(' \\\\[4pt] ')} \\end{cases}\\)</div>`;
+          explicacaoAbsurdo = `${t('log_step4_irrat', { diff: 'proporções incongruentes' })}<br> <div class="math-step notranslate overflow-x-auto">\\(\\begin{cases} ${eqSistema.join(' \\\\[4pt] ')} \\end{cases}\\)</div>`;
         }
 
         html = `
@@ -3523,18 +4434,16 @@
             <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) \\notin \\mathbb{Q}\\)</span>
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-            <p><strong>1. Fatoração e Suposição</strong></p>
-            <p>Suponha, por absurdo, que o logaritmo seja um racional \\(p/q\\) (com \\(p, q > 0\\)). Da definição de logaritmo:</p>
+            <p><strong>${t('log_step1')}</strong></p>
+            <p>${t('log_step1_desc')}</p>
             <div class="math-step notranslate">\\(\\log_{${b}}(${a}) = \\frac{p}{q} \\implies ${b}^{\\frac{p}{q}} = ${a} \\implies ${b}^p = ${a}^q\\)</div>
             
-            <p><strong>2. Aplicação do TFA</strong></p>
-            <p>Substituindo pelas decomposições em fatores primos:</p>
+            <p><strong>${t('log_step3_desc')}</strong></p>
             <div class="math-step notranslate overflow-x-auto">\\( (${factB_str})^p = (${factA_str})^q \\)</div>
             
             <div class="p-3 bg-red-50 border-l-4 border-red-500 dark:bg-red-900/20 dark:border-red-800 rounded text-red-900 dark:text-red-300 text-xs mt-3">
               <strong>Contradição:</strong> ${explicacaoAbsurdo}
             </div>
-            <p class="font-semibold text-slate-900 dark:text-slate-100 pt-1">Logo, \\(\\log_{${b}}(${a})\\) é estritamente irracional (e, pelo Teorema de Gelfond-Schneider, também transcendente).</p>
           </div>
         `;
       }
@@ -3933,26 +4842,50 @@
             };
         };
 
-        if (isDangerousCAS) {
-            integralTex = '\\text{Integral elementar não suportada}';
-            // injecao do integrador numérico para o Gráfico não ficar vazio
-            intObj = { 
-                buildFunction: () => integradorNumericoFallback(), 
-                text: () => '', 
-                variables: () => [] 
-            };
-        } else {
-            try {
-                intObj = nerdamer(`integrate(${funcStr}, ${mainVar})`);
-                integralTex = formatarRaizesLaTeX(intObj.toTeX());
-            } catch(e) {
-                integralTex = '\\text{Integral elementar não suportada}';
-                // fallback de segurança caso a função não seja perigosa mas o CAS falhe mesmo assim
+        // 1. CONSULTA AO DICIONÁRIO / CACHE
+        const resultadoCache = resolverIntegralComCache(funcStr, mainVar);
+
+        if (resultadoCache.sucesso) {
+            integralTex = resultadoCache.latex;
+            
+            if (!resultadoCache.suportada) {
+                // Se não tiver primitiva elementar, mostra o TeX teórico, mas usa o fallback numérico para traçar o gráfico
                 intObj = { 
                     buildFunction: () => integradorNumericoFallback(), 
                     text: () => '', 
                     variables: () => [] 
                 };
+            } else {
+                // Se é suportada (ex: cos(log(x))), tenta extrair a função avaliável do motor
+                try {
+                    intObj = nerdamer(`integrate(${funcStr}, ${mainVar})`);
+                } catch(e) {
+                    intObj = { buildFunction: () => integradorNumericoFallback(), text: () => '', variables: () => [] };
+                }
+            }
+        } 
+
+        // 2. FALLBACK PARA O FLUXO ORIGINAL (Nerdamer)
+        else {
+            if (isDangerousCAS) {
+                integralTex = '\\text{Integral elementar não suportada}';
+                intObj = { 
+                    buildFunction: () => integradorNumericoFallback(), 
+                    text: () => '', 
+                    variables: () => [] 
+                };
+            } else {
+                try {
+                    intObj = nerdamer(`integrate(${funcStr}, ${mainVar})`);
+                    integralTex = formatarRaizesLaTeX(intObj.toTeX());
+                } catch(e) {
+                    integralTex = '\\text{Integral elementar não suportada}';
+                    intObj = { 
+                        buildFunction: () => integradorNumericoFallback(), 
+                        text: () => '', 
+                        variables: () => [] 
+                    };
+                }
             }
         }
 
