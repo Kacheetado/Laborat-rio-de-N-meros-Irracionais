@@ -5,7 +5,7 @@
 - **Novo:** Adição de favicon personalizado para o laboratório
 - **Novo:** Suporte a ângulos maiores que 360° na aba "Funções trigonométricas"
 - **Novo:** Suporte a base $e$ e logaritmo natural ($\ln$) na aba "Logaritmos"
-- **Melhoria:** Refatoração estrutural massiva: separação do código monolítico em múltiplos arquivos modulares (arquivos JS, HTML e JSON organizados)
+- **Melhoria:** Refatoração estrutural massiva: separação do código monolítico em múltiplos arquivos modulares
 
 ## [1.1.5]
 - **Novo:** Malha quadriculada de fundo nos gráficos para suporte à análise visual
