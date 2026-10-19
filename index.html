@@ -82,15 +82,8 @@
     <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div>
         <h1 data-i18n="app_title" class="text-2xl font-bold tracking-tight">Laboratório de Números Irracionais</h1>
-        <p data-i18n="app_subtitle" class="text-slate-400 text-sm mt-1">Investigação e Dedução: TFA, TRR Completo,
-          Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas</p>
       </div>
-
-      <div class="flex items-center gap-3 flex-wrap">
-        <div class="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded text-slate-300">
-          <span data-i18n="project_badge">Iniciação Científica • Sequência Didática</span>
-        </div>
-
+      <div class="flex items-center gap-3 flex-wrap">  
         <!-- Toggle Dark/Light Mode -->
         <button id="theme-toggle" onclick="toggleTheme()"
           class="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors border border-slate-700"
@@ -122,6 +115,7 @@
             class="lang-btn px-2.5 py-1 rounded-md text-slate-300 hover:text-white transition-colors"
             data-lang="fr">FR</button>
         </div>
+        
       </div>
     </div>
   </header>
@@ -745,10 +739,44 @@
 
   </main>
 
-  <footer
-    class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
-    <span data-i18n="footer_text">Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo
-      (2002), Marques (2013)</span>
+  <!-- Rodapé Dinâmico e Traduzível -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-10 px-6 mt-20 transition-colors duration-300 dark:bg-slate-950 dark:border-slate-900">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-8 border-b border-slate-800 dark:border-slate-800/50">
+        <!-- Bloco Esquerdo: Identidade do Projeto -->
+        <div class="space-y-2">
+            <h3 class="text-slate-200 font-semibold text-sm" data-i18n="app_title">Laboratório de Números Irracionais</h3>
+            <p class="text-slate-500 max-w-sm" data-i18n="footer_desc">Ferramenta interativa de apoio acadêmico para visualização e estudo de polinômios, frações contínuas e irracionalidade.</p>
+        </div>
+        <!-- Bloco Direito: Links e Contato -->
+        <div class="flex flex-col sm:flex-row gap-6 sm:gap-12 items-start sm:items-center">
+            <div>
+                <h4 class="text-slate-300 font-medium mb-2" data-i18n="footer_contact">Contato & Repositório</h4>
+                <ul class="space-y-1.5">
+                    <li>
+                        <a href="mailto:laboratorionumerosirracionais@gmail.com" class="hover:text-blue-400 transition-colors">
+                            laboratorionumerosirracionais@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Kacheetado/Laborat-rio-de-N-meros-Irracionais" target="_blank" class="hover:text-blue-400 transition-colors" data-i18n="footer_github">
+                            Repositório no GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-slate-300 font-medium" data-i18n="footer_inst">Institucional</h4>
+                <p class="text-slate-500">IFPB — Campus Campina Grande</p>
+                <p class="text-slate-500" data-i18n="project_badge">Iniciação Científica</p>
+            </div>
+        </div>
+    </div>
+    <!-- Barra Inferior de Direitos Autorais -->
+    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-slate-600 gap-4">
+        <p data-i18n="footer_copyright">© 2026 Laboratório de Números Irracionais. Todos os direitos reservados.</p>
+        <div class="flex gap-4">
+        </div>
+    </div>
   </footer>
 
   <!-- CONTROLE DE TEMA (DARK/LIGHT) -->
@@ -785,8 +813,6 @@
     const i18n = {
   pt: {
     app_title: "Laboratório de Números Irracionais",
-    app_subtitle: "Investigação e Dedução: TFA, TRR Completo, Polinômios Gerais, Trigonometria, Eisenstein e Frações Contínuas",
-    project_badge: "Iniciação Científica • Sequência Didática",
     tab_tfa: "1. Verificador TFA",
     tab_solver: "2. Solucionador de Polinômios",
     tab_trig: "3. Funções Trigonométricas",
@@ -796,7 +822,6 @@
     tab_tabela: "7. Tabela de Notáveis",
     tab_historia: "8. Contexto Histórico",
 
-    /* Aba 1: TFA */
     tfa_title: "1. Demonstração via Teorema Fundamental da Aritmética",
     tfa_desc: "Investigue a irracionalidade de raízes \\(\\sqrt[n]{K}\\) examinando a divisibilidade e paridade dos expoentes na decomposição prima canônica. Pela unicidade do TFA, um número inteiro não admite duas fatorações distintas.",
     tfa_lbl_index: "Índice (n ≥ 2):",
@@ -816,7 +841,6 @@
     tfa_contradiction_desc: "Pela unicidade da fatoração em primos, um número inteiro não pode admitir duas contagens de fatores distintas. Logo, \\(p^{{{n}}} = {k}q^{{{n}}}\\) não possui soluções inteiras com \\(q > 0\\).",
     tfa_conclusion: "Conclusão: \\(\\sqrt[{n}]{{{k}}}\\) é irracional.",
 
-    /* Aba 2: Solucionador TRR */
     solver_title: "2. Solucionador de Polinômios",
     solver_desc: "Insira qualquer polinômio com coeficientes inteiros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). O algoritmo encontra todos os candidatos racionais \\(\\pm \\frac{p}{q}\\) pelo TRR, fatora por Briot-Ruffini, extrai as raízes racionais e isola as raízes irracionais remanescentes.",
     quick_ex: "Exemplos rápidos:",
@@ -855,7 +879,6 @@
     solver_irrat_roots_found: "Raízes Irracionais Algébricas (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
     solver_no_real_roots: "Nenhuma raiz real encontrada no corpo avaliado.",
 
-    /* Aba 3: Trigonometria */
     trig_title: "3. Funções Trigonométricas",
     trig_desc: "Investigue a irracionalidade dos valores trigonométricos. De acordo com o Teorema de Niven, para ângulos racionais \\(\\theta \\in [0^\\circ, 90^\\circ]\\), os únicos casos em que \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) são racionais ocorrem em \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos os outros geram valores irracionais.",
     trig_shortcuts: "Atalhos didáticos:",
@@ -889,7 +912,6 @@
     trig_niven_quote: "\"Para qualquer ângulo \\(\\theta\\) tal que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), os únicos valores de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) que são racionais são \\(0, \\pm \\frac{1}{2}\\) e \\(\\pm 1\\).\"",
     trig_niven_concl: "Como o ângulo <strong>{angle}°</strong> é racional em graus, mas o resultado <strong>{val}</strong> não pertence a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), o Teorema de Niven garante que o valor é <strong>estritamente irracional</strong>.",
     
-    // Novas chaves - Trigonometria (Análise Analítica e Representações Alternativas)
     trig_alt_title: "Representações Alternativas",
     trig_alt_euler: "Representação Exponencial:",
     trig_alt_taylor: "Série de Taylor:",
@@ -897,14 +919,12 @@
     trig_analyt_deriv: "Derivada no ponto \\(\\theta\\):",
     trig_analyt_int: "Integral Indefinida:",
 
-    /* Aba 4: Logaritmos */
     log_title: "4. Demonstração de Irracionalidade de Logaritmos",
     log_desc: "Verifique a irracionalidade de \\(\\log_b(a)\\). Se o logaritmo for igual a uma fração racional \\(p/q\\), então \\(b^p = a^q\\). Pelo Teorema Fundamental da Aritmética, isso exige que a base e o logaritmando compartilhem os mesmos fatores primos em proporções exatas.",
     log_lbl_base: "Base (b ≥ 2):",
     log_lbl_arg: "Logaritmando (a ≥ 1):",
     log_btn: "Analisar",
     
-    // Explicação e Passos dos Logaritmos
     log_res_rat: "Resultado: Racional Comprovado",
     log_res_irrat: "Resultado: Irracional Comprovado",
     log_step1: "1. Suposição de Racionalidade:",
@@ -917,7 +937,6 @@
     log_step4_irrat: "Para que a igualdade \\(b^p = a^q\\) se sustente, as bases primeiramente deveriam compartilhar exatamente os mesmos fatores primos. Como existem fatores primos incompatíveis (ex: {diff}), a igualdade é impossível. Logo, o logaritmo é estritamente irracional.",
     log_step4_rat: "A base e o logaritmando são potências de uma mesma raiz base, permitindo a igualdade das proporções.",
 
-    /* Aba 5: Eisenstein */
     eisen_title: "5. Critério de Irredutibilidade de Eisenstein",
     eisen_desc: "Ferramenta avançada de Álgebra Abstrata: Se existir um primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) e \\(p^2 \\nmid a_0\\), o polinômio é irredutível sobre \\(\\mathbb{Q}\\). Consequentemente, para graus \\(n \\ge 2\\), nenhuma de suas raízes pode ser racional!",
     eisen_btn: "Testar Primos",
@@ -930,7 +949,6 @@
     eisen_inconc_title: "Critério Inconclusivo para os Primeiros Primos",
     eisen_inconc_desc: "Nenhum dos primos testados satisfez simultaneamente as 3 condições de Eisenstein. Utilize a aba 2 (Solucionador TRR) para investigar as raízes.",
 
-    /* Aba 6: Frações Contínuas */
     cf_title: "Reconhecimento Construtivo via Frações Contínuas Simples",
     cf_desc: "Diferente da expansão decimal finita, a expansão em fração contínua de qualquer número racional sempre termina, enquanto a de um irracional é estritamente infinita. Em particular, irracionais quadráticos produzem expansões periódicas: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
     cf_lbl_rad: "Raiz Quadrada \\(\\sqrt{N}\\) (N não quadrado):",
@@ -956,7 +974,7 @@
     err_invalid_expr: "Expressão inválida. Utilize formatação em inglês (ex: pi, e, sin(1), sqrt(2)).",
     err_syntax: "Erro de sintaxe algébrica.",
 
-    /* Placeholders das Caixas de Texto (Inputs) */
+    /* Placeholders das Caixas de Texto */
     cf_expr_placeholder: "ex: pi, e, sin(1), sqrt(2)/2",
     solver_poly_placeholder: "ex: x^2 - 2, 8x^3 - 6x - 1",
     placeholder_idx: "ex: 2, 3, 4...",
@@ -965,7 +983,7 @@
     placeholder_arg: "ex: 3, 5, 10...",
     placeholder_angle: "ex: 30, 45, 60...",
 
-    /* Gráficos (Eixos, Legendas e Títulos) */
+    /* Gráficos */
     chart_title_poly: "Gráfico do Polinômio",
     chart_title_trig: "Gráfico Trigonométrico",
     chart_xaxis: "Eixo X (Reais)",
@@ -976,7 +994,6 @@
     chart_complex_imag: "Eixo Imaginário (Im)",
     chart_complex_legend: "Raízes Complexas",
 
-    /* Aba 7: Tabela */
     tabela_title: "Tabela de Constantes e Irracionais Notáveis",
     tabela_desc: "Diferenciação fundamental entre irracionais algébricos (raízes de equações com coeficientes inteiros) e transcendentes.",
     th_sym: "Símbolo",
@@ -999,7 +1016,6 @@
     row_zeta_proof: "Provado por Apéry (1979)",
     row_delos_name: "Constante de Delos",
 
-    /* Aba 8: História */
     hist_title: "A Evolução Histórica e Epistemológica dos Irracionais",
     hist_subtitle: "Da crise da incomensurabilidade grega à formalização analítica de Dedekind.",
     hist_h1: "1. O Colapso Pitagórico e a Incomensurabilidade (séc. V a.C.)",
@@ -1013,13 +1029,15 @@
     hist_h5: "5. A Completude da Reta: Dedekind e Cantor",
     hist_p5: "Dedekind formulou os Cortes. Cantor comprovou que os racionais são enumeráveis enquanto os irracionais são não enumeráveis.",
 
-    footer_text: "Laboratório de Números Irracionais • Referências: Niven (1956, 1990), Figueiredo (2002), Marques (2013)"
+    footer_desc: "Ferramenta interativa de apoio acadêmico para visualização e estudo da irracionalidade.",
+    footer_contact: "Contato & Repositório",
+    footer_github: "Repositório no GitHub",
+    footer_inst: "Institucional",
+    footer_copyright: "© 2026 Laboratório de Números Irracionais. Todos os direitos reservados.",
   },
 
   en: {
     app_title: "Irrational Numbers Laboratory",
-    app_subtitle: "Investigation and Deduction: FTA, Full RRT, General Polynomials, Trigonometry, Eisenstein and Continued Fractions",
-    project_badge: "Scientific Research • Didactic Sequence",
     tab_tfa: "1. FTA Verifier",
     tab_solver: "2. Polynomial Solver",
     tab_trig: "3. Trigonometric Functions",
@@ -1029,7 +1047,6 @@
     tab_tabela: "7. Table of Constants",
     tab_historia: "8. Historical Context",
 
-    /* Tab 1: FTA */
     tfa_title: "1. Proof via Fundamental Theorem of Arithmetic",
     tfa_desc: "Investigate the irrationality of roots \\(\\sqrt[n]{K}\\) by examining the divisibility and parity of exponents in canonical prime factorization. By FTA uniqueness, an integer cannot have two distinct prime factorizations.",
     tfa_lbl_index: "Index (n ≥ 2):",
@@ -1049,7 +1066,6 @@
     tfa_contradiction_desc: "By the uniqueness of prime factorization, an integer cannot have two distinct prime factor counts. Thus \\(p^{{{n}}} = {k}q^{{{n}}}\\) has no integer solutions with \\(q > 0\\).",
     tfa_conclusion: "Conclusion: \\(\\sqrt[{n}]{{{k}}}\\) is irrational.",
 
-    /* Tab 2: RRT Solver */
     solver_title: "2. Polynomial Solver",
     solver_desc: "Enter any polynomial with integer coefficients \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). The algorithm tests all rational candidates \\(\\pm \\frac{p}{q}\\) via RRT, factors using Briot-Ruffini, extracts rational roots, and isolates the remaining irrational roots.",
     quick_ex: "Quick examples:",
@@ -1088,7 +1104,6 @@
     solver_irrat_roots_found: "Algebraic Irrational Roots (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
     solver_no_real_roots: "No real roots found in the evaluated domain.",
 
-    /* Tab 3: Trigonometry */
     trig_title: "3. Trigonometric Functions",
     trig_desc: "Investigate the irrationality of trigonometric values. According to Niven's Theorem, for rational angles \\(\\theta \\in [0^\\circ, 90^\\circ]\\), the only cases where \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) are rational occur at \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). All other angles produce irrational values.",
     trig_shortcuts: "Didactic shortcuts:",
@@ -1122,7 +1137,6 @@
     trig_niven_quote: "\"For any angle \\(\\theta\\) such that \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), the only values of \\(\\sin(\\theta)\\) or \\(\\cos(\\theta)\\) that are rational are \\(0, \\pm \\frac{1}{2}\\), and \\(\\pm 1\\).\"",
     trig_niven_concl: "Since <strong>{angle}°</strong> is rational in degrees, but the evaluated result <strong>{val}</strong> does not belong to \\(\\{0, \\pm 1/2, \\pm 1\\}\\), Niven's Theorem proves the value is <strong>strictly irrational</strong>.",
     
-    // New Keys - Trigonometry (Analytical Analysis and Alternative Reps)
     trig_alt_title: "Alternative Representations",
     trig_alt_euler: "Exponential Representation (Euler's Formula):",
     trig_alt_taylor: "Taylor/Maclaurin Series:",
@@ -1130,14 +1144,11 @@
     trig_analyt_deriv: "Derivative at point \\(\\theta\\):",
     trig_analyt_int: "Indefinite Integral:",
 
-    /* Tab 4: Logarithms */
     log_title: "4. Logarithm Irrationality Proof",
     log_desc: "Verify the irrationality of \\(\\log_b(a)\\). If the logarithm is equal to a rational fraction \\(p/q\\), then \\(b^p = a^q\\). By the Fundamental Theorem of Arithmetic, this requires the base and argument to share the exact same prime factors in exact proportions.",
     log_lbl_base: "Base (b ≥ 2):",
     log_lbl_arg: "Argument (a ≥ 1):",
     log_btn: "Analyze",
-    
-    // New Keys - Logarithms Explanation and Steps
     log_res_rat: "Result: Rational (Exact Ratio)",
     log_res_irrat: "Result: Irrational Proven",
     log_step1: "1. Assumption of Rationality:",
@@ -1150,7 +1161,6 @@
     log_step4_irrat: "For the equality \\(b^p = a^q\\) to hold, both sides must share exactly the same prime factors. Since there are incompatible prime factors (e.g., {diff}), the equality is impossible. Therefore, the logarithm is strictly irrational.",
     log_step4_rat: "The base and the argument are powers of the same root base, allowing the proportions to be equal.",
 
-    /* Tab 5: Eisenstein */
     eisen_title: "5. Eisenstein's Irreducibility Criterion",
     eisen_desc: "Advanced Abstract Algebra tool: If there is a prime \\(p\\) such that \\(p \\mid a_i\\) for all \\(i < n\\), \\(p \\nmid a_n\\), and \\(p^2 \\nmid a_0\\), the polynomial is irreducible over \\(\\mathbb{Q}\\). Consequently, for degree \\(n \\ge 2\\), none of its roots can be rational!",
     eisen_btn: "Test Primes",
@@ -1163,7 +1173,6 @@
     eisen_inconc_title: "Criterion Inconclusive for First Primes",
     eisen_inconc_desc: "None of the tested primes satisfied all 3 conditions. Use Tab 2 (RRT Solver) to test rational roots exhaustively.",
 
-    /* Tab 6: Continued Fractions */
     cf_title: "Constructive Recognition via Simple Continued Fractions",
     cf_desc: "Unlike finite decimal expansions, the continued fraction expansion of any rational number always terminates, whereas for an irrational number it is strictly infinite. Quadratic irrationals produce periodic expansions: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
     cf_lbl_rad: "Square Root \\(\\sqrt{N}\\) (non-square N):",
@@ -1178,7 +1187,6 @@
     cf_convergents_lbl: "2. Best Rational Approximations (Convergents):",
     cf_diff_rat: "<strong>Fundamental Difference with Rationals:</strong> A rational number always terminates in a finite continued fraction. The fact that \\(\\sqrt{{{N}}}\\) generates an infinite cycle categorially proves its irrationality.",
 
-    /* Hybrid, Errors & Tools */
     hybrid_title: "Analytical Analysis Mode",
     hybrid_badge: "Function from \\(\\mathbb{R}\\) to \\(\\mathbb{C}\\)",
     hybrid_desc: "The RRT requires integer coefficients. To preserve absolute rigor without decimals, Real Analysis was activated.",
@@ -1189,7 +1197,7 @@
     err_invalid_expr: "Invalid expression. Use English formatting (e.g., pi, e, sin(1)).",
     err_syntax: "Algebraic syntax error.",
 
-    /* Placeholders for Textboxes (Inputs) */
+    /* Placeholders for Textboxes */
     cf_expr_placeholder: "e.g., pi, e, sin(1), sqrt(2)/2",
     solver_poly_placeholder: "e.g., x^2 - 2, 8x^3 - 6x - 1",
     placeholder_idx: "e.g., 2, 3, 4...",
@@ -1198,7 +1206,7 @@
     placeholder_arg: "e.g., 3, 5, 10...",
     placeholder_angle: "e.g., 30, 45, 60...",
 
-    /* Charts (Axes, Legends, and Titles) */
+    /* Charts */
     chart_title_poly: "Polynomial Graph",
     chart_title_trig: "Trigonometric Graph",
     chart_xaxis: "X Axis (Reals)",
@@ -1209,7 +1217,6 @@
     chart_complex_imag: "Imaginary Axis (Im)",
     chart_complex_legend: "Complex Roots",
 
-    /* Tab 7: Table */
     tabela_title: "Table of Constants & Notable Irrationals",
     tabela_desc: "Fundamental distinction between algebraic irrationals and transcendental numbers.",
     th_sym: "Symbol",
@@ -1232,7 +1239,6 @@
     row_zeta_proof: "Proven by Apéry (1979)",
     row_delos_name: "Delian Constant",
 
-    /* Tab 8: History */
     hist_title: "Historical and Epistemological Evolution of Irrationals",
     hist_subtitle: "From the Pythagorean crisis to the formalization of Dedekind.",
     hist_h1: "1. The Pythagorean Collapse (5th century BC)",
@@ -1244,13 +1250,16 @@
     hist_h4: "4. Transcendence: Liouville, Hermite, and Lindemann",
     hist_p4: "Existence and proofs of transcendental numbers outside polynomial algebra.",
     hist_h5: "5. Completeness of the Real Line",
-    hist_p5: "Dedekind cuts and Cantor's proofs on uncountability of irrationals."
+    hist_p5: "Dedekind cuts and Cantor's proofs on uncountability of irrationals.",
+
+    footer_desc: "Interactive academic tool for the visualization and study of irrationality.",
+    footer_contact: "Contact & Repository",
+    footer_github: "GitHub Repository",
+    footer_inst: "Institutional",
   },
 
   es: {
     app_title: "Laboratorio de Números Irracionales",
-    app_subtitle: "Investigación y Deducción: TFA, TRR Completo, Polinomios Generales, Trigonometría, Eisenstein y Fracciones Continuas",
-    project_badge: "Iniciación Científica • Secuencia Didáctica",
     tab_tfa: "1. Verificador TFA",
     tab_solver: "2. Solucionador de Polinomios",
     tab_trig: "3. Funciones Trigonométricas",
@@ -1260,7 +1269,6 @@
     tab_tabela: "7. Tabla de Notables",
     tab_historia: "8. Contexto Histórico",
 
-    /* Aba 1: TFA */
     tfa_title: "1. Demostración mediante el Teorema Fundamental de la Aritmética",
     tfa_desc: "Investigue la irracionalidad de raíces \\(\\sqrt[n]{K}\\) examinando la divisibilidad y paridad de los exponentes en la descomposición canónica en primos. Por la unicidad del TFA, un número entero no admite dos factorizaciones distintas.",
     tfa_lbl_index: "Índice (n ≥ 2):",
@@ -1280,7 +1288,6 @@
     tfa_contradiction_desc: "Por la unicidad del TFA, un entero no puede tener dos factorizaciones distintas. \\(p^{{{n}}} = {k}q^{{{n}}}\\) no tiene soluciones enteras con \\(q > 0\\).",
     tfa_conclusion: "Conclusión: \\(\\sqrt[{n}]{{{k}}}\\) es irracional.",
 
-    /* Aba 2: Solucionador TRR */
     solver_title: "2. Solucionador de Polinomios",
     solver_desc: "Ingrese cualquier polinomio con coeficientes enteros \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). El algoritmo prueba los candidatos racionales \\(\\pm \\frac{p}{q}\\) por el TRR, factoriza mediante la regla de Briot-Ruffini, extrae las raíces racionales y aísla las raíces irracionales restantes.",
     quick_ex: "Ejemplos rápidos:",
@@ -1319,7 +1326,6 @@
     solver_irrat_roots_found: "Raíces Irracionales Algebraicas (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)):",
     solver_no_real_roots: "No se encontraron raíces reales en el dominio evaluado.",
 
-    /* Aba 3: Trigonometria */
     trig_title: "3. Funciones Trigonométricas",
     trig_desc: "Investigue la irracionalidad de los valores trigonométricos. Según el Teorema de Niven, para ángulos racionales \\(\\theta \\in [0^\\circ, 90^\\circ]\\), los únicos casos donde \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son racionales ocurren en \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Todos los demás generan valores irracionales.",
     trig_shortcuts: "Atajos didácticos:",
@@ -1353,7 +1359,6 @@
     trig_niven_quote: "\"Para cualquier ángulo \\(\\theta\\) tal que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), los únicos valores racionales de \\(\\sin(\\theta)\\) o \\(\\cos(\\theta)\\) son \\(0, \\pm \\frac{1}{2}\\) y \\(\\pm 1\\).\"",
     trig_niven_concl: "Como <strong>{angle}°</strong> es racional en grados, pero <strong>{val}</strong> no pertenece a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), el Teorema de Niven demuestra que es <strong>irracional</strong>.",
     
-    // New Keys - Trigonometry (Analytical Analysis and Alternative Reps)
     trig_alt_title: "Representaciones Alternativas",
     trig_alt_euler: "Representación Exponencial (Fórmula de Euler):",
     trig_alt_taylor: "Serie de Taylor/Maclaurin:",
@@ -1361,14 +1366,11 @@
     trig_analyt_deriv: "Derivada en el punto \\(\\theta\\):",
     trig_analyt_int: "Integral Indefinida:",
 
-    /* Aba 4: Logaritmos */
     log_title: "4. Demostración de Irracionalidad de Logaritmos",
     log_desc: "Verifique la irracionalidad de \\(\\log_b(a)\\). Si el logaritmo equivale a una fracción racional \\(p/q\\), entonces \\(b^p = a^q\\). Por el Teorema Fundamental de la Aritmética, esto exige que la base y el argumento compartan los mismos factores primos en proporciones exactas.",
     log_lbl_base: "Base (b ≥ 2):",
     log_lbl_arg: "Argumento (a ≥ 1):",
     log_btn: "Analizar",
-    
-    // New Keys - Logarithms Explanation and Steps
     log_res_rat: "Resultado: Racional (Razón Exacta)",
     log_res_irrat: "Resultado: Irracional Demostrado",
     log_step1: "1. Suposición de Racionalidad:",
@@ -1381,7 +1383,6 @@
     log_step4_irrat: "Para que la igualdad \\(b^p = a^q\\) se mantenga, ambos lados deben compartir exactamente los mismos factores primos. Como hay factores primos incompatibles (ej. {diff}), la igualdad es imposible. Por lo tanto, el logaritmo es estrictamente irracional.",
     log_step4_rat: "La base y el argumento son potencias de una misma base raíz, permitiendo que las proporciones sean iguales.",
 
-    /* Aba 5: Eisenstein */
     eisen_title: "5. Criterio de Irreducibilidad de Eisenstein",
     eisen_desc: "Herramienta avanzada de Álgebra Abstracta: Si existe un primo \\(p\\) tal que \\(p \\mid a_i\\) para todo \\(i < n\\), \\(p \\nmid a_n\\) y \\(p^2 \\nmid a_0\\), el polinomio es irreducible sobre \\(\\mathbb{Q}\\). ¡Ninguna de sus raíces reales puede ser racional!",
     eisen_btn: "Probar Primos",
@@ -1394,7 +1395,6 @@
     eisen_inconc_title: "Criterio Inconcluso para los Primeros Primos",
     eisen_inconc_desc: "Ninguno de los primos probados cumplió las 3 condiciones de Eisenstein. Utilice la pestaña 2 (Solucionador TRR).",
 
-    /* Aba 6: Fracciones Continuas */
     cf_title: "Reconocimiento Constructivo mediante Fracciones Continuas Simples",
     cf_desc: "A diferencia del desarrollo decimal finito, la fracción continua de cualquier número racional siempre termina, mientras que la de un irracional es estrictamente infinita. Los irracionales cuadráticos generan desarrollos periódicos: \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
     cf_lbl_rad: "Raíz Cuadrada \\(\\sqrt{N}\\) (N no cuadrado):",
@@ -1420,7 +1420,7 @@
     err_invalid_expr: "Expresión inválida. Utilice formato en inglés (ej: pi, e, sin(1)).",
     err_syntax: "Error de sintaxis algebraica.",
 
-    /* Placeholders for Textboxes (Inputs) */
+    /* Placeholders for Textboxes */
     cf_expr_placeholder: "ej: pi, e, sin(1), sqrt(2)/2",
     solver_poly_placeholder: "ej: x^2 - 2, 8x^3 - 6x - 1",
     placeholder_idx: "ej: 2, 3, 4...",
@@ -1429,7 +1429,7 @@
     placeholder_arg: "ej: 3, 5, 10...",
     placeholder_angle: "ej: 30, 45, 60...",
 
-    /* Charts (Axes, Legends, and Titles) */
+    /* Charts */
     chart_title_poly: "Gráfico del Polinomio",
     chart_title_trig: "Gráfico Trigonométrico",
     chart_xaxis: "Eje X (Reales)",
@@ -1440,7 +1440,6 @@
     chart_complex_imag: "Eje Imaginario (Im)",
     chart_complex_legend: "Raíces Complejas",
 
-    /* Aba 7: Tabela */
     tabela_title: "Tabla de Constantes e Irracionales Notables",
     tabela_desc: "Diferenciación fundamental entre irracionales algebraicos y trascendentes.",
     th_sym: "Símbolo",
@@ -1463,7 +1462,6 @@
     row_zeta_proof: "Probado por Apéry (1979)",
     row_delos_name: "Constante de Delos",
 
-    /* Aba 8: Historia */
     hist_title: "Evolución Histórica y Epistemológica de los Irracionales",
     hist_subtitle: "De la crisis de inconmensurabilidad pitagórica a la formalización de Dedekind.",
     hist_h1: "1. El Colapso Pitagórico (s. V a.C.)",
@@ -1475,13 +1473,17 @@
     hist_h4: "4. Trascendencia: Liouville, Hermite y Lindemann",
     hist_p4: "Demostraciones de la existencia de números ajenos al álgebra polinomial.",
     hist_h5: "5. La Completitud de la Recta",
-    hist_p5: "Formalización a través de los cortes de Dedekind y pruebas de Cantor."
+    hist_p5: "Formalización a través de los cortes de Dedekind y pruebas de Cantor.",
+
+    footer_desc: "Herramienta académica interactiva para la visualización y estudio de irracionalidad.",
+    footer_contact: "Contacto y Repositorio",
+    footer_github: "Repositorio en GitHub",
+    footer_inst: "Institucional",
+    footer_copyright: "© 2026 Laboratorio de Números Irracionales. Todos los derechos reservados.",
   },
 
   fr: {
     app_title: "Laboratoire des Nombres Irrationnels",
-    app_subtitle: "Investigation et Déduction : TFA, TRR Complet, Polynômes Généraux, Trigonométrie, Eisenstein et Fractions Continues",
-    project_badge: "Recherche Scientifique • Séquence Didactique",
     tab_tfa: "1. Vérificateur TFA",
     tab_solver: "2. Résolveur de Polynômes",
     tab_trig: "3. Fonctions Trigonométriques",
@@ -1491,7 +1493,6 @@
     tab_tabela: "7. Table des Notables",
     tab_historia: "8. Contexte Historique",
 
-    /* Aba 1: TFA */
     tfa_title: "1. Démonstration via le Théorème Fondamental de l'Arithmétique",
     tfa_desc: "Analysez l'irrationalité des racines \\(\\sqrt[n]{K}\\) en examinant la divisibilité et parité des exposants dans la décomposition en facteurs premiers. Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes.",
     tfa_lbl_index: "Indice (n ≥ 2) :",
@@ -1511,7 +1512,6 @@
     tfa_contradiction_desc: "Par l'unicité du TFA, un entier ne peut pas avoir deux décompositions distinctes. L'égalité \\(p^{{{n}}} = {k}q^{{{n}}}\\) n'a pas de solutions entières avec \\(q > 0\\).",
     tfa_conclusion: "Conclusion : \\(\\sqrt[{n}]{{{k}}}\\) est irrationnel.",
 
-    /* Aba 2: Solucionador TRR */
     solver_title: "2. Résolveur de Polynômes",
     solver_desc: "Entrez un polynôme à coefficients entiers \\(P(x) = a_n x^n + \\dots + a_1 x + a_0\\). L'algorithme teste les candidats rationnels \\(\\pm \\frac{p}{q}\\) par le TRR, factorise par Briot-Ruffini, extrait les racines rationnelles et isole les racines irrationnelles restantes.",
     quick_ex: "Exemples rapides :",
@@ -1550,7 +1550,6 @@
     solver_irrat_roots_found: "Racines Irrationnelles Algébriques (\\(\\mathbb{R} \\setminus \\mathbb{Q}\\)) :",
     solver_no_real_roots: "Aucune racine réelle trouvée dans le domaine évalué.",
 
-    /* Aba 3: Trigonometria */
     trig_title: "3. Fonctions Trigonométriques",
     trig_desc: "Examinez l'irrationalité des valeurs trigonométriques. D'après le Théorème de Niven, pour des angles rationnels \\(\\theta \\in [0^\\circ, 90^\\circ]\\), les seuls cas où \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont rationnels sont \\(\\theta \\in \\{0^\\circ, 30^\\circ, 90^\\circ\\}\\). Tous les autres produisent des nombres irrationnels.",
     trig_shortcuts: "Raccourcis didactiques :",
@@ -1584,7 +1583,6 @@
     trig_niven_quote: "\"Pour tout angle \\(\\theta\\) tel que \\(\\frac{\\theta}{\\pi} \\in \\mathbb{Q}\\), les seules valeurs rationnelles de \\(\\sin(\\theta)\\) ou \\(\\cos(\\theta)\\) sont \\(0, \\pm \\frac{1}{2}\\) et \\(\\pm 1\\).\"",
     trig_niven_concl: "Comme <strong>{angle}°</strong> est rationnel en degrés, mais <strong>{val}</strong> n'appartient pas à \\(\\{0, \\pm 1/2, \\pm 1\\}\\), le Théorème de Niven prouve que la valeur est <strong>strictement irrationnelle</strong>.",
     
-    // New Keys - Trigonometry (Analytical Analysis and Alternative Reps)
     trig_alt_title: "Représentations Alternatives",
     trig_alt_euler: "Représentation Exponentielle (Formule d'Euler) :",
     trig_alt_taylor: "Série de Taylor/Maclaurin :",
@@ -1592,14 +1590,12 @@
     trig_analyt_deriv: "Dérivée au point \\(\\theta\\) :",
     trig_analyt_int: "Intégrale Indéfinie :",
 
-    /* Aba 4: Logaritmos */
     log_title: "4. Démonstration de l'Irrationalité des Logarithmes",
     log_desc: "Vérifiez l'irrationalité de \\(\\log_b(a)\\). Si le logarithme est égal à une fraction rationnelle \\(p/q\\), alors \\(b^p = a^q\\). D'après le Théorème Fondamental de l'Arithmétique, cela exige que la base et l'argument partagent les mêmes facteurs premiers dans des proportions exactes.",
     log_lbl_base: "Base (b ≥ 2) :",
     log_lbl_arg: "Argument (a ≥ 1) :",
     log_btn: "Analyser",
     
-    // New Keys - Logarithms Explanation and Steps
     log_res_rat: "Résultat : Rationnel (Rapport Exact)",
     log_res_irrat: "Résultat : Irrationnel Démontré",
     log_step1: "1. Hypothèse de Rationalité :",
@@ -1612,7 +1608,6 @@
     log_step4_irrat: "Pour que l'égalité \\(b^p = a^q\\) soit vraie, les deux côtés doivent partager exactement les mêmes facteurs premiers. Puisqu'il y a des facteurs premiers incompatibles (ex. {diff}), l'égalité est impossible. Par conséquent, le logarithme est strictement irrationnel.",
     log_step4_rat: "La base et l'argument sont des puissances d'une même base racine, permettant l'égalité des proportions.",
 
-    /* Aba 5: Eisenstein */
     eisen_title: "5. Critère d'Irréductibilité d'Eisenstein",
     eisen_desc: "Outil d'algèbre abstraite : S'il existe un nombre premier \\(p\\) tel que \\(p \\mid a_i\\) pour tout \\(i < n\\), \\(p \\nmid a_n\\) et \\(p^2 \\nmid a_0\\), le polynôme est irréductible sur \\(\\mathbb{Q}\\). Par conséquent, pour un degré \\(n \\ge 2\\), aucune de ses racines réelles ne peut être rationnelle !",
     eisen_btn: "Tester les Nombres Premiers",
@@ -1625,7 +1620,6 @@
     eisen_inconc_title: "Critère Inconcluant pour les Premiers Nombres Premiers",
     eisen_inconc_desc: "Aucun des nombres premiers testés n'a satisfait les 3 conditions d'Eisenstein. Utilisez l'onglet 2 (Résolveur TRR) pour investiguer les racines.",
 
-    /* Aba 6: Fracciones Continuas */
     cf_title: "Reconnaissance Constructive via Fractions Continues Simples",
     cf_desc: "Contrairement à l'écriture décimale finie, la fraction continue d'un nombre rationnel se termine toujours, tandis que celle d'un irrationnel est strictement infinie. Les irrationnels quadratiques produisent des développements périodiques : \\([a_0; \\overline{a_1, a_2, \\dots, a_k}]\\).",
     cf_lbl_rad: "Racine Carrée \\(\\sqrt{N}\\) (N non carré) :",
@@ -1640,7 +1634,6 @@
     cf_convergents_lbl: "2. Meilleures Approximations Rationnelles (Convergentes) :",
     cf_diff_rat: "<strong>Différence Fondamentale avec les Rationnels :</strong> Un nombre rationnel génère toujours une fraction continue finie. Le fait que \\(\\sqrt{{{N}}}\\) produise un cycle infini prouve catégoriquement son irrationalité.",
 
-    /* Hybrid, Errors & Tools */
     hybrid_title: "Mode d'Analyse Analytique",
     hybrid_badge: "Fonction de \\(\\mathbb{R}\\) dans \\(\\mathbb{C}\\)",
     hybrid_desc: "Le TRR exige des polynômes à coefficients entiers. Pour préserver la rigueur, le moteur d'Analyse Réelle est activé.",
@@ -1651,7 +1644,7 @@
     err_invalid_expr: "Expression invalide. Utilisez le formatage en anglais (ex: pi, e, sin(1)).",
     err_syntax: "Erreur de syntaxe algébrique.",
 
-    /* Placeholders for Textboxes (Inputs) */
+    /* Placeholders for Textboxes */
     cf_expr_placeholder: "ex: pi, e, sin(1), sqrt(2)/2",
     solver_poly_placeholder: "ex: x^2 - 2, 8x^3 - 6x - 1",
     placeholder_idx: "ex: 2, 3, 4...",
@@ -1660,7 +1653,7 @@
     placeholder_arg: "ex: 3, 5, 10...",
     placeholder_angle: "ex: 30, 45, 60...",
 
-    /* Charts (Axes, Legends, and Titles) */
+    /* Charts */
     chart_title_poly: "Graphique du Polynôme",
     chart_title_trig: "Graphique Trigonométrique",
     chart_xaxis: "Axe X (Réels)",
@@ -1671,7 +1664,6 @@
     chart_complex_imag: "Axe Imaginaire (Im)",
     chart_complex_legend: "Racines Complexes",
 
-    /* Aba 7: Tabela */
     tabela_title: "Tableau des Constantes et Irrationnels Notables",
     tabela_desc: "Distinction fondamentale entre irrationnels algébriques et nombres transcendants.",
     th_sym: "Symbole",
@@ -1694,7 +1686,6 @@
     row_zeta_proof: "Démontré par Apéry (1979)",
     row_delos_name: "Constante de Délos",
 
-    /* Aba 8: Historia */
     hist_title: "Évolution Historique et Épistémologique des Irrationnels",
     hist_subtitle: "De la crise de l'incommensurabilité à la formalisation analytique de Dedekind.",
     hist_h1: "1. L'Effondrement Pythagoricien (Ve siècle av. J.-C.)",
@@ -1706,11 +1697,27 @@
     hist_h4: "4. La Transcendance : Liouville, Hermite et Lindemann",
     hist_p4: "L'existence de nombres au-delà des équations algébriques.",
     hist_h5: "5. La Complétude de la Droite",
-    hist_p5: "Coupures de Dedekind et preuves de Cantor sur l'indénombrabilité."
+    hist_p5: "Coupures de Dedekind et preuves de Cantor sur l'indénombrabilité.",
+
+    footer_desc: "Outil académique interactif pour la visualisation et l'étude des irrationalité.",
+    footer_contact: "Contact et Dépôt",
+    footer_github: "Dépôt sur GitHub",
+    footer_inst: "Institutionnel",
+    footer_copyright: "© 2026 Laboratoire des Nombres Irrationnels. Tous droits réservés.",
   }
 };
 
-    let idiomaAtual = 'pt';
+    // detecta o idioma principal do dispositivo/navegador
+    const idiomaDetectado = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+    const idiomasSuportados = ['pt', 'en', 'es', 'fr'];
+
+    // se for suportado, usa ele. Se não for, cai para o inglês
+    let idiomaAtual = idiomasSuportados.includes(idiomaDetectado) ? idiomaDetectado : 'en';
+
+    // assim que a página carregar, aplica o idioma detectado automaticamente na interface
+    document.addEventListener('DOMContentLoaded', () => {
+      mudarIdioma(idiomaAtual);
+    });
 
     function t(key, params = {}) {
       const dict = i18n[idiomaAtual] || i18n['pt'];
@@ -1724,6 +1731,8 @@
     function mudarIdioma(lang) {
       if (!i18n[lang]) return;
       idiomaAtual = lang;
+      // Atualiza o atributo lang da tag <html> para acessibilidade
+      document.documentElement.lang = lang;
       const dict = i18n[lang];
 
       document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -1734,7 +1743,7 @@
         }
       });
 
-      // Traduz o innerHTML padrão
+      // traduz o innerHTML padrão
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) {
@@ -1742,7 +1751,7 @@
         }
       });
 
-      // Traduz os placeholders
+      // traduz os placeholders
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         if (dict[key]) {
