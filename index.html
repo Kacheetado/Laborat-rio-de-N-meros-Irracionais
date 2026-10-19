@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Laboratório de Números Irracionais</title>
 
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- PWA Manifest e Tema -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
   <!-- Tailwind CSS CDN com suporte a Dark Mode -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -359,7 +366,7 @@
             <label for="trig-angle"
               class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
               data-i18n="trig_lbl_angle">Ângulo em Graus (°):</label>
-            <input type="number" id="trig-angle" min="0" max="360" value="20" step="1"
+            <input type="number" id="trig-angle" value="20" step="1" placeholder="ex: 30"
               class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
           <div>
@@ -392,7 +399,7 @@
           <div>
             <label for="log-base" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
               data-i18n="log_lbl_base">Base (b &ge; 2):</label>
-            <input type="number" id="log-base" min="2" max="1000000" value="10"
+            <input type="text" id="log-base" value="10" placeholder="ex: 2, 10, e"
               class="w-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white">
           </div>
           <div class="sm:col-span-2">
@@ -2981,8 +2988,8 @@
       `;
 
       const subTitleText = isTrig 
-        ? t('chart_subtitle_trig', { default: 'Linha contínua: Parte Real / Tracejada: Parte Im.' })
-        : t('chart_subtitle_poly', { default: 'Scroll para Zoom' });
+        ? t('chart_subtitle_trig', { default: 'Linha contínua: Parte Real / Tracejada: Parte Im. (Gráfico Estático em Radianos)' })
+        : t('chart_subtitle_poly', { default: 'Linha contínua: Parte Real / Tracejada: Parte Im. (Scroll para Zoom)' });
 
       const svgHtml = `
         <style>
@@ -4054,7 +4061,10 @@
       return { hasExact: false };
     }
 
-        function getAlternativasHTML(func, angle) {
+        function getAlternativasHTML(func, originalAngle) {
+      // Reduz o ângulo para a primeira volta positiva (0 a 360)
+      const angle = ((originalAngle % 360) + 360) % 360;
+
       // define a cofunção
       const cofunc = {
         'sin': 'cos', 'cos': 'sin',
@@ -4062,7 +4072,12 @@
         'sec': 'csc', 'csc': 'sec'
       }[func];
       
-      const formatVal = (v) => v + '^\\circ';
+      const formatVal = (v) => {
+        // Garante que o valor final gerado também fique entre 0 e 360
+        let val = ((v % 360) + 360) % 360;
+        return val + '^\\circ';
+      };
+      
       const alts = [];
 
       // Identidade da Cofunção
@@ -4085,7 +4100,7 @@
 
       let listHtml = uniqueAlts.map(a => `
         <div class="py-3 border-b border-slate-200 dark:border-slate-700/60 last:border-0">
-          <div class="math-step notranslate text-sm">\\(\\\\%s(${angle}^\\circ) = ${a}\\)</div>
+          <div class="math-step notranslate text-sm">\\(\\\\%s(${originalAngle}^\\circ) = ${a}\\)</div>
         </div>
       `.replace('%s', func)).join('');
 
@@ -4346,30 +4361,80 @@
         </div>
       `;
     }
-     // MOTOR 4: LORATIMOS
+     // MOTOR 4: LOGARITMOS
     function analisarLogaritmo() {
-      const b = parseInt(document.getElementById('log-base').value);
+      const baseInput = document.getElementById('log-base').value.trim().toLowerCase();
       const a = parseInt(document.getElementById('log-arg').value);
       const outDiv = document.getElementById('log-output');
       outDiv.classList.remove('hidden');
 
-      if (isNaN(b) || b < 2 || isNaN(a) || a < 1) {
-        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">A base deve ser &ge; 2 e o logaritmando &ge; 1.</div>`;
+      // Verifica se o usuário digitou "e"
+      const isBaseE = (baseInput === 'e');
+      const b = isBaseE ? Math.E : parseInt(baseInput);
+
+      if ((!isBaseE && (isNaN(b) || b < 2)) || isNaN(a) || a < 1) {
+        outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">A base deve ser &ge; 2 (ou 'e') e o logaritmando &ge; 1.</div>`;
         return;
       }
 
+      // Cálculo do valor numérico (Goal 2)
+      const valCalc = isBaseE ? Math.log(a) : Math.log(a) / Math.log(b);
+      const valBadge = `
+        <div class="mt-4 p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+          <span class="font-bold text-slate-700 dark:text-slate-300">Valor Numérico Aproximado:</span>
+          <div class="math-step notranslate mt-2 text-lg text-blue-600 dark:text-blue-400">\\(\\approx ${valCalc.toFixed(8)}\\)</div>
+        </div>
+      `;
+
+      let baseTex = isBaseE ? 'e' : b;
+      let logNot = isBaseE ? `\\ln(${a})` : `\\log_{${b}}(${a})`;
+
+      // Tratamento do Logaritmando = 1
       if (a === 1) {
         outDiv.innerHTML = `
-          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_rational_int')}</h3>
-            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(1) = 0 \\in \\mathbb{Q}\\)</span>
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_rational_int')}</h3>
+              <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(${logNot} = 0 \\in \\mathbb{Q}\\)</span>
+            </div>
           </div>
-          <div class="text-sm text-slate-700 dark:text-slate-300">O logaritmo de 1 em qualquer base é sempre 0, pois \\(${b}^0 = 1\\).</div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <p>O logaritmo de 1 em qualquer base é sempre 0, pois \\(${baseTex}^0 = 1\\).</p>
+            ${valBadge}
+          </div>
         `;
         if (window.renderMathInElement) renderMathInElement(outDiv);
         return;
       }
 
+      // Tratamento Exclusivo para Base "e" (Goal 1)
+      if (isBaseE) {
+        outDiv.innerHTML = `
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_irrational_proven')}</h3>
+              <span class="bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300 font-semibold px-3 py-1 rounded text-xs">\\(${logNot} \\notin \\mathbb{Q}\\) (Transcendente)</span>
+            </div>
+          </div>
+          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+            <p><strong>1. Suposição de Racionalidade:</strong></p>
+            <p>Suponha por absurdo que o logaritmo natural de ${a} seja um número racional \\(\\frac{p}{q}\\).</p>
+            <div class="math-step notranslate">\\(\\ln(${a}) = \\frac{p}{q} \\implies e^{\\frac{p}{q}} = ${a} \\implies e^p = ${a}^q\\)</div>
+            
+            <p><strong>2. Contradição por Transcendência:</strong></p>
+            <p>Como \\(${a}\\) é um inteiro maior que 1 e \\(q \\neq 0\\), a potência \\(${a}^q\\) também é um número inteiro. Pelo <em>Teorema de Hermite-Lindemann</em>, sabemos que \\(e\\) é um número <strong>transcendente</strong>. Sendo assim, qualquer potência inteira não-nula de \\(e\\) (como \\(e^p\\)) resulta em um valor estritamente transcendente, e jamais em um número algébrico ou inteiro.</p>
+            
+            <div class="p-3 bg-red-50 border-l-4 border-red-500 dark:bg-red-900/20 dark:border-red-800 rounded text-red-900 dark:text-red-300 text-xs mt-3">
+              <strong>Conclusão:</strong> A igualdade \\(e^p = ${a}^q\\) é estruturalmente impossível. Logo, \\(\\ln(${a})\\) é irracional.
+            </div>
+            ${valBadge}
+          </div>
+        `;
+        if (window.renderMathInElement) renderMathInElement(outDiv);
+        return;
+      }
+
+      // Lógica existente para bases numéricas inteiras
       const factB = primeFactorization(b);
       const factA = primeFactorization(a);
       const primesB = Object.keys(factB).sort((x, y) => x - y);
@@ -4409,15 +4474,18 @@
       if (isRational) {
         let fracStr = q_val === 1 ? `${p_val}` : `\\frac{${p_val}}{${q_val}}`;
         html = `
-          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_rational_int')}</h3>
-            <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) = ${fracStr} \\in \\mathbb{Q}\\)</span>
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_rational_int')}</h3>
+              <span class="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) = ${fracStr} \\in \\mathbb{Q}\\)</span>
+            </div>
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
             <p>${t('log_step4_rat')}</p>
             <div class="math-step notranslate">\\(${b} = ${factB_str}\\)</div>
             <div class="math-step notranslate">\\(${a} = ${factA_str}\\)</div>
             <p>Portanto, \\(${b}^{${fracStr}} = ${a}\\).</p>
+            ${valBadge}
           </div>
         `;
       } else {
@@ -4429,9 +4497,11 @@
         }
 
         html = `
-          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
-            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_irrational_proven')}</h3>
-            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) \\notin \\mathbb{Q}\\)</span>
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('res_irrational_proven')}</h3>
+              <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(\\log_{${b}}(${a}) \\notin \\mathbb{Q}\\)</span>
+            </div>
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
             <p><strong>${t('log_step1')}</strong></p>
@@ -4444,6 +4514,7 @@
             <div class="p-3 bg-red-50 border-l-4 border-red-500 dark:bg-red-900/20 dark:border-red-800 rounded text-red-900 dark:text-red-300 text-xs mt-3">
               <strong>Contradição:</strong> ${explicacaoAbsurdo}
             </div>
+            ${valBadge}
           </div>
         `;
       }
@@ -5029,5 +5100,15 @@
       analisarTrig();
     });
   </script>
+  <!-- Registro do Service Worker (PWA) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(registration => console.log('ServiceWorker registrado com sucesso:', registration.scope))
+            .catch(error => console.log('Falha ao registrar o ServiceWorker:', error));
+        });
+      }
+    </script>
  </body>
 </html>
