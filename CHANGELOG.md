@@ -1,5 +1,9 @@
 ## 📝 Histórico de Versões
 
+## [1.1.7]
+- **Novo:** Implementação do detector automático de idiomas
+- **Melhoria:** Reformulação estrutural do rodapé e remoção de textos obsoletos do site
+
 ## [1.1.6]
 - **Novo:** Transformação do projeto em Progressive Web App (PWA) com suporte offline e cache
 - **Novo:** Adição de favicon personalizado para o laboratório
