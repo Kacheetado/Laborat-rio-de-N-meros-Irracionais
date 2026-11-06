@@ -462,7 +462,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end max-w-2xl">
           <div>
-            <!-- Reutilizamos o i18n da Aba 1 para manter o sistema de idiomas funcionando 100% -->
+            <!-- Reutilizamos o i18n da Aba 1 para manter o sistema de idiomas funfando-->
             <label for="cf-index" class="block text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1"
               data-i18n="tfa_lbl_index">Índice (n &ge; 2):</label>
             <input type="number" id="cf-index" min="2" max="10" value="2"
@@ -533,7 +533,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
               </path>
             </svg>
-            Levar para o Construtor (Aba 2)
+            Levar para o Construtor
           </button>
           <div class="flex flex-col gap-2 w-full">
             <button onclick="executarFracaoExpressao()"
@@ -739,13 +739,13 @@
 
   </main>
 
-  <!-- Rodapé Dinâmico e Traduzível -->
+  <!-- Rodapé -->
   <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-10 px-6 mt-20 transition-colors duration-300 dark:bg-slate-950 dark:border-slate-900">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-8 border-b border-slate-800 dark:border-slate-800/50">
         <!-- Bloco Esquerdo: Identidade do Projeto -->
         <div class="space-y-2">
             <h3 class="text-slate-200 font-semibold text-sm" data-i18n="app_title">Laboratório de Números Irracionais</h3>
-            <p class="text-slate-500 max-w-sm" data-i18n="footer_desc">Ferramenta interativa de apoio acadêmico para visualização e estudo de polinômios, frações contínuas e irracionalidade.</p>
+            <p class="text-slate-500 max-w-sm" data-i18n="footer_desc">Ferramenta interativa de apoio acadêmico para visualização e estudo de polinômios, frações contínuas e irracionalidade numérica.</p>
         </div>
         <!-- Bloco Direito: Links e Contato -->
         <div class="flex flex-col sm:flex-row gap-6 sm:gap-12 items-start sm:items-center">
@@ -766,8 +766,14 @@
             </div>
             <div class="space-y-2">
                 <h4 class="text-slate-300 font-medium" data-i18n="footer_inst">Institucional</h4>
-                <p class="text-slate-500">IFPB — Campus Campina Grande</p>
-                <p class="text-slate-500" data-i18n="project_badge">Iniciação Científica</p>
+                <ul class="space-y-1.5">
+                    <li>
+                        <a href="https://www.ifpb.edu.br/campus/campinagrande" target="_blank" class="hover:text-blue-400 transition-colors" data-i18n="footer_ifpb">
+                            IFPB — Campus Campina Grande
+                        </a>
+                    </li>
+                </ul>
+                <p class="text-slate-400" data-i18n="footer_interconecta">Projeto Interconecta</p>
             </div>
         </div>
     </div>
@@ -827,8 +833,8 @@
     tfa_lbl_index: "Índice (n ≥ 2):",
     tfa_lbl_rad: "Radicando (K inteiro positivo):",
     tfa_btn: "Demonstrar",
-    res_rational_int: "Resultado: Racional (Inteiro)",
-    res_irrational_proven: "Resultado: Irracional Demonstrado",
+    res_rational_int: "Resultado: Racional",
+    res_irrational_proven: "Resultado: Irracional",
     tfa_step1: "1. Decomposição Canônica em Primos (TFA):",
     tfa_perf_power: "Todos os expoentes dos fatores primos são múltiplos exatos do índice {n}. Portanto, {k} é uma potência perfeita.",
     tfa_odd_obs: "Observe o fator primo <strong>{p}</strong>: seu expoente é <strong>{exp}</strong>, que <strong>não é divisível por {n}</strong>.",
@@ -925,8 +931,8 @@
     log_lbl_arg: "Logaritmando (a ≥ 1):",
     log_btn: "Analisar",
     
-    log_res_rat: "Resultado: Racional Comprovado",
-    log_res_irrat: "Resultado: Irracional Comprovado",
+    log_res_rat: "Resultado: Racional",
+    log_res_irrat: "Resultado: Irracional",
     log_step1: "1. Suposição de Racionalidade:",
     log_step1_desc: "Suponha por absurdo que \\(\\log_{b}(a)\\) seja um número racional \\(\\frac{p}{q}\\), com \\(p, q \\in \\mathbb{Z}^*\\) e \\(\\text{mdc}(p,q)=1\\).",
     log_step2: "2. Conversão para Forma Exponencial:",
@@ -1029,10 +1035,12 @@
     hist_h5: "5. A Completude da Reta: Dedekind e Cantor",
     hist_p5: "Dedekind formulou os Cortes. Cantor comprovou que os racionais são enumeráveis enquanto os irracionais são não enumeráveis.",
 
-    footer_desc: "Ferramenta interativa de apoio acadêmico para visualização e estudo da irracionalidade.",
+    footer_desc: "Ferramenta interativa de apoio acadêmico para visualização e estudo da irracionalidade numérica.",
     footer_contact: "Contato & Repositório",
     footer_github: "Repositório no GitHub",
     footer_inst: "Institucional",
+    footer_ifpb: "IFPB — Campus Campina Grande",
+    footer_interconecta: "Projeto Interconecta",
     footer_copyright: "© 2026 Laboratório de Números Irracionais. Todos os direitos reservados.",
   },
 
@@ -1052,8 +1060,8 @@
     tfa_lbl_index: "Index (n ≥ 2):",
     tfa_lbl_rad: "Radicand (Positive integer K):",
     tfa_btn: "Prove",
-    res_rational_int: "Result: Rational (Integer)",
-    res_irrational_proven: "Result: Irrational Proven",
+    res_rational_int: "Result: Rational",
+    res_irrational_proven: "Result: Irrational",
     tfa_step1: "1. Canonical Prime Factorization (FTA):",
     tfa_perf_power: "All prime factor exponents are exact multiples of index {n}. Therefore, {k} is an exact perfect power.",
     tfa_odd_obs: "Notice prime factor <strong>{p}</strong>: its exponent is <strong>{exp}</strong>, which is <strong>not divisible by {n}</strong>.",
@@ -1149,8 +1157,8 @@
     log_lbl_base: "Base (b ≥ 2):",
     log_lbl_arg: "Argument (a ≥ 1):",
     log_btn: "Analyze",
-    log_res_rat: "Result: Rational (Exact Ratio)",
-    log_res_irrat: "Result: Irrational Proven",
+    log_res_rat: "Result: Rational",
+    log_res_irrat: "Result: Irrational",
     log_step1: "1. Assumption of Rationality:",
     log_step1_desc: "Suppose by contradiction that \\(\\log_{b}(a)\\) is a rational number \\(\\frac{p}{q}\\), with \\(p, q \\in \\mathbb{Z}^*\\) and \\(\\gcd(p,q)=1\\).",
     log_step2: "2. Conversion to Exponential Form:",
@@ -1252,10 +1260,13 @@
     hist_h5: "5. Completeness of the Real Line",
     hist_p5: "Dedekind cuts and Cantor's proofs on uncountability of irrationals.",
 
-    footer_desc: "Interactive academic tool for the visualization and study of irrationality.",
+    footer_desc: "Interactive academic tool for the visualization and study of numerical irrationality.",
     footer_contact: "Contact & Repository",
     footer_github: "GitHub Repository",
     footer_inst: "Institutional",
+    footer_ifpb: "IFPB — Campus Campina Grande",
+    footer_interconecta: "Interconecta Project",
+    footer_copyright: "© 2026 Irrational Numbers Laboratory. All rights reserved.",
   },
 
   es: {
@@ -1274,8 +1285,8 @@
     tfa_lbl_index: "Índice (n ≥ 2):",
     tfa_lbl_rad: "Radicando (K entero positivo):",
     tfa_btn: "Demostrar",
-    res_rational_int: "Resultado: Racional (Entero)",
-    res_irrational_proven: "Resultado: Irracional Demostrado",
+    res_rational_int: "Resultado: Racional",
+    res_irrational_proven: "Resultado: Irracional",
     tfa_step1: "1. Descomposición Canónica en Primos (TFA):",
     tfa_perf_power: "Todos los exponentes de los factores primos son múltiplos exactos del índice {n}. Por lo tanto, {k} es una potencia perfecta.",
     tfa_odd_obs: "Observe el factor primo <strong>{p}</strong>: su exponente es <strong>{exp}</strong>, que <strong>no es divisible por {n}</strong>.",
@@ -1371,8 +1382,8 @@
     log_lbl_base: "Base (b ≥ 2):",
     log_lbl_arg: "Argumento (a ≥ 1):",
     log_btn: "Analizar",
-    log_res_rat: "Resultado: Racional (Razón Exacta)",
-    log_res_irrat: "Resultado: Irracional Demostrado",
+    log_res_rat: "Resultado: Racional",
+    log_res_irrat: "Resultado: Irracional",
     log_step1: "1. Suposición de Racionalidad:",
     log_step1_desc: "Suponga por absurdo que \\(\\log_{b}(a)\\) es un número racional \\(\\frac{p}{q}\\), con \\(p, q \\in \\mathbb{Z}^*\\) y \\(\\text{mcd}(p,q)=1\\).",
     log_step2: "2. Conversión a Forma Exponencial:",
@@ -1479,6 +1490,8 @@
     footer_contact: "Contacto y Repositorio",
     footer_github: "Repositorio en GitHub",
     footer_inst: "Institucional",
+    footer_ifpb: "IFPB — Campus Campina Grande",
+    footer_interconecta: "Proyecto Interconecta",
     footer_copyright: "© 2026 Laboratorio de Números Irracionales. Todos los derechos reservados.",
   },
 
@@ -1498,8 +1511,8 @@
     tfa_lbl_index: "Indice (n ≥ 2) :",
     tfa_lbl_rad: "Radicande (K entier positif) :",
     tfa_btn: "Démontrer",
-    res_rational_int: "Résultat : Rationnel (Entier)",
-    res_irrational_proven: "Résultat : Irrationnel Démontré",
+    res_rational_int: "Résultat: Rationnel",
+    res_irrational_proven: "Résultat: Irrationnel",
     tfa_step1: "1. Décomposition Canonique en Facteurs Premiers (TFA) :",
     tfa_perf_power: "Tous les exposants des facteurs premiers sont des multiples exacts de {n}. Ainsi, {k} est une puissance parfaite.",
     tfa_odd_obs: "Notez le facteur premier <strong>{p}</strong> : son exposant est <strong>{exp}</strong>, qui <strong>n'est pas divisible par {n}</strong>.",
@@ -1596,8 +1609,8 @@
     log_lbl_arg: "Argument (a ≥ 1) :",
     log_btn: "Analyser",
     
-    log_res_rat: "Résultat : Rationnel (Rapport Exact)",
-    log_res_irrat: "Résultat : Irrationnel Démontré",
+    log_res_rat: "Résultat: Rationnel",
+    log_res_irrat: "Résultat: Irrationnel",
     log_step1: "1. Hypothèse de Rationalité :",
     log_step1_desc: "Supposons par l'absurde que \\(\\log_{b}(a)\\) est un nombre rationnel \\(\\frac{p}{q}\\), avec \\(p, q \\in \\mathbb{Z}^*\\) et \\(\\text{pgcd}(p,q)=1\\).",
     log_step2: "2. Conversion en Forme Exponentielle :",
@@ -1699,10 +1712,12 @@
     hist_h5: "5. La Complétude de la Droite",
     hist_p5: "Coupures de Dedekind et preuves de Cantor sur l'indénombrabilité.",
 
-    footer_desc: "Outil académique interactif pour la visualisation et l'étude des irrationalité.",
+    footer_desc: "Outil académique interactif pour la visualisation et l'étude des irrationalité numérique.",
     footer_contact: "Contact et Dépôt",
     footer_github: "Dépôt sur GitHub",
     footer_inst: "Institutionnel",
+    footer_ifpb: "IFPB — Campus Campina Grande",
+    footer_interconecta: "Projet Interconecta",
     footer_copyright: "© 2026 Laboratoire des Nombres Irrationnels. Tous droits réservés.",
   }
 };
