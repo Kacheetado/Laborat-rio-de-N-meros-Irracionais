@@ -1556,8 +1556,8 @@
             ${gridLines}
             <line x1="0" y1="${toScreenY(0)}" x2="${width}" y2="${toScreenY(0)}" stroke="#94a3b8" stroke-width="1.5" />
             <line x1="${toScreenX(0)}" y1="0" x2="${toScreenX(0)}" y2="${height}" stroke="#94a3b8" stroke-width="1.5" />
-            <text x="${width - 15}" y="${toScreenY(0) - 10}" fill="#cbd5e1" font-size="12" font-style="italic">Re</text>
-            <text x="${toScreenX(0) + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">Im</text>
+            <text x="${width - 15}" y="${toScreenY(0) - 10}" fill="#cbd5e1" font-size="12" font-style="italic">${t('chart_complex_real') || 'Re'}</text>
+            <text x="${toScreenX(0) + 10}" y="15" fill="#cbd5e1" font-size="12" font-style="italic">${t('chart_complex_imag') || 'Im'}</text>
             ${pointsSvg}
           </svg>
         </div>
@@ -2645,10 +2645,10 @@
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
             <p><strong>1. Suposição de Racionalidade:</strong></p>
-            <p>Suponha por absurdo que o logaritmo natural de ${a} seja um número racional \\(\\frac{p}{q}\\).</p>
+            <p>Suponha que o logaritmo natural de ${a} seja um número racional \\(\\frac{p}{q}\\).</p>
             <div class="math-step notranslate">\\(\\ln(${a}) = \\frac{p}{q} \\implies e^{\\frac{p}{q}} = ${a} \\implies e^p = ${a}^q\\)</div>
             
-            <p><strong>2. Contradição por Transcendência:</strong></p>
+            <p><strong>2. Contradição:</strong></p>
             <p>Como \\(${a}\\) é um inteiro maior que 1 e \\(q \\neq 0\\), a potência \\(${a}^q\\) também é um número inteiro. Pelo <em>Teorema de Hermite-Lindemann</em>, sabemos que \\(e\\) é um número <strong>transcendente</strong>. Sendo assim, qualquer potência inteira não-nula de \\(e\\) (como \\(e^p\\)) resulta em um valor estritamente transcendente, e jamais em um número algébrico ou inteiro.</p>
             
             <div class="p-3 bg-red-50 border-l-4 border-red-500 dark:bg-red-900/20 dark:border-red-800 rounded text-red-900 dark:text-red-300 text-xs mt-3">
@@ -2850,15 +2850,34 @@
           if (a === 2 * a0) break; // Encontrou o ciclo
         }
 
-        let p_ant = 1, p_cur = a0, q_ant = 0, q_cur = 1;
+        // Transformando os valores iniciais em BigInt (adicionando o 'n' no final)
+        let p_ant = 1n, p_cur = BigInt(periodo[0]), q_ant = 0n, q_cur = 1n;
         const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
 
-        for (let i = 0; i < Math.min(periodo.length, 6); i++) {
-          const coef = periodo[i];
-          let p_next = coef * p_cur + p_ant, q_next = coef * q_cur + q_ant;
+        for (let i = 1; i < periodo.length; i++) {
+          const coef = BigInt(periodo[i]);
+          let p_next = coef * p_cur + p_ant;
+          let q_next = coef * q_cur + q_ant;
           p_ant = p_cur; p_cur = p_next;
           q_ant = q_cur; q_cur = q_next;
-          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(6)}`);
+          
+          // Divisão longa com BigInt para precisão absoluta (16 casas decimais)
+          let p_abs = p_cur < 0n ? -p_cur : p_cur;
+          let q_abs = q_cur < 0n ? -q_cur : q_cur;
+          let sign = (p_cur < 0n) !== (q_cur < 0n) && p_cur !== 0n ? "-" : "";
+          
+          let intPart = p_abs / q_abs;
+          let rem = p_abs % q_abs;
+          let decPart = '';
+          
+          // Extraindo dígito por dígito do resto
+          for (let j = 0; j < 16; j++) {
+            rem *= 10n;
+            decPart += (rem / q_abs).toString();
+            rem %= q_abs;
+          }
+          
+          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${sign}${intPart}.${decPart}`);
         }
 
         html = `
@@ -2893,7 +2912,7 @@
           stepCount++;
         }
 
-        let p_ant = 1, p_cur = terms[0], q_ant = 0, q_cur = 1;
+        let p_ant = 1n, p_cur = BigInt(terms[0]), q_ant = 0n, q_cur = 1n;
         const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
         for (let i = 1; i < Math.min(terms.length, 7); i++) {
           const coef = terms[i];
@@ -2965,16 +2984,43 @@
           stepCount++;
         }
 
-        let p_ant = 1, p_cur = periodo[0], q_ant = 0, q_cur = 1;
-        const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
+        // Resetamos o estado do botão sempre que uma nova expressão for gerada
+        window.convState = 1;
+
+        let p_ant = 1n, p_cur = BigInt(periodo[0]), q_ant = 0n, q_cur = 1n;
+        const convergentesHtml = [];
+
+        // C_0 sempre visível
+        convergentesHtml.push(`<div class="mb-1 conv-stage-1"><strong>C_0:</strong> \\(\\frac{${p_cur}}{${q_cur}} = ${p_cur}\\)</div>`);
 
         for (let i = 1; i < periodo.length; i++) {
-          const coef = periodo[i];
+          const coef = BigInt(periodo[i]);
           let p_next = coef * p_cur + p_ant;
           let q_next = coef * q_cur + q_ant;
           p_ant = p_cur; p_cur = p_next;
           q_ant = q_cur; q_cur = q_next;
-          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(8)}`);
+          
+          let p_abs = p_cur < 0n ? -p_cur : p_cur;
+          let q_abs = q_cur < 0n ? -q_cur : q_cur;
+          let sign = (p_cur < 0n) !== (q_cur < 0n) && p_cur !== 0n ? "-" : "";
+          
+          let intPart = p_abs / q_abs;
+          let rem = p_abs % q_abs;
+          let decPart = '';
+          
+          // Precisão dinâmica: C1-C4 (8 casas), C5-C12 (16 casas), C13+ (30 casas)
+          let precision = i <= 4 ? 8 : (i <= 12 ? 16 : 30);
+          
+          for (let j = 0; j < precision; j++) {
+            rem *= 10n;
+            decPart += (rem / q_abs).toString();
+            rem %= q_abs;
+          }
+          
+          // Classes para gerenciar o que aparece em cada clique
+          let displayClass = i <= 4 ? "conv-stage-1" : (i <= 12 ? "conv-stage-2 hidden" : "conv-stage-3 hidden");
+          
+          convergentesHtml.push(`<div class="${displayClass} mb-1"><strong>C_${i}:</strong> \\(\\frac{${p_cur}}{${q_cur}} \\approx ${sign}${intPart}.${decPart}\\)</div>`);
         }
 
         const exprTex = formatarRaizesLaTeX(nerdamer(expr).toTeX());
@@ -2986,8 +3032,9 @@
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
             <div class="math-step notranslate overflow-x-auto pb-2">\\(${exprTex} \\approx [${periodo.join('; ')}]\\)</div>
             <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
-              ${convergentes.map((c, idx) => `<div class="mb-1"><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+              ${convergentesHtml.join('')}
             </div>
+            ${periodo.length > 5 ? `<button id="btn-expand-conv" onclick="toggleConvergentes()" class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Gerar com mais precisão ↓</button>` : ''}
           </div>
         `;
         renderMathInElement(outDiv);
@@ -2995,6 +3042,30 @@
         outDiv.innerHTML = `<div class="text-red-600 dark:text-red-400 font-medium text-sm">${t('err_invalid_expr')}</div>`;
       }
     }
+
+    window.toggleConvergentes = function() {
+      const stage2 = document.querySelectorAll('.conv-stage-2');
+      const stage3 = document.querySelectorAll('.conv-stage-3');
+      const btn = document.getElementById('btn-expand-conv');
+
+      if (window.convState === 1) {
+          // Mostra até o C12 (16 casas de precisão)
+          stage2.forEach(el => el.classList.remove('hidden'));
+          btn.innerHTML = "Máxima precisão ↓";
+          window.convState = 2;
+      } else if (window.convState === 2) {
+          // Mostra até o C20 (30 casas de precisão)
+          stage3.forEach(el => el.classList.remove('hidden'));
+          btn.innerHTML = "Mostrar menos ↑";
+          window.convState = 3;
+      } else {
+          // Reseta para o padrão
+          stage2.forEach(el => el.classList.add('hidden'));
+          stage3.forEach(el => el.classList.add('hidden'));
+          btn.innerHTML = "Gerar com mais precisão ↓";
+          window.convState = 1;
+      }
+    };
 
     function enviarParaAba2() {
       let expr = document.getElementById('cf-expr-input').value.trim();
