@@ -617,7 +617,7 @@
       html += `<text x="${yAxisX - 6*currentScale}" y="${xAxisY + 12*currentScale}" fill="#94a3b8" font-size="${fontSize}" text-anchor="end">0</text>`;
       
       gridGroup.innerHTML = html;
-
+      
       const labelX = svgEl.querySelector('.axis-label-x');
       const labelY = svgEl.querySelector('.axis-label-y');
       if (labelX) {
@@ -630,6 +630,15 @@
           labelY.setAttribute('y', vy + 15 * currentScale);
           labelY.setAttribute('font-size', 12 * currentScale);
       }
+
+      //antem o tamanho fisico dos pontos durante o zoom
+      svgEl.querySelectorAll('.graph-root-point').forEach(ponto => {
+          let baseR = parseFloat(ponto.getAttribute('data-base-r'));
+          if (!isNaN(baseR)) {
+              // Multiplica o raio base pela escala de zoom atual da tela
+              ponto.setAttribute('r', baseR * currentScale);
+          }
+      });
     };
 
     let rafGridTimer = null;
@@ -713,6 +722,90 @@
       window.scheduleGridUpdate(svgEl);
     };
 
+    // VARIÁVEIS E CONTROLES PARA TOUCH SCREEN (PINCH-TO-ZOOM E PAN)
+    let initialPinchDistance = null;
+    let initialPinchViewBox = null;
+    let isTouchPanning = false;
+    let startTouchPanX = 0, startTouchPanY = 0;
+    let startTouchVb = [];
+
+    window.handleTouchStart = function(evt, svgEl) {
+      if (svgEl.getAttribute('data-istrig') === 'true') return;
+      
+      if (evt.touches.length === 2) {
+        // Inicia o movimento de pinça (Zoom)
+        evt.preventDefault();
+        let dx = evt.touches[0].clientX - evt.touches[1].clientX;
+        let dy = evt.touches[0].clientY - evt.touches[1].clientY;
+        initialPinchDistance = Math.hypot(dx, dy);
+        initialPinchViewBox = svgEl.getAttribute('viewBox').split(' ').map(Number);
+      } else if (evt.touches.length === 1) {
+        // Inicia o arrastar com um dedo (Pan)
+        isTouchPanning = true;
+        startTouchPanX = evt.touches[0].clientX;
+        startTouchPanY = evt.touches[0].clientY;
+        startTouchVb = svgEl.getAttribute('viewBox').split(' ').map(Number);
+      }
+    };
+
+    window.handleTouchMove = function(evt, svgEl) {
+      if (svgEl.getAttribute('data-istrig') === 'true') return;
+      evt.preventDefault(); // Impede a tela do tablet de rolar enquanto interage com o gráfico
+
+      if (evt.touches.length === 2 && initialPinchDistance && initialPinchViewBox) {
+        // Lógica matemática do Zoom por Pinça
+        let dx = evt.touches[0].clientX - evt.touches[1].clientX;
+        let dy = evt.touches[0].clientY - evt.touches[1].clientY;
+        let currentDistance = Math.hypot(dx, dy);
+        
+        // Se a distância diminui, a escala da tela aumenta (Zoom Out)
+        let zoomFactor = initialPinchDistance / currentDistance; 
+        
+        let vb = initialPinchViewBox;
+        let newW = vb[2] * zoomFactor;
+        let newH = vb[3] * zoomFactor;
+        
+        if (newW < 20 || newW > 10000) return;
+
+        // Encontra o centro exato entre os dois dedos para dar zoom no ponto certo
+        let rect = svgEl.getBoundingClientRect();
+        let centerX = (evt.touches[0].clientX + evt.touches[1].clientX) / 2 - rect.left;
+        let centerY = (evt.touches[0].clientY + evt.touches[1].clientY) / 2 - rect.top;
+
+        let svgCenterX = vb[0] + (centerX / rect.width) * vb[2];
+        let svgCenterY = vb[1] + (centerY / rect.height) * vb[3];
+        
+        let newX = svgCenterX - (centerX / rect.width) * newW;
+        let newY = svgCenterY - (centerY / rect.height) * newH;
+
+        svgEl.setAttribute('viewBox', `${newX} ${newY} ${newW} ${newH}`);
+        window.scheduleGridUpdate(svgEl);
+
+      } else if (evt.touches.length === 1 && isTouchPanning) {
+        // Lógica do Pan com 1 dedo
+        let rect = svgEl.getBoundingClientRect();
+        let dxTouch = evt.touches[0].clientX - startTouchPanX;
+        let dyTouch = evt.touches[0].clientY - startTouchPanY;
+        
+        let vbDx = (dxTouch / rect.width) * startTouchVb[2];
+        let vbDy = (dyTouch / rect.height) * startTouchVb[3];
+        
+        svgEl.setAttribute('viewBox', `${startTouchVb[0] - vbDx} ${startTouchVb[1] - vbDy} ${startTouchVb[2]} ${startTouchVb[3]}`);
+        window.scheduleGridUpdate(svgEl);
+      }
+    };
+
+    window.handleTouchEnd = function(evt, svgEl) {
+      if (evt.touches.length < 2) {
+        initialPinchDistance = null;
+        initialPinchViewBox = null;
+      }
+      if (evt.touches.length === 0) {
+        isTouchPanning = false;
+      }
+      window.scheduleGridUpdate(svgEl);
+    };
+
     // RASTREADOR O(1)
     let rafTrackTimer = null;
     window.trackCoordinates = function(evt, svgEl) {
@@ -783,6 +876,22 @@
       svg.setAttribute('width', '1200');
       svg.setAttribute('height', '600');
       
+      // CORREÇÃO DO ZOOM NO PNG: O Canvas ignora vector-effect.
+      // Multiplicamos a espessura da linha pela escala atual do viewBox antes de renderizar.
+      let vb = svg.getAttribute('viewBox');
+      if (vb) {
+        let vbArr = vb.split(' ').map(Number);
+        let scale = vbArr[2] / 600; // 600 é a largura base do SVG
+        
+        svg.querySelectorAll('path, line, circle').forEach(el => {
+          let currentStroke = el.getAttribute('stroke-width');
+          if (currentStroke) {
+            el.setAttribute('stroke-width', parseFloat(currentStroke) * scale);
+          }
+          el.removeAttribute('vector-effect'); // Remove para não bugar o renderizador do canvas
+        });
+      }
+      
       const svgData = new XMLSerializer().serializeToString(svg);
       const imgSrc = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
       
@@ -798,7 +907,7 @@
         ctx.drawImage(img, 0, 0, 1200, 600);
         
         const a = document.createElement('a');
-        a.download = 'grafico_polinomio.png';
+        a.download = btn.getAttribute('data-filename') || 'grafico_matematico.png';
         a.href = canvas.toDataURL('image/png');
         a.click();
       };
@@ -1268,6 +1377,10 @@
                onmouseup="endGraphPan(event, this)"
                onmouseleave="hideCrosshairs(this); endGraphPan(event, this)"
                ondblclick="resetGraphZoom(this)"
+               ontouchstart="handleTouchStart(event, this)"
+               ontouchmove="handleTouchMove(event, this)"
+               ontouchend="handleTouchEnd(event, this)"
+               style="touch-action: none;"
                class="math-graph-svg w-full h-auto max-h-72 mx-auto bg-slate-950 rounded border border-slate-800 shadow-sm cursor-default">
             
             <!-- Grupo da Malha -->
@@ -1550,9 +1663,14 @@
       }
 
       return `
-        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full">
-          <p class="text-xs text-slate-400 mb-2 font-medium" data-i18n="solver_complex_title">${t('solver_complex_title')}</p>
-          <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
+        <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center h-full relative group">
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-xs text-slate-400 font-medium" data-i18n="solver_complex_title">${t('solver_complex_title')}</p>
+            <button onclick="downloadGraph(this)" data-filename="plano_complexo.png" class="flex items-center gap-1.5 hover:bg-slate-800 p-1.5 rounded transition-all text-slate-500 hover:text-white border border-transparent hover:border-slate-700" title="Baixar Imagem (PNG)">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            </button>
+          </div>
+          <svg viewBox="0 0 ${width} ${height}" class="math-graph-svg w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
             ${gridLines}
             <line x1="0" y1="${toScreenY(0)}" x2="${width}" y2="${toScreenY(0)}" stroke="#94a3b8" stroke-width="1.5" />
             <line x1="${toScreenX(0)}" y1="0" x2="${toScreenX(0)}" y2="${height}" stroke="#94a3b8" stroke-width="1.5" />
@@ -2408,30 +2526,49 @@
             <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">${t('trig_res_irrat')}</h3>
             <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
           </div>
-          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-            <p><strong>${t('trig_triple_arc')}</strong></p>
-            <div class="math-step notranslate">\\(${formula}\\)</div>
-            <p>${t('trig_chebyshev_sub', { angle })}</p>
-            <div class="math-step notranslate">\\(${subFormula} \\iff 8x^3 - 6x ${sinal} = 0\\)</div>
-            <p><strong>${t('trig_trr_filter')}</strong></p>
-            <p>${t('trig_trr_cand_lbl')}</p>
-            <div class="math-step notranslate">\\(\\mathcal{C} \\in \\left\\{ \\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{4}, \\pm \\frac{1}{8} \\right\\}\\)</div>
-            <p>${t('trig_trr_none')}</p>
-            <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
-              ${t('trig_chebyshev_concl', { angle })}
+          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+            
+            <!-- CAIXAS DE VALORES (Agora aparecem junto com a demonstração) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded shadow-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Valor Decimal:</span>
+                <div class="math-step notranslate mt-2 text-lg">\\(${funcName}(${angle}^\\circ) \\approx ${valCalc.toFixed(8)}\\)</div>
+              </div>
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded shadow-sm">
+                <span class="font-bold text-slate-700 dark:text-slate-300">Ângulo em Radianos:</span>
+                <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
+              </div>
+            </div>
+
+            <!-- DEMONSTRAÇÃO ISOLADA EM UM CARD -->
+            <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded shadow-sm space-y-3">
+                <p><strong>${t('trig_triple_arc')}</strong></p>
+                <div class="math-step notranslate">\\(${formula}\\)</div>
+                <p>${t('trig_chebyshev_sub', { angle })}</p>
+                <div class="math-step notranslate">\\(${subFormula} \\iff 8x^3 - 6x ${sinal} = 0\\)</div>
+                <p><strong>${t('trig_trr_filter')}</strong></p>
+                <p>${t('trig_trr_cand_lbl')}</p>
+                <div class="math-step notranslate">\\(\\mathcal{C} \\in \\left\\{ \\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{4}, \\pm \\frac{1}{8} \\right\\}\\)</div>
+                <p>${t('trig_trr_none')}</p>
+                <div class="p-3 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 rounded text-blue-950 dark:text-blue-200 text-xs">
+                  ${t('trig_chebyshev_concl', { angle })}
+                </div>
             </div>
           </div>
         `;
+
       } else if (exactData.isUndefined) {
         html = `
           <div class="border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center justify-between">
             <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Valor Indefinido</h3>
             <span class="bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 font-semibold px-3 py-1 rounded text-xs">Assíntota Vertical</span>
           </div>
-          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-            <p>A função não está definida para o ângulo de ${angle}°.</p>
-            <div class="math-step notranslate">\\( \\theta = ${angle}^\\circ = ${radTex} \\text{ rad} \\)</div>
-            <div class="math-step notranslate">\\( \\lim_{\\theta \\to ${angle}^\\circ} ${funcName}(\\theta) = \\pm \\infty \\)</div>
+          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+            <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded shadow-sm space-y-3">
+              <p>A função não está definida para o ângulo de ${angle}°.</p>
+              <div class="math-step notranslate">\\( \\theta = ${angle}^\\circ = ${radTex} \\text{ rad} \\)</div>
+              <div class="math-step notranslate">\\( \\lim_{\\theta \\to ${angle}^\\circ} ${funcName}(\\theta) = \\pm \\infty \\)</div>
+            </div>
           </div>
         `;
       } else if (exactData.hasExact) {
@@ -2446,18 +2583,24 @@
             <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Valor Algébrico Exato</h3>
             <span class="${badgeClass} font-semibold px-3 py-1 rounded text-xs">${badgeText}</span>
           </div>
-          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
-            <div class="math-step notranslate pb-2 text-xl">\\(${funcName}(${angle}^\\circ) = ${exactData.tex}\\)</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded shadow-sm">
                 <span class="font-bold text-slate-700 dark:text-slate-300">Valor Decimal:</span>
                 <div class="math-step notranslate mt-2 text-lg">\\(\\approx ${valCalc.toFixed(8)}\\)</div>
               </div>
-              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded shadow-sm">
                 <span class="font-bold text-slate-700 dark:text-slate-300">Ângulo em Radianos:</span>
                 <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
               </div>
             </div>
+            
+            <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded shadow-sm flex flex-col items-center justify-center min-h-[100px]">
+              <span class="font-bold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wide text-[10px]">Forma Algébrica</span>
+              <div class="math-step notranslate text-2xl">\\(${funcName}(${angle}^\\circ) = ${exactData.tex}\\)</div>
+            </div>
+            
           </div>
         `;
       } else {
@@ -2466,13 +2609,13 @@
             <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg">Valor Numérico</h3>
             <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 font-semibold px-3 py-1 rounded text-xs">\\(${funcName}(${angle}^\\circ) \\notin \\mathbb{Q}\\)</span>
           </div>
-          <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+          <div class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded shadow-sm">
                 <span class="font-bold text-slate-700 dark:text-slate-300">Valor Decimal:</span>
                 <div class="math-step notranslate mt-2 text-lg">\\(${funcName}(${angle}^\\circ) \\approx ${valCalc.toFixed(8)}\\)</div>
               </div>
-              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded shadow-sm">
                 <span class="font-bold text-slate-700 dark:text-slate-300">Ângulo em Radianos:</span>
                 <div class="math-step notranslate mt-2 text-lg">\\(${radTex} \\text{ rad}\\)</div>
               </div>
@@ -2489,11 +2632,13 @@
         html += gerarSvgCirculoTrigonometrico(func, angle);
       }
 
+      // NOVO CARD DO TEOREMA DE NIVEN COM DESIGN UNIFICADO
       if (!exactData.hasExact && !exactData.isUndefined && !isCosSecTriplo && !isSinCscTriplo) {
         html += `
-          <div class="mt-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center w-full mx-auto">
-            <p class="text-sm font-medium text-slate-300">
-              Como o ângulo <strong>${angle}°</strong> é racional em graus, mas o resultado <strong>${valCalc.toFixed(4)}</strong> não pertence a \\(\\{0, \\pm 1/2, \\pm 1\\}\\), o Teorema de Niven garante que o valor é estritamente irracional.
+          <div class="mt-4 p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded shadow-sm space-y-2">
+            <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-1">Teorema de Niven</h4>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+              Como o ângulo <strong>${angle}°</strong> é racional em graus, mas o resultado <strong>${valCalc.toFixed(4)}</strong> não pertence ao conjunto \\(\\{0, \\pm 1/2, \\pm 1\\}\\), o Teorema de Niven garante que o valor dessa função trigonométrica é estritamente irracional.
             </p>
           </div>
         `;
@@ -2502,6 +2647,7 @@
       outDiv.innerHTML = html;
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
+
     //circulo trigonométrico
     function gerarSvgCirculoTrigonometrico(func, angleDeg) {
       const width = 700, height = 300;
@@ -2579,9 +2725,14 @@
 
       return `
         <div class="mt-6">
-          <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center w-full mx-auto">
-            <p class="text-xs text-slate-400 mb-2 font-medium">Visualização Geométrica: ${func}(${angleDeg}°)</p>
-            <svg viewBox="0 0 ${width} ${height}" class="w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
+          <div class="my-4 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-inner overflow-hidden text-center w-full mx-auto relative group">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-xs text-slate-400 font-medium">Visualização Geométrica: ${func}(${angleDeg}°)</p>
+              <button onclick="downloadGraph(this)" data-filename="circulo_trigonometrico.png" class="flex items-center gap-1.5 hover:bg-slate-800 p-1.5 rounded transition-all text-slate-500 hover:text-white border border-transparent hover:border-slate-700" title="Baixar Imagem (PNG)">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              </button>
+            </div>
+            <svg viewBox="0 0 ${width} ${height}" class="math-graph-svg w-full h-auto max-h-64 mx-auto bg-slate-950 rounded border border-slate-800">
               ${svgContent}
             </svg>
           </div>
@@ -2811,7 +2962,6 @@
 
     // MOTOR: FRAÇÕES CONTÍNUAS
     function executarFracaoContinua() {
-      // Caso o input cf-index não exista na tela assume n=2
       const elIndex = document.getElementById('cf-index');
       const n = elIndex ? parseInt(elIndex.value) : 2;
       const k = parseInt(document.getElementById('cf-radicand').value);
@@ -2850,18 +3000,27 @@
           if (a === 2 * a0) break; // Encontrou o ciclo
         }
 
-        // Transformando os valores iniciais em BigInt (adicionando o 'n' no final)
-        let p_ant = 1n, p_cur = BigInt(periodo[0]), q_ant = 0n, q_cur = 1n;
-        const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
+        // NOVO: Expande os termos repetindo o período para termos as 20 convergentes
+        const terms = [a0];
+        let pIdx = 0;
+        while(terms.length < 21) {
+            terms.push(periodo[pIdx % periodo.length]);
+            pIdx++;
+        }
 
-        for (let i = 1; i < periodo.length; i++) {
-          const coef = BigInt(periodo[i]);
+        window.convStateRaiz = 1;
+        let p_ant = 1n, p_cur = BigInt(terms[0]), q_ant = 0n, q_cur = 1n;
+        const convergentesHtml = [];
+
+        convergentesHtml.push(`<div class="mb-1 conv-stage-raiz-1"><strong>C_0:</strong> \\(\\frac{${p_cur}}{${q_cur}} = ${p_cur}\\)</div>`);
+
+        for (let i = 1; i < terms.length; i++) {
+          const coef = BigInt(terms[i]);
           let p_next = coef * p_cur + p_ant;
           let q_next = coef * q_cur + q_ant;
           p_ant = p_cur; p_cur = p_next;
           q_ant = q_cur; q_cur = q_next;
           
-          // Divisão longa com BigInt para precisão absoluta (16 casas decimais)
           let p_abs = p_cur < 0n ? -p_cur : p_cur;
           let q_abs = q_cur < 0n ? -q_cur : q_cur;
           let sign = (p_cur < 0n) !== (q_cur < 0n) && p_cur !== 0n ? "-" : "";
@@ -2870,14 +3029,17 @@
           let rem = p_abs % q_abs;
           let decPart = '';
           
-          // Extraindo dígito por dígito do resto
-          for (let j = 0; j < 16; j++) {
+          let precision = i <= 4 ? 8 : (i <= 12 ? 16 : 30);
+          
+          for (let j = 0; j < precision; j++) {
             rem *= 10n;
             decPart += (rem / q_abs).toString();
             rem %= q_abs;
           }
           
-          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${sign}${intPart}.${decPart}`);
+          let displayClass = i <= 4 ? "conv-stage-raiz-1" : (i <= 12 ? "conv-stage-raiz-2 hidden" : "conv-stage-raiz-3 hidden");
+          
+          convergentesHtml.push(`<div class="${displayClass} mb-1"><strong>C_${i}:</strong> \\(\\frac{${p_cur}}{${q_cur}} \\approx ${sign}${intPart}.${decPart}\\)</div>`);
         }
 
         html = `
@@ -2887,15 +3049,16 @@
           </div>
           <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
             <div class="math-step notranslate overflow-x-auto pb-2">\\(\\sqrt{${k}} = [${a0}; \\overline{${periodo.join(', ')}}]\\)</div>
-            <p>${t('cf_lagrange')}</p>
+            <p>${t('cf_lagrange') || 'Pelo Teorema de Lagrange, todo irracional quadrático possui uma fração contínua periódica.'}</p>
             <p><strong>${t('cf_convergents_lbl') || '2. Melhores Aproximações Racionais (Convergentes):'}</strong></p>
             <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
-              ${convergentes.map((c, idx) => `<div><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+              ${convergentesHtml.join('')}
             </div>
+            ${terms.length > 5 ? `<button id="btn-expand-conv-raiz" onclick="toggleConvergentesRaiz()" class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Gerar com mais precisão ↓</button>` : ''}
           </div>
         `;
       } 
-      // caso N > 2: irracionais de grau maior
+      // CASO N > 2: irracionais de grau maior
       else {
         let val = Math.pow(k, 1/n);
         let a_n = Math.floor(val);
@@ -2903,8 +3066,8 @@
         const terms = [a_n];
         
         let stepCount = 0;
-        // limita a 15 termos
-        while (x_n > 1e-10 && stepCount < 15) {
+        // Limita a 20 termos para bater exatamente com a precisão máxima de cliques (C20)
+        while (x_n > 1e-11 && stepCount < 20) {
           let inverted = 1 / x_n;
           a_n = Math.floor(inverted);
           terms.push(a_n);
@@ -2912,14 +3075,37 @@
           stepCount++;
         }
 
+        window.convStateRaiz = 1;
         let p_ant = 1n, p_cur = BigInt(terms[0]), q_ant = 0n, q_cur = 1n;
-        const convergentes = [`\\frac{${p_cur}}{${q_cur}} = ${p_cur}`];
-        for (let i = 1; i < Math.min(terms.length, 7); i++) {
-          const coef = terms[i];
+        const convergentesHtml = [];
+        
+        convergentesHtml.push(`<div class="mb-1 conv-stage-raiz-1"><strong>C_0:</strong> \\(\\frac{${p_cur}}{${q_cur}} = ${p_cur}\\)</div>`);
+
+        for (let i = 1; i < terms.length; i++) {
+          const coef = BigInt(terms[i]);
           let p_next = coef * p_cur + p_ant, q_next = coef * q_cur + q_ant;
           p_ant = p_cur; p_cur = p_next;
           q_ant = q_cur; q_cur = q_next;
-          convergentes.push(`\\frac{${p_cur}}{${q_cur}} \\approx ${(p_cur / q_cur).toFixed(6)}`);
+          
+          let p_abs = p_cur < 0n ? -p_cur : p_cur;
+          let q_abs = q_cur < 0n ? -q_cur : q_cur;
+          let sign = (p_cur < 0n) !== (q_cur < 0n) && p_cur !== 0n ? "-" : "";
+          
+          let intPart = p_abs / q_abs;
+          let rem = p_abs % q_abs;
+          let decPart = '';
+          
+          let precision = i <= 4 ? 8 : (i <= 12 ? 16 : 30);
+          
+          for (let j = 0; j < precision; j++) {
+            rem *= 10n;
+            decPart += (rem / q_abs).toString();
+            rem %= q_abs;
+          }
+          
+          let displayClass = i <= 4 ? "conv-stage-raiz-1" : (i <= 12 ? "conv-stage-raiz-2 hidden" : "conv-stage-raiz-3 hidden");
+          
+          convergentesHtml.push(`<div class="${displayClass} mb-1"><strong>C_${i}:</strong> \\(\\frac{${p_cur}}{${q_cur}} \\approx ${sign}${intPart}.${decPart}\\)</div>`);
         }
 
         html = `
@@ -2932,8 +3118,9 @@
             <p><strong>Diferença Fundamental (Teorema de Lagrange):</strong> Ao contrário das raízes quadradas (que geram ciclos periódicos perfeitos e repetitivos), os irracionais algébricos de grau maior que 2 não possuem repetição. Suas frações contínuas são estritamente <strong>aperiódicas e infinitas</strong>, e os padrões de distribuição desses números ainda são objeto de intenso estudo na Matemática moderna.</p>
             <p><strong>${t('cf_convergents_lbl') || '2. Melhores Aproximações Racionais (Convergentes):'}</strong></p>
             <div class="p-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded font-mono text-xs overflow-x-auto whitespace-nowrap">
-              ${convergentes.map((c, idx) => `<div><strong>C_${idx}:</strong> \\(${c}\\)</div>`).join('')}
+              ${convergentesHtml.join('')}
             </div>
+            ${terms.length > 5 ? `<button id="btn-expand-conv-raiz" onclick="toggleConvergentesRaiz()" class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Gerar com mais precisão ↓</button>` : ''}
           </div>
         `;
       }
@@ -2942,7 +3129,28 @@
       if (window.renderMathInElement) renderMathInElement(outDiv);
     }
 
-    // MOTOR: FRAÇÕES CONTÍNUAS 
+    window.toggleConvergentesRaiz = function() {
+      const stage2 = document.querySelectorAll('.conv-stage-raiz-2');
+      const stage3 = document.querySelectorAll('.conv-stage-raiz-3');
+      const btn = document.getElementById('btn-expand-conv-raiz');
+
+      if (window.convStateRaiz === 1) {
+          stage2.forEach(el => el.classList.remove('hidden'));
+          btn.innerHTML = "Máxima precisão ↓";
+          window.convStateRaiz = 2;
+      } else if (window.convStateRaiz === 2) {
+          stage3.forEach(el => el.classList.remove('hidden'));
+          btn.innerHTML = "Mostrar menos ↑";
+          window.convStateRaiz = 3;
+      } else {
+          stage2.forEach(el => el.classList.add('hidden'));
+          stage3.forEach(el => el.classList.add('hidden'));
+          btn.innerHTML = "Gerar com mais precisão ↓";
+          window.convStateRaiz = 1;
+      }
+    };
+
+    // MOTOR: FRAÇÕES CONTÍNUAS PARA EXPRESSÕES
     function inserirNoExpr(texto) {
       const input = document.getElementById('cf-expr-input');
       const start = input.selectionStart;
