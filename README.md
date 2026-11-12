@@ -43,3 +43,48 @@ A interface da ferramenta possui suporte completo e revisado para quatro idiomas
 - 🇺🇸 Inglês
 - 🇪🇸 Espanhol
 - 🇫🇷 Francês
+
+## 🎓 Como citar este projeto
+
+Se este software ou a pesquisa associada a ele foram úteis para o seu trabalho acadêmico, você pode nos citar utilizando os formatos abaixo:
+
+### Formato ABNT
+PEREIRA, Kauã Fabson Batista; JERÔNIMO, Jonathas. **Laboratório de Números Irracionais**: Uma aplicação interativa para identificação de números irracionais no ensino básico. Versão 1.0. Campina Grande: Instituto Federal da Paraíba (IFPB), 2026. Software de código aberto. Disponível em: https://github.io. Acesso em: 10 nov. 2026.
+
+### Formato BibTeX (para usuários de LaTeX)
+```bibtex
+@software{pereira2026laboratorio,
+  author       = {Pereira, Kau{\~a} Fabson Batista and Jer{\^o}nimo, Jonathas},
+  title        = {Laborat{\'o}rio de N{\'u}meros Irracionais: Uma aplica{\c{c}}{\~a}o interativa para identifica{\c{c}}{\~a}o de n{\'u}meros irracionais no ensino b{\'a}sico},
+  month        = {nov},
+  year         = {2026},
+  publisher    = {GitHub},
+  version      = {1.0.0},
+  url          = {https://github.io}
+}
+```
+
+---
+
+### 💡 Dica extra de automação (O "Jeito Dev" de fazer)
+Como o seu projeto está no GitHub, você pode criar um arquivo chamado **`CITATION.cff`** na raiz do seu repositório. 
+
+O GitHub lê esse arquivo automaticamente e gera um botão lindo chamado *"Cite this repository"* na barra lateral direita do seu projeto, permitindo que qualquer pessoa copie a citação com um clique. Se quiser fazer isso, crie o arquivo `CITATION.cff` e cole o código abaixo dentro dele:
+
+```yaml
+cff-version: 1.2.0
+message: "Se você usar este software, por favor cite-o conforme abaixo."
+authors:
+- family-names: "Batista Pereira"
+  given-names: "Kauã Fabson"
+- family-names: "Jerônimo"
+  given-names: "Jonathas"
+title: "Laboratório de Números Irracionais"
+version: 1.0.0
+date-released: 2026-11-10
+url: "https://github.io"
+```
+
+<FollowUp>
+Quer ajuda para **revisar ou traduzir alguma das seções de matemática do seu README** (como a explicação do Critério de Eisenstein ou do TRR) para o inglês e espanhol, deixando a documentação ainda mais gringa?
+</FollowUp>
